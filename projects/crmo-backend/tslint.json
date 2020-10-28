@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "crmoBackend",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "crmo-backend",
+      "kebab-case"
+    ]
+  }
+}
