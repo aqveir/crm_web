@@ -27,5 +27,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 
+npx ng serve crmo-backend
 npx ng generate application crmo-backend --legacyBrowsers=true --lintFix=true --prefix=crmo-backend --routing=true --strict=true --style=scss
 npx ng generate library crmo-lib --lintFix=true --prefix=crmo-lib
+npx ng generate module modules/user --project=crmo-backend --routing=true --module=modules/user
+npx ng generate component modules/user/auth --project=crmo-backend --module=modules/user
