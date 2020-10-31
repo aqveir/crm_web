@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
+  { path: 'secure', loadChildren: () => import('./modules/console/console.module').then(m => m.ConsoleModule) },
   { path: 'error', loadChildren: () => import('./modules/error/error.module').then(m => m.ErrorModule) },
   { path: '', pathMatch: 'full', redirectTo: 'user/login' },
   { path: '**', redirectTo: 'error/404' },

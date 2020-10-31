@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  appVersion: 'v712demo1',
+  USERDATA_KEY: 'authf649fc9a5f55',
+  isMockEnabled: true,
   logs:true,
 
   //Customer Key

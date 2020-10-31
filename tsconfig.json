@@ -6,6 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -15,6 +16,7 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
+    "strictNullChecks": false,
     "lib": [
       "es2018",
       "dom"
@@ -23,7 +25,9 @@
       "crmo-lib": [
         "dist/crmo-lib/crmo-lib",
         "dist/crmo-lib"
-      ]
+      ],
+      "@env-backend/*": ["projects/crmo-backend/src/environments/*"],
+      "@asset-backend/*": ["projects/crmo-backend/src/assets/*"],
     }
   },
   "angularCompilerOptions": {
