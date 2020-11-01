@@ -51,11 +51,6 @@ export class TopbarComponent implements OnInit, AfterViewInit {
     this.extrasNotificationsDisplay = this.layout.getProp('extras.notifications.display');
     this.extrasNotificationsLayout = this.layout.getProp('extras.notifications.layout');
 
-    console.log({
-      'extrasNotificationsDisplay': this.extrasNotificationsDisplay,
-      'extrasNotificationsLayout': this.extrasNotificationsLayout
-    });
-
     this.extrasQuickActionsDisplay = this.layout.getProp('extras.quickActions.display');
     this.extrasQuickActionsLayout = this.layout.getProp('extras.quickActions.layout');
 

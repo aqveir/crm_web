@@ -16,7 +16,7 @@ interface LanguageFlag {
   styleUrls: ['./language-selector.component.scss'],
 })
 export class LanguageSelectorComponent implements OnInit {
-  //language: LanguageFlag;
+  language: LanguageFlag;
   languages: LanguageFlag[] = [
     {
       lang: 'en',
