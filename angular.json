@@ -3,46 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "crmo-lib": {
-      "projectType": "library",
-      "root": "projects/crmo-lib",
-      "sourceRoot": "projects/crmo-lib/src",
-      "prefix": "crmo-lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/crmo-lib/tsconfig.lib.json",
-            "project": "projects/crmo-lib/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/crmo-lib/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/crmo-lib/src/test.ts",
-            "tsConfig": "projects/crmo-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/crmo-lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/crmo-lib/tsconfig.lib.json",
-              "projects/crmo-lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "crmo-backend": {
       "projectType": "application",
       "schematics": {
@@ -169,6 +129,86 @@
             "production": {
               "devServerTarget": "crmo-backend:serve:production"
             }
+          }
+        }
+      }
+    },
+    "crmo-lib": {
+      "projectType": "library",
+      "root": "projects/crmo-lib",
+      "sourceRoot": "projects/crmo-lib/src",
+      "prefix": "crmo-lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/crmo-lib/tsconfig.lib.json",
+            "project": "projects/crmo-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/crmo-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/crmo-lib/src/test.ts",
+            "tsConfig": "projects/crmo-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/crmo-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/crmo-lib/tsconfig.lib.json",
+              "projects/crmo-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ellaisys-lib": {
+      "projectType": "library",
+      "root": "projects/ellaisys-lib",
+      "sourceRoot": "projects/ellaisys-lib/src",
+      "prefix": "eis-lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ellaisys-lib/tsconfig.lib.json",
+            "project": "projects/ellaisys-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ellaisys-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ellaisys-lib/src/test.ts",
+            "tsConfig": "projects/ellaisys-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/ellaisys-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ellaisys-lib/tsconfig.lib.json",
+              "projects/ellaisys-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

@@ -26,6 +26,10 @@
         "dist/crmo-lib/crmo-lib",
         "dist/crmo-lib"
       ],
+      "ellaisys-lib": [
+        "dist/ellaisys-lib/ellaisys-lib",
+        "dist/ellaisys-lib"
+      ],
       "@env-backend/*": ["projects/crmo-backend/src/environments/*"],
       "@asset-backend/*": ["projects/crmo-backend/src/assets/*"],
     }

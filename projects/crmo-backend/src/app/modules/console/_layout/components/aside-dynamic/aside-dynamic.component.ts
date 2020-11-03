@@ -2,6 +2,11 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+
+// Application files
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
+
+// Application Services
 import { LayoutService, DynamicAsideMenuService } from '../../../../../_metronic/core';
 
 @Component({
@@ -10,6 +15,9 @@ import { LayoutService, DynamicAsideMenuService } from '../../../../../_metronic
   styleUrls: ['./aside-dynamic.component.scss']
 })
 export class AsideDynamicComponent implements OnInit, OnDestroy {
+
+  public dataMenuAside: any|null;
+
   menuConfig: any;
   subscriptions: Subscription[] = [];
 
@@ -26,12 +34,21 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
 
   currentUrl: string = '';
 
+
+  /**
+   * Default constructor
+   */
   constructor(
     private layout: LayoutService,
     private router: Router,
     private menu: DynamicAsideMenuService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef
+  ) { }
 
+
+  /**
+   * Lifecycle Hook's
+   */
   ngOnInit(): void {
     // load view settings
     this.disableAsideSelfDisplay =
@@ -49,7 +66,7 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
     this.asideMenuScroll = this.layout.getProp('aside.menu.scroll') ? 1 : 0;
     this.asideMenuCSSClasses = `${this.asideMenuCSSClasses} ${this.asideMenuScroll === 1 ? 'scroll my-4 ps ps--active-y' : ''}`;
 
-    // router subscription
+    // Router subscription
     this.currentUrl = this.router.url.split(/[?#]/)[0];
     const routerSubscr = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -59,13 +76,14 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
     });
     this.subscriptions.push(routerSubscr);
 
-    // menu load
-    const menuSubscr = this.menu.menuConfig$.subscribe(res => {
+    // Menu Load
+    const menuSubscr = this.menu.menuConfig$.subscribe((res: any) => {
       this.menuConfig = res;
       this.cdr.detectChanges();
     });
     this.subscriptions.push(menuSubscr);
-  }
+
+  } //Function ends
 
   private getLogo() {
     if (this.brandSkin === 'light') {
@@ -94,4 +112,4 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
-}
+} //Class ends

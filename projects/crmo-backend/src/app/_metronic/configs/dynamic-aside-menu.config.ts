@@ -5,17 +5,24 @@ export const DynamicAsideMenuConfig = {
       root: true,
       icon: 'flaticon2-architecture-and-city',
       svg: './assets/media/svg/icons/Design/Layers.svg',
-      page: '/dashboard',
+      page: '/secure/dashboard',
       translate: 'MENU.DASHBOARD',
       bullet: 'dot',
     },
-    // {
-    //   title: 'Layout Builder',
-    //   root: true,
-    //   icon: 'flaticon2-expand',
-    //   page: '/builder',
-    //   svg: './assets/media/svg/icons/Home/Library.svg'
-    // },
+    {
+      title: 'Work Queue',
+      root: true,
+      icon: 'flaticon2-expand',
+      page: '/secure/queue',
+      svg: './assets/media/svg/icons/Layout/Layout-4-blocks.svg'
+    },
+    {
+      title: 'Contacts',
+      root: true,
+      icon: 'flaticon2-expand',
+      page: '/secure/contact',
+      svg: './assets/media/svg/icons/Layout/Layout-left-panel-2.svg'
+    },
     // { section: 'Components' },
     // {
     //   title: 'Google Material',

@@ -10,8 +10,13 @@ const emptyMenuConfig = {
   providedIn: 'root'
 })
 export class DynamicAsideMenuService {
+  public menuConfig$: Observable<any>;
   private menuConfigSubject = new BehaviorSubject<any>(emptyMenuConfig);
-  menuConfig$: Observable<any>;
+  
+
+  /**
+   * Default constructor
+   */
   constructor() {
     this.menuConfig$ = this.menuConfigSubject.asObservable();
     this.loadMenu();

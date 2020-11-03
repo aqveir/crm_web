@@ -1,5 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
+// Application files
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
+
+// Application Services
 import { LayoutService } from '../../../../../_metronic/core';
 
 @Component({
@@ -8,6 +13,7 @@ import { LayoutService } from '../../../../../_metronic/core';
   styleUrls: ['./aside.component.scss'],
 })
 export class AsideComponent implements OnInit {
+
   disableAsideSelfDisplay: boolean = false;
   headerLogo: string = '';
   brandSkin: string = '';
@@ -20,12 +26,22 @@ export class AsideComponent implements OnInit {
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
 
-  constructor(private layout: LayoutService, private loc: Location) { }
 
+  /**
+   * Default constructor
+   */
+  constructor(
+    private layout: LayoutService, 
+    private loc: Location
+  ) { }
+
+
+  /**
+   * Lifecycle Hook's
+   */
   ngOnInit(): void {
     // load view settings
-    this.disableAsideSelfDisplay =
-      this.layout.getProp('aside.self.display') === false;
+    this.disableAsideSelfDisplay = this.layout.getProp('aside.self.display') === false;
     this.brandSkin = this.layout.getProp('brand.self.theme');
     this.headerLogo = this.getLogo();
     this.ulCSSClasses = this.layout.getProp('aside_menu_nav');
@@ -40,7 +56,10 @@ export class AsideComponent implements OnInit {
     this.asideMenuCSSClasses = `${this.asideMenuCSSClasses} ${this.asideMenuScroll === 1 ? 'scroll my-4 ps ps--active-y' : ''}`;
     // Routing
     this.location = this.loc;
-  }
+
+    //Initilaize component
+    this.fnInitialize();
+  } //Function ends
 
   private getLogo() {
     if (this.brandSkin === 'light') {
@@ -48,5 +67,12 @@ export class AsideComponent implements OnInit {
     } else {
       return './assets/media/logos/logo-light.png';
     }
-  }
-}
+  } //Function ends
+
+
+  /**
+   * Initialize
+   */
+  private fnInitialize(): void {
+  } //Function ends
+} //Class ends
