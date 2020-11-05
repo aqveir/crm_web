@@ -1,35 +1,21 @@
 <!--begin::Languages-->
-<div class="dropdown" ngbDropdown placement="bottom-right" [autoClose]="true">
+<div class="dropdown" ngbDropdown placement="bottom-right" [autoClose]="true" *ngIf="objDefaultLanguage && arrActiveLanguages">
   <!--begin::Toggle-->
-  <div
-    ngbDropdownToggle
-    class="topbar-item"
-    data-toggle="dropdown"
-    data-offset="10px,0px"
-  >
+  <div ngbDropdownToggle class="topbar-item"
+    data-toggle="dropdown" data-offset="10px,0px">
     <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-      <img class="h-25px w-25px rounded"
-        src="{{ language?.flag }}"
-        alt="language"
-      /><!--  -->
+      <img class="h-25px w-25px rounded" src="{{ objDefaultLanguage.flag }}" />
     </div>
   </div>
   <!--end::Toggle-->
 
   <!--begin::Dropdown-->
-  <div
-    ngbDropdownMenu
-    class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right"
-  >
+  <div ngbDropdownMenu class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
     <ul class="navi navi-hover py-4">
-      <ng-container *ngFor="let language of languages">
-        <li class="navi-item" [ngClass]="{ active: language.active }">
-          <a
-            href="javascript:;"
-            (click)="setLanguageWithRefresh(language.lang)"
-            [ngClass]="{ active: language.active }"
-            class="navi-link"
-          >
+      <ng-container *ngFor="let language of arrActiveLanguages">
+        <li class="navi-item" [ngClass]="{ 'active': language.is_active }">
+          <a href="javascript:;" (click)="fnLangSelectionChanged(language.code)"
+            class="navi-link" [ngClass]="{ '/': language.is_active }">
             <span class="symbol symbol-20 mr-3">
               <img src="{{ language.flag }}" />
             </span>

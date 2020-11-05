@@ -115,10 +115,10 @@ export const DefaultLayoutConfig = {
     displayDesc: true,
     displayDaterangepicker: true,
     layoutVersion: 'v1', // [1..6]
-    fixed: true,
+    fixed: false,
     width: 'fluid', // fixed|fluid,
     clear: false,
-    style: 'solid', // transparent/solid
+    style: 'transparent', // transparent/solid
   },
 
   // Content
@@ -129,14 +129,14 @@ export const DefaultLayoutConfig = {
   // Brand
   brand: {
     self: {
-      theme: 'dark', // light/dark
+      theme: 'light', // light/dark
     },
   },
 
   // Aside
   aside: {
     self: {
-      theme: 'dark', // light/dark
+      theme: 'light', // light/dark
       display: true,
       fixed: true,
       minimize: {

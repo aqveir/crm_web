@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class CrmoLibService {
+export class UserAuthService {
 
-  //Default Constructor
   constructor() { }
-
-} //Class ends
+}

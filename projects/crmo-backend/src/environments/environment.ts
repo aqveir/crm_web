@@ -78,13 +78,14 @@ export const environment = {
       
       //Language options
       options: [
-        { name:"English", code:"en", isActive:true, order:1 },
-        { name:"Hindi (हिन्दी)", code:"hi", isActive:true, order:2 },
-        { name:"Marathi (मराठी)", code:"mr", isActive:true, order:3 },
-        { name:"Kannada (ಕನ್ನಡ)", code:"kn", isActive:false, order:4 },
-        { name:"Romanian", code:"ro", isActive:false, order:5 },
-        { name:"French", code:"fr", isActive:true, order:7 },
-        { name:"German", code:"de", isActive:true, order:6 }
+        {name:"English", code:"en", flag: './assets/media/svg/flags/226-united-states.svg', is_active:true},
+        {name:"Spanish", code:"es", flag: './assets/media/svg/flags/128-spain.svg', is_active:true},
+        {name:"German", code:"de", flag: './assets/media/svg/flags/162-germany.svg', is_active:true},
+        {name:"French", code:"fr", flag: './assets/media/svg/flags/195-france.svg', is_active:true},
+        {name:"Hindi (हिन्दी)", code:"hi", flag: './assets/media/svg/flags/246-india.svg', is_active:true},
+        {name:"Kannada (ಕನ್ನಡ)", code:"kn", flag: './assets/media/svg/flags/246-india.svg', is_active:false},
+        {name:"Marathi (मराठी)", code:"mr", flag: './assets/media/svg/flags/246-india.svg', is_active:false},
+        {name:"Romanian", code:"ro", flag: './assets/media/svg/flags/109-romania.svg', is_active:false}
       ],
     },
 

@@ -7,6 +7,14 @@ import { LocalStorageService, SessionStorageService, TranslateService, Notificat
 //Project References
 import { environment } from '@env-backend/environment';
 
+//Language Interface
+export interface ILanguage {
+    name: string;
+    code: string;
+    flag: string;
+    is_active?: boolean;
+} //Interface ends
+
 @Injectable()
 export class Globals {
     public static readonly _LANGUAGE_ENV_DEFAULT: string = environment.application.language.default_selection;
@@ -30,6 +38,7 @@ export class Globals {
         clickToClose: true,
     };
 
+
     //Breadcrumb Data
     public static readonly _BREADCRUMBS: any = {
         'user-login': [
@@ -46,7 +55,7 @@ export class Globals {
 
     //Application Constants
     public static readonly APPLICATION_CONSTANT: any = {
-        LANGUAGES:environment.application.language.options,
+        LANGUAGES: environment.application.language.options,
     };
 
 
@@ -66,36 +75,36 @@ export class Globals {
     } //Function ends
 
 
-//     /**
-//      * Getter/Setters and Validators for Application Languages
-//      */
-//     public getActiveLanguages(): any {
-//         let objLanguages: [] = Globals.APPLICATION_CONSTANT.LANGUAGES;
-//         return objLanguages.filter((language: any) => (language.isActive==true)).sort((a: any, b: any) => { return a.order-b.order });
-//     } //Function ends
-//     public setLanguage(_langCode: string, _boolShowNotify: boolean=false): void {
-//         this._translateService.use(_langCode).subscribe(() => {
-//             //Set lang params
-//             let appParams: ApplicationParams = this.getAppParams();
-//             appParams.lang = _langCode;
+    /**
+     * Getter/Setters and Validators for Application Languages
+     */
+    public getActiveLanguages(): ILanguage[] {
+        let objLanguages: [] = Globals.APPLICATION_CONSTANT.LANGUAGES;
+        return objLanguages.filter((language: any) => (language.is_active==true)).sort((a: any, b: any) => { return a.order-b.order });
+    } //Function ends
+    public setLanguage(_langCode: string, _boolShowNotify: boolean=false): void {
+        this._translateService.use(_langCode).subscribe(() => {
+            //Set lang params
+            //let appParams: ApplicationParams = this.getAppParams();
+            //appParams.lang = _langCode;
 
-//             //Save lang params
-//             this.setAppParams(appParams);
+            //Save lang params
+            //this.setAppParams(appParams);
 
-//             //Show Notification
-//             if (_boolShowNotify) {
-//                 this._notificationService.success(
-//                     this._translateService.instant('NOTIFICATION_COMMON_SUCCESS_TITLE'), 
-//                     'Language changed', 
-//                     Globals.NotificationDefaultOptions
-//                 );
-//             } //End if
-//         });
-//     } //Function ends
-//     public validateLanguage(_langCode: string): boolean {
-//         let objLanguages: [] = Globals.APPLICATION_CONSTANT.LANGUAGES;
-//         return objLanguages.filter((language:any) => (language.code==_langCode && language.isActive==true))?true:false;
-//     } //Function ends
+            //Show Notification
+            if (_boolShowNotify) {
+                this._notificationService.success(
+                    this._translateService.instant('NOTIFICATION_COMMON_SUCCESS_TITLE'), 
+                    'Language changed', 
+                    Globals.NotificationDefaultOptions
+                );
+            } //End if
+        });
+    } //Function ends
+    public validateLanguage(_langCode: string): boolean {
+        let objLanguages: [] = Globals.APPLICATION_CONSTANT.LANGUAGES;
+        return objLanguages.filter((language:any) => (language.code==_langCode && language.isActive==true))?true:false;
+    } //Function ends
 
     
 //     /**
