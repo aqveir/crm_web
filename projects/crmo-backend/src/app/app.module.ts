@@ -16,6 +16,7 @@ import {
   TranslateModule, TranslateLoader, TranslateHttpLoader, HttpLoaderFactory,
   LoggerModule, LoggerLevel
 } from 'ellaisys-lib';
+import { CrmoLibModule } from 'crmo-lib';
 
 import { UserModule } from './modules/user/user.module';
 import { ConsoleModule } from './modules/console/console.module';
@@ -81,6 +82,9 @@ export function HttpTranslateLoader(http: HttpClient) {
     
     //Notification Module
     NotificationModule.forRoot(),
+
+    //CRMO Library Module
+    CrmoLibModule,
 
     //CRMO Modules
     UserModule,

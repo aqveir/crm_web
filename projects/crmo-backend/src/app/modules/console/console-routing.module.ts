@@ -15,6 +15,7 @@ const routes: Routes = [
     { path: 'contact', component: ContactListComponent },
     { path: 'task', component: TaskListComponent },
     { path: 'event', component: EventListComponent },
+    { path: 'setting', loadChildren: () => import('../console/setting/setting.module').then(m => m.SettingModule) },
     { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   ]}
 ];

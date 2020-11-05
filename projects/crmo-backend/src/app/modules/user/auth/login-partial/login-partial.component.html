@@ -38,16 +38,12 @@
         <!--begin::Form group-->
         <div class="form-group">
             <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-            <input type="email" name="email" formControlName="email"
+            <input type="email" name="email" formControlName="username"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                 autocomplete="off" tabindex="1" autofocus
-                [ngClass]="{ 'is-invalid': loginForm.controls['email'].invalid }"
-            />
-            <!-- <ng-container
-            [ngTemplateOutlet]="formError"
-            [ngTemplateOutletContext]="{
-                validation: 'required',
-                message: 'Email is required',
+                [ngClass]="{ 'is-invalid': loginForm.controls['username'].invalid }" />
+            <!-- <ng-container [ngTemplateOutlet]="formError" 
+                [ngTemplateOutletContext]="{ validation: 'required', message: 'Email is required',
                 control: loginForm.controls['email']
             }"
             ></ng-container> -->

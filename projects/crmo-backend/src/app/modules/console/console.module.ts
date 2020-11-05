@@ -3,8 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InlineSVGModule } from 'ng-inline-svg';
-import { ConsoleRoutingModule } from './console-routing.module';
+
+// Application Modules
 import { LayoutModule } from './_layout/layout.module';
+import { ConsoleRoutingModule } from './console-routing.module';
+import { SettingModule } from './setting/setting.module';
+
+// Application Components
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -31,7 +36,9 @@ import { WorkQueueComponent } from './work-queue/work-queue.component';
     ConsoleRoutingModule,
 
     //CRMO Modules
-    LayoutModule
+    LayoutModule,
+
+    SettingModule
   ]
 })
 export class ConsoleModule { }

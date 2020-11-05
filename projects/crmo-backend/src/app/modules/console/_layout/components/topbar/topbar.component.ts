@@ -1,6 +1,12 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs';
+
+//Application Modules
+import { ResponseUserLogin } from 'crmo-lib';
+
+//Application Services
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { LayoutService } from '../../../../../_metronic/core';
+
 //import { AuthService } from '../../../../modules/auth/_services/auth.service';
 //import { UserModel } from '../../../../modules/auth/_models/user.model';
 import KTLayoutQuickSearch from '@asset-backend/js/layout/extended/quick-search';
@@ -12,13 +18,18 @@ import KTLayoutQuickUser from '@asset-backend/js/layout/extended/quick-user';
 import KTLayoutHeaderTopbar from '@asset-backend/js/layout/base/header-topbar';
 import { KTUtil } from '@asset-backend/js/components/util';
 
+
+
+
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent implements OnInit, AfterViewInit {
-  //user$: Observable<UserModel>;
+
+  public objUser: ResponseUserLogin;
+
   // tobbar extras
   extraSearchDisplay: boolean = false;
   extrasSearchLayout: 'offcanvas' | 'dropdown';
@@ -34,17 +45,13 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   extrasUserLayout: 'offcanvas' | 'dropdown';
 
   constructor(
+    private _globals: Globals,
     private layout: LayoutService, 
-    //private auth: AuthService
-    ) {
-    //this.user$ = this.auth.currentUserSubject.asObservable();
+  ) {
   }
 
   ngOnInit(): void {
-    // topbar extras
-
-    console.log('extras.init');
-    
+    //Topbar extras   
     this.extraSearchDisplay = this.layout.getProp('extras.search.display');
     this.extrasSearchLayout = this.layout.getProp('extras.search.layout');
 
@@ -57,15 +64,14 @@ export class TopbarComponent implements OnInit, AfterViewInit {
     this.extrasCartDisplay = this.layout.getProp('extras.cart.display');
     this.extrasCartLayout = this.layout.getProp('extras.cart.layout');
 
-    this.extrasLanguagesDisplay = this.layout.getProp(
-      'extras.languages.display'
-    );
+    this.extrasLanguagesDisplay = this.layout.getProp('extras.languages.display');
     this.extrasUserDisplay = this.layout.getProp('extras.user.display');
     this.extrasUserLayout = this.layout.getProp('extras.user.layout');
-    this.extrasQuickPanelDisplay = this.layout.getProp(
-      'extras.quickPanel.display'
-    );
-  }
+    this.extrasQuickPanelDisplay = this.layout.getProp('extras.quickPanel.display');
+
+    //Load User Data
+    this.objUser = this._globals.getClaim();
+  } //Function ends
 
   ngAfterViewInit(): void {
     KTUtil.ready(() => {
@@ -109,5 +115,6 @@ export class TopbarComponent implements OnInit, AfterViewInit {
       // Init Header Topbar For Mobile Mode
       KTLayoutHeaderTopbar.init('kt_header_mobile_topbar_toggle');
     });
-  }
-}
+  } //Function ends
+
+} //Class end

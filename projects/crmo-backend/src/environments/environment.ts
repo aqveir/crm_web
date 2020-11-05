@@ -10,14 +10,14 @@ export const environment = {
   logs:true,
 
   //Customer Key
-  organization_key: 'o2020061593290773356', //This key and the http_config > api_server > request > params > key['key'] is same
+  organization_key: 'o2020101603735319507', //This key and the http_config > api_server > request > params > key['key'] is same
 
   //Http Settings
   http_config: {
 
     //API Configuration
     api_server: {
-      server: 'http://dev.ellaisys.com/',
+      server: 'http://dev.crmomni.com/',
       apiUrl: 'api/',
       title: '',
       headers: {
@@ -31,7 +31,7 @@ export const environment = {
         time_out: 2*60*1000, // 2 minutes
 
         params: [
-          { key:'key', value:'o2020061593290773356' },
+          { key:'key', value:'o2020101603735319507' },
           { key:'lang', value:'en_US' },
           { key:'source', value:'website' },
         ],
@@ -50,9 +50,9 @@ export const environment = {
   //Storage Settings
   storage_config: {
     storage_keys: {
-      app_key: 'EIS_OMNI_WIDGET',
-      auth_claim_key: '_SESSION_AUTH_CLAIM_KEY', //Key to store the authenticated claim
-      auth_credentials_key: '_LOCAL_STORAGE_AUTH_CREDENTIALS', //Key to store the auth credentials to remember the successful login.      
+      app_key: 'CRM_OMNI_WIDGET',
+      auth_claim_key: '_SESSION_USER_AUTH_CLAIM_KEY', //Key to store the authenticated claim
+      auth_credentials_key: '_LOCAL_STORAGE_USER_AUTH_CREDENTIALS', //Key to store the auth credentials to remember the successful login.      
     },
 
   },

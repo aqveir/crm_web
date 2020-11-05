@@ -8,6 +8,4 @@ export interface IOrganization {
 export interface IOrganizationMinimal {
     hash: string;
     name: string;
-    users_count: number;
-    last_updated_at: Date;
 }

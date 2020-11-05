@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+//Application files
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
+
+//Application CRMO Library
+import { RequestUserLogin, ResponseUserLogin, UserAuthService } from 'crmo-lib';
+
 @Component({
   selector: 'crmo-backend-login-partial',
   templateUrl: './login-partial.component.html',
@@ -20,10 +26,10 @@ export class LoginPartialComponent implements OnInit {
    * Default constructor
    */
   constructor(
-    //private _globals: Globals,
+    private _globals: Globals,
     private _router: Router,
     private _formBuilder: FormBuilder,
-    //private _custauthService: CustomerAuthService
+    private _userAuthService: UserAuthService
   ) { }
 
 
@@ -46,8 +52,9 @@ export class LoginPartialComponent implements OnInit {
 
   } //Function ends
 
+
   /**
-   * Authenticate the Customer
+   * Authenticate the User
    */
   public fnAuthenticateUserAction(): boolean {
     try {
@@ -55,20 +62,20 @@ export class LoginPartialComponent implements OnInit {
       this.loginForm.updateValueAndValidity();
       if (this.loginForm.invalid) { /*this.fnRaiseErrors(this.loginForm);*/ return false; }
 
-      // let objLoginForm: RequestCustomerLogin = this.loginForm.value;
-      // this.boolLoading = true;
-      // // this._logger.log('Your log message goes here');
-      // this._custauthService.login(objLoginForm)
-      //   .subscribe((response: ResponseCustomerLogin) => {
-      //     //Save the data into globals
-      //     this._globals.setClaim(response);
+      let objLoginForm: RequestUserLogin = this.loginForm.value;
+      this.boolLoading = true;
+      // this._logger.log('Your log message goes here');
+      this._userAuthService.login(objLoginForm)
+        .subscribe((response: ResponseUserLogin) => {
+          //Save the data into globals
+          this._globals.setClaim(response);
 
-      //     //Stop loader
-      //     this.boolLoading = false;
+          //Stop loader
+          this.boolLoading = false;
 
-      //     //Navidate to my account page
-      //     this._router.navigate(['/user/my-account']);
-      //   },() => {});
+          //Navidate to my account page
+          this._router.navigate(['/secure']);
+        },() => {});
         // .then ((response) => {
         //   // this._logger.log('Your log message goes here');
         //   // this._logger.debug("Your Debug message goes here");
@@ -78,6 +85,7 @@ export class LoginPartialComponent implements OnInit {
         // })
         // .catch()
         // .finally();
+
         return true;
     } catch (error) {
       //Stop loader
@@ -103,10 +111,9 @@ export class LoginPartialComponent implements OnInit {
    */
   private fnLoginForm() {
     this.loginForm = this._formBuilder.group({
-      email: ['amit.dhongde@gmail.com', Validators.required],
-      password: ['12345678', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
+      username: ['admin@ellaisys.com', Validators.required],
+      password: ['password', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
       remember_me: true,
-      country_idd: ['91'],
       device_id: ['xxxx']
     });
   } //Function ends

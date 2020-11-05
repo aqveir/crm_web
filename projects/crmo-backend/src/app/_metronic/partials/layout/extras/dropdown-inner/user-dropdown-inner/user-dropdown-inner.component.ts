@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
+//Application Modules
+import { ResponseUserLogin, UserAuthService } from 'crmo-lib';
+
+//Application Services
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { LayoutService } from '../../../../../core';
-// import { UserModel } from '../../../../../../modules/auth/_models/user.model';
-// import { AuthService } from '../../../../../../modules/auth/_services/auth.service';
 
 @Component({
   selector: 'app-user-dropdown-inner',
@@ -10,20 +14,41 @@ import { LayoutService } from '../../../../../core';
   styleUrls: ['./user-dropdown-inner.component.scss'],
 })
 export class UserDropdownInnerComponent implements OnInit {
-  extrasUserDropdownStyle: 'light' | 'dark' = 'light';
-  user$: any = null;
+  public extrasUserDropdownStyle: 'light' | 'dark' = 'light';
+  public objUser: ResponseUserLogin;
 
-  constructor(private layout: LayoutService) {}
 
+  /**
+   * Default constructor
+   */
+  constructor(
+    private _globals: Globals,
+    private _router: Router,
+    private _layout: LayoutService,
+    private _userAuthService: UserAuthService
+  ) {}
+
+
+  /**
+   * Lifecycle Hook's
+   */
   ngOnInit(): void {
-    this.extrasUserDropdownStyle = this.layout.getProp(
-      'extras.user.dropdown.style'
-    );
-    //this.user$ = this.auth.currentUserSubject.asObservable();
+    this.extrasUserDropdownStyle = this._layout.getProp('extras.user.dropdown.style');
+    this.objUser = this._globals.getClaim();
+  } //Function ends
+
+
+  /**
+   * User Logout
+   */
+  public fnUserLogoutAction(): void {
+
+    //Raise the request to logout
+    this._userAuthService.logout()
+      .subscribe((response) => {
+          //Navidate to my account page
+          this._router.navigate(['/user/login']);
+      });
   }
 
-  logout() {
-    //this.auth.logout();
-    document.location.reload();
-  }
-}
+} //Class ends

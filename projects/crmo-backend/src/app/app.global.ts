@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 
 //Propritery Library
-// import { ResponseCustomerLogin, ApplicationParams } from 'omni-lib';
+import { ResponseUserLogin, ApplicationParams } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
 import { environment } from '@env-backend/environment';
+
 
 //Language Interface
 export interface ILanguage {
@@ -62,8 +63,8 @@ export class Globals {
     /**
      * Delaration of variables
      */
-//     public claimCustomer: ResponseCustomerLogin | null;
-//     public params: ApplicationParams | null;
+     public claimUser: ResponseUserLogin | null;
+     public params: ApplicationParams | null;
 
     //Default Constructor
     constructor(
@@ -85,11 +86,11 @@ export class Globals {
     public setLanguage(_langCode: string, _boolShowNotify: boolean=false): void {
         this._translateService.use(_langCode).subscribe(() => {
             //Set lang params
-            //let appParams: ApplicationParams = this.getAppParams();
-            //appParams.lang = _langCode;
+            let appParams: ApplicationParams = this.getAppParams();
+            appParams.lang = _langCode;
 
             //Save lang params
-            //this.setAppParams(appParams);
+            this.setAppParams(appParams);
 
             //Show Notification
             if (_boolShowNotify) {
@@ -107,49 +108,49 @@ export class Globals {
     } //Function ends
 
     
-//     /**
-//      * Getter and Setters for Authentication Claim Token
-//      */
-//     public getClaim(): ResponseCustomerLogin {
-//         if(this.claimCustomer == null) {
-//             let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
-//             this.claimCustomer = strJsonData;
-//         } //End if
-//         return this.claimCustomer;
-//     } //Function ends
-//     public setClaim(_claim: ResponseCustomerLogin): void {
-//         this.claimCustomer = _claim;
-//     } //Function ends
+    /**
+     * Getter and Setters for Authentication Claim Token
+     */
+    public getClaim(): ResponseUserLogin {
+        if(this.claimUser == null) {
+            let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
+            this.claimUser = strJsonData;
+        } //End if
+        return this.claimUser;
+    } //Function ends
+    public setClaim(_claim: ResponseUserLogin): void {
+        this.claimUser = _claim;
+    } //Function ends
 
 
-//     /**
-//      * Getter and Setters for Application Params
-//      */
-//     public getAppParams(): ApplicationParams {
-//         if(this.params == null) {
-//             let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_APP_PARAMS_KEY);
-//             this.params = (strJsonData)?strJsonData:(new ApplicationParams());
-//         } //End if
-//         return this.params;
-//     } //Function ends
-//     public setAppParams(_params: ApplicationParams): void {
-//         this._sessionStorageService.setItem(Globals._SESSION_APP_PARAMS_KEY, _params);
-//         this.params = _params;
-//     } //Function ends
+    /**
+     * Getter and Setters for Application Params
+     */
+    public getAppParams(): ApplicationParams {
+        if(this.params == null) {
+            let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_APP_PARAMS_KEY);
+            this.params = (strJsonData)?strJsonData:(new ApplicationParams());
+        } //End if
+        return this.params;
+    } //Function ends
+    public setAppParams(_params: ApplicationParams): void {
+        this._sessionStorageService.setItem(Globals._SESSION_APP_PARAMS_KEY, _params);
+        this.params = _params;
+    } //Function ends
 
 
-//     /**
-//      * Getter and Setters for Store Layout
-//      */
-//     public getStoreData(): ResponseCustomerLogin {
-//         if(this.claimCustomer == null) {
-//             let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
-//             this.claimCustomer = strJsonData;
-//         } //End if
-//         return this.claimCustomer;
-//     } //Function ends
-//     public setStoreData(_claim: ResponseCustomerLogin): void {
-//         this.claimCustomer = _claim;
-//     } //Function ends
+    /**
+     * Getter and Setters for Store Layout
+     */
+    public getStoreData(): ResponseUserLogin {
+        if(this.claimUser == null) {
+            let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
+            this.claimUser = strJsonData;
+        } //End if
+        return this.claimUser;
+    } //Function ends
+    public setStoreData(_claim: ResponseUserLogin): void {
+        this.claimUser = _claim;
+    } //Function ends
 
 } //Class ends

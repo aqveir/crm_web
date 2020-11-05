@@ -50,11 +50,11 @@ export class ContactAuthService extends BaseService {
           let claim: ResponseContactLogin = response.data;
 
           //Store the claim into the session storage
-          this._sessionStorageService.setItem('_SESSION_AUTH_CLAIM_KEY', claim);
+          this._sessionStorageService.setItem('_SESSION_CONTACT_AUTH_CLAIM_KEY', claim);
 
           //Store the credentials into local storage
           if (_data.remember_me) {
-            this._localStorageService.setItem('_LOCAL_STORAGE_AUTH_CREDENTIALS', _data);
+            this._localStorageService.setItem('_LOCAL_STORAGE_CONTACT_AUTH_CREDENTIALS', _data);
           } //End if
 
           observer.next(claim);
@@ -77,8 +77,8 @@ export class ContactAuthService extends BaseService {
         .then((response: any) => {
 
           //Store the claim into the session storage
-          if (this._sessionStorageService.hasItem('_SESSION_AUTH_CLAIM_KEY')) {
-            this._sessionStorageService.removeItem('_SESSION_AUTH_CLAIM_KEY');
+          if (this._sessionStorageService.hasItem('_SESSION_CONTACT_AUTH_CLAIM_KEY')) {
+            this._sessionStorageService.removeItem('_SESSION_CONTACT_AUTH_CLAIM_KEY');
           } //End if          
 
           observer.next(response);
