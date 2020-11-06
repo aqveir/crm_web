@@ -7,26 +7,18 @@
         <!--begin::Title-->
         <div class="pb-13 pt-lg-0 pt-5">
             <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-                Welcome to CRM OMNI
+                {{ 'PAGE.AUTH.SIGNUP.TITLE' | translate }}
             </h3>
-            <span class="text-muted font-weight-bold font-size-h4">New Here?
-                <a routerLink="/auth/registration" id="kt_login_signup"
-                    class="text-primary font-weight-bolder"
-                    >"AUTH.GENERAL.SIGNUP_BUTTON" | translate</a>
+            <span class="text-muted font-weight-bold font-size-h4">
+                {{ 'PAGE.AUTH.SIGNUP.SUB_TITLE' | translate }}
+                <a [routerLink]="['/user/registration']" id="kt_login_signup"
+                    class="text-primary font-weight-bolder">
+                    {{ 'PAGE.AUTH.SIGNUP.GENERAL_BUTTON_LABEL' | translate }}
+                </a>
             </span>
         </div>
         <!--end::Title-->
-  
-        <!-- begin::Alert info-->
-        <ng-container *ngIf="hasError">
-            <div class="mb-10 alert alert-custom alert-light-info alert-dismissible">
-            <div class="alert-text">
-                Error Text
-            </div>
-            </div>
-        </ng-container>
-        <!-- end::Alert info-->
-  
+   
         <!-- begin::Alert error-->
         <ng-container *ngIf="hasError">
             <div class="mb-10 alert alert-custom alert-light-danger alert-dismissible">
@@ -37,54 +29,29 @@
   
         <!--begin::Form group-->
         <div class="form-group">
-            <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-            <input type="email" name="email" formControlName="username"
+            <label class="font-size-h6 font-weight-bolder text-dark" translate>PAGE.AUTH.SIGNUP.USERNAME.LABEL</label>
+            <input type="email" name="email" formControlName="username" placeholder="{{ 'PAGE.AUTH.SIGNUP.USERNAME.PLACEHOLDER' | translate }}"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                 autocomplete="off" tabindex="1" autofocus
-                [ngClass]="{ 'is-invalid': loginForm.controls['username'].invalid }" />
-            <!-- <ng-container [ngTemplateOutlet]="formError" 
-                [ngTemplateOutletContext]="{ validation: 'required', message: 'Email is required',
-                control: loginForm.controls['email']
-            }"
-            ></ng-container> -->
-            <!-- <ng-container
-            [ngTemplateOutlet]="formError"
-            [ngTemplateOutletContext]="{
-                validation: 'email',
-                message: 'Email is invalid',
-                control: loginForm.controls['email']
-            }"
-            ></ng-container> -->
-            <!-- <ng-container
-            [ngTemplateOutlet]="formError"
-            [ngTemplateOutletContext]="{
-                validation: 'minLength',
-                message: 'Email should have at least 3 symbols',
-                control: loginForm.controls['email']
-            }"
-            ></ng-container> -->
-            <!-- <ng-container
-            [ngTemplateOutlet]="formError"
-            [ngTemplateOutletContext]="{
-                validation: 'maxLength',
-                message: 'Email should have maximum 360 symbols',
-                control: loginForm.controls['email']
-            }"
-            ></ng-container> -->
+                [ngClass]="{ 'is-invalid': loginForm.controls['username'].invalid && loginForm.controls['username'].dirty }" />
+
+            <ng-container [ngTemplateOutlet]="formError" 
+                [ngTemplateOutletContext]= "{ control: loginForm.controls['username'], 
+                message: 'PAGE.AUTH.SIGNUP.USERNAME.VALIDATION_ERROR', validation: 'required' }"></ng-container>
         </div>
         <!--end::Form group-->
   
         <!--begin::Form group-->
         <div class="form-group">
             <div class="d-flex justify-content-between mt-n5">
-                <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
+                <label class="font-size-h6 font-weight-bolder text-dark pt-5" translate>CUSTOMER_LOGIN_PASSWORD_LABEL</label>
                 <a [routerLink]="['/user/forgotpass']" id="kt_login_forgot"
-                    class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5 cursor-pointer">
-                    Forgot Password ?
+                    class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5 cursor-pointer" translate>
+                    CUSTOMER_LOGIN_FORGOTPASS_LABEL
                 </a>
             </div>
     
-            <input type="password" name="password" formControlName="password"
+            <input type="password" name="password" formControlName="password" placeholder="{{ 'CUSTOMER_LOGIN_PASSWORD_PLACEHOLDER'| translate }}"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                 autocomplete="off" tabindex="2"
                 [ngClass]="{ 'is-invalid': loginForm.controls['password'].invalid }"
@@ -120,16 +87,17 @@
         <div class="pb-lg-0 pb-5">
             <button type="submit" id="kt_login_signin_submit"
                 class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-                [disabled]="loginForm.invalid">
-                Sign In
+                [disabled]="loginForm.invalid" translate>
+                CUSTOMER_LOGIN_BTN_LABEL
             </button>
     
-            <button type="button" [hidden]="true"
-                class="btn btn-light-primary font-weight-bolder px-8 py-4 my-3 font-size-lg">
+            <button type="button" [hidden]="false"
+                class="btn btn-light-primary font-weight-bolder px-8 py-4 my-3 font-size-lg"
+                (click)="fnSocialAuthenticateUserAction('google')">
                 <span class="svg-icon svg-icon-md">
                     <img src="./assets/media/svg/social-icons/google.svg" />
                 </span>
-                Sign in with Google
+                {{ 'CUSTOMER_LOGIN_SOCIAL_GOOGLE' | translate }}
             </button>
     
             <!-- <ng-container *ngIf="isLoading$ | async">
@@ -142,17 +110,11 @@
 </div>
 <!--end::Signin-->
   
-<!-- <ng-template
-    #formError
-    let-control="control"
-    let-message="message"
-    let-validation="validation">
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
     <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)" >
         <div class="fv-plugins-message-container">
-        <div class="fv-help-block">
-            {{ message }}
-        </div>
+            <div class="fv-help-block">{{ message | translate }}</div>
         </div>
     </ng-container>
-</ng-template> -->
+</ng-template>
   

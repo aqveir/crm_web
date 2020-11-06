@@ -26,10 +26,10 @@ export class UserAuthService extends BaseService {
 
 
   /**
-   * Contact Authentication/Sign In
+   * user Authentication/Sign In
    * 
-   * Authenticate the contact using the backend service.
-   * @param _data RequestContactLogin
+   * Authenticate the user using the backend service.
+   * @param _data RequestUserLogin
    */
   public login(_data: RequestUserLogin): Observable<any> {
     //Set HTTP Params
@@ -53,17 +53,16 @@ export class UserAuthService extends BaseService {
 
           observer.next(claim);
         })
-        .catch((error: any) =>  { observer.error(error); })
+        .catch((error: IResponseError) =>  { observer.error(error); })
         .finally();
     });
   } //Function ends
 
 
   /**
-   * Contact Logout/Sign Out
+   * User Logout/Sign Out
    * 
-   * Logout the contact using the backend service.
-   * @param _data ContactLogin
+   * Logout the user using the backend service.
    */
   public logout(): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
@@ -77,7 +76,7 @@ export class UserAuthService extends BaseService {
 
           observer.next(response);
         })
-        .catch((error: any) =>  { observer.error(error); })
+        .catch((error: IResponseError) =>  { observer.error(error); })
         .finally();
     });
   } //Function ends

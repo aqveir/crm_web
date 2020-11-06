@@ -1,4 +1,64 @@
 {
+    "COMMON": {
+        "LABEL": {
+            "SAVE": "Save",
+            "CANCEL": "Cancel",
+            "CLOSE": "Close",
+
+            "ADD": "Add",
+            "ADD_NEW": "Add New",
+            "EDIT": "Edit",
+            "DELETE": "Delete",
+
+            "LOAD": "Load"
+        }
+    },
+
+    "ERROR": {
+        "CODE": {
+            "0": "There seems to be issues with internet connectivity. Please check your connection.",
+            "401": "The username and/or password is incorrect. Please check your credentials.",
+            "403": "You are not authorized to access this content.",
+            "404": "We are sorry, the page you've requested is not available.",
+            "422": "The data provided incorrect.",
+            "500": "We are sorry, we have encountered some error.If the issue persists, please contact the support team."
+        }
+    },
+
+    "PAGE": {
+        "AUTH": {
+            "SIGNUP": {
+                "TITLE": "Welcome to CRM OMNI",
+                "SUB_TITLE": "New Here ?",
+                "GENERAL_BUTTON_LABEL": "Create an Account",
+
+                "USERNAME": {
+                    "LABEL": "Username",
+                    "PLACEHOLDER": "Enter phone or email address",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid email or phone number."
+                },
+                "PASSWORD": {
+                    "LABEL": "Password",
+                    "PLACEHOLDER": "Enter password.",
+                    "FINE_TEXT": ""
+                },
+                "SUBMIT_BUTTON": {
+                    "LABEL": "Login"
+                }
+            },
+            "SIGNIN": {
+                
+            },
+            "FORGOT_PASSWORD": {
+                
+            },
+            "RESET_PASSWORD": {
+                
+            }
+        }
+    },
+
     "NOTIFICATION_COMMON_SUCCESS_TITLE":"Success",
     
     "ERROR_CODE_0":"There seems to be issues with internet connectivity. Please check your connection.",
@@ -27,7 +87,7 @@
     "COMMON_LABEL_VALUE":"Value",
     "COMMON_LABEL_STATUS":"Status",
 
-    "CUSTOMER_LOGIN_TITLE":"Sign In",
+    "CUSTOMER_LOGIN_TITLE":"Welcome to CRM OMNI",
     "CUSTOMER_LOGIN_SUBTITLE":"Hello, Welcome to your account.",
     "CUSTOMER_LOGIN_SOCIAL_FACEBOOK":"Sign In with Facebook",
     "CUSTOMER_LOGIN_SOCIAL_GOOGLE":"Sign In with Google+",

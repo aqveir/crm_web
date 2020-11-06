@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-//Application files
+//Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { BaseComponent } from '../../../base.component';
 
 //Application CRMO Library
 import { RequestUserLogin, ResponseUserLogin, UserAuthService } from 'crmo-lib';
+import { NotificationService } from 'ellaisys-lib';
+
 
 @Component({
   selector: 'crmo-backend-login-partial',
   templateUrl: './login-partial.component.html',
   styleUrls: ['./login-partial.component.scss']
 })
-export class LoginPartialComponent implements OnInit {
+export class LoginPartialComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
 
@@ -29,8 +32,9 @@ export class LoginPartialComponent implements OnInit {
     private _globals: Globals,
     private _router: Router,
     private _formBuilder: FormBuilder,
-    private _userAuthService: UserAuthService
-  ) { }
+    private _userAuthService: UserAuthService,
+    private _notification : NotificationService
+  ) { super(); }
 
 
   /**
@@ -60,7 +64,11 @@ export class LoginPartialComponent implements OnInit {
     try {
       //Check form validity
       this.loginForm.updateValueAndValidity();
-      if (this.loginForm.invalid) { /*this.fnRaiseErrors(this.loginForm);*/ return false; }
+      if (this.loginForm.invalid) { 
+        this.fnRaiseErrors(this.loginForm); 
+
+        return false; 
+      } //End if
 
       let objLoginForm: RequestUserLogin = this.loginForm.value;
       this.boolLoading = true;
@@ -75,7 +83,15 @@ export class LoginPartialComponent implements OnInit {
 
           //Navidate to my account page
           this._router.navigate(['/secure']);
-        },() => {});
+        },(error) => {
+          //Stop loader
+          this.boolLoading = false;
+
+          //Show Error
+          //this.hasError = true;
+
+          throw error;
+        });
         // .then ((response) => {
         //   // this._logger.log('Your log message goes here');
         //   // this._logger.debug("Your Debug message goes here");
@@ -90,9 +106,21 @@ export class LoginPartialComponent implements OnInit {
     } catch (error) {
       //Stop loader
       this.boolLoading = false;
-      return false;
 
-      // this._objError = this._error.handleError(error);
+      throw error;
+    } //Try-catch ends
+  } //Function ends
+
+
+
+  /**
+   * Authenticate the User with Social login
+   */
+  public fnSocialAuthenticateUserAction(provider: string): void {
+    try {
+      this._notification.error('success', 'now it works');
+    } catch(error) {
+
     } //Try-catch ends
   } //Function ends
 

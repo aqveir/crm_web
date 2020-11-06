@@ -9,6 +9,8 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 //import { TranslationModule } from '../modules/i18n/translation.module';
 
+//Application Module
+import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
 import { CoreModule } from '../../../_metronic/core';
 import { SubheaderModule } from '../../../_metronic/partials/layout/subheader/subheader.module';
 
@@ -49,6 +51,14 @@ import { HeaderMenuDynamicComponent } from './components/header/header-menu-dyna
     ExtrasModule,
     NgbDropdownModule,
     NgbProgressbarModule,
+
+    //EllaiSys Library
+    TranslateModule,
+    NotificationModule,
+    ValidatorModule,
+    PipeModule,
+    LoggerModule,
+
     CoreModule,
     SubheaderModule,
   ],

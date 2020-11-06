@@ -31,7 +31,7 @@ export class Globals {
 
     //Notification Options
     public static readonly NotificationDefaultOptions: any = {
-        position: ["bottom", "right"],
+        position: ["top", "right"],
         timeOut: 1500,
         lastOnBottom: true,
         showProgressBar: false,

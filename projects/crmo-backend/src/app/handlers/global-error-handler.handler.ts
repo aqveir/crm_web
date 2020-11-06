@@ -28,7 +28,8 @@ export class GlobalErrorHandler implements ErrorHandler {
     //Default Constructor
     constructor(
         private _zone: NgZone,
-        private injector: Injector
+        private _injector: Injector,
+        private _notification: NotificationService
     ) {
     } //Function ends
 
@@ -47,9 +48,9 @@ export class GlobalErrorHandler implements ErrorHandler {
 
 
     private processError(_error: HttpErrorResponse|any): void {
-        const notification = this.injector.get(NotificationService);
-        const logger = this.injector.get(LoggerService);
-        const router = this.injector.get(Router);
+        const notification = this._injector.get(NotificationService);
+        const logger = this._injector.get(LoggerService);
+        const router = this._injector.get(Router);
         //const route = this.injector.get(ActivatedRoute);
         
         //Create Error Model
@@ -61,35 +62,35 @@ export class GlobalErrorHandler implements ErrorHandler {
                 if (_error.status!=null) {
                     switch (_error.status) {
                         case 0: {
-                            this.objError.name='ERROR_NO_INTERNET';
+                            this.objError.name='ERROR.CODE.0';
                             this.objError.message='No Internet or Connectivity';
                             this.objError.action=_error.status.toString();
                             break;
                         }
                         case 401: {
-                            this.objError.name='ERROR_AUTH_USERNAME_PASSWORD';
+                            this.objError.name='ERROR.CODE.401';
                             this.objError.message='Unauthorized User';
                             break;
                         }
                         case 403: {
-                            this.objError.name='ERROR_FORBIDDEN';
+                            this.objError.name='ERROR.CODE.403';
                             this.objError.message='User session expired.';
                             this.objError.toLogin=true;
                             break;
                         }
                         case 404: {
-                            this.objError.name='ERROR_RESOURCE_NOT_FOUND';
+                            this.objError.name='ERROR.CODE.404';
                             this.objError.message='Resource not found';
                             this.objError.action=_error.status.toString();
                             break;
                         }
                         case 422: {
-                            this.objError.name='ERROR_MODEL_VALIDATION';
+                            this.objError.name='ERROR.CODE.422';
                             this.objError.message='The input data format is incorrect.';
                             break;
                         }
                         case 500: {
-                            this.objError.name='ERROR_INTERNAL';
+                            this.objError.name='ERROR.CODE.500';
                             this.objError.message='Some error has occured. Please try again.';
                             this.objError.action=_error.status.toString();
 
@@ -110,10 +111,10 @@ export class GlobalErrorHandler implements ErrorHandler {
 
                     // Raise notification
                     if (notification && (this.objError.action==null)) {
-                        notification.error(this.objError.message, 'Some Error', Globals.NotificationDefaultOptions);
+                        notification.error('Some Error', this.objError.name); // , Globals.NotificationDefaultOptions);
                     } //End if
 
-                    //Log the notification
+                    //Log the error
                     if (logger) {
                         logger.error(JSON.stringify(this.objError));
                     } //End if

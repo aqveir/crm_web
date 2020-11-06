@@ -48,7 +48,7 @@ export class UserDropdownInnerComponent implements OnInit {
       .subscribe((response) => {
           //Navidate to my account page
           this._router.navigate(['/user/login']);
-      });
+      },(() => {}));
   }
 
 } //Class ends
