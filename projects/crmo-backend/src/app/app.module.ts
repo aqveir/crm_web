@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, Injector } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { 
   EllaisysLibModule, NotificationModule, ValidatorModule, PipeModule, 
   TranslateModule, TranslateLoader, TranslateHttpLoader, HttpLoaderFactory,
-  LoggerModule, LoggerLevel
+  LoggerModule, LoggerLevel, LoaderService
 } from 'ellaisys-lib';
 import { CrmoLibModule } from 'crmo-lib';
 
@@ -96,4 +96,17 @@ export function HttpTranslateLoader(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  /**
+   * Default Constructor
+   * Create global Service Injector
+   * 
+   * @param _injector 
+   */
+  constructor(
+    private _injector: Injector
+  ) {
+    //LoaderService.injector = this._injector;
+  }
+}

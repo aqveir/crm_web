@@ -25,6 +25,17 @@
         }
     },
 
+    "MENU": {
+        "TOP_BAR": {
+            "AUTH_USER": {
+                "CHANGE_PASSWORD": {
+                    "TITLE": "Change Password",
+                    "SUBTITLE": "Every 60 days, change your password."
+                }
+            }
+        }
+    },
+
     "PAGE": {
         "AUTH": {
             "SIGNUP": {

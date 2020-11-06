@@ -1,9 +1,9 @@
-import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
+import { ErrorHandler, Injectable, NgZone, Injector } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 //Framework library
-import { NotificationService, LoggerService } from 'ellaisys-lib';
+import { NotificationService, LoggerService, LoaderService, TranslateService } from 'ellaisys-lib';
 
 //Application files
 import { Globals } from '../app.global';
@@ -25,11 +25,13 @@ export class GlobalErrorHandler implements ErrorHandler {
     private objError : ErrorModel|null;
 
 
-    //Default Constructor
+    /**
+     * Default constructor
+     */
     constructor(
         private _zone: NgZone,
         private _injector: Injector,
-        private _notification: NotificationService
+        private _translateService: TranslateService
     ) {
     } //Function ends
 
@@ -39,6 +41,11 @@ export class GlobalErrorHandler implements ErrorHandler {
     } //Function ends
 
 
+    /**
+     * Error Handler
+     * 
+     * @param _error 
+     */
     public handleError(_error: any): void {
         //Process Error
         this.processError(_error);
@@ -47,11 +54,15 @@ export class GlobalErrorHandler implements ErrorHandler {
     } //Function ends
 
 
+    /**
+     * Process the error and initiate action
+     * 
+     * @param _error 
+     */
     private processError(_error: HttpErrorResponse|any): void {
         const notification = this._injector.get(NotificationService);
         const logger = this._injector.get(LoggerService);
         const router = this._injector.get(Router);
-        //const route = this.injector.get(ActivatedRoute);
         
         //Create Error Model
         this.objError=new ErrorModel();

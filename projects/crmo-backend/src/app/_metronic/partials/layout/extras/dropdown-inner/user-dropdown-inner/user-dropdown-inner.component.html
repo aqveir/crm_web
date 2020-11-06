@@ -31,7 +31,10 @@
         <!--end::Symbol-->
 
         <!--begin::Text-->
-        <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">{{ objUser.full_name }}</div>
+        <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">
+          {{ objUser.full_name | shorten:25 }}
+          <span class="font-size-h6"><small>{{ objUser.username }}</small></span>
+        </div>
         <!--end::Text-->
       </div>
 
@@ -117,14 +120,14 @@
     <a class="navi-item px-8 cursor-pointer">
       <div class="navi-link">
         <div class="navi-icon mr-2">
-          <i class="flaticon2-hourglass text-primary"></i>
+          <i class="flaticon2-right-arrow text-primary"></i>
         </div>
-        <div class="navi-text">
+        <div class="navi-text" (click)="fnUserChangePasswordAction()">
           <div class="font-weight-bold">
-            Change Password
+            {{ 'MENU.TOP_BAR.AUTH_USER.CHANGE_PASSWORD.TITLE' | translate }}
           </div>
           <div class="text-muted">
-            latest tasks and projects
+            {{ 'MENU.TOP_BAR.AUTH_USER.CHANGE_PASSWORD.SUBTITLE' | translate }}
           </div>
         </div>
       </div>

@@ -39,6 +39,14 @@ export class UserDropdownInnerComponent implements OnInit {
 
 
   /**
+   * Change password
+   */
+  public fnUserChangePasswordAction(): void {
+    this._router.navigate(['/secure/user/change-password']);
+  } //Function ends
+
+
+  /**
    * User Logout
    */
   public fnUserLogoutAction(): void {
@@ -49,6 +57,6 @@ export class UserDropdownInnerComponent implements OnInit {
           //Navidate to my account page
           this._router.navigate(['/user/login']);
       },(() => {}));
-  }
+  } //Function ends
 
 } //Class ends
