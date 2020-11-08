@@ -9,11 +9,11 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 
 const routes: Routes = [
-  { path: 'organizations', component: OrganizationListComponent },
-  { path: 'organization/:hash', component: OrganizationDetailComponent },
-  { path: 'organization/:hash/configuration', component: OrganizationConfigurationComponent },
-  { path: 'users', component: UserListComponent },
-  { path: 'user/:hash', component: UserDetailComponent },
+  { path: 'organization', component: OrganizationListComponent },
+  { path: 'organization/:ohash', component: OrganizationDetailComponent },
+  { path: 'organization/:ohash/configuration', component: OrganizationConfigurationComponent },
+  { path: 'organization/:ohash/user', component: UserListComponent },
+  { path: 'organization/:ohash/user/:uhash', component: UserDetailComponent },
   { path: '', pathMatch: 'full', redirectTo: 'organizations' },
 ];
 

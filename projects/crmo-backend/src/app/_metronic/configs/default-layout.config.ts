@@ -95,7 +95,7 @@ export const DefaultLayoutConfig = {
         arrow: true,
         toggle: 'click',
         submenu: {
-          theme: 'light',
+          //theme: 'base',
           arrow: true,
         },
       },

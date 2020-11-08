@@ -52,7 +52,7 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
    */
   private fnInitialize(): void {
     //Load form
-    this.fnLoginForm();
+    this.fnInitializeForm();
 
   } //Function ends
 
@@ -70,10 +70,10 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
-      let objLoginForm: RequestUserLogin = this.loginForm.value;
+      let objFormData: RequestUserLogin = this.loginForm.value;
       this.boolLoading = true;
       // this._logger.log('Your log message goes here');
-      this._userAuthService.login(objLoginForm)
+      this._userAuthService.login(objFormData)
         .subscribe((response: ResponseUserLogin) => {
           //Save the data into globals
           this._globals.setClaim(response);
@@ -135,9 +135,9 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
 
 
   /**
-   * Login Reactive Form
+   * Initialize Reactive Form
    */
-  private fnLoginForm() {
+  private fnInitializeForm() {
     this.loginForm = this._formBuilder.group({
       username: ['admin@ellaisys.com', Validators.required],
       password: ['password', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],

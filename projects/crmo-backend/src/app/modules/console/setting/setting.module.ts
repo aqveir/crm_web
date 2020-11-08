@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Application Modules
 import { SettingRoutingModule } from './setting-routing.module';
+import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
 
 // Application Components
 import { OrganizationDetailComponent } from './organization/organization-detail/organization-detail.component';
@@ -17,16 +18,24 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
   declarations: [
     OrganizationListComponent,
     OrganizationDetailComponent,
-
     UserListComponent,
-
     UserDetailComponent,
-
     OrganizationConfigurationComponent,
     
   ],
   imports: [
     CommonModule,
+    FormsModule, 
+    ReactiveFormsModule,
+
+    //EllaiSys Library
+    TranslateModule,
+    NotificationModule,
+    ValidatorModule,
+    PipeModule,
+    LoggerModule,
+
+    //Application Modules
     SettingRoutingModule
   ]
 })

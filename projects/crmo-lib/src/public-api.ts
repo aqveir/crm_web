@@ -6,6 +6,12 @@ export * from './lib/crmo-lib.service';
 export * from './lib/crmo-lib.component';
 export * from './lib/crmo-lib.module';
 
+//Exported Interfaces
+export * from './lib/interfaces/common/response.interface';
+export * from './lib/interfaces/common/lookup.interface';
+export * from './lib/interfaces/common/country.interface';
+export * from './lib/interfaces/organization/organization.interface';
+
 //Exported Services
 export * from './lib/services/organization/organization.service';
 export * from './lib/services/user/user-auth.service';

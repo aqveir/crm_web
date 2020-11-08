@@ -46,7 +46,6 @@ import { HeaderMenuDynamicComponent } from './components/header/header-menu-dyna
     CommonModule,
     RouterModule,
 
-    //TranslationModule,
     InlineSVGModule,
     ExtrasModule,
     NgbDropdownModule,

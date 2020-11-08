@@ -26,12 +26,28 @@
     },
 
     "MENU": {
-        "TOP_BAR": {
-            "AUTH_USER": {
-                "CHANGE_PASSWORD": {
-                    "TITLE": "Change Password",
-                    "SUBTITLE": "Every 60 days, change your password."
+        "DASHBOARD": {
+            "LABEL": "Dashboard"
+        },
+        "SETTING": {
+            "LABEL": "Setting",
+            "ORGANIZATION": {
+                "LABEL": "Organization",
+                "USER_MANAGEMENT": {
+                    "LABEL": "User Management",
+                    "USER": {
+                        "LABEL": "User"
+                    },
+                    "ROLE": {
+                        "LABEL": "Role"
+                    }
                 }
+            }
+        },
+        "AUTH_USER": {
+            "CHANGE_PASSWORD": {
+                "TITLE": "Change Password",
+                "SUBTITLE": "Every 60 days, change your password."
             }
         }
     },
@@ -66,6 +82,64 @@
             },
             "RESET_PASSWORD": {
                 
+            }
+        },
+        "ORGANIZATION": {
+            "LIST": {
+
+            },
+            "DETAIL": {
+                "TITLE": "",
+                "TAB_DETAIL": {
+                    "NAME": {
+                        "LABEL": "Name",
+                        "PLACEHOLDER": "Enter phone or email address",
+                        "FINE_TEXT": "Your invoices will be addressed to this company.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "KEY": {
+                        "LABEL": "Key",
+                        "PLACEHOLDER": "",
+                        "FINE_TEXT": "This key will be required for Mail Parsing, Cloud Telephony and other external references.",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "SUBDOMAIN": {
+                        "LABEL": "Sub-Domain",
+                        "PLACEHOLDER": "Enter the subdomain name",
+                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "WEBSITE": {
+                        "LABEL": "Website",
+                        "PLACEHOLDER": "Enter the website url",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "SEARCH_TAG": {
+                        "LABEL": "Search Tags",
+                        "PLACEHOLDER": "Enter the tag name",
+                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PERSON_NAME": {
+                        "LABEL": "Person's Name",
+                        "PLACEHOLDER": "Enter the biller or contact person's name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "EMail",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "This email will be used to contact the biller for account based communication.",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                }
             }
         }
     },

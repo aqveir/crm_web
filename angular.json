@@ -37,9 +37,14 @@
               "projects/crmo-backend/src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap4/dist/css/bootstrap.min.css",
+              "node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css",
               "projects/crmo-backend/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery1_9/dist/jquery.min.js",
+              "node_modules/bootstrap4/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {

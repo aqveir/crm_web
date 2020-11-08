@@ -8,6 +8,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { LayoutModule } from './_layout/layout.module';
 import { ConsoleRoutingModule } from './console-routing.module';
 import { SettingModule } from './setting/setting.module';
+import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
 
 // Application Components
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -35,9 +36,15 @@ import { WorkQueueComponent } from './work-queue/work-queue.component';
     InlineSVGModule,
     ConsoleRoutingModule,
 
+    //EllaiSys Library
+    TranslateModule,
+    NotificationModule,
+    ValidatorModule,
+    PipeModule,
+    LoggerModule,
+
     //CRMO Modules
     LayoutModule,
-
     SettingModule
   ]
 })
