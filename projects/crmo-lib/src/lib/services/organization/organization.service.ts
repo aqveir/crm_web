@@ -12,7 +12,9 @@ import { IOrganization } from '../../interfaces/organization/organization.interf
 })
 export class OrganizationService extends BaseService {
 
-  //Default Constructor
+  /**
+   * Default constructor
+   */
   constructor(
     private _httpService: HttpService
   ) { super(); }

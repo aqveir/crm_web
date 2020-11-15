@@ -14,6 +14,7 @@ export * from './lib/interfaces/common/configuration.interface';
 export * from './lib/interfaces/organization/organization.interface';
 
 //Exported Services
+export * from './lib/services/common/lookup/lookup.service';
 export * from './lib/services/organization/organization.service';
 export * from './lib/services/user/user-auth.service';
 //export * from './lib/services/user/user.service';

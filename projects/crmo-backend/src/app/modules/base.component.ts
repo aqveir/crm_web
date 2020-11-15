@@ -108,5 +108,4 @@ export abstract class BaseComponent {
     this.errors=null;
   } //Function ends
 
-
 } //Class ends

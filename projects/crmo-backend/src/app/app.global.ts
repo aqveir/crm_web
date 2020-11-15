@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 //Propritery Library
-import { ResponseUserLogin, ApplicationParams } from 'crmo-lib';
+import { ResponseUserLogin, ApplicationParams, LookupService, ILookup, ILookupValue } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
@@ -23,6 +23,7 @@ export class Globals {
     //Storage-Session keys
     public static readonly _STORAGE_AUTH_CLAIM_KEY: string=environment.storage_config.storage_keys.auth_claim_key;
     public static readonly _SESSION_APP_PARAMS_KEY: string='_APP_PARAMS_KEY';
+    public static readonly _STORAGE_LOOKUP_KEY: string='_LOCAL_STORAGE_LOOKUP_DATA';
 
     //Date Format
     public static readonly _DATE_FORMAT_SERVER: string='DD-MM-YYYY HH:mm:ss';
@@ -64,17 +65,27 @@ export class Globals {
 
 
     /**
-     * Delaration of variables
+     * Delaration of public variables
      */
-     public claimUser: ResponseUserLogin | null;
-     public params: ApplicationParams | null;
+    public claimUser: ResponseUserLogin | null;
+    public params: ApplicationParams | null;
+
+
+    /**
+     * Declaration of private variables
+     */
+    private boolDataLoaded: boolean = false;
+    private lookup: ILookup[] = null;
+
 
     //Default Constructor
     constructor(
         private _localStorageService: LocalStorageService,
         private _sessionStorageService: SessionStorageService,
         private _translateService: TranslateService,
-        private _notificationService: NotificationService
+        private _notificationService: NotificationService,
+
+        private _lookupService: LookupService
     ) {
     } //Function ends
 
@@ -154,6 +165,66 @@ export class Globals {
     } //Function ends
     public setStoreData(_claim: ResponseUserLogin): void {
         this.claimUser = _claim;
+    } //Function ends
+
+
+    /**
+     * Getter and Setters for LookUp
+     */
+    public getLookup(): ILookup[] {
+        if (this.lookup == null) {
+            var strJsonData = this._localStorageService.getItem(Globals._STORAGE_LOOKUP_KEY);
+            this.lookup = JSON.parse(strJsonData);
+        } //End if
+        return this.lookup;
+    } //Function ends
+    public getLookupByKey(_key: string): ILookup {
+        if (this.lookup == null) {
+            this.getLookup();
+        } //End if
+
+        return this.lookup.find((x: ILookup) => { return x.key == _key; });
+    } //Function ends
+    public getLookupByKeyValue(_key: string, _valueKey: string): number {
+        let lookup = this.getLookupByKey(_key);
+        let lookupValue = (lookup.values).find((x: ILookupValue) => { return x.key == _valueKey; });
+
+        return lookupValue.id;
+    } //Function ends
+    public setLookUp(_lookup: ILookup[]) {
+        this.lookup = _lookup;
+    } //Function ends
+
+    
+
+    /**
+     * Load values from backend service, this is called
+     * at the application load.
+     */
+    public fnLoadApplicationData(): void {
+        if (!this.boolDataLoaded) {
+            //Load lookup data
+            this.fnLoadLookupnData();
+
+            //Set the data uploaded status to true
+            this.boolDataLoaded=true;            
+        } //End if
+    } //Function ends
+
+
+    /**
+     * Load Lookup Data from Backend Service
+     */
+    private fnLoadLookupnData(): void {
+        try {
+            this._lookupService.getAll()
+                .subscribe((data: ILookup[]) => {
+                    this.setLookUp(data);
+                },
+                (error) => { console.log(error); });
+        } catch(error) {
+            console.log(error);
+        } //Try-catch ends
     } //Function ends
 
 } //Class ends

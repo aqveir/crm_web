@@ -72,7 +72,6 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
 
       let objFormData: RequestUserLogin = this.loginForm.value;
       this.boolLoading = true;
-      // this._logger.log('Your log message goes here');
       this._userAuthService.login(objFormData)
         .subscribe((response: ResponseUserLogin) => {
           //Save the data into globals
@@ -81,26 +80,17 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
           //Stop loader
           this.boolLoading = false;
 
+          //Load the application data
+          this._globals.fnLoadApplicationData();
+
           //Navidate to my account page
           this._router.navigate(['/secure']);
         },(error) => {
           //Stop loader
           this.boolLoading = false;
 
-          //Show Error
-          //this.hasError = true;
-
           throw error;
         });
-        // .then ((response) => {
-        //   // this._logger.log('Your log message goes here');
-        //   // this._logger.debug("Your Debug message goes here");
-        //   // this._logger.warn("Your Warning message goes here");
-
-        //   // this._router.navigate(['home']);
-        // })
-        // .catch()
-        // .finally();
 
         return true;
     } catch (error) {
