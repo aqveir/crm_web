@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 //Application Libraries
-import { IOrganization } from 'crmo-lib';
+import { IOrganization, IConfiguration } from 'crmo-lib';
 import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
+
 
 @Component({
   selector: 'crmo-backend-organization-configuration-list',
@@ -11,10 +12,14 @@ import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.compon
 })
 export class OrganizationConfigurationListComponent extends BaseComponent implements OnInit {
   @Input('organization') objOrganization: IOrganization = null;
-  @Input('configurations') objConfigurations = null;
+  @Input('configurations') objConfigurations: IConfiguration[] = null;
+   
 
   //Common attributes
   public boolLoading: boolean = false;
+  public boolShowChild: boolean = false;
+
+  public objSelectedConfiguration: IConfiguration = null;
 
 
   /**
@@ -30,6 +35,23 @@ export class OrganizationConfigurationListComponent extends BaseComponent implem
 
     //Initilaize component
     this.fnInitialize();
+  } //Function ends
+
+
+  /**
+   * Edit Data
+   */
+  public fnEditData(configuration: IConfiguration): void {
+    this.objSelectedConfiguration = configuration;
+    this.boolShowChild = true;
+  } //Function ends
+
+
+  /**
+   * Delete Record
+   */
+  public fnDeleteRecord(configuration: IConfiguration): void {
+
   } //Function ends
 
 

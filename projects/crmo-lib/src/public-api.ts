@@ -10,6 +10,7 @@ export * from './lib/crmo-lib.module';
 export * from './lib/interfaces/common/response.interface';
 export * from './lib/interfaces/common/lookup.interface';
 export * from './lib/interfaces/common/country.interface';
+export * from './lib/interfaces/common/configuration.interface';
 export * from './lib/interfaces/organization/organization.interface';
 
 //Exported Services

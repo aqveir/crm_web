@@ -149,6 +149,15 @@
                         "ACTION_TITLE": "Action"
                     }
                 }
+            },
+            "AMEND_CONFIGURATIONS": {
+                "TITLE": "Amend Configuration",
+                "DISPLAY_VALUE": {
+                    "LABEL": "Name",
+                    "PLACEHOLDER": "Select the configuration",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
+                }
             }
         }
     },
