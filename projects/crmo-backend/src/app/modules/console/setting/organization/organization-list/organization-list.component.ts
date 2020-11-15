@@ -43,7 +43,7 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-    /**
+  /**
    * Initialize
    */
   private fnInitialize(): void {

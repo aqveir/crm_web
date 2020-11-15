@@ -86,14 +86,14 @@
         },
         "ORGANIZATION": {
             "LIST": {
-
+                "TITLE": "Oraganization List"
             },
             "DETAIL": {
-                "TITLE": "",
                 "TAB_DETAIL": {
+                    "TITLE": "Detail",
                     "NAME": {
                         "LABEL": "Name",
-                        "PLACEHOLDER": "Enter phone or email address",
+                        "PLACEHOLDER": "Enter organization name",
                         "FINE_TEXT": "Your invoices will be addressed to this company.",
                         "VALIDATION_ERROR": "Enter valid email or phone number."
                     },
@@ -138,6 +138,15 @@
                         "PLACEHOLDER": "Enter the email address",
                         "FINE_TEXT": "This email will be used to contact the biller for account based communication.",
                         "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                },
+                "TAB_CONFIGURATION": {
+                    "TITLE": "Configuration",
+                    "TABLE_NAMES": {
+                        "KEY_TITLE": "Key",
+                        "TYPE_TITLE": "Type",
+                        "VALUE_TITLE": "Value",
+                        "ACTION_TITLE": "Action"
                     }
                 }
             }

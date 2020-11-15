@@ -29,6 +29,9 @@ export class Globals {
     public static readonly _TIME_FORMAT_SERVER: string='HH:mm:ss';
     public static readonly _DATE_FORMAT_WEB_DISPLAY: string='dd-MM-yyyy';
 
+    //RegEx Patterns
+    public static readonly _REGEX_PATTERN_UEL: string="/^(http[s]?://){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/";
+
     //Notification Options
     public static readonly NotificationDefaultOptions: any = {
         position: ["top", "right"],

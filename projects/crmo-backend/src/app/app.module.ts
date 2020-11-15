@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { 
   EllaisysLibModule, NotificationModule, ValidatorModule, PipeModule, 
   TranslateModule, TranslateLoader, TranslateHttpLoader, HttpLoaderFactory,
-  LoggerModule, LoggerLevel, LoaderService
+  LoggerModule, LoggerLevel
 } from 'ellaisys-lib';
 import { CrmoLibModule } from 'crmo-lib';
 
@@ -107,6 +107,5 @@ export class AppModule {
   constructor(
     private _injector: Injector
   ) {
-    //LoaderService.injector = this._injector;
   }
 }
