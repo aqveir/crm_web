@@ -7,7 +7,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
 
 //Application CRMO Library
-import { RequestUserLogin, ResponseUserLogin, UserAuthService } from 'crmo-lib';
+import { IRequestUserLogin, IResponseUserLogin, UserAuthService } from 'crmo-lib';
 import { NotificationService } from 'ellaisys-lib';
 
 
@@ -70,10 +70,10 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
-      let objFormData: RequestUserLogin = this.loginForm.value;
+      let objFormData: IRequestUserLogin = this.loginForm.value;
       this.boolLoading = true;
       this._userAuthService.login(objFormData)
-        .subscribe((response: ResponseUserLogin) => {
+        .subscribe((response: IResponseUserLogin) => {
           //Save the data into globals
           this._globals.setClaim(response);
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 //Application Modules
-import { ResponseUserLogin } from 'crmo-lib';
+import { IResponseUserLogin } from 'crmo-lib';
 
 //Application Services
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -28,7 +28,7 @@ import { KTUtil } from '@asset-backend/js/components/util';
 })
 export class TopbarComponent implements OnInit, AfterViewInit {
 
-  public objUser: ResponseUserLogin;
+  public objUser: IResponseUserLogin;
 
   // tobbar extras
   extraSearchDisplay: boolean = false;

@@ -10,7 +10,8 @@ import { BaseService } from '../base.service';
 import { IResponse, IResponseError } from '../../interfaces/common/response.interface';
 
 // Models
-import { RequestUserLogin, ResponseUserLogin } from '../../models/user/user-auth.model';
+import { ResponseUserLogin } from '../../models/user/user-auth.model';
+import { IRequestUserLogin } from '../../interfaces/user/user-auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,9 @@ export class UserAuthService extends BaseService {
    * user Authentication/Sign In
    * 
    * Authenticate the user using the backend service.
-   * @param _data RequestUserLogin
+   * @param _data IRequestUserLogin
    */
-  public login(_data: RequestUserLogin): Observable<any> {
+  public login(_data: IRequestUserLogin): Observable<any> {
     //Set HTTP Params
     let params = new HttpParams()
       .set('username', _data.username)

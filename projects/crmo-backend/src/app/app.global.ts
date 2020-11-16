@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 //Propritery Library
-import { ResponseUserLogin, ApplicationParams, LookupService, ILookup, ILookupValue } from 'crmo-lib';
+import { IResponseUserLogin, ApplicationParams, LookupService, ILookup, ILookupValue } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
@@ -67,7 +67,7 @@ export class Globals {
     /**
      * Delaration of public variables
      */
-    public claimUser: ResponseUserLogin | null;
+    public claimUser: IResponseUserLogin | null;
     public params: ApplicationParams | null;
 
 
@@ -125,14 +125,14 @@ export class Globals {
     /**
      * Getter and Setters for Authentication Claim Token
      */
-    public getClaim(): ResponseUserLogin {
+    public getClaim(): IResponseUserLogin {
         if(this.claimUser == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
             this.claimUser = strJsonData;
         } //End if
         return this.claimUser;
     } //Function ends
-    public setClaim(_claim: ResponseUserLogin): void {
+    public setClaim(_claim: IResponseUserLogin): void {
         this.claimUser = _claim;
     } //Function ends
 
@@ -156,14 +156,14 @@ export class Globals {
     /**
      * Getter and Setters for Store Layout
      */
-    public getStoreData(): ResponseUserLogin {
+    public getStoreData(): IResponseUserLogin {
         if(this.claimUser == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
             this.claimUser = strJsonData;
         } //End if
         return this.claimUser;
     } //Function ends
-    public setStoreData(_claim: ResponseUserLogin): void {
+    public setStoreData(_claim: IResponseUserLogin): void {
         this.claimUser = _claim;
     } //Function ends
 

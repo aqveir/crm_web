@@ -1,9 +1,10 @@
-import { IResponse } from '../common/response.interface';
+import { IOrganizationMinimal } from '../organization/organization.interface';
+import { IPrivilege } from '../common/privilege.interface';
 
 export interface IRequestUserLogin {
     username: string;  
     password: string
-    device_id: string;
+    device_id?: string;
     remember_me?: boolean;
 }
 export interface IResponseUserLogin {
@@ -11,11 +12,19 @@ export interface IResponseUserLogin {
     token: string
     created_on: number;
     expires_in: number;
-    
+
     hash: string;
+    username: string;
     full_name: string;
     name_initials: string;
+    last_login_at: Date;
     last_updated_at: Date;
+    country: any;
+    timezone: any;
+    organization: IOrganizationMinimal;
+
+    privileges: IPrivilege[];
+    reportees: [];
 }
 
 

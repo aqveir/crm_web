@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Application Modules
-import { ResponseUserLogin, UserAuthService } from 'crmo-lib';
+import { IResponseUserLogin, UserAuthService } from 'crmo-lib';
 
 //Application Services
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -15,7 +15,7 @@ import { LayoutService } from '../../../../../core';
 })
 export class UserDropdownInnerComponent implements OnInit {
   public extrasUserDropdownStyle: 'light' | 'dark' = 'light';
-  public objUser: ResponseUserLogin;
+  public objUser: IResponseUserLogin;
 
 
   /**
