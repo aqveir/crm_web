@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 //Propritery Library
-import { IResponseUserLogin, ApplicationParams, LookupService, ILookup, ILookupValue } from 'crmo-lib';
+import { IResponseUserLogin, ApplicationParams, LookupService, ILookup, ILookupValue, UserStatusService, IUserStatusResponse } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
@@ -69,6 +69,7 @@ export class Globals {
      */
     public claimUser: IResponseUserLogin | null;
     public params: ApplicationParams | null;
+    public objUserStatus: IUserStatusResponse = null;
 
 
     /**
@@ -85,7 +86,8 @@ export class Globals {
         private _translateService: TranslateService,
         private _notificationService: NotificationService,
 
-        private _lookupService: LookupService
+        private _lookupService: LookupService,
+        private _userStatusService: UserStatusService
     ) {
     } //Function ends
 
@@ -133,6 +135,7 @@ export class Globals {
         return this.claimUser;
     } //Function ends
     public setClaim(_claim: IResponseUserLogin): void {
+        this._sessionStorageService.setItem(Globals._STORAGE_AUTH_CLAIM_KEY, _claim);
         this.claimUser = _claim;
     } //Function ends
 
@@ -195,6 +198,35 @@ export class Globals {
         this.lookup = _lookup;
     } //Function ends
 
+
+
+    /**
+     * Getter and Setters for User Status
+     */
+    public getUserStatus(_boolIsForcedUpdate: boolean=false): IUserStatusResponse {
+        if (this.objUserStatus==null || _boolIsForcedUpdate) {
+            this._userStatusService.get()
+                .subscribe((response: IUserStatusResponse) => {
+                    this.objUserStatus = response;
+
+                    return this.objUserStatus;
+                }, (error) => {
+                    throw error;
+                });
+                
+            return null;
+        } else {
+            return this.objUserStatus;
+        } //End if
+    } //Function ends
+    public setUserStatus(_userStatus: string): void {
+        this._userStatusService.set(_userStatus)
+            .subscribe((response: any) => {
+                this.objUserStatus = response;
+            }, (error) => {
+                throw error;
+            });
+    } //Function ends
     
 
     /**

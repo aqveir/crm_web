@@ -89,6 +89,10 @@ export const environment = {
       ],
     },
 
+    timer: {
+      application_interval: 5000, //In Milli-seconds
+    },
+
     default: {
       start_page: '/queue',
       auto_page_refersh_time_in_sec: 15

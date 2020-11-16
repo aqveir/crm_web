@@ -7,11 +7,8 @@ import { HttpService, LocalStorageService, SessionStorageService } from 'ellaisy
 import { BaseService } from '../base.service';
 
 // Interfaces
-import { IResponse, IResponseError } from '../../interfaces/common/response.interface';
-
-// Models
-import { ResponseUserLogin } from '../../models/user/user-auth.model';
-import { IRequestUserLogin } from '../../interfaces/user/user-auth.interface';
+import { IResponseError } from '../../interfaces/common/response.interface';
+import { IRequestUserLogin, IResponseUserLogin } from '../../interfaces/user/user-auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +39,7 @@ export class UserAuthService extends BaseService {
     return Observable.create((observer: Observer<any>) => {
       this._httpService.post('user/login', params, true, false)
         .then((response: any) => {
-          let claim: ResponseUserLogin = response.data;
+          let claim: IResponseUserLogin = response.data;
 
           //Store the claim into the session storage
           this._sessionStorageService.setItem('_SESSION_USER_AUTH_CLAIM_KEY', claim);

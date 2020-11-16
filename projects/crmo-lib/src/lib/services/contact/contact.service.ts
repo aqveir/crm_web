@@ -1,15 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { HttpParams } from '@angular/common/http';
 
 //Framework files
-import { HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
-
-//Interfaces
-import { IResponse } from '../../interfaces/common/response.interface';
-
-//Models
-import { ResponseContact } from '../../models/contact/contact.model';
+import { HttpService } from 'ellaisys-lib';
 
 //Services
 import { BaseService } from '../base.service';
@@ -22,8 +15,6 @@ export class ContactService extends BaseService {
     //Default Constructor
     constructor(
         private _httpService: HttpService,
-        private _localStorageService: LocalStorageService,
-        private _sessionStorageService: SessionStorageService
     ) { super(); }
 
 
@@ -35,7 +26,7 @@ export class ContactService extends BaseService {
             this._httpService.get('contact')
             .then((response: any) => {
                 if (response.status=='success') {
-                    let data: ResponseContact = response.data;
+                    let data: any = response.data;
                     observer.next(data);                    
                 } else {
                     observer.error(response);

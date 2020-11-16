@@ -45,9 +45,18 @@
             }
         },
         "AUTH_USER": {
+            "USER_STATUS": {
+                "USER_STATUS_OFFLINE": "Offline",
+                "USER_STATUS_ONLINE": "Online",
+                "USER_STATUS_BUSY": "Busy",
+                "USER_STATUS_AWAY": "Away"
+            },
             "CHANGE_PASSWORD": {
                 "TITLE": "Change Password",
                 "SUBTITLE": "Every 60 days, change your password."
+            },
+            "LOGOUT_USER": {
+                "TITLE": "Logout"
             }
         }
     },
