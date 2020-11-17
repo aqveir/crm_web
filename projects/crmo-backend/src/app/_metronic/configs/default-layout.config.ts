@@ -68,7 +68,7 @@ export const DefaultLayoutConfig = {
 
   // Page loader
   pageLoader: {
-    type: '', // default|spinner-message|spinner-logo
+    type: 'default', // default|spinner-message|spinner-logo
   },
 
   // Header
@@ -113,12 +113,12 @@ export const DefaultLayoutConfig = {
   subheader: {
     display: true,
     displayDesc: true,
-    displayDaterangepicker: true,
+    displayDaterangepicker: false,
     layoutVersion: 'v1', // [1..6]
     fixed: false,
     width: 'fluid', // fixed|fluid,
     clear: false,
-    style: 'transparent', // transparent/solid
+    style: 'solid', // transparent/solid
   },
 
   // Content
@@ -170,7 +170,7 @@ export const DefaultLayoutConfig = {
   footer: {
     display: true,
     width: 'fluid',
-    fixed: true,
+    fixed: false,
   },
 
   // Extras
@@ -252,7 +252,7 @@ export const DefaultLayoutConfig = {
 
     // Page Toolbar
     toolbar: {
-      display: true,
+      display: false,
     },
 
     // Scrolltop

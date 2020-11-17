@@ -10,7 +10,11 @@
             "EDIT": "Edit",
             "DELETE": "Delete",
 
-            "LOAD": "Load"
+            "LOAD": "Load",
+
+            "CALL": "Call",
+            "SMS": "SMS",
+            "EMAIL": "Email"
         }
     },
 
@@ -63,7 +67,7 @@
 
     "PAGE": {
         "AUTH": {
-            "SIGNUP": {
+            "SIGNIN": {
                 "TITLE": "Welcome to CRM OMNI",
                 "SUB_TITLE": "New Here ?",
                 "GENERAL_BUTTON_LABEL": "Create an Account",
@@ -83,7 +87,7 @@
                     "LABEL": "Login"
                 }
             },
-            "SIGNIN": {
+            "SIGNUP": {
                 
             },
             "FORGOT_PASSWORD": {

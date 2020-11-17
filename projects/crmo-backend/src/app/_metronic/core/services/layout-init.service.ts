@@ -36,8 +36,6 @@ export class LayoutInitService {
   private preInitLayout() {
     const config = this.layout.getConfig();
     const updatedConfig = Object.assign({}, config);
-console.log(updatedConfig);
-
     const subheaderFixed = this.layout.getProp('subheader.fixed');
     const headerSelfFixedDesktop = this.layout.getProp('header.self.fixed.desktop');
     if (subheaderFixed && headerSelfFixedDesktop) {
@@ -51,7 +49,6 @@ console.log(updatedConfig);
 
   private initLayout() {
     const selfBodyBackgroundImage = this.layout.getProp('self.body.background-image');
-    console.log(selfBodyBackgroundImage);
     if (selfBodyBackgroundImage) {
       document.body.style.backgroundImage = `url("${selfBodyBackgroundImage}")`;
     }
@@ -164,6 +161,18 @@ console.log(updatedConfig);
     // Enable Aside
     document.body.classList.add('aside-enabled');
 
+    // Aside Theme
+    switch (this.layout.getProp('aside.self.theme')) {
+      case 'light':
+        this.layout.setCSSClass('aside', 'aside-light');
+        break;
+
+      case 'dask':
+      default:
+        this.layout.setCSSClass('aside', 'aside-dark');
+        break;
+    } //End switch
+
     // Fixed Aside
     if (this.layout.getProp('aside.self.fixed')) {
       document.body.classList.add('aside-fixed');
@@ -204,6 +213,7 @@ console.log(updatedConfig);
     const asideMenuSubmenuDropdownHoverTimout = this.layout.getProp(
       'aside.menu.submenu.dropdown.hoverTimeout'
     );
+
     if (asideMenuSubmenuDropdownHoverTimout) {
       this.layout.setHTMLAttribute(
         'aside_menu',

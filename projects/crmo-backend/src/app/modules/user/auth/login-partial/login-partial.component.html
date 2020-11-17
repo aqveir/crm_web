@@ -7,13 +7,13 @@
         <!--begin::Title-->
         <div class="pb-13 pt-lg-0 pt-5">
             <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-                {{ 'PAGE.AUTH.SIGNUP.TITLE' | translate }}
+                {{ 'PAGE.AUTH.SIGNIN.TITLE' | translate }}
             </h3>
             <span class="text-muted font-weight-bold font-size-h4">
-                {{ 'PAGE.AUTH.SIGNUP.SUB_TITLE' | translate }}
-                <a [routerLink]="['/user/registration']" id="kt_login_signup"
+                {{ 'PAGE.AUTH.SIGNIN.SUB_TITLE' | translate }}
+                <a [routerLink]="['/user/registration']" id="kt_login_SIGNIN"
                     class="text-primary font-weight-bolder">
-                    {{ 'PAGE.AUTH.SIGNUP.GENERAL_BUTTON_LABEL' | translate }}
+                    {{ 'PAGE.AUTH.SIGNIN.GENERAL_BUTTON_LABEL' | translate }}
                 </a>
             </span>
         </div>
@@ -29,15 +29,15 @@
   
         <!--begin::Form group-->
         <div class="form-group">
-            <label class="font-size-h6 font-weight-bolder text-dark" translate>PAGE.AUTH.SIGNUP.USERNAME.LABEL</label>
-            <input type="email" name="email" formControlName="username" placeholder="{{ 'PAGE.AUTH.SIGNUP.USERNAME.PLACEHOLDER' | translate }}"
+            <label class="font-size-h6 font-weight-bolder text-dark" translate>PAGE.AUTH.SIGNIN.USERNAME.LABEL</label>
+            <input type="email" name="email" formControlName="username" placeholder="{{ 'PAGE.AUTH.SIGNIN.USERNAME.PLACEHOLDER' | translate }}"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                 autocomplete="off" tabindex="1" autofocus
                 [ngClass]="{ 'is-invalid': loginForm.controls['username'].invalid && loginForm.controls['username'].dirty }" />
 
             <ng-container [ngTemplateOutlet]="formError" 
                 [ngTemplateOutletContext]= "{ control: loginForm.controls['username'], 
-                message: 'PAGE.AUTH.SIGNUP.USERNAME.VALIDATION_ERROR', validation: 'required' }"></ng-container>
+                message: 'PAGE.AUTH.SIGNIN.USERNAME.VALIDATION_ERROR', validation: 'required' }"></ng-container>
         </div>
         <!--end::Form group-->
   

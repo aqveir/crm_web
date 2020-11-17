@@ -130,7 +130,11 @@ export class GlobalErrorHandler implements ErrorHandler {
                         logger.error(JSON.stringify(this.objError));
                     } //End if
 
-                    if (router && (this.objError.action!=null)) {
+                    if (router && (this.objError.toLogin)) {
+                        this._zone.run(() => router.navigate(['/user/login']));
+                    } //End if
+
+                    if (router && (!this.objError.toLogin) && (this.objError.action!=null)) {
                         this._zone.run(() => router.navigate(['/error', this.objError.action]));
                     } //End if
                 } else {
@@ -145,6 +149,7 @@ export class GlobalErrorHandler implements ErrorHandler {
                 //Output to console
                 console.error('GlobalErrorHandler-->');
                 console.error(_error);
+                console.error(this.objError);
             } //End if
             // ----------------------------------------------------     
 
