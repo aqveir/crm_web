@@ -30,8 +30,11 @@ export class GlobalErrorHandler implements ErrorHandler {
      */
     constructor(
         private _zone: NgZone,
-        private _injector: Injector,
-        private _translateService: TranslateService
+        private _router: Router,
+        private _loggerService: LoggerService,
+        private _translateService: TranslateService,
+        private _notificationService: NotificationService,
+        
     ) {
     } //Function ends
 
@@ -59,11 +62,7 @@ export class GlobalErrorHandler implements ErrorHandler {
      * 
      * @param _error 
      */
-    private processError(_error: HttpErrorResponse|any): void {
-        const notification = this._injector.get(NotificationService);
-        const logger = this._injector.get(LoggerService);
-        const router = this._injector.get(Router);
-        
+    private processError(_error: HttpErrorResponse|any): void {       
         //Create Error Model
         this.objError=new ErrorModel();
         this.objError.error=_error;
@@ -75,7 +74,7 @@ export class GlobalErrorHandler implements ErrorHandler {
                         case 0: {
                             this.objError.name='ERROR.CODE.0';
                             this.objError.message='No Internet or Connectivity';
-                            this.objError.action=_error.status.toString();
+                            this.objError.action=null;
                             break;
                         }
                         case 401: {
@@ -121,21 +120,20 @@ export class GlobalErrorHandler implements ErrorHandler {
                     } //Switch ends
 
                     // Raise notification
-                    if (notification && (this.objError.action==null)) {
-                        notification.error('Some Error', this.objError.name); // , Globals.NotificationDefaultOptions);
+                    if (this._notificationService && (this.objError.action==null)) {
+                        this._translateService.get(this.objError.name).subscribe((errorMsg: string) => {
+                            this._notificationService.error('Error', errorMsg, Globals.NotificationDefaultOptions);
+                        });
                     } //End if
 
                     //Log the error
-                    if (logger) {
-                        logger.error(JSON.stringify(this.objError));
+                    if (this._loggerService) {
+                        this._loggerService.error(JSON.stringify(this.objError));
                     } //End if
-
-                    if (router && (this.objError.toLogin)) {
-                        this._zone.run(() => router.navigate(['/user/login']));
-                    } //End if
-
-                    if (router && (!this.objError.toLogin) && (this.objError.action!=null)) {
-                        this._zone.run(() => router.navigate(['/error', this.objError.action]));
+                    
+                    //Route in case of action
+                    if (this._router && (!this.objError.toLogin) && (this.objError.action!=null)) {
+                        this._zone.run(() => this._router.navigate(['/error', this.objError.action]));
                     } //End if
                 } else {
                     this.objError.code='';

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 //Application Module
 import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
@@ -9,6 +10,7 @@ import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, Pip
   ],
   imports: [
     CommonModule,
+    InlineSVGModule,
 
     //EllaiSys Library
     TranslateModule,
@@ -18,7 +20,6 @@ import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, Pip
     LoggerModule,
   ],
   exports: [
-
   ]
 })
 export class MetronicModule { }

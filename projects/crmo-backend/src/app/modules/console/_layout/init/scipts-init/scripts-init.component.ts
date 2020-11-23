@@ -14,26 +14,26 @@ import KTLayoutAsideMenu from '@asset-backend/js/layout/base/aside-menu';
   templateUrl: './scripts-init.component.html',
 })
 export class ScriptsInitComponent implements OnInit, AfterViewInit {
-  asideSelfMinimizeToggle = false;
+  boolAsideSelfMinimizeToggle = false;
 
   constructor(private layout: LayoutService) { }
 
   ngOnInit(): void {
-    this.asideSelfMinimizeToggle = this.layout.getProp('aside.self.minimize.toggle');
+    this.boolAsideSelfMinimizeToggle = this.layout.getProp('aside.self.minimize.toggle');
   }
 
   ngAfterViewInit() {
     KTUtil.ready(() => {
       // Init Brand Panel For Logo
       KTLayoutBrand.init('kt_brand');
-      
+
       // Init Aside
       KTLayoutAside.init('kt_aside');
 
       // Init Aside Menu
       KTLayoutAsideMenu.init('kt_aside_menu');
 
-      if (this.asideSelfMinimizeToggle) {
+      if (this.boolAsideSelfMinimizeToggle) {
         // Init Aside Menu Toggle
         KTLayoutAsideToggle.init('kt_aside_toggle');
       }
@@ -45,4 +45,4 @@ export class ScriptsInitComponent implements OnInit, AfterViewInit {
       KTLayoutStretchedCard.init('kt_page_stretched_card');
     });
   }
-}
+} //Class ends

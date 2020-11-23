@@ -18,9 +18,17 @@ import KTLayoutQuickUser from '@asset-backend/js/layout/extended/quick-user';
 import KTLayoutHeaderTopbar from '@asset-backend/js/layout/base/header-topbar';
 import { KTUtil } from '@asset-backend/js/components/util';
 
-
-
-
+// import { Observable } from 'rxjs';
+// import { LayoutService } from '../../../../_metronic/core';
+// import { AuthService } from '../../../../modules/auth/_services/auth.service';
+// import { UserModel } from '../../../../modules/auth/_models/user.model';
+// import KTLayoutQuickSearch from '../../../../../assets/js/layout/extended/quick-search';
+// import KTLayoutQuickNotifications from '../../../../../assets/js/layout/extended/quick-notifications';
+// import KTLayoutQuickActions from '../../../../../assets/js/layout/extended/quick-actions';
+// import KTLayoutQuickCartPanel from '../../../../../assets/js/layout/extended/quick-cart';
+// import KTLayoutQuickPanel from '../../../../../assets/js/layout/extended/quick-panel';
+// import KTLayoutQuickUser from '../../../../../assets/js/layout/extended/quick-user';
+// import { KTUtil } from '../../../../../assets/js/components/util';
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
@@ -44,6 +52,10 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   extrasUserDisplay: boolean = false;
   extrasUserLayout: 'offcanvas' | 'dropdown';
 
+  // layout
+  public boolAsideSecondaryDisplay: boolean = false;
+  public boolAsideSelfMinimizeToggle: boolean = false;
+
   constructor(
     private _globals: Globals,
     private layout: LayoutService, 
@@ -51,7 +63,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    //Topbar extras   
+    // Topbar extras
     this.extraSearchDisplay = this.layout.getProp('extras.search.display');
     this.extrasSearchLayout = this.layout.getProp('extras.search.layout');
 
@@ -69,6 +81,10 @@ export class TopbarComponent implements OnInit, AfterViewInit {
     this.extrasUserLayout = this.layout.getProp('extras.user.layout');
     this.extrasQuickPanelDisplay = this.layout.getProp('extras.quickPanel.display');
 
+    // Layout
+    this.boolAsideSecondaryDisplay = this.layout.getProp('aside.secondary.display');
+    this.boolAsideSelfMinimizeToggle = this.layout.getProp('aside.self.minimize.toggle');
+    
     //Load User Data
     this.objUser = this._globals.getClaim();
   } //Function ends

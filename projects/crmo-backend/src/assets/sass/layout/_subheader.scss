@@ -6,22 +6,22 @@
 	display: flex;
 	align-items: center;
 
-	// Subheader Separator
+	// Subheader Separaor
 	.subheader-separator {
 		display: block;
 	    width: 12px;
 	    height: 4px;
 	    border-radius: 2px;
 
+		// Subheader Separaor Vertical Mode
 		&.subheader-separator-ver {
 			width: 1px;
     		height: 22px;
 		}
 	}
 
-	// Subheader Solid Mode
+	// Subheader Solid Background
 	&.subheader-solid {
-		border-top: 1px solid get($subheader-config, default, border-color);
 		background-color: get($subheader-config, default, bg-color);
 	}
 }
@@ -29,45 +29,50 @@
 // Desktop Mode
 @include media-breakpoint-up(lg) {
 	.subheader {
-		// Fixed subheader mode
-		.header-fixed.subheader-fixed & {
+		// Fixed Subheader Mode
+		.subheader-fixed & {
 			position: fixed;
 			height: get($subheader-config, fixed, height);
-			top: get($header-config, desktop, fixed, height);
+			top: 0;
 			left: 0;
 			right: 0;
-			transition: top 0.3s ease;
+			transition: get($aside-config, base, transition);
 			z-index: get($subheader-config, fixed, zindex);
+			background-color: get($subheader-config, default,  bg-color);
 			box-shadow: get($subheader-config, fixed, shadow);
-			background-color: get($subheader-config, default, bg-color);
 			border-top: 1px solid get($subheader-config, default, border-color);
 			margin: 0;
+
+			// Subheader Title
+			.subheader-title {
+				font-size: 1.25rem;
+			}
 		}
 
-		// Fixed header, minimized header and fixed subheader
-		.header-fixed.subheader-fixed.header-minimize:not(.aside-minimize-hover) & {
-			top: get($header-config, desktop, fixed, height);
-			transition: top 0.3s ease;
+		// Fixed Aside & Fixed Subheader Modes
+		.aside-fixed.subheader-fixed & {
+			left: get($aside-config, base, primary-width);
 		}
 
-		// Aside Enabled & Subheader Fixed Modes
-		.aside-enabled.subheader-fixed & {
-			left: get($aside-config, base, width);
+		// Fixed Aside, Aside Secondary Panel Enabled & Fixed Subheader Modes
+		.aside-fixed.aside-secondary-enabled.subheader-fixed & {
+			left: get($aside-config, base, primary-width) +  get($aside-config, base, secondary-width);
 		}
 
-		// Fixed Subheader & Aside Minimize Hover Modes
-		.subheader-fixed.aside-minimize & {
-			left: get($aside-config, base, minimized-width);
+		// Fixed Aside, Minimized Aside & Fixed Subheader Modes
+		.aside-minimize.aside-fixed.subheader-fixed & {
+			transition: get($aside-config, base, transition);
+			left: get($aside-config, base, primary-width);
 		}
 	}
 
-    // Static Subheader
+    // Static Subheader Mode
 	.subheader-enabled:not(.subheader-fixed) {
 		.content {
 			padding-top: 0;
 		}
 
-		// Subheder Solid Mode
+		// Subheader Solid Background Mode
 		.subheader.subheader-solid {
 			margin-bottom: get($page-padding, desktop);
 		}
@@ -76,32 +81,16 @@
 
 // Tablet & Mobile Modes
 @include media-breakpoint-down(md) {
-	// Mobile fixed subheader mode
-	.subheader {
-		.header-mobile-fixed.subheader-mobile-fixed & {
-			position: fixed;
-			height: get($subheader-config, fixed, height-mobile);
-			top: get($header-config, tablet-and-mobile, fixed, height);
-			left: 0;
-			right: 0;
-			transition: top 0.3s ease;
-			z-index: get($subheader-config, fixed, zindex);
-			box-shadow: get($subheader-config, fixed, shadow);
-			background-color: get($subheader-config, default, bg-color);
-			border-top: 1px solid get($subheader-config, default, border-color);
-			margin: 0;
-		}
-	}
-
-	// Content
-	.content {
-		.subheader-enabled:not(.subheader-mobile-fixed) & {
+    // Subheader Enabled Mode
+	.subheader-enabled {
+		// Content
+		.content {
 			padding-top: 0;
 		}
-	}
 
-	// Subheder Solid Mode
-	.subheader.subheader-solid {
-		margin-bottom: get($page-padding, tablet-and-mobile);
+		// Subheader Solid Background Mode
+		.subheader.subheader-solid {
+			margin-bottom: get($page-padding, tablet-and-mobile);
+		}
 	}
 }

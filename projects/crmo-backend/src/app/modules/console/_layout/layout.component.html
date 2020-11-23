@@ -15,27 +15,21 @@
     <div class="d-flex flex-row flex-column-fluid page">
       <!-- begin:: Aside Left -->
       <ng-container *ngIf="boolAsideSelfDisplay">
-        <!--begin::STATIC Aside-->
-        <!-- <app-aside
+        <!--begin::Aside-->
+        <app-aside
           #ktAside
           id="kt_aside"
-          class="aside aside-left d-flex flex-column flex-row-auto"
+          class="aside aside-left d-flex"
           [ngClass]="cssAside"
-        ></app-aside> -->
-        <!--end::STATIC Aside-->
-
-        <!--begin::DYNAMIC Aside-->
-        <app-aside-dynamic #ktAside id="kt_aside"
-          class="aside aside-left d-flex flex-column flex-row-auto"
-          [ngClass]="cssAside"></app-aside-dynamic>
-        <!--end::DYNAMIC Aside-->
+        ></app-aside>
+        <!--end::Aside-->
       </ng-container>
       <!-- end:: Aside Left -->
 
       <!--begin::Wrapper-->
       <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
         <!-- begin:: Header -->
-        <app-header #ktHeader id="kt_header" class="header" [ngClass]="headerCSSClasses"></app-header>
+        <!-- <app-header #ktHeader id="kt_header" class="header" [ngClass]="headerCSSClasses"></app-header> -->
         <!-- end:: Header -->
 
         <!-- begin:: Content -->
@@ -100,7 +94,7 @@
     </ng-container>
 
     <ng-container *ngIf="extrasUserOffcanvasDisplay">
-      <!-- <app-user-offcanvas></app-user-offcanvas> -->
+      <app-user-offcanvas></app-user-offcanvas>
     </ng-container>
 
     <!-- This is the floating toolbar on RH side -->
@@ -115,7 +109,7 @@
 
 <ng-template #blankLayout>
   <div class="d-flex flex-column flex-root">
-    <!-- <router-outlet></router-outlet> -->
+    <router-outlet></router-outlet>
   </div>
 </ng-template>
 

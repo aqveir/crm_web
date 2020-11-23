@@ -12,7 +12,6 @@ export class LayoutInitService {
     this.layout.initConfig();
 
     this.preInitLayout();
-    
     // init base layout
     this.initLayout();
     this.initLoader();
@@ -42,7 +41,12 @@ export class LayoutInitService {
       updatedConfig.subheader.style = 'solid';
     } else {
       updatedConfig.subheader.fixed = false;
-    }
+    } //End if
+    
+    const subheaderStyle = this.layout.getProp('subheader.style');
+    if (subheaderFixed && subheaderStyle === 'solid') {
+      updatedConfig.subheader.fixed = false;
+    } //End if
 
     this.layout.setConfigWithoutLocalStorageChanges(updatedConfig);
   }
@@ -76,29 +80,6 @@ export class LayoutInitService {
     const headerSelfFixedMobile = this.layout.getProp('header.self.fixed.mobile');
     if (headerSelfFixedMobile) {
       document.body.classList.add('header-mobile-fixed');
-      this.layout.setCSSClass('header_mobile', 'header-mobile-fixed');
-    } //End if
-
-    // Menu
-    const headerMenuSelfDisplay = this.layout.getProp(
-      'header.menu.self.display'
-    );
-    const headerMenuSelfLayout = this.layout.getProp('header.menu.self.layout');
-    if (headerMenuSelfDisplay) {
-      this.layout.setCSSClass(
-        'header_menu',
-        `header-menu-layout-${headerMenuSelfLayout}`
-      );
-
-      if (this.layout.getProp('header.menu.self.rootArrow')) {
-        this.layout.setCSSClass('header_menu', 'header-menu-root-arrow');
-      }
-    }
-
-    if (this.layout.getProp('header.self.width') === 'fluid') {
-      this.layout.setCSSClass('header_container', 'container-fluid');
-    } else {
-      this.layout.setCSSClass('header_container', 'container');
     }
   }
 
@@ -112,14 +93,15 @@ export class LayoutInitService {
 
     // Fixed content head
     const subheaderFixed = this.layout.getProp('subheader.fixed');
-    const headerSelfFixedDesktop = this.layout.getProp(
-      'header.self.fixed.desktop'
-    );
+    const headerSelfFixedDesktop = this.layout.getProp('header.self.fixed.desktop');
     if (subheaderFixed && headerSelfFixedDesktop) {
       document.body.classList.add('subheader-fixed');
     }
-
+    
     const subheaderStyle = this.layout.getProp('subheader.style');
+    if (subheaderFixed && subheaderStyle === 'solid') {
+      document.body.classList.add('subheader-fixed');
+    }
     if (subheaderStyle) {
       this.layout.setCSSClass('subheader', `subheader-${subheaderStyle}`);
     }
@@ -181,6 +163,13 @@ export class LayoutInitService {
       document.body.classList.add('aside-static');
     }
 
+    // Aside Secondary
+    if (this.layout.getProp('aside.secondary.display')) {
+      document.body.classList.add('aside-secondary-enabled');
+    } else {
+      document.body.classList.add('aside-secondary-disabled');
+    }
+
     // Check Aside
     if (this.layout.getProp('aside.self.display') !== true) {
       return;
@@ -228,6 +217,7 @@ export class LayoutInitService {
     // Fixed header
     if (this.layout.getProp('footer.fixed') === true) {
       document.body.classList.add('footer-fixed');
+      this.layout.setCSSClass('footer', 'bg-white');
     }
 
     if (this.layout.getProp('footer.width') === 'fluid') {
@@ -241,13 +231,5 @@ export class LayoutInitService {
    * Set the body class name based on page skin options
    */
   private initSkins() {
-    const headerSelfTheme = this.layout.getProp('header.self.theme') || '';
-    const brandSelfTheme = this.layout.getProp('brand.self.theme') || '';
-    const asideSelfDisplay = this.layout.getProp('aside.self.display');
-    if (asideSelfDisplay === false) {
-      document.body.classList.add(`brand-${headerSelfTheme}`);
-    } else {
-      document.body.classList.add(`brand-${brandSelfTheme}`);
-    }
   }
 }

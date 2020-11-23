@@ -9,7 +9,7 @@
     class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap"
   >
     <!--begin::Info-->
-    <div class="d-flex align-items-center flex-wrap mr-1">
+    <div class="d-flex align-items-center mr-1">
       <ng-container *ngIf="subheaderMobileToggle">
         <!--begin::Mobile Toggle-->
         <button
@@ -25,7 +25,9 @@
       <div class="d-flex align-items-baseline flex-wrap mr-5">
         <!--begin::Page Title-->
         <ng-container *ngIf="title$ | async as _title">
-          <h2 class="subheader-title text-dark font-weight-bold my-1 mr-3">
+          <h2
+            class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3"
+          >
             {{ _title }}
             <ng-container *ngIf="subheaderDisplayDesc">
               <ng-container *ngIf="description$ | async as _description">
@@ -56,16 +58,16 @@
     <!--end::Info-->
 
     <!--begin::Toolbar-->
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center flex-wrap">
       <!--begin::Button-->
       <a
-        class="btn btn-fixed-height btn-default btn-hover-primary font-weight-bold px-2 px-lg-5 mr-2 cursor-pointer"
+        class="btn btn-primary btn-fixed-height font-weight-bold px-2 px-lg-5 mr-2"
       >
         <span
           [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'"
-          class="svg-icon svg-icon-success svg-icon-lg"
+          class="svg-icon svg-icon-lg"
         ></span> <!-- cacheSVG="true" -->
-        New Member
+        <span class="d-none d-md-inline">New Member</span>
       </a>
       <!--end::Button-->
 
@@ -79,7 +81,7 @@
         ngbDropdown
       >
         <a
-          class="btn btn-fixed-height btn-default btn-hover-primary font-weight-bold px-2 px-lg-5 mr-2 cursor-pointer"
+          class="btn btn-primary btn-fixed-height font-weight-bold px-2 px-lg-5 mr-2"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
@@ -87,9 +89,9 @@
         >
           <span
             [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
-            class="svg-icon svg-icon-success svg-icon-lg"
+            class="svg-icon svg-icon-lg"
           ></span> <!-- cacheSVG="true" -->
-          New Report
+          <span class="d-none d-md-inline">New Report</span>
         </a>
         <div
           class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right"
@@ -101,7 +103,7 @@
       <!--end::Dropdown-->
       <!--begin::Button-->
       <a
-        class="btn btn-success btn-icon font-weight-bold cursor-pointer"
+        class="btn btn-primary btn-icon font-weight-bold"
         data-toggle="modal"
         data-target="#kt_chat_modal"
       >

@@ -30,7 +30,7 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
   asideMenuDropdown: any;
   brandClasses: string = '';
   asideMenuScroll = 1;
-  asideSelfMinimizeToggle = false;
+  boolAsideSelfMinimizeToggle = false;
 
   currentUrl: string = '';
 
@@ -61,7 +61,7 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
     this.asideMenuHTMLAttributes = this.layout.getHTMLAttributes('aside_menu');
     this.asideMenuDropdown = this.layout.getProp('aside.menu.dropdown') ? '1' : '0';
     this.brandClasses = this.layout.getProp('brand');
-    this.asideSelfMinimizeToggle = this.layout.getProp('aside.self.minimize.toggle');
+    this.boolAsideSelfMinimizeToggle = this.layout.getProp('aside.self.minimize.toggle');
     this.asideMenuScroll = this.layout.getProp('aside.menu.scroll') ? 1 : 0;
     this.asideMenuCSSClasses = `${this.asideMenuCSSClasses} ${this.asideMenuScroll === 1 ? 'scroll my-4 ps ps--active-y' : ''}`;
     console.log('asideMenuCSSClasses2->' + this.asideMenuCSSClasses);

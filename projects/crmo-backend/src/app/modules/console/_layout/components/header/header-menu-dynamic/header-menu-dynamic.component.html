@@ -2,8 +2,11 @@
   <!-- begin::Header Nav -->
   <ul class="menu-nav" [ngClass]="ulCSSClasses">
     <ng-container *ngFor="let item of menuConfig.items">
-      <ng-container *ngIf="item.title" [ngTemplateOutlet]="menu1LevelTemplate" 
-        [ngTemplateOutletContext]="{ item: item }"></ng-container>
+      <ng-container
+        *ngIf="item.title"
+        [ngTemplateOutlet]="menu1LevelTemplate"
+        [ngTemplateOutletContext]="{ item: item }"
+      ></ng-container>
     </ng-container>
   </ul>
   <!-- end::Header Nav -->
@@ -15,9 +18,10 @@
   <ng-container *ngIf="!item.submenu">
     <!-- begin::1 Level -->
     <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
-      <a class="menu-link" [routerLink]="['/secure/dashboard']" routerLinkActive="active">
-        <span class="menu-text" *ngIf="item.translate">{{ item.translate | translate }}</span>
-        <span class="menu-text" *ngIf="!item.translate">{{ item.title }}</span>
+      <a class="menu-link" [routerLink]="item.page" routerLinkActive="active">
+        <span class="menu-text" [translate]="item.translate">{{
+          item.title
+        }}</span>
         <ng-container *ngIf="rootArrowEnabled">
           <i class="menu-arrow"></i>
         </ng-container>
@@ -30,21 +34,31 @@
   <!-- begin::if has submenu classic -->
   <ng-container *ngIf="item.submenu && !item.mega">
     <!-- begin::1 Level -->
-    <li [attr.data-menu-toggle]="headerMenuDesktopToggle"
-      aria-haspopup="true" class="menu-item menu-item-submenu menu-item-rel"
-      routerLinkActive="menu-item-active" [ngClass]="{ 'menu-item-active': isMenuItemActive(item.page) }">
-
-      <a class="menu-link menu-toggle" [attr.href]="item.page" routerLinkActive="active"
-        [ngClass]="{ 'active ': isMenuItemActive(item.page) }">
-        <span class="menu-text" *ngIf="item.translate">{{ item.translate | translate }}</span>
-        <span class="menu-text" *ngIf="!item.translate">{{ item.title }}</span>
+    <li
+      [attr.data-menu-toggle]="headerMenuDesktopToggle"
+      aria-haspopup="true"
+      class="menu-item menu-item-submenu menu-item-rel"
+      routerLinkActive="menu-item-active"
+      [ngClass]="{ 'menu-item-active': isMenuItemActive(item.page) }"
+    >
+      <a
+        class="menu-link menu-toggle"
+        [attr.href]="item.page"
+        routerLinkActive="active"
+        [ngClass]="{ 'active ': isMenuItemActive(item.page) }"
+      >
+        <span class="menu-text" [translate]="item.translate">{{
+          item.title
+        }}</span>
         <i class="menu-arrow"></i>
       </a>
-
       <div class="menu-submenu menu-submenu-classic menu-submenu-left">
         <ul class="menu-subnav">
-          <ng-container *ngFor="let sub of item.submenu" [ngTemplateOutlet]="menu2LevelTemplate"
-            [ngTemplateOutletContext]="{ item: sub }"></ng-container>
+          <ng-container
+            *ngFor="let sub of item.submenu"
+            [ngTemplateOutlet]="menu2LevelTemplate"
+            [ngTemplateOutletContext]="{ item: sub }"
+          ></ng-container>
         </ul>
       </div>
     </li>
@@ -95,11 +109,16 @@
 <ng-template #menu2LevelTemplate let-item="item">
   <!-- begin::if don't have submenu -->
   <ng-container *ngIf="!item.submenu">
-    <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-      <a class="menu-link" [attr.href]="item.page" routerLinkActive="active">
-        <span class="menu-text" *ngIf="item.translate">{{ item.translate | translate }}</span>
-        <span class="menu-text" *ngIf="!item.translate">{{ item.title }}</span>
-      </a>
+    <li
+      class="menu-item"
+      aria-haspopup="true"
+      routerLinkActive="menu-item-active"
+    >
+      <a class="menu-link" [attr.href]="item.page" routerLinkActive="active"
+        ><span class="menu-text" [translate]="item.translate">{{
+          item.title
+        }}</span></a
+      >
     </li>
   </ng-container>
   <!-- end::if don't have submenu -->
@@ -107,24 +126,38 @@
   <!-- begin::if has submenu -->
   <ng-container *ngIf="item.submenu">
     <!-- begin::2 Level -->
-    <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true"
-      routerLinkActive="menu-item-active" [ngClass]="{ 'menu-item-active ': isMenuItemActive(item.page) }">
-      <a class="menu-link menu-toggle" [attr.href]="item.page" routerLinkActive="active"
-        [ngClass]="{ 'active ': isMenuItemActive(item.page) }">
+    <li
+      class="menu-item menu-item-submenu"
+      data-menu-toggle="hover"
+      aria-haspopup="true"
+      routerLinkActive="menu-item-active"
+      [ngClass]="{ 'menu-item-active ': isMenuItemActive(item.page) }"
+    >
+      <a
+        class="menu-link menu-toggle"
+        [attr.href]="item.page"
+        routerLinkActive="active"
+        [ngClass]="{ 'active ': isMenuItemActive(item.page) }"
+      >
         <ng-container *ngIf="item.svg">
-          <span [inlineSVG]="item.svg" class="svg-icon menu-icon"></span> <!-- cacheSVG="true" -->
+          <span
+            [inlineSVG]="item.svg"
+            class="svg-icon menu-icon"
+          ></span> <!-- cacheSVG="true" -->
         </ng-container>
-
-        <span class="menu-text" *ngIf="item.translate">{{ item.translate | translate }}</span>
-        <span class="menu-text" *ngIf="!item.translate">{{ item.title }}</span>
+        <span class="menu-text" [translate]="item.translate">{{
+          item.title
+        }}</span>
         <i class="menu-arrow"></i>
       </a>
-
       <div class="menu-submenu menu-submenu-classic menu-submenu-right">
         <ul class="menu-subnav">
           <!-- submenu-->
-          <ng-container *ngFor="let sub of item.submenu"
-            [ngTemplateOutlet]="menu3LevelTemplate" [ngTemplateOutletContext]="{ item: sub }"></ng-container>
+          <ng-container
+            *ngFor="let sub of item.submenu"
+            [ngTemplateOutlet]="menu3LevelTemplate"
+            [ngTemplateOutletContext]="{ item: sub }"
+          ></ng-container>
         </ul>
       </div>
     </li>
@@ -137,11 +170,11 @@
 <ng-template #menu3LevelTemplate let-item="item">
   <!-- begin::3 Level -->
   <li class="menu-item" routerLinkActive="menu-item-active">
-    <a class="menu-link" [routerLink]="[item.page]" routerLinkActive="active">
+    <a class="menu-link" [routerLink]="item.page" routerLinkActive="active">
       <i class="menu-bullet menu-bullet-dot"><span></span></i>
-
-      <span class="menu-text" *ngIf="item.translate">{{ item.translate | translate }}</span>
-      <span class="menu-text" *ngIf="!item.translate">{{ item.title }}</span>
+      <span class="menu-text" [translate]="item.translate">{{
+        item.title
+      }}</span>
     </a>
   </li>
   <!-- end::3 Level -->

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: LayoutComponent, children: [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'queue', component: WorkQueueComponent },
-    { path: 'contact', component: ContactListComponent },
+    { path: 'contacts', component: ContactListComponent },
     { path: 'task', component: TaskListComponent },
     { path: 'event', component: EventListComponent },
     { path: 'setting', loadChildren: () => import('../console/setting/setting.module').then(m => m.SettingModule) },

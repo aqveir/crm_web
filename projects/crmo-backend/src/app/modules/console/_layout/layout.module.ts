@@ -6,8 +6,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import {
   NgbDropdownModule,
   NgbProgressbarModule,
+  NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
-//import { TranslationModule } from '../modules/i18n/translation.module';
 
 //Application Module
 import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
@@ -26,6 +26,8 @@ import { ExtrasModule } from '../../../_metronic/partials/layout/extras/extras.m
 import { LanguageSelectorComponent } from './components/topbar/language-selector/language-selector.component';
 import { AsideDynamicComponent } from './components/aside-dynamic/aside-dynamic.component';
 import { HeaderMenuDynamicComponent } from './components/header/header-menu-dynamic/header-menu-dynamic.component';
+import { AsideStaticComponent } from './components/aside/aside-static/aside-static.component';
+import { AsideSearchComponent } from './components/aside/aside-search/aside-search.component';
 
 
 @NgModule({
@@ -40,9 +42,13 @@ import { HeaderMenuDynamicComponent } from './components/header/header-menu-dyna
     TopbarComponent,
     LanguageSelectorComponent,
     AsideDynamicComponent,
+    AsideStaticComponent,
+    AsideSearchComponent,
     HeaderMenuDynamicComponent,
   ],
   imports: [
+    //DropdownMenusModule,
+
     CommonModule,
     RouterModule,
 
@@ -50,6 +56,7 @@ import { HeaderMenuDynamicComponent } from './components/header/header-menu-dyna
     ExtrasModule,
     NgbDropdownModule,
     NgbProgressbarModule,
+    NgbTooltipModule,
 
     //EllaiSys Library
     TranslateModule,
@@ -72,6 +79,8 @@ import { HeaderMenuDynamicComponent } from './components/header/header-menu-dyna
     TopbarComponent,
     LanguageSelectorComponent,
     AsideDynamicComponent,
+    AsideStaticComponent,
+    AsideSearchComponent,
     HeaderMenuDynamicComponent,
   ]
 })

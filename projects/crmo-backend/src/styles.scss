@@ -6,7 +6,7 @@
 
 // => Material
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-//@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 @import "~highlight.js/styles/googlecode.css";
 @import "~perfect-scrollbar/css/perfect-scrollbar.css";
@@ -31,39 +31,39 @@
 // @import "./assets/sass/themes/layout/aside/dark.scss";
 
 // Header themes
-.header-base-light {
-    @import "./assets/sass/themes/layout/header/base/light.scss";
-}
+// .header-base-light {
+//     @import "./assets/sass/themes/layout/header/base/light.scss";
+// }
 
-.header-base-dark {
-    @import "./assets/sass/themes/layout/header/base/dark.scss";
-}
+// .header-base-dark {
+//     @import "./assets/sass/themes/layout/header/base/dark.scss";
+// }
 
 // Header Menu themes
-.header-menu-light {
-    @import "./assets/sass/themes/layout/header/menu/light.scss";
-}
-.header-menu-dark {
-    @import "./assets/sass/themes/layout/header/menu/dark.scss";
-}
+// .header-menu-light {
+//     @import "./assets/sass/themes/layout/header/menu/light.scss";
+// }
+// .header-menu-dark {
+//     @import "./assets/sass/themes/layout/header/menu/dark.scss";
+// }
 
 // Brand themes
-.brand-dark {
-  @import "./assets/sass/themes/layout/brand/dark.scss";
-}
+// .brand-dark {
+//   @import "./assets/sass/themes/layout/brand/dark.scss";
+// }
 
-.brand-light {
-  @import "./assets/sass/themes/layout/brand/light.scss";
-}
+// .brand-light {
+//   @import "./assets/sass/themes/layout/brand/light.scss";
+// }
 
 // Aside themes
-.aside-dark {
-  @import "./assets/sass/themes/layout/aside/dark.scss";
-}
+// .aside-dark {
+//   @import "./assets/sass/themes/layout/aside/dark.scss";
+// }
 
-.aside-light {
-  @import "./assets/sass/themes/layout/aside/light.scss";
-}
+// .aside-light {
+//   @import "./assets/sass/themes/layout/aside/light.scss";
+// }
 
 // hide bootstrap dropdown arrow globally
 .dropdown-toggle::after {
