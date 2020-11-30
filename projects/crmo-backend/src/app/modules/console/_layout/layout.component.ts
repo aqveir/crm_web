@@ -22,7 +22,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   public cssContentContainer: string = null;
   public cssFooter: string = null;
 
-  public boolSubHeaderDisplay: boolean = true;
+  public boolSubHeaderDisplay: boolean = false;
   public boolAsideSelfDisplay: boolean = true;
   public boolContentExtended: boolean = false;
   public boolFooterDisplay: boolean = false;

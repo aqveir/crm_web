@@ -55,6 +55,10 @@
                 "USER_STATUS_BUSY": "Busy",
                 "USER_STATUS_AWAY": "Away"
             },
+            "USER_PROFILE": {
+                "TITLE": "My Profile",
+                "SUBTITLE": ""
+            },
             "CHANGE_PASSWORD": {
                 "TITLE": "Change Password",
                 "SUBTITLE": "Every 60 days, change your password."

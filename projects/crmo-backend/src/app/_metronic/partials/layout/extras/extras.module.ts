@@ -46,7 +46,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ToolbarComponent,
   ],
   imports: [
-    CommonModule, InlineSVGModule, PerfectScrollbarModule, CoreModule,
+    CommonModule, 
+    InlineSVGModule, 
+    PerfectScrollbarModule, 
+    
+    CoreModule,
 
     //EllaiSys Library
     TranslateModule,
@@ -56,10 +60,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoggerModule,
   ],
   providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG, },
   ],
   exports: [
     SearchDropdownInnerComponent,

@@ -10,7 +10,6 @@ import { SubheaderService } from '../_services/subheader.service';
 })
 export class Subheader6Component implements OnInit {
   public cacheSVG: boolean = false;
-  
   subheaderCSSClasses = '';
   subheaderContainerCSSClasses = '';
   subheaderMobileToggle = false;

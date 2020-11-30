@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
 
 // Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -8,7 +7,6 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 // Application Services
 import { LayoutService, DynamicAsideMenuService } from '../../../../../_metronic/core';
 import { KTUtil } from '@asset-backend/js/components/util';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-aside',
@@ -17,19 +15,9 @@ import { Subscription } from 'rxjs';
 })
 export class AsideComponent implements OnInit, OnDestroy {
   public objMenuTab: any = null;
-  public boolDisableAsideSecondaryDisplay: boolean = false;
+  public objAsideSubMenu: any = null;
+  public boolShowAsideSecondaryDisplay: boolean = false;
 
-  private tabSubscriptions: Subscription[] = [];
-
-
-  TABS: string[] = [
-    'kt_aside_tab_0',
-    'kt_aside_tab_1',
-    'kt_aside_tab_2',
-    'kt_aside_tab_3',
-    'kt_aside_tab_4',
-    'kt_aside_tab_5',
-    'kt_aside_tab_6'];
   activeTabId;
   disableAsideSelfDisplay: boolean;
   
@@ -50,6 +38,7 @@ export class AsideComponent implements OnInit, OnDestroy {
    * @param _cdr 
    */
   constructor(
+    private _renderer: Renderer2,
     private _layoutService: LayoutService,
     private _menuService: DynamicAsideMenuService,
     private _cdr: ChangeDetectorRef
@@ -60,8 +49,6 @@ export class AsideComponent implements OnInit, OnDestroy {
    * LifeCycle Hooks
    */
   ngOnInit(): void {
-    this.activeTabId = this.TABS[1];
-
     // Load settings
     this.disableAsideSelfDisplay = this._layoutService.getProp('aside.self.display') === false;
     this.ulCSSClasses = this._layoutService.getProp('aside_menu_nav');
@@ -72,18 +59,18 @@ export class AsideComponent implements OnInit, OnDestroy {
     this.boolAsideSelfMinimizeToggle = this._layoutService.getProp('aside.self.minimize.toggle');
     this.asideMenuScroll = this._layoutService.getProp('aside.menu.scroll') ? 1 : 0;
     this.asideMenuCSSClasses = `${this.asideMenuCSSClasses} ${this.asideMenuScroll === 1 ? 'scroll my-4 ps ps--active-y' : ''}`;
-    this.boolDisableAsideSecondaryDisplay = this._layoutService.getProp('aside.secondary.display');
+    //this.boolShowAsideSecondaryDisplay = this._layoutService.getProp('aside.secondary.display');
 
     // Menu load
     const menuSubscr = this._menuService.menuConfig$.subscribe((response: any) => {
       this.objMenuTab = response;
       this._cdr.detectChanges();
     });
-    this.tabSubscriptions.push(menuSubscr);
+    //this.tabSubscriptions.push(menuSubscr);
 
   } //Function ends
   ngOnDestroy() {
-    this.tabSubscriptions.forEach(x => x.unsubscribe());
+    //this.tabSubscriptions.forEach(x => x.unsubscribe());
   } //Function ends
 
 
@@ -93,23 +80,47 @@ export class AsideComponent implements OnInit, OnDestroy {
    * @param _tab 
    */
   public fnSelectTab(_tab: any) {
-    //Show Secondary Aside
+
     if (_tab.submenu) {
-      this.boolDisableAsideSecondaryDisplay=false;
+      this.objAsideSubMenu = _tab.submenu;
+
+      // Show Secondary Aside
+      this.boolShowAsideSecondaryDisplay=true;
+      this.fnToggleSecondaryAsideMenu(true);
+    } else {
+      this.objAsideSubMenu = null;
+
+      // Hide Secondary Aside
+      this.boolShowAsideSecondaryDisplay=false;
+      this.fnToggleSecondaryAsideMenu(false);
     } //End if
 
     //this.activeTabId = _tab;
 
-    const asideWorkspace = KTUtil.find(
-      document.getElementById('kt_aside'),
-      '.aside-secondary .aside-workspace'
-    );
+    // const asideWorkspace = KTUtil.find(
+    //   document.getElementById('kt_aside'),
+    //   '.aside-secondary .aside-workspace'
+    // );
 
-    if (asideWorkspace) {
-      KTUtil.scrollUpdate(asideWorkspace);
-    } //End if
+    // if (asideWorkspace) {
+    //   KTUtil.scrollUpdate(asideWorkspace);
+    // } //End if
 
     this._cdr.detectChanges();
+  } //Function ends
+
+
+  /**
+   * Toggle the Aside Secondary Menu
+   * 
+   * @param showSecondaryAside 
+   */
+  private fnToggleSecondaryAsideMenu(showSecondaryAside: boolean=false): void {
+    if (showSecondaryAside) {
+      this._renderer.removeClass(document.body, 'aside-minimize');
+    } else {
+      this._renderer.addClass(document.body, 'aside-minimize');
+    } //End if
   } //Function ends
 
 } //Class ends

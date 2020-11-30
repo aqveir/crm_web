@@ -103,8 +103,8 @@ export const DefaultLayoutConfig = {
       display: true,
       fixed: true,
       minimize: {
-        toggle: true, // allow toggle
-        default: false, // default state
+        toggle: false, // allow toggle
+        default: true, // default state
       },
     },
 
@@ -128,8 +128,9 @@ export const DefaultLayoutConfig = {
 
   // Footer
   footer: {
-    width: 'fixed', // fixed|fluid
-    fixed: true,
+    display: true,
+    width: 'fluid', // fixed|fluid
+    fixed: false,
   },
 
   // Extras
@@ -175,6 +176,7 @@ export const DefaultLayoutConfig = {
         style: 'dark', // light|dark
       },
       offcanvas: {
+        style: 'light', // light|dark - Not wired
         direction: 'left',
       },
     },

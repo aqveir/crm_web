@@ -1,13 +1,7 @@
 <!--begin::Subheader-->
-<div
-  class="subheader py-3 py-lg-8"
-  [ngClass]="subheaderCSSClasses"
-  id="kt_subheader"
->
-  <div
-    [ngClass]="subheaderContainerCSSClasses"
-    class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap"
-  >
+<div class="subheader py-3 py-lg-8" [ngClass]="subheaderCSSClasses" id="kt_subheader">
+  <div [ngClass]="subheaderContainerCSSClasses"
+    class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
     <!--begin::Info-->
     <div class="d-flex align-items-center mr-1">
       <ng-container *ngIf="subheaderMobileToggle">
@@ -24,11 +18,9 @@
       <!--begin::Page Heading-->
       <div class="d-flex align-items-baseline flex-wrap mr-5">
         <!--begin::Page Title-->
-        <ng-container *ngIf="title$ | async as _title">
-          <h2
-            class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3"
-          >
-            {{ _title }}
+        <ng-container> <!-- *ngIf="title$ | async as _title"> -->
+          <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">
+            _title -Page Title
             <ng-container *ngIf="subheaderDisplayDesc">
               <ng-container *ngIf="description$ | async as _description">
                 <small>{{ _description }}</small>
@@ -58,7 +50,7 @@
     <!--end::Info-->
 
     <!--begin::Toolbar-->
-    <div class="d-flex align-items-center flex-wrap">
+    <div class="d-flex align-items-center flex-wrap" *ngIf="false">
       <!--begin::Button-->
       <a
         class="btn btn-primary btn-fixed-height font-weight-bold px-2 px-lg-5 mr-2"
