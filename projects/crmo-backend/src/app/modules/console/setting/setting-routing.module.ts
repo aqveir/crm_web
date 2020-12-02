@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'organization', component: OrganizationListComponent },
   { path: 'organization/:ohash', component: OrganizationDetailComponent },
   { path: 'organization/:ohash/configuration/:key', component: OrganizationConfigurationDataComponent },
-  { path: 'organization/ohash/user', component: UserListComponent },
+  { path: 'organization/:ohash/user', component: UserListComponent },
   { path: 'organization/:ohash/user/:uhash', component: UserDetailComponent },
   { path: '', pathMatch: 'full', redirectTo: 'organizations' },
 ];

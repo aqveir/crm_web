@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 
 //Application Libraries
 import { IOrganization, IConfiguration } from 'crmo-lib';
@@ -13,11 +13,12 @@ import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.compon
 export class OrganizationConfigurationListComponent extends BaseComponent implements OnInit {
   @Input('organization') objOrganization: IOrganization = null;
   @Input('configurations') objConfigurations: IConfiguration[] = null;
+  @Output('refresh') eventRefreshData: EventEmitter<boolean> = new EventEmitter<boolean>();
    
 
   //Common attributes
   public boolLoading: boolean = false;
-  public boolShowChild: boolean = false;
+  public boolShowConfigDetail: boolean = false;
 
   public objSelectedConfiguration: IConfiguration = null;
 
@@ -43,7 +44,7 @@ export class OrganizationConfigurationListComponent extends BaseComponent implem
    */
   public fnEditData(configuration: IConfiguration): void {
     this.objSelectedConfiguration = configuration;
-    this.boolShowChild = true;
+    this.boolShowConfigDetail = true;
   } //Function ends
 
 
@@ -51,8 +52,18 @@ export class OrganizationConfigurationListComponent extends BaseComponent implem
    * Delete Record
    */
   public fnDeleteRecord(configuration: IConfiguration): void {
-
+    this.eventRefreshData.emit(true);
+    event.stopPropagation();
   } //Function ends
+
+
+  /**
+   * Refresh Data
+   */
+  public fnRefreshData(): void {
+    this.boolShowConfigDetail=false;
+    this.eventRefreshData.emit(true);
+  } //function ends
 
 
   /**

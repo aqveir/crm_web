@@ -84,4 +84,16 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
     } //Try-catch ends
   } //Function ends
 
+
+  public fnSelectOrganization(organization: IOrganization): boolean {
+    let objReturnValue: boolean=false;
+    try {
+      this._router.navigate(['/secure/setting/organization', organization.hash]);
+    } catch(error) {
+      throw error;
+    } //Try-catch ends
+
+    return objReturnValue;
+  }
+
 } //Class ends

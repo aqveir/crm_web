@@ -32,7 +32,6 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
     private _globals: Globals,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder,
     private _organizationService: OrganizationService,
     private _notification : NotificationService
   ) { super(); }
@@ -91,6 +90,14 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
 
       throw error;
     } //Try-catch ends
+  } //Function ends
+
+
+  /**
+   * Refresh Organization Data
+   */
+  public fnRefreshOrganizationData(oHash: string): void {
+    this.fnShowData(this.oHash);
   } //Function ends
 
 

@@ -43,7 +43,8 @@
             <div class="tab-pane fade" id="kt_tab_organization_configuration" role="tabpanel" aria-labelledby="kt_tab_organization_configuration">
                 <crmo-backend-organization-configuration-list
                     [organization]="objOrganization"
-                    [configurations]="objOrganization?.configurations"></crmo-backend-organization-configuration-list>
+                    [configurations]="objOrganization?.configurations"
+                    (refresh)="fnRefreshOrganizationData(objOrganization.hash)"></crmo-backend-organization-configuration-list>
             </div>
 
             <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>

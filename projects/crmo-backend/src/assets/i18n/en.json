@@ -175,6 +175,16 @@
                     "FINE_TEXT": "",
                     "VALIDATION_ERROR": ""
                 }
+            },
+            "USER_LIST": {
+                "TITLE": "User List",
+                "COLUMNS": {
+                    "FULL_NAME": "Name",
+                    "CONTACT": "Phone",
+                    "STATUS": "Status",
+                    "LAST_LOGIN": "Last Login",
+                    "LAST_MODIFIED": "Last modified"
+                }
             }
         }
     },

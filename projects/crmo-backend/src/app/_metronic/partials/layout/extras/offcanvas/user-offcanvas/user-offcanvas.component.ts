@@ -105,7 +105,9 @@ export class UserOffcanvasComponent implements OnInit {
   private fnGetUpdatedHeaderData(): void {
     //Get the updated user status
     let userStatus: IUserStatusResponse = this._globals.getUserStatus();
-    this.keyUserStatus = userStatus.status.key;
+    if (userStatus && userStatus.status) {
+      this.keyUserStatus = userStatus.status.key;
+    } //End if
 
     //Update user status css class & lang key
     this.langKeyUserStatus = 'MENU.AUTH_USER.USER_STATUS.' + this.keyUserStatus.toUpperCase();

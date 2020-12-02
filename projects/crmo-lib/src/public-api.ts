@@ -12,6 +12,7 @@ export * from './lib/interfaces/common/lookup.interface';
 export * from './lib/interfaces/common/country.interface';
 export * from './lib/interfaces/common/configuration.interface';
 export * from './lib/interfaces/organization/organization.interface';
+export * from './lib/interfaces/user/user.interface';
 export * from './lib/interfaces/user/user-auth.interface';
 export * from './lib/interfaces/user/user-status.interface';
 
