@@ -1,0 +1,42 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "strictNullChecks": false,
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "crmo-lib": [
+        "dist/crmo-lib/crmo-lib",
+        "dist/crmo-lib"
+      ],
+      "ellaisys-lib": [
+        "dist/ellaisys-lib/ellaisys-lib",
+        "dist/ellaisys-lib"
+      ],
+      "@env-backend/*": ["projects/crmo-backend/src/environments/*"],
+      "@asset-backend/*": ["projects/crmo-backend/src/assets/*"],
+    }
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
