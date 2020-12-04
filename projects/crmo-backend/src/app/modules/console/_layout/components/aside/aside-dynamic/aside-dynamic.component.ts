@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ElementRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 // Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals, SettingInfo } from 'projects/crmo-backend/src/app/app.global';
 
 // Application Services
 import { LayoutService, DynamicAsideMenuService } from '../../../../../../_metronic/core';
@@ -17,6 +17,8 @@ import { LayoutService, DynamicAsideMenuService } from '../../../../../../_metro
 })
 export class AsideDynamicComponent implements OnInit, OnDestroy {
   @Input('menu') objAsideSubMenu: any = null;
+
+  private objSettingInfo: SettingInfo;
   
   menuConfig: any;
   subscriptions: Subscription[] = [];
@@ -38,6 +40,7 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
    * Default constructor
    */
   constructor(
+    private _global: Globals,
     private layout: LayoutService,
     private _router: Router,
     private menu: DynamicAsideMenuService,
@@ -49,6 +52,9 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
    * Lifecycle Hook's
    */
   ngOnInit(): void {
+    //Get Setting Model
+    this.objSettingInfo = this._global.getSettingInfo();
+
     // Load view settings
     this.brandSkin = this.layout.getProp('brand.self.theme');
     this.headerLogo = this.getLogo();
@@ -123,14 +129,36 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
       } //End if
 
       // Navigate for valid url
-      if (item.path && item.path!='') {
-        this._router.navigate(item.path)
+      if (item.path && item.path!='' && this.objSettingInfo) {
+        let pathRoute: any = item.path.replace(/{oHash}/gi, this.objSettingInfo.oHash);
+
+        this._router.navigate(pathRoute)
       } //End if
 
     } catch(error) {
       throw error;
     } //Try-catch ends
     return objReturnValue;
-  }
+  } //Function ends
+
+  public fnMenuLink(item: any): string[] {
+    let objReturnValue: string[] = [];
+
+    try {
+      // Navigate for valid url
+      if (item.page && item.page!='' && this.objSettingInfo) {
+        let strMenupath: string = item.page;
+        let strSearch = /oHash/gi;
+
+        strMenupath = strMenupath.replace(strSearch, 'o2020101603735319507');
+        objReturnValue[0]=strMenupath;
+      } //End if
+    } catch(error) {
+      objReturnValue = [];
+      console.error(error);
+    } //Try-catch ends
+
+    return objReturnValue;
+  } //Function ends
 
 }

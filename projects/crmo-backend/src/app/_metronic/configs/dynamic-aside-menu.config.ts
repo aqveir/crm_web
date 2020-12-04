@@ -172,23 +172,33 @@ export const DynamicAsideMenuConfig = {
       page: '/secure/events'
     },
     {
-      name: 'aside_tab_setting_list',
-      title: 'setting',
+      name: 'aside_tab_setting_organization_list',
+      title: 'Setting',
       root: true,
       type: 'link',
       icon: 'flaticon2-settings',
+      alignment: 'center',
+      page: '/secure/setting/organization',
+      permission: ['super_admin', 'organization_owner'],
+      translate: 'MENU.SETTING.ORGANIZATION.LABEL',
+    },
+    {
+      name: 'aside_tab_setting_list',
+      title: 'Setting',
+      root: false,
+      type: 'link',
+      icon: 'flaticon2-settings',
       alignment: 'left',
-      toggle: 'click',
       page: '/secure/setting/organization',
       translate: 'MENU.SETTING.LABEL',
       submenu: [
         {
-          title: 'organization',
+          title: 'organization detail',
           bullet: 'dot',
           icon: 'flaticon2-shelter',
           permission: 'accessToECommerceModule',
-          page: '/secure/setting/organization',
-          translate: 'MENU.SETTING.ORGANIZATION.LABEL',
+          page: '/secure/setting/organization/oHash',
+          translate: 'MENU.SETTING.ORGANIZATION.DETAIL.LABEL',
         },
         {
           title: 'User Management',
@@ -198,12 +208,12 @@ export const DynamicAsideMenuConfig = {
           submenu: [
             {
               title: 'users',
-              page: '/secure/setting/organization/ohash/user',
+              page: '/secure/setting/organization/oHash/user',
               translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
             },
             {
               title: 'roles',
-              page: '/secure/user-management/roles',
+              page: '/secure/setting/organization/oHash/role',
               translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
             }
           ]

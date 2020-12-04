@@ -16,6 +16,12 @@ export interface ILanguage {
     is_active?: boolean;
 } //Interface ends
 
+//Setting Information Model
+export class SettingInfo {
+    oHash: string=null;
+    uHash: string=null;
+} //Class ends
+
 @Injectable()
 export class Globals {
     public static readonly _LANGUAGE_ENV_DEFAULT: string = environment.application.language.default_selection;
@@ -77,6 +83,7 @@ export class Globals {
      */
     private boolDataLoaded: boolean = false;
     private lookup: ILookup[] = null;
+    private objSettingInfo: SettingInfo = null;
 
 
     //Default Constructor
@@ -227,6 +234,23 @@ export class Globals {
                 throw error;
             });
     } //Function ends
+
+
+    /**
+     * Getter and Setters for Setting Information
+     */
+    public getSettingInfo(): SettingInfo {
+        if(this.objSettingInfo == null) {
+            let objSettingInfo: SettingInfo = new SettingInfo();
+            objSettingInfo['oHash'] = this.getAppParams().oHash;
+
+            this.objSettingInfo = objSettingInfo;
+        } //End if
+        return this.objSettingInfo;
+    } //Function ends
+    public setSettingInfo(_settingInfo: SettingInfo): void {
+        this.objSettingInfo = _settingInfo;
+    } //Function ends
     
 
     /**
@@ -235,6 +259,13 @@ export class Globals {
      */
     public fnLoadApplicationData(): void {
         if (!this.boolDataLoaded) {
+
+            //Create Setting Model
+            let objSettingInfo: SettingInfo = this.getSettingInfo();
+            objSettingInfo['oHash'] = this.getAppParams().oHash;
+            objSettingInfo['uHash'] = this.getClaim().hash;
+            this.setSettingInfo(objSettingInfo);
+
             //Load lookup data
             this.fnLoadLookupnData();
 

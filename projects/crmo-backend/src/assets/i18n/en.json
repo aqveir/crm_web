@@ -37,6 +37,9 @@
             "LABEL": "Setting",
             "ORGANIZATION": {
                 "LABEL": "Organization",
+                "DETAIL": {
+                    "LABEL": "Organization Detail"
+                },
                 "USER_MANAGEMENT": {
                     "LABEL": "User Management",
                     "USER": {

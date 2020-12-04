@@ -1,0 +1,11 @@
+.card > .card-header {
+    min-height: 40px;
+
+    .card-title {
+        margin: 0.2rem 0.5rem 0.2rem 0;
+
+        .card-label {
+            font-size: 1rem !important;
+        }
+    }    
+}

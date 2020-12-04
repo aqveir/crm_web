@@ -21,9 +21,7 @@
   <!--end::PrimaryAside TopNav-->
 
   <!--begin::PrimaryAside BottomNav-->
-  <app-topbar
-    class="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10"
-  ></app-topbar>
+  <app-topbar class="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10"></app-topbar>
   <!--end::PrimaryAside BottomNav-->
 </div>
 <!--end::PrimaryAside-->
@@ -32,8 +30,8 @@
 <ng-template #menuTabSectionTemplate let-tab="tab">
   <li class="nav-item mb-3" placement="right" [ngbTooltip]="tab.title" container="body">
     <!-- start: without submenu-->
-    <a class="nav-link btn btn-icon btn-clean btn-lg"
-      [routerLink]="tab.page" routerLinkActive="active"
+    <a class="nav-link btn btn-icon btn-clean btn-lg" id="kt_aside_menu" 
+      [routerLink]="tab.page" [ngClass]="{'active': currentPage==tab.page}"
       *ngIf="!tab.submenu" (click)="fnSelectTab(tab)">
 
       <i [ngClass]="tab.icon" *ngIf="tab.icon && !tab.svg"></i>
@@ -43,7 +41,8 @@
 
     <!-- start: with submenu-->
     <a class="nav-link btn btn-icon btn-clean btn-lg" data-toggle="tab" role="tab"
-      data-target="#kt_aside_tab_1" (click)="fnSelectTab(tab)" *ngIf="tab.submenu">
+      data-target="#kt_aside_tab_1" [ngClass]="{'active': currentPage==tab.name}" 
+      (click)="fnSelectTab(tab)" *ngIf="tab.submenu">
 
       <i [ngClass]="tab.icon" *ngIf="tab.icon && !tab.svg"></i>
       <span [inlineSVG]="tab.svg" class="svg-icon svg-icon-xl" *ngIf="tab.svg"></span>

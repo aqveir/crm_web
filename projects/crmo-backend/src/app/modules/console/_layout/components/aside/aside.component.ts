@@ -7,6 +7,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 // Application Services
 import { LayoutService, DynamicAsideMenuService } from '../../../../../_metronic/core';
 import { KTUtil } from '@asset-backend/js/components/util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aside',
@@ -17,6 +18,8 @@ export class AsideComponent implements OnInit, OnDestroy {
   public objMenuTab: any = null;
   public objAsideSubMenu: any = null;
   public boolShowAsideSecondaryDisplay: boolean = false;
+
+  public currentPage: string = '';
 
   activeTabId;
   disableAsideSelfDisplay: boolean;
@@ -40,6 +43,7 @@ export class AsideComponent implements OnInit, OnDestroy {
   constructor(
     private _renderer: Renderer2,
     private _layoutService: LayoutService,
+    private _router: Router,
     private _menuService: DynamicAsideMenuService,
     private _cdr: ChangeDetectorRef
   ) { }
@@ -62,11 +66,13 @@ export class AsideComponent implements OnInit, OnDestroy {
     //this.boolShowAsideSecondaryDisplay = this._layoutService.getProp('aside.secondary.display');
 
     // Menu load
-    const menuSubscr = this._menuService.menuConfig$.subscribe((response: any) => {
+    this._menuService.menuConfig$.subscribe((response: any) => {
       this.objMenuTab = response;
       this._cdr.detectChanges();
     });
-    //this.tabSubscriptions.push(menuSubscr);
+
+    //Set current page on reload
+    this.currentPage = this._router?.routerState?.snapshot?.url;
 
   } //Function ends
   ngOnDestroy() {
@@ -84,10 +90,16 @@ export class AsideComponent implements OnInit, OnDestroy {
     if (_tab.submenu) {
       this.objAsideSubMenu = _tab.submenu;
 
+      //Set selected page
+      this.currentPage=_tab.name;
+
       // Show Secondary Aside
       this.boolShowAsideSecondaryDisplay=true;
       this.fnToggleSecondaryAsideMenu(true);
     } else {
+      //Set selected page
+      this.currentPage=_tab.page;
+
       this.objAsideSubMenu = null;
 
       // Hide Secondary Aside
