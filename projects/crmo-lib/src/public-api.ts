@@ -15,6 +15,9 @@ export * from './lib/interfaces/organization/organization.interface';
 export * from './lib/interfaces/user/user.interface';
 export * from './lib/interfaces/user/user-auth.interface';
 export * from './lib/interfaces/user/user-status.interface';
+export * from './lib/interfaces/contact/contact.interface';
+export * from './lib/interfaces/note/note.interface';
+export * from './lib/interfaces/document/document.interface';
 
 //Exported Services
 export * from './lib/services/common/lookup/lookup.service';
@@ -24,6 +27,7 @@ export * from './lib/services/user/user-auth.service';
 export * from './lib/services/user/user-status.service';
 export * from './lib/services/contact/contact.service';
 export * from './lib/services/contact/contact-auth.service';
+export * from './lib/services/contact/contact-communication.service';
 //export * from './lib/services/catalogue/catalogue-category.service';
 //export * from './lib/services/wallet/wallet.service';
 

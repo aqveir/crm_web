@@ -189,6 +189,15 @@
                     "LAST_MODIFIED": "Last modified"
                 }
             }
+        },
+        "CONTACT_LIST": {
+            "TITLE": "Contacts",
+            "SUB_TITLE": "New Here ?",
+            "COLUMNS": {
+                "FULL_NAME": "Name",
+                "STATUS": "Status",
+                "LAST_MODIFIED": "Last modified"
+            }
         }
     },
 

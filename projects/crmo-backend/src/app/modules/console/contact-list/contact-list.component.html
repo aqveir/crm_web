@@ -1,1 +1,69 @@
-<p>contact-list works!</p>
+<div>
+    <!--begin::Card-->
+    <div class="card card-custom gutter-b">
+        <div class="card-header border-0 py-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label font-weight-bolder text-dark">
+                    {{ 'PAGE.CONTACT_LIST.TITLE' | translate }}
+                </span>
+                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
+            </h3>
+            <div class="card-toolbar">
+                <div class="form-group mr-2 mt-8">
+                    <div class="input-icon input-icon-right">
+                        <input type="text" class="form-control" placeholder="Search..."/>
+                        <span><i class="flaticon2-search-1 icon-md"></i></span>
+                    </div>  
+                </div>
+
+                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm mr-2">
+                    <span class="navi-icon"><i class="la la-filter icon-md"></i></span>
+                </a>
+                
+                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
+                [routerLink]="['/secure/setting/user/', '0']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
+            </div>
+        </div>
+
+        <div class="card-body py-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th class="pl-0">{{ 'PAGE.CONTACT_LIST.COLUMNS.FULL_NAME' | translate }}</th>
+                            <th style="min-width: 120px"></th>
+                            <th style="min-width: 150px">{{ 'PAGE.CONTACT_LIST.COLUMNS.STATUS' | translate }}</th>
+                            <th style="min-width: 150px">{{ 'PAGE.CONTACT_LIST.COLUMNS.LAST_MODIFIED' | translate }}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let contact of listContact" class="cursor-pointer" style="outline: none;"
+                            [routerLink]="['/secure/setting/organization', contact.hash]">
+                            <td style="min-width: 30px">
+                                <div class="symbol symbol-50 symbol-light mt-1">
+                                    <span class="symbol-label" *ngIf="contact.avatar">
+                                        <img [src]="contact.avatar" class="h-75 align-self-end" alt="Avatar" />
+                                    </span>
+
+                                    <span class="symbol-label font-size-h4 font-weight-bold" *ngIf="!contact.avatar">{{ contact.name_initials }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ contact.full_name }}</span>
+                            </td>
+                            <td>
+                                <span class="text-dark-75 d-block font-size-lg">Active</span>
+                            </td>
+                            <td>
+                                <span class="text-dark-75 d-block">{{ contact.last_updated_at | date }}</span>
+                                <span class="text-muted">{{ contact.last_updated_at | date:'shortTime' }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--end::Card-->
+</div>

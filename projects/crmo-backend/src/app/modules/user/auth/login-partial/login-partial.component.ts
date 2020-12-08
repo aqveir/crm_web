@@ -18,7 +18,7 @@ import { NotificationService } from 'ellaisys-lib';
 })
 export class LoginPartialComponent extends BaseComponent implements OnInit {
   //Common attributes
-  public boolLoading: boolean = false;
+  public isLoading: boolean = false;
 
   public loginForm!: FormGroup;
   public hasError: boolean = false;
@@ -71,14 +71,14 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
       } //End if
 
       let objFormData: IRequestUserLogin = this.loginForm.value;
-      this.boolLoading = true;
+      this.isLoading = true;
       this._userAuthService.login(objFormData)
         .subscribe((response: IResponseUserLogin) => {
           //Save the data into globals
           this._globals.setClaim(response);
 
           //Stop loader
-          this.boolLoading = false;
+          this.isLoading = false;
 
           //Load the application data
           this._globals.fnLoadApplicationData();
@@ -87,7 +87,7 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
           this._router.navigate(['/secure']);
         },(error) => {
           //Stop loader
-          this.boolLoading = false;
+          this.isLoading = false;
 
           throw error;
         });
@@ -95,7 +95,7 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
         return true;
     } catch (error) {
       //Stop loader
-      this.boolLoading = false;
+      this.isLoading = false;
 
       throw error;
     } //Try-catch ends

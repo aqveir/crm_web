@@ -36,7 +36,7 @@ export class UserAuthService extends BaseService {
       .set('password', _data.password)
       .set('device_id', _data.device_id);
 
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.post('user/login', params, true, false)
         .then((response: any) => {
           let claim: IResponseUserLogin = response.data;
