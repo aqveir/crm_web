@@ -94,4 +94,9 @@ export class ContactListComponent extends BaseComponent implements OnInit {
       });
   } //Function ends
 
+
+  public fnSortColumn(columnName: string, sortDir: string): void {
+
+  }
+
 } //Class ends

@@ -132,8 +132,15 @@ export class GlobalErrorHandler implements ErrorHandler {
                     } //End if
                     
                     //Route in case of action
-                    if (this._router && (!this.objError.toLogin) && (this.objError.action!=null)) {
-                        this._zone.run(() => this._router.navigate(['/error', this.objError.action]));
+                    if (this._router) {
+                        if ((!this.objError.toLogin) && (this.objError.action!=null)) {
+                            this._zone.run(() => this._router.navigate(['/error', this.objError.action]));
+                        } else if (this.objError.toLogin) {
+                            this._zone.run(() => this._router.navigate(['/']));
+                        } else {
+                            //Do nothing
+                        } //End if
+                        
                     } //End if
                 } else {
                     this.objError.code='';

@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 
+//Plugin Modules
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+
 // Application Modules
 import { LayoutModule } from './_layout/layout.module';
 import { ConsoleRoutingModule } from './console-routing.module';
@@ -35,6 +38,9 @@ import { WorkQueueComponent } from './work-queue/work-queue.component';
     //CRO Console Module
     InlineSVGModule,
     ConsoleRoutingModule,
+
+    //Pluin Modules
+    NgbTooltipModule,
 
     //EllaiSys Library
     TranslateModule,

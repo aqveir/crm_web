@@ -21,6 +21,9 @@
 // Metronic styles (replace these path when using RTL css below)
 @import "./assets/sass/style.angular.scss";
 
+// Metronic Color variables
+@import "./assets/sass/components/variables.demo";
+
 // For RTL, check this documentation https://keenthemes.com/metronic/?page=docs&section=angular-rtl
 // @import "./assets/sass/style.angular.rtl.css";
 
@@ -76,3 +79,58 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
+
+// CRMO Common
+.spinner-button {
+    position: fixed;
+    left: 50%;
+    top: 50px;
+    z-index: 1;
+}
+
+// CRMO Card Customizations
+.card.card-screen-height {
+    height: calc(100vh - 100px);
+}
+
+// CRMO Table style for listing
+$TABLE-CELL-WIDTH-DATE: 160px;
+table.table {
+    thead {
+        &.thead-dark {
+            tr {
+                th {
+                    background-color: $primary;
+                    border: $primary 1px solid;
+                    box-shadow: $primary 0px 3px 5px 0px;
+                    color: #ffffff !important;
+                }
+            }
+        }
+        tr {
+            th {
+                &.table-cell-date {
+                    width: $TABLE-CELL-WIDTH-DATE;
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            &:hover {
+                background-color: rgba(252, 243, 232, 0.35);
+            }
+            td {
+                padding: 0.20rem;
+
+                &.table-cell-date {
+                    width: $TABLE-CELL-WIDTH-DATE;
+
+                    span {
+                        width: $TABLE-CELL-WIDTH-DATE;
+                    }
+                }
+            }       
+        }
+    }
+}

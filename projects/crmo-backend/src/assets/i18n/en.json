@@ -14,7 +14,9 @@
 
             "CALL": "Call",
             "SMS": "SMS",
-            "EMAIL": "Email"
+            "EMAIL": "Email",
+
+            "PLEASE_WAIT": "Please wait ..."
         }
     },
 
@@ -194,9 +196,14 @@
             "TITLE": "Contacts",
             "SUB_TITLE": "New Here ?",
             "COLUMNS": {
-                "FULL_NAME": "Name",
-                "STATUS": "Status",
-                "LAST_MODIFIED": "Last modified"
+                "CONTACTC_FULL_NAME": "Name",
+                "CONTACT_TYPE": "Type",
+                "CONTACT_OWNER": "Owner",
+                "CONTACT_SOURCES": "Source",
+                "CONTACT_STATUS": "Status",
+                "ACCOUNT_NAME": "Account",
+                "LAST_MODIFIED": "Last modified",
+                "ACTION_CONTROLS": ""
             }
         }
     },

@@ -82,7 +82,7 @@ export const DefaultLayoutConfig = {
 
   // Subheader
   subheader: {
-    display: true,
+    display: false,
     displayDesc: false,
     displayDaterangepicker: true,
     layoutVersion: 'v6', // [1..6]
@@ -94,7 +94,7 @@ export const DefaultLayoutConfig = {
 
   // Content
   content: {
-    width: 'fixed', // fluid|fixed
+    width: 'fluid', // fluid|fixed
   },
 
   // Aside
