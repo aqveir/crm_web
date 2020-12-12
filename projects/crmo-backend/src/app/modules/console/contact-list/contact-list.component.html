@@ -1,12 +1,8 @@
 <div>
-    <div class="spinner-button" [ngClass]="{'d-none': (!isLoading)}">
-        <span class="btn btn-white btn-shadow btn-light-success spinner spinner-darker-primary spinner-right">
-            {{ 'COMMON.LABEL.PLEASE_WAIT' | translate }}
-        </span>
-    </div>
+    <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
 
     <!--begin::Card-->
-    <div class="card card-custom gutter-b" [ngClass]="{ 'card-screen-height': (listContact?.length==0) }">
+    <div class="card card-custom gutter-b card-screen-height">
         <div class="card-header border-0 py-2">
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label font-weight-bolder text-dark">

@@ -29,6 +29,7 @@ import { AsideComponent } from './components/aside/aside.component';
 import { AsideStaticComponent } from './components/aside/aside-static/aside-static.component';
 import { AsideSearchComponent } from './components/aside/aside-search/aside-search.component';
 import { AsideDynamicComponent } from './components/aside/aside-dynamic/aside-dynamic.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -46,6 +47,9 @@ import { AsideDynamicComponent } from './components/aside/aside-dynamic/aside-dy
     AsideStaticComponent,
     AsideSearchComponent,
     HeaderMenuDynamicComponent,
+
+    //CRMO Custom Component
+    SpinnerComponent,
   ],
   imports: [
     //DropdownMenusModule,
@@ -83,6 +87,9 @@ import { AsideDynamicComponent } from './components/aside/aside-dynamic/aside-dy
     AsideStaticComponent,
     AsideSearchComponent,
     HeaderMenuDynamicComponent,
+
+    //CRMO Custom Component
+    SpinnerComponent,
   ]
 })
 export class LayoutModule { }

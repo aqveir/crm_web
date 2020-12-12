@@ -81,16 +81,11 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
 
 // CRMO Common
-.spinner-button {
-    position: fixed;
-    left: 50%;
-    top: 50px;
-    z-index: 1;
-}
+
 
 // CRMO Card Customizations
 .card.card-screen-height {
-    height: calc(100vh - 100px);
+    min-height: calc(100vh - 150px);
 }
 
 // CRMO Table style for listing

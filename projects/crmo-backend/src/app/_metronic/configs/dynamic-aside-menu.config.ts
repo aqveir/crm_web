@@ -132,28 +132,39 @@ export const DynamicAsideMenuConfig = {
     },
     {
       name: 'aside_tab_queue',
-      title: 'Work Queue',
+      title: 'work_queue',
       root: true,
       type: 'link',
       icon: 'flaticon2-menu-4',
-      page: '/secure/queue'
+      page: '/secure/queue',
+      translate: 'MENU.WORK_QUEUE.LABEL'
     },
     {
       name: 'aside_tab_contact_list',
-      title: 'Contacts',
+      title: 'contacts',
       root: true,
       type: 'link',
       icon: 'flaticon2-avatar',
-      page: '/secure/contacts'
+      page: '/secure/contacts',
+      translate: 'MENU.CONTACT_LIST.LABEL'
     },
     {
-      name: 'aside_tab_sr_list',
-      title: 'Service Requests',
+      name: 'aside_tab_lead_list',
+      title: 'request-leads',
       root: true,
       type: 'link',
       icon: 'flaticon2-expand',
-      page: '/secure/request',
-      svg: './assets/media/svg/icons/Design/Substract.svg'
+      page: '/secure/leads',
+      translate: 'MENU.LEAD_LIST.LABEL'
+    },
+    {
+      name: 'aside_tab_opportunity_list',
+      title: 'request-opportunities',
+      root: true,
+      type: 'link',
+      icon: 'flaticon2-expand',
+      page: '/secure/opportunities',
+      translate: 'MENU.OPPORTUNITY_LIST.LABEL'
     },
     {
       name: 'aside_tab_task_list',
@@ -162,6 +173,7 @@ export const DynamicAsideMenuConfig = {
       type: 'link',
       icon: 'flaticon2-shield',
       page: '/secure/tasks',
+      translate: 'MENU.TASK_LIST.LABEL',
     },
     {
       name: 'aside_tab_event_list',
@@ -169,7 +181,8 @@ export const DynamicAsideMenuConfig = {
       root: true,
       type: 'link',
       icon: 'flaticon2-calendar-1',
-      page: '/secure/events'
+      page: '/secure/events',
+      translate: 'MENU.EVENT_LIST.LABEL',
     },
     {
       name: 'aside_tab_setting_organization_list',

@@ -10,7 +10,7 @@
   <!--end::PrimaryAside Logo-->
 
   <!--begin::PrimaryAside TopNav-->
-  <div class="aside-nav d-flex flex-column align-items-center flex-column-fluid py-5 scroll scroll-pull">
+  <div class="aside-nav d-flex flex-column align-items-center flex-column-fluid py-2 scroll scroll-pull">
     <ul class="nav flex-column" role="tablist">
       <ng-container *ngFor="let tabData of objMenuTab?.tabs">
         <ng-container [ngTemplateOutlet]="menuTabSectionTemplate" 
@@ -28,7 +28,7 @@
 
 <!-- begin::PrimanyAside TabMenu -->
 <ng-template #menuTabSectionTemplate let-tab="tab">
-  <li class="nav-item mb-3" placement="right" [ngbTooltip]="tab.title" container="body">
+  <li class="nav-item mb-2" placement="right" [ngbTooltip]="tab.translate | translate" container="body">
     <!-- start: without submenu-->
     <a class="nav-link btn btn-icon btn-clean btn-lg" id="kt_aside_menu" 
       [routerLink]="tab.page" [ngClass]="{'active': currentPage==tab.page}"

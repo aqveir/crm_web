@@ -35,6 +35,24 @@
         "DASHBOARD": {
             "LABEL": "Dashboard"
         },
+        "WORK_QUEUE": {
+            "LABEL": "Work Queue"
+        },
+        "CONTACT_LIST": {
+            "LABEL": "Contacts"
+        },
+        "LEAD_LIST": {
+            "LABEL": "Leads"
+        },
+        "OPPORTUNITY_LIST": {
+            "LABEL": "Opportunities"
+        },
+        "TASK_LIST": {
+            "LABEL": "Tasks"
+        },
+        "EVENT_LIST": {
+            "LABEL": "Events"
+        },
         "SETTING": {
             "LABEL": "Setting",
             "ORGANIZATION": {
@@ -194,7 +212,7 @@
         },
         "CONTACT_LIST": {
             "TITLE": "Contacts",
-            "SUB_TITLE": "New Here ?",
+            "SUB_TITLE": "Loaded 30 of total 5000",
             "COLUMNS": {
                 "CONTACTC_FULL_NAME": "Name",
                 "CONTACT_TYPE": "Type",
