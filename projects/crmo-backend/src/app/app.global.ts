@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 
 //Propritery Library
-import { IResponseUserLogin, ApplicationParams, LookupService, ILookup, ILookupValue, UserStatusService, IUserStatusResponse } from 'crmo-lib';
+import { IResponseUserLogin, IPrivilege, IUserStatusResponse, ILookupValue,
+    ApplicationParams, LookupService, ILookup,  UserStatusService,  } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
 import { environment } from '@env-backend/environment';
-
 
 //Language Interface
 export interface ILanguage {
@@ -250,6 +250,30 @@ export class Globals {
     } //Function ends
     public setSettingInfo(_settingInfo: SettingInfo): void {
         this.objSettingInfo = _settingInfo;
+    } //Function ends
+
+
+    public fnCheckUserPrivilege(privilegeKey: string): boolean {
+        let objReturnValue: boolean = false;
+        try {
+            let boolSuccessCheck: boolean = true;
+            let claim: IResponseUserLogin = this.getClaim();
+            let privilegeList: IPrivilege[] = claim.privileges;
+
+            //Check for the 'not' OR '!' sign
+            let signIndex: number = privilegeKey.search('!');
+            if (signIndex==0) {
+                boolSuccessCheck = false;
+                privilegeKey = privilegeKey.substr(1, privilegeKey.length);
+            } //End if
+
+            let objPrivilege: IPrivilege = privilegeList.find((x) => {return (x.key == privilegeKey)?x:null;})
+            
+            objReturnValue = (objPrivilege && (objPrivilege !== undefined) && boolSuccessCheck)?true:false;
+        } catch(error) {
+            //Do nothing
+        } //Try-catch ends
+        return objReturnValue;
     } //Function ends
     
 

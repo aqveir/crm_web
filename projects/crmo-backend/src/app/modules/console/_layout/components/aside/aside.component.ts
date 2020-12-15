@@ -41,6 +41,7 @@ export class AsideComponent implements OnInit, OnDestroy {
    * @param _cdr 
    */
   constructor(
+    private _globals: Globals,
     private _renderer: Renderer2,
     private _layoutService: LayoutService,
     private _router: Router,
@@ -120,6 +121,24 @@ export class AsideComponent implements OnInit, OnDestroy {
 
     this._cdr.detectChanges();
   } //Function ends
+
+
+  public fnValidateUserPrivileges(_tab: any): boolean {
+    let objReturnValue: boolean = false;
+
+    if (_tab && _tab.permission) {
+      let permissions: string[] = _tab.permission;
+
+      objReturnValue = true;
+      permissions.forEach((permission: string) => {
+        objReturnValue = this._globals.fnCheckUserPrivilege(permission) && objReturnValue;
+      });
+    } else {
+      objReturnValue = true;
+    } //End if
+
+    return objReturnValue;
+  } //End if
 
 
   /**

@@ -1,6 +1,9 @@
 import { IOrganizationMinimal } from '../organization/organization.interface';
 import { IPrivilege } from '../common/privilege.interface';
 
+export { IPrivilege } from '../common/privilege.interface';
+export { IOrganizationMinimal } from '../organization/organization.interface';
+
 export interface IRequestUserLogin {
     username: string;  
     password: string

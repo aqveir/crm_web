@@ -192,7 +192,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-settings',
       alignment: 'center',
       page: '/secure/setting/organization',
-      permission: ['super_admin', 'organization_owner'],
+      permission: ['list_all_organizations'],
       translate: 'MENU.SETTING.ORGANIZATION.LABEL',
     },
     {
@@ -203,6 +203,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-settings',
       alignment: 'left',
       page: '/secure/setting/organization',
+      permission: ['edit_organization_data', '!list_all_organizations'],
       translate: 'MENU.SETTING.LABEL',
       submenu: [
         {

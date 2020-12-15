@@ -28,7 +28,8 @@
 
 <!-- begin::PrimanyAside TabMenu -->
 <ng-template #menuTabSectionTemplate let-tab="tab">
-  <li class="nav-item mb-2" placement="right" [ngbTooltip]="tab.translate | translate" container="body">
+  <li class="nav-item mb-2" placement="right" container="body" 
+    [ngbTooltip]="tab.translate | translate" *ngIf="fnValidateUserPrivileges(tab)">
     <!-- start: without submenu-->
     <a class="nav-link btn btn-icon btn-clean btn-lg" id="kt_aside_menu" 
       [routerLink]="tab.page" [ngClass]="{'active': currentPage==tab.page}"
