@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "crmo-build-all": "ng build ellaisys-lib && ng build crmo-lib && ng build crmo-backend",
-    "crmo-build-all-serve-backend": "ng build ellaisys-lib && ng build crmo-lib && ng build crmo-backend && ng serve crmo-backend"
+    "build:crmo-build-all-dev": "ng build -prod --environment dev ellaisys-lib && ng build -prod --environment dev crmo-lib && ng build -prod --environment dev crmo-backend",
+    "build:crmo-build-all-serve-backend": "ng build ellaisys-lib && ng build crmo-lib && ng build crmo-backend && ng serve crmo-backend"
   },
   "private": true,
   "dependencies": {
