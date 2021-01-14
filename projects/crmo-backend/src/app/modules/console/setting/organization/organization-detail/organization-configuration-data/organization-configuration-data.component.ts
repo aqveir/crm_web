@@ -87,7 +87,7 @@ export class OrganizationConfigurationDataComponent extends BaseComponent implem
     this.eventSaved.emit(true);
   }
 
-  public fnCancelAction() {
+  public fnBackAction() {
     this.eventCancel.emit(true);
   }
 

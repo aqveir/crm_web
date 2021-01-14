@@ -23,13 +23,13 @@ export class ContactService extends BaseService {
     /**
      * Get All Contacts
      */
-    public getAll(_viewName?: string, _filter?: string, _from: string='0', _size: string='0', _payload: any=null): Observable<any> {
+    public getAll(_viewName?: string, _filter?: string, _page: string='1', _size: string='10', _payload: any=null): Observable<any> {
 
       //Set HTTP Params
       let params = new HttpParams()
       .set('view', _viewName)
       .set('filter', _filter)
-      .set('from', _from)
+      .set('page', _page)
       .set('size', _size);
 
       return new Observable((observer: Observer<any>) => {

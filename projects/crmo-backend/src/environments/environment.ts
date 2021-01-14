@@ -17,7 +17,7 @@ export const environment = {
 
     //API Configuration
     api_server: {
-      server: 'http://dev.crmomni.com/',
+      server: 'http://ellaisys.crmomni.com/',
       apiUrl: 'api/',
       title: '',
       headers: {

@@ -1,9 +1,12 @@
 {
     "COMMON": {
         "LABEL": {
+            "BLANK": "",
+
             "SAVE": "Save",
             "CANCEL": "Cancel",
             "CLOSE": "Close",
+            "BACK": "Back",
 
             "ADD": "Add",
             "ADD_NEW": "Add New",
@@ -212,6 +215,35 @@
         },
         "CONTACT_LIST": {
             "TITLE": "Contacts",
+            "SUB_TITLE": "Loaded 30 of total 5000",
+            "COLUMNS": {
+                "CONTACTC_FULL_NAME": "Name",
+                "CONTACT_TYPE": "Type",
+                "CONTACT_OWNER": "Owner",
+                "CONTACT_SOURCES": "Source",
+                "CONTACT_STATUS": "Status",
+                "ACCOUNT_NAME": "Account",
+                "LAST_MODIFIED": "Last modified",
+                "ACTION_CONTROLS": ""
+            }
+        },
+        "TASK_LIST": {
+            "TITLE": "Tasks",
+            "SUB_TITLE": "Loaded 30 of total 5000",
+            "COLUMNS": {
+                "TASK_TYPE": "Type",
+                "TASK_OWNER": "Owner",
+                "TASK_CONTACT": "Contact",
+                "TASK_TITLE": "Subject",
+                "TASK_STATUS": "Status",
+                "TASK_PRIORITY": "Priority",
+                "DUE_DATE": "Due On",
+                "COMPLETED_DATE": "Completed",
+                "ACTION_CONTROLS": ""
+            }
+        },
+        "EVENT_LIST": {
+            "TITLE": "Events",
             "SUB_TITLE": "Loaded 30 of total 5000",
             "COLUMNS": {
                 "CONTACTC_FULL_NAME": "Name",

@@ -13,8 +13,8 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'queue', component: WorkQueueComponent },
     { path: 'contacts', component: ContactListComponent },
-    { path: 'task', component: TaskListComponent },
-    { path: 'event', component: EventListComponent },
+    { path: 'tasks', component: TaskListComponent },
+    { path: 'events', component: EventListComponent },
     { path: 'setting', loadChildren: () => import('../console/setting/setting.module').then(m => m.SettingModule) },
     { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   ]}

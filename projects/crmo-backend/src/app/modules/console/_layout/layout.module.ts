@@ -31,6 +31,9 @@ import { AsideSearchComponent } from './components/aside/aside-search/aside-sear
 import { AsideDynamicComponent } from './components/aside/aside-dynamic/aside-dynamic.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
+//Directives
+import { TableCellSortableDirective } from './directives/table-cell-sortable/table-cell-sortable.directive';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     AsideStaticComponent,
     AsideSearchComponent,
     HeaderMenuDynamicComponent,
+
+    //Common Directives
+    TableCellSortableDirective,
 
     //CRMO Custom Component
     SpinnerComponent,
@@ -87,6 +93,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     AsideStaticComponent,
     AsideSearchComponent,
     HeaderMenuDynamicComponent,
+
+    //Common Directives
+    TableCellSortableDirective,
 
     //CRMO Custom Component
     SpinnerComponent,

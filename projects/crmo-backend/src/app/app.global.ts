@@ -26,6 +26,9 @@ export class SettingInfo {
 export class Globals {
     public static readonly _LANGUAGE_ENV_DEFAULT: string = environment.application.language.default_selection;
 
+    public static readonly _LIST_PAGE_DEFAULT_FROM_POSITION: number = 1;
+    public static readonly _LIST_PAGE_DEFAULT_RECORDS_DISPLAYED: number = 20;
+
     //Storage-Session keys
     public static readonly _STORAGE_AUTH_CLAIM_KEY: string=environment.storage_config.storage_keys.auth_claim_key;
     public static readonly _SESSION_APP_PARAMS_KEY: string='_APP_PARAMS_KEY';
@@ -35,6 +38,9 @@ export class Globals {
     public static readonly _DATE_FORMAT_SERVER: string='DD-MM-YYYY HH:mm:ss';
     public static readonly _TIME_FORMAT_SERVER: string='HH:mm:ss';
     public static readonly _DATE_FORMAT_WEB_DISPLAY: string='dd-MM-yyyy';
+
+    //Application constants
+    public static readonly _SCROLL_RELOAD_FACTOR: number = 0.9;
 
     //RegEx Patterns
     public static readonly _REGEX_PATTERN_UEL: string="/^(http[s]?://){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/";

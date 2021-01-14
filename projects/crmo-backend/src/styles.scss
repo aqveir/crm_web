@@ -89,7 +89,7 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
 }
 
 // CRMO Table style for listing
-$TABLE-CELL-WIDTH-DATE: 160px;
+$TABLE-CELL-WIDTH-DATE: 130px;
 table.table {
     thead {
         &.thead-dark {
@@ -105,7 +105,7 @@ table.table {
         tr {
             th {
                 &.table-cell-date {
-                    width: $TABLE-CELL-WIDTH-DATE;
+                    min-width: $TABLE-CELL-WIDTH-DATE;
                 }
             }
         }
@@ -117,12 +117,14 @@ table.table {
             }
             td {
                 padding: 0.20rem;
-
+                height: 50px;
+                
                 &.table-cell-date {
                     width: $TABLE-CELL-WIDTH-DATE;
 
                     span {
                         width: $TABLE-CELL-WIDTH-DATE;
+                        height: auto;
                     }
                 }
             }       

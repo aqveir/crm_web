@@ -8,7 +8,7 @@
                 <span class="card-label font-weight-bolder text-dark">
                     {{ 'PAGE.CONTACT_LIST.TITLE' | translate }}
                 </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
+                <span class="text-muted mt-3 font-weight-bold font-size-sm">{{ pageRecordsLoaded }} records of {{ pageTotalSize }} loaded.</span>
             </h3>
             <div class="card-toolbar align-items-baseline">
                 <div class="form-group mr-2" *ngIf="listContact?.length>0">
