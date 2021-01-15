@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:crmo-build-all-dev": "ng build -prod --environment dev ellaisys-lib && ng build -prod --environment dev crmo-lib && ng build -prod --environment dev crmo-backend",
+    "build:crmo-build-all": "ng build -prod ellaisys-lib && ng build -prod crmo-lib && ng build -prod --base-href=/web/ crmo-backend",
+    "build:crmo-build-all-dev": "ng build -prod ellaisys-lib && ng build -prod crmo-lib && ng build -prod --environment dev --base-href=/web/ crmo-backend",
     "build:crmo-build-all-serve-backend": "ng build ellaisys-lib && ng build crmo-lib && ng build crmo-backend && ng serve crmo-backend"
   },
   "private": true,
