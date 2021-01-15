@@ -17,7 +17,6 @@ pipelines:
         script:
           - cd /
           - npm install -g @angular/cli@10.2.0
-          - npm install
           
   branches:
     master:
@@ -41,6 +40,11 @@ pipelines:
               - node  
     
     phase1.0.dev:
+    - step:
+        name: Update Node Modules
+        script:
+          - npm install
+
       - step:
           name: Build and Test
           script:
