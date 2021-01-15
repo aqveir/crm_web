@@ -40,10 +40,10 @@ pipelines:
               - node  
     
     phase1.0.dev:
-    - step:
-        name: Update Node Modules
-        script:
-          - npm install
+      - step:
+          name: Update Node Modules
+          script:
+            - npm install
 
       - step:
           name: Build and Test
