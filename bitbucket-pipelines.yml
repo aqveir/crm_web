@@ -49,7 +49,7 @@ pipelines:
           name: Build and Test
           deployment: test
           script:
-            - npm install
+            - npm ci
             - echo "Starting CRM Omni Dev Build"
             - npm run build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
