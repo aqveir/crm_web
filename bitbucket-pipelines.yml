@@ -13,7 +13,7 @@ pipelines:
           
     - step:
         name: Create Environment
-        deployment: production
+        # deployment: production
         script:
           - cd /
           - npm install -g @angular/cli@10.2.0
@@ -45,11 +45,13 @@ pipelines:
       - step:
           name: Update Node Modules
           script:
-            - npm install
+            # - npm install
+            - echo "hello"
 
       - step:
           name: Build and Test
           script:
+            - npm install
             - echo "Starting CRM Omni Dev Build"
             - npm run build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
