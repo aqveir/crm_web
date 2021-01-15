@@ -2,6 +2,9 @@
 
 image: node:10.15.3
 
+clone:
+  lfs: true
+
 pipelines:
   default:
     - step:
@@ -43,13 +46,8 @@ pipelines:
     
     phase1.0.dev:
       - step:
-          name: Update Node Modules
-          script:
-            # - npm install
-            - echo "hello"
-
-      - step:
           name: Build and Test
+          deployment: test
           script:
             - npm install
             - echo "Starting CRM Omni Dev Build"
