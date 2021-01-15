@@ -17,6 +17,8 @@ pipelines:
         script:
           - cd /
           - npm install -g @angular/cli@10.2.0
+        caches:
+          - node
           
   branches:
     master:
