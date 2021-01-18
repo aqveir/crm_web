@@ -19,9 +19,9 @@ pipelines:
         # deployment: production
         script:
           - cd /
-          - npm install -g @angular/cli@10.2.0
-        caches:
-          - node
+          #- npm install -g @angular/cli@10.2.0
+        #caches:
+          #- node
           
   branches:
     master:
@@ -49,6 +49,7 @@ pipelines:
           name: Build and Test
           deployment: test
           script:
+            - npm install -g @angular/cli@10.2.0
             - npm install
             - echo "Starting CRM Omni Dev Build"
             #- npm run build ellaisys-lib
