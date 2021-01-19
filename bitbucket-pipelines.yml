@@ -7,21 +7,24 @@ clone:
 
 pipelines:
   default:
-    - step:
-        name: Starting Build
-        caches:
-          - node
+      - step:
+        name: Versions
         script:
-          - echo "Creating Angular Build environment"
-          
+          - node -v
+          - npm -v
+
+      - step:
+        name: Install Node
+        script:
+          - echo "Installed node:6.14.5"
+
     - step:
-        name: Create Environment
-        # deployment: production
+        name: Install Anugular
+        caches: npm
         script:
           - cd /
-          #- npm install -g @angular/cli@10.2.0
-        #caches:
-          #- node
+          - npm install -g @angular/cli@11.0.7
+          - echo "Creating Angular Build environment"
           
   branches:
     master:
@@ -49,12 +52,13 @@ pipelines:
           name: Build and Test
           deployment: test
           script:
-            - npm install -g @angular/cli@10.2.0
+            - npm install -g @angular/cli@11.0.7
             - npm install
             - echo "Starting CRM Omni Dev Build"
             #- npm run build ellaisys-lib
             - echo "EllaiSys Library Build Complete"
             #- npm run build -prod crmo-lib
+            - npm run ng build -prod crmo-backend
             - echo "CRMO Library Build Complete"
             #- npm run build -prod --base-href=/$NG_BACKEND_BASE_HREF/ crmo-backend
             - echo "Ng Build Complete"
