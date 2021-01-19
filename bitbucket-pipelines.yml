@@ -66,16 +66,16 @@ pipelines:
             - cp .htaccess.dev dist/.htaccess
             - echo "HTACCESS Copied"
           artifacts:
-            - node_modules/**
-            #- dist/**
+            #- node_modules/**
+            - dist/**
 
       - step:
           name: Code linting
           script:
             - npm install eslint
-            - npx eslint .
-          caches:
-            - node
+          #  - npx eslint .
+          #caches:
+          #  - node
 
       - step:
           name: Deploy to S3 Web
