@@ -1,3 +1,3 @@
 [submodule "ellaisys-lib"]
 	path = projects/ellaisys-lib
-	url = https://ellaisys@bitbucket.org/ellaisys/eis_ngx_library.git
+	url = git@bitbucket.org:ellaisys/eis_ngx_library.git
