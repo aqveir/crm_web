@@ -5,26 +5,44 @@ image: node:10.15.3
 clone:
   lfs: true
 
-pipelines:
-  default:
-    - step:
-        name: Versions
-        script:
-          - node -v
-          - npm -v
-
-    - step:
-        name: Install Node
-        script:
-          - echo "Installed node:6.14.5"
-
-    - step:
-        name: Install Anugular
+definitions: 
+  steps:
+    - step: &load-submodules
+        name: Load GIT Submodules
         script:
           - cd /
+          - git submodule update --init --recursive
+
+    - step: &install-angular
+        name: Install Anugular & Project Dependencies
+        caches:
+          - node
+        script:
+          - cd /
+          - node -v
+          - npm -v
           - npm install -g @angular/cli@11.0.7
-          - echo "Creating Angular Build environment"
-          
+          - echo "Angular Installed"
+          - npm install
+          - echo "Project Dependencies installed"
+
+    - step: &code-linting
+        name: Code linting
+        caches:
+          - node
+        script:
+          - npm install eslint
+
+    - step: &deploy
+        name: Deploy to AWS S3
+        image: atlassian/pipelines-awscli
+        deployment: test
+        script:
+          - cd dist/
+          - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/dev
+          - echo "Uploaded to AWS S3 WEB"
+
+pipelines:          
   branches:
     master:
       - parallel:
@@ -47,15 +65,15 @@ pipelines:
               - node  
     
     phase1.0.dev:
+      - step: 
+          <<: *load-submodules
+
+      - step: *install-angular
+
       - step:
           name: Build and Test
           deployment: test
           script:
-            - node -v
-            - npm -v
-            - git submodule update --init --recursive
-            - npm install -g @angular/cli@11.0.7
-            - npm install
             - echo "Starting CRM Omni Dev Build"
             - npm run ng build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
@@ -66,23 +84,8 @@ pipelines:
             - cp .htaccess.dev dist/.htaccess
             - echo "HTACCESS Copied"
           artifacts:
-            #- node_modules/**
             - dist/**
 
-      - step:
-          name: Code linting
-          script:
-            - npm install eslint
-          #  - npx eslint .
-          #caches:
-          #  - node
+      - step: *code-linting
 
-      - step:
-          name: Deploy to S3 Web
-          image: atlassian/pipelines-awscli
-          script:
-            - cd dist/
-            - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/dev
-            - echo "Uploaded to AWS S3 WEB"
-
-
+      - step: *deploy
