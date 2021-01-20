@@ -6,9 +6,14 @@ clone:
   lfs: true
 
 definitions: 
+  caches:
+    submodule: ellaisys-lib
+
   steps:
     - step: &load-submodules
         name: Load GIT Submodules
+        caches: 
+          - submodule
         script:
           - git submodule update --init --recursive
 
@@ -35,7 +40,6 @@ definitions:
     - step: &deploy
         name: Deploy to AWS S3
         image: atlassian/pipelines-awscli
-        deployment: test
         script:
           - cd dist/
           - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/dev
