@@ -72,7 +72,6 @@ pipelines:
 
       - step:
           name: Build and Test
-          deployment: test
           script:
             - echo "Starting CRM Omni Dev Build"
             - npm run ng build -prod ellaisys-lib
