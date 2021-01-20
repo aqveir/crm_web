@@ -10,7 +10,6 @@ definitions:
     - step: &load-submodules
         name: Load GIT Submodules
         script:
-          - cd /
           - git submodule update --init --recursive
 
     - step: &install-angular
