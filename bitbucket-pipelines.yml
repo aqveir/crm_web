@@ -5,6 +5,56 @@ image: node:10.15.3
 clone:
   lfs: true
 
+pipelines:          
+  branches:
+    master:
+      - parallel:
+        - step:
+            name: Build and Test
+            script:
+              - echo "Starting CRM Omni PROD Build"
+              - npm run build:crmo-build-all
+              - echo "Ng Build Complete"
+              - cp .htaccess dist
+              - echo "HTACCESS Copied"
+            artifacts:
+              - dist/**
+        - step:
+            name: Code linting
+            script:
+              - npm install eslint
+              - npx eslint .
+            caches:
+              - node  
+    
+    phase1.0.dev:
+      - step: 
+          <<: *load-submodules
+
+      - step: *install-angular
+
+      - step:
+          name: Build and Test
+          caches:
+            - submodule
+            - node
+          script:
+            - echo "Starting CRM Omni Dev Build"
+            - npm run ng build -prod ellaisys-lib
+            - echo "EllaiSys Library Build Complete"
+            - npm run ng build -prod crmo-lib
+            - echo "CRMO Library Build Complete"
+            - npm run ng build -prod --base-href=/$NG_BACKEND_BASE_HREF/ crmo-backend
+            - echo "Ng Build Complete"
+            - cp .htaccess.dev dist/.htaccess
+            - echo "HTACCESS Copied"
+          artifacts:
+            - dist/**
+
+      - step: *code-linting
+
+      - step: *deploy
+
 definitions: 
   caches:
     submodule: ellaisys-lib
@@ -12,7 +62,7 @@ definitions:
   steps:
     - step: &load-submodules
         name: Load GIT Submodules
-        caches: 
+        caches:
           - submodule
         script:
           - git submodule update --init --recursive
@@ -44,50 +94,3 @@ definitions:
           - cd dist/
           - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/dev
           - echo "Uploaded to AWS S3 WEB"
-
-pipelines:          
-  branches:
-    master:
-      - parallel:
-        - step:
-            name: Build and Test
-            script:
-              - echo "Starting CRM Omni PROD Build"
-              - npm run build:crmo-build-all
-              - echo "Ng Build Complete"
-              - cp .htaccess dist
-              - echo "HTACCESS Copied"
-            artifacts:
-              - dist/**
-        - step:
-            name: Code linting
-            script:
-              - npm install eslint
-              - npx eslint .
-            caches:
-              - node  
-    
-    phase1.0.dev:
-      - step: 
-          <<: *load-submodules
-
-      - step: *install-angular
-
-      - step:
-          name: Build and Test
-          script:
-            - echo "Starting CRM Omni Dev Build"
-            - npm run ng build -prod ellaisys-lib
-            - echo "EllaiSys Library Build Complete"
-            - npm run ng build -prod crmo-lib
-            - echo "CRMO Library Build Complete"
-            - npm run ng build -prod --base-href=/$NG_BACKEND_BASE_HREF/ crmo-backend
-            - echo "Ng Build Complete"
-            - cp .htaccess.dev dist/.htaccess
-            - echo "HTACCESS Copied"
-          artifacts:
-            - dist/**
-
-      - step: *code-linting
-
-      - step: *deploy
