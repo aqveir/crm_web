@@ -67,7 +67,7 @@ pipelines:
             caches:
               - node  
     
-    phase1.0.dev:
+    phase1.0:
       - step: 
           <<: *load-submodules
 
