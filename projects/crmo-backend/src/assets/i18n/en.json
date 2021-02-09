@@ -152,6 +152,12 @@
                         "FINE_TEXT": "This URL that will be associated for your use.",
                         "VALIDATION_ERROR": "Enter valid email or phone number."
                     },
+                    "INDUSTRY": {
+                        "LABEL": "Industry",
+                        "PLACEHOLDER": "Enter the subdomain name",
+                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
                     "WEBSITE": {
                         "LABEL": "Website",
                         "PLACEHOLDER": "Enter the website url",

@@ -55,7 +55,7 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
     this.oHash = oHash;
 
     //Load data for existing hash value
-    if (oHash!='0') {
+    if (oHash!='new') {
       //Fetch Data
       this.fnShowData(oHash);      
     } //End if

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
 
 //Library Module
 import { TranslateService } from 'ellaisys-lib';
@@ -37,13 +38,16 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   constructor (
     private _globals: Globals,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _location: Location
   ) {
     //Set the notification option
     this.optionsNotification = Globals.NotificationDefaultOptions;
 
     //Process language setup
     this.fnProcessLanguageTranslations();
+
+    console.log(window.location.host);
   } //Function ends
 
 

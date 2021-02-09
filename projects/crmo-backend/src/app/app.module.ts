@@ -27,6 +27,7 @@ import { GlobalErrorHandler } from './handlers/global-error-handler.handler';
 
 //Application Components
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 /**
@@ -88,11 +89,13 @@ export function HttpTranslateLoader(http: HttpClient) {
 
     //CRMO Modules
     UserModule,
-    ConsoleModule
+    ConsoleModule,
+    NgbModule
   ],
   providers: [
     Globals,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    //Location, {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

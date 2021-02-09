@@ -12,20 +12,22 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="oHash!='new'">
                         <a href="#kt_tab_organization_configuration" class="nav-link" 
                             data-toggle="tab" data-target="#kt_tab_organization_configuration">
                             {{ 'PAGE.ORGANIZATION.DETAIL.TAB_CONFIGURATION.TITLE' | translate }}
                         </a>
                     </li>
                     
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="oHash!='new'">
                         <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Link</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    
+                    <li class="nav-item dropdown" *ngIf="oHash!='new'">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                     </li>
-                    <li class="nav-item">
+
+                    <li class="nav-item" *ngIf="oHash!='new'">
                         <a class="nav-link disabled" data-toggle="tab" href="#kt_tab_pane_4" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>
                 </ul>
