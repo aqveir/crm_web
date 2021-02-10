@@ -27,7 +27,7 @@ export class Globals {
     public static readonly _LANGUAGE_ENV_DEFAULT: string = environment.application.language.default_selection;
 
     public static readonly _LIST_PAGE_DEFAULT_FROM_POSITION: number = 1;
-    public static readonly _LIST_PAGE_DEFAULT_RECORDS_DISPLAYED: number = 20;
+    public static readonly _LIST_PAGE_DEFAULT_RECORDS_DISPLAYED: number = 15;
 
     //Storage-Session keys
     public static readonly _STORAGE_AUTH_CLAIM_KEY: string=environment.storage_config.storage_keys.auth_claim_key;

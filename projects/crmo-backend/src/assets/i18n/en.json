@@ -41,6 +41,9 @@
         "WORK_QUEUE": {
             "LABEL": "Work Queue"
         },
+        "ACCOUNT_LIST": {
+            "LABEL": "Accounts"
+        },
         "CONTACT_LIST": {
             "LABEL": "Contacts"
         },
@@ -219,18 +222,24 @@
                 }
             }
         },
-        "CONTACT_LIST": {
-            "TITLE": "Contacts",
-            "SUB_TITLE": "Loaded 30 of total 5000",
-            "COLUMNS": {
-                "CONTACTC_FULL_NAME": "Name",
-                "CONTACT_TYPE": "Type",
-                "CONTACT_OWNER": "Owner",
-                "CONTACT_SOURCES": "Source",
-                "CONTACT_STATUS": "Status",
-                "ACCOUNT_NAME": "Account",
-                "LAST_MODIFIED": "Last modified",
-                "ACTION_CONTROLS": ""
+        "CONTACT": {
+            "CONTACT_LIST": {
+                "TITLE": "Contacts",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACTC_FULL_NAME": "Name",
+                    "CONTACT_TYPE": "Type",
+                    "CONTACT_OWNER": "Owner",
+                    "CONTACT_SOURCES": "Source",
+                    "CONTACT_STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
+                }
+            },            
+            "CONTACT_DETAIL": {
+                "TITLE": "Contact",
+                "SUB_TITLE": "Loaded 30 of total 5000"
             }
         },
         "TASK_LIST": {

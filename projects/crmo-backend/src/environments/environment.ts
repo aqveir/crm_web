@@ -10,7 +10,7 @@ export const environment = {
   logs:true,
 
   //Customer Key
-  organization_key: 'o2020101603735319507', //This key and the http_config > api_server > request > params > key['key'] is same
+  organization_key: 'o202102b1ece4b3799cee762add9f2bf9891a19', //This key and the http_config > api_server > request > params > key['key'] is same
 
   //Http Settings
   http_config: {
@@ -31,7 +31,7 @@ export const environment = {
         time_out: 2*60*1000, // 2 minutes
 
         params: [
-          { key:'key', value:'o2020101603735319507' },
+          { key:'key', value:'o202102b1ece4b3799cee762add9f2bf9891a19' },
           { key:'lang', value:'en_US' },
           { key:'source', value:'website' },
         ],

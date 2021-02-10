@@ -3,7 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { ContactService, IContact } from 'crmo-lib';
-import { BaseComponent } from '../../base.component';
+import { BaseComponent } from '../../../base.component';
 
 
 @Component({
@@ -28,7 +28,6 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   private scrollId: string = 'abcd';
   private payload: any = null;
   
-
 
   /**
    * Default constructor
