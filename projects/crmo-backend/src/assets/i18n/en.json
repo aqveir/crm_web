@@ -239,7 +239,24 @@
             },            
             "CONTACT_DETAIL": {
                 "TITLE": "Contact",
-                "SUB_TITLE": "Loaded 30 of total 5000"
+                "TAB_DETAILS": {
+                    "TITLE": "Personal"
+                },
+                "TAB_ADDRESS": {
+                    "TITLE": "Address"
+                },
+                "TAB_DOCUMENTS": {
+                    "TITLE": "Documents"
+                },
+                "TAB_NOTES" : {
+                    "TITLE": "Notes"
+                },
+                "TAB_ACCESS_CONTROLS": {
+                    "TITLE": "Access Control"
+                },
+                "TAB_SETTINGS": {
+                    "TITLE": "Settings"
+                }
             }
         },
         "TASK_LIST": {

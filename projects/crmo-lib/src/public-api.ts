@@ -28,6 +28,8 @@ export * from './lib/services/user/user-status.service';
 export * from './lib/services/contact/contact.service';
 export * from './lib/services/contact/contact-auth.service';
 export * from './lib/services/contact/contact-communication.service';
+export * from './lib/services/note/note.service';
+export * from './lib/services/document/document.service';
 //export * from './lib/services/catalogue/catalogue-category.service';
 //export * from './lib/services/wallet/wallet.service';
 
