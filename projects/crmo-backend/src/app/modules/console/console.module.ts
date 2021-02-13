@@ -13,6 +13,7 @@ import { ConsoleRoutingModule } from './console-routing.module';
 import { ContactModule } from './contact/contact.module';
 import { AccountModule } from './account/account.module';
 import { SettingModule } from './setting/setting.module';
+import { WidgetsModule } from './widgets/widgets.module';
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
 
 // Application Components
@@ -50,9 +51,15 @@ import { WorkQueueComponent } from './work-queue/work-queue.component';
 
     //CRMO Modules
     LayoutModule,
+    WidgetsModule,
     SettingModule,
     ContactModule,
-    AccountModule
+    AccountModule,
+  ],
+  exports: [
+    //CRMO Modules
+    LayoutModule,
+    WidgetsModule,
   ]
 })
 export class ConsoleModule { }

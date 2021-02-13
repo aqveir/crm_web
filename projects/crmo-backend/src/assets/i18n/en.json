@@ -290,6 +290,20 @@
         }
     },
 
+    "MODAL": {
+        "NOTE": {
+            "TITLE": "Add/Edit Note",
+            "FORM": {
+                "TEXT": {
+                    "LABEL": "Message",
+                    "PLACEHOLDER": "Enter a note",
+                    "FINE_TEXT": "Your invoices will be addressed to this company.",
+                    "VALIDATION_ERROR": "Enter valid email or phone number."
+                }
+            }
+        }
+    },
+
     "NOTIFICATION_COMMON_SUCCESS_TITLE":"Success",
     
     "ERROR_CODE_0":"There seems to be issues with internet connectivity. Please check your connection.",
