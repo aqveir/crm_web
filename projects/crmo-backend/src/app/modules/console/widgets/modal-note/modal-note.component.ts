@@ -36,12 +36,12 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
     private _noteService: NoteService,
     private _activeModal: NgbActiveModal,
     private _modalService: NgbModal
-    ) {
-      super();
+  ) {
+    super();
 
-      //Set Active Modal
-      this.modalNote = _activeModal;
-    }
+    //Set Active Modal
+    this.modalNote = _activeModal;
+  }
 
 
   /**
@@ -75,19 +75,25 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
-      let objFormData: any = this.noteForm.value;
+      let objFormData: INote = this.noteForm.value;
       this.boolLoading = true;
-      // this._logger.log('Your log message goes here');
+
       this._noteService.create(objFormData)
         .subscribe((response: any) => {
           //Stop loader
           this.boolLoading = false;
+
+          //Refresh data
+          this.boolSaved.emit(true);
+
+          //Close the modal window
+          this.modalNote.close({refresh: true});
         },(error) => {
           //Stop loader
           this.boolLoading = false;
 
           //Show Error
-          //this.hasError = true;
+          this.hasError = true;
 
           throw error;
         });
@@ -100,20 +106,6 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
-
-
-  /**
-   * Update form data
-   */
-  private fnUpdateData() {
-    if (this.objNote) {
-      this.noteForm.patchValue({
-        entity_type: this.strEntityType?this.strEntityType:'',
-        reference_id: this.intReferenceId?this.intReferenceId:'',
-        note: this.objNote.note?this.objNote.note:'',
-      });
-    } //End if
-  }  //Function ends
 
 
   /**
@@ -134,8 +126,8 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
    */
   private fnInitializeForm() {
     this.noteForm = this._formBuilder.group({
-      entity_type: ['', Validators.required],
-      reference_id: ['', Validators.required],
+      entity_type: [(this.strEntityType?this.strEntityType:''), Validators.required],
+      reference_id: [(this.intReferenceId?this.intReferenceId:''), Validators.required],
       note: [(this.objNote?this.objNote.note:''), [
         Validators.required,
         Validators.maxLength(4000),

@@ -1173,7 +1173,7 @@
 
                                 <!--begin::Tab Content (Notes)-->
                                 <div class="tab-pane" id="kt_apps_contacts_view_tab_notes" role="tabpanel">
-                                    <crmo-backend-tab-note [contact]="objContact"></crmo-backend-tab-note>
+                                    <crmo-backend-tab-note [contact]="objContact" (refresh)="fnReloadData($event);"></crmo-backend-tab-note>
                                 </div>
                                 <!--end::Tab Content-->                                
 

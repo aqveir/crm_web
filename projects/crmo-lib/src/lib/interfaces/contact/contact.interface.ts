@@ -9,6 +9,8 @@ export * from './contact-detail.interface';
 export * from './contact-address.interface';
 
 export interface IContact {
+    id?: number;
+
     avatar: string;
     hash: string;
     name_initials: string;
@@ -18,4 +20,12 @@ export interface IContact {
     addresses: IContactAddress[];
     notes: INote[];
     documents: IDocument[];
+}
+
+export interface IContactMinimal {
+    avatar: string;
+    hash: string;
+    name_initials: string;
+    full_name: string;
+    last_updated_at: Date;
 }

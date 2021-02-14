@@ -7,8 +7,8 @@ export interface INote {
     id?: number;
     entity_type?: string;
     reference_id?: number;
-
-    entity?: ILookupValue;
-    owner?: IUser;
     last_updated_at?: Date;
+
+    type?: ILookupValue;
+    owner?: IUser;
 }

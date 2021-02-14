@@ -58,7 +58,11 @@ export class TabNoteComponent extends BaseComponent implements OnInit {
     modalNoteRef.componentInstance.strEntityType = 'entity_type_contact';
     modalNoteRef.componentInstance.intReferenceId = 5;
     modalNoteRef.componentInstance.objNote = _note;
+    modalNoteRef.result.then(
+      result => { this.boolRefresh.emit(result.refresh); }
+    );
   } //Function ends
+  
 
   public fnNoteSaved($event): void {
     this.boolRefresh.emit(true);

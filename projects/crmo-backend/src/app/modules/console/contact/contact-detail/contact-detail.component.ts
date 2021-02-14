@@ -40,6 +40,11 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
+  public fnReloadData($event): void {
+    this.fnLoadData(false);
+  } //End if
+
+
   /**
    * Initialize
    */

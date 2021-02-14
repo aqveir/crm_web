@@ -19,12 +19,14 @@
                             placeholder="{{ 'MODAL.NOTE.FORM.TEXT.PLACEHOLDER' | translate }}"
                             autocomplete="off" tabindex="1" autofocus></textarea>
 
-                        <span *ngIf="noteForm.controls.note.invalid && (noteForm.controls.note.dirty || noteForm.controls.note.touched)">Error</span>
+                        <span *ngIf="noteForm.controls.note.invalid && (noteForm.controls.note.dirty || noteForm.controls.note.touched)">
+                            {{ noteForm.controls.note.errors | json }}
+                        </span>
                     </div>
 
                     <div class="mt-10">
                         <div class="d-flex flex-lg-row-reverse">
-                            <button type="submit" class="btn btn-primary font-weight-bold">
+                            <button type="submit" class="btn btn-primary font-weight-bold" [ngClass]="{ 'spinner spinner-white spinner-left': boolLoading }" data-style="expand-left">
                                 {{ 'COMMON.LABEL.SAVE' | translate }}
                             </button>
                             <button type="button" class="btn btn-clean font-weight-bold mr-2" (click)="fnCloseModal();">
