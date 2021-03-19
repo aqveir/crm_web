@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
 
 //Library Module
 import { TranslateService } from 'ellaisys-lib';
@@ -9,7 +8,6 @@ import { ApplicationParams } from 'crmo-lib';
 import { environment } from '@env-backend/environment';
 import { Globals, ILanguage } from './app.global';
 import defaultLanguage from "./../assets/i18n/en.json";
-
 
 @Component({
   selector: 'crmo-backend-root',
@@ -38,16 +36,13 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   constructor (
     private _globals: Globals,
-    private _translateService: TranslateService,
-    private _location: Location
+    private _translateService: TranslateService
   ) {
     //Set the notification option
     this.optionsNotification = Globals.NotificationDefaultOptions;
 
     //Process language setup
     this.fnProcessLanguageTranslations();
-
-    console.log(window.location.host);
   } //Function ends
 
 

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NgModule, ErrorHandler, Injector } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -39,6 +39,10 @@ export function HttpTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
 }
 
+export function GetApplicationLocation(_location: Location) {
+  return _location;
+}
+
 
 @NgModule({
   declarations: [
@@ -55,9 +59,10 @@ export function HttpTranslateLoader(http: HttpClient) {
     InlineSVGModule.forRoot(),
 
     //EllaiSys Library
-    EllaisysLibModule.forRoot({
-      'env': environment
-    }),
+    EllaisysLibModule.forRoot(
+      {'env': environment}, 
+      {'win_location': window.location}
+    ),
     ValidatorModule,
     PipeModule,
     
@@ -95,7 +100,7 @@ export function HttpTranslateLoader(http: HttpClient) {
   providers: [
     Globals,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    //Location, {provide: LocationStrategy, useClass: PathLocationStrategy}
+    Location, {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
