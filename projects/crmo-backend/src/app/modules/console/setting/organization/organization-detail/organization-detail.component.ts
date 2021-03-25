@@ -7,7 +7,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
-import { NotificationService } from 'ellaisys-lib';
+import { EventBrokerService, NotificationService } from 'ellaisys-lib';
 import { OrganizationService, IOrganization, IResponse } from 'crmo-lib';
 
 
@@ -33,7 +33,8 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
     private _router: Router,
     private _route: ActivatedRoute,
     private _organizationService: OrganizationService,
-    private _notification : NotificationService
+    private _notification : NotificationService,
+    private _broker: EventBrokerService
   ) { super(); }
 
 
@@ -73,6 +74,9 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
         .subscribe((response: IResponse) => {
           //Stop loader
           this.boolLoading = false;
+
+          //Raise event to show submenu
+          this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, true);
 
           //Set param
           this.objOrganization = response.data;          

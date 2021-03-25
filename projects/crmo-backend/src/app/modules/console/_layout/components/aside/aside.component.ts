@@ -8,6 +8,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { LayoutService, DynamicAsideMenuService } from '../../../../../_metronic/core';
 import { KTUtil } from '@asset-backend/js/components/util';
 import { Router } from '@angular/router';
+import { EventBrokerService } from 'ellaisys-lib';
 
 @Component({
   selector: 'app-aside',
@@ -46,7 +47,8 @@ export class AsideComponent implements OnInit, OnDestroy {
     private _layoutService: LayoutService,
     private _router: Router,
     private _menuService: DynamicAsideMenuService,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
+    private _broker: EventBrokerService
   ) { }
 
 
@@ -75,6 +77,10 @@ export class AsideComponent implements OnInit, OnDestroy {
     //Set current page on reload
     this.currentPage = this._router?.routerState?.snapshot?.url;
 
+    //Initialize the broker and set into listen mode
+    this._broker.listen<boolean>(Globals.EVENT_SHOW_SUBMENU, ((x: boolean) => {
+      this.fnToggleSecondaryAsideMenu(x);
+    }));
   } //Function ends
   ngOnDestroy() {
     //this.tabSubscriptions.forEach(x => x.unsubscribe());

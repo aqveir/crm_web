@@ -79,13 +79,13 @@ export class GlobalErrorHandler implements ErrorHandler {
                         }
                         case 401: {
                             this.objError.name='ERROR.CODE.401';
-                            this.objError.message='Unauthorized User';
+                            this.objError.message='User session expired.';
+                            this.objError.toLogin=true;
                             break;
                         }
                         case 403: {
                             this.objError.name='ERROR.CODE.403';
-                            this.objError.message='User session expired.';
-                            this.objError.toLogin=true;
+                            this.objError.message='Forbidden. Unauthorized User.';
                             break;
                         }
                         case 404: {

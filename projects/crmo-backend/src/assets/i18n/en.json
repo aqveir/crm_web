@@ -157,8 +157,8 @@
                     },
                     "INDUSTRY": {
                         "LABEL": "Industry",
-                        "PLACEHOLDER": "Enter the subdomain name",
-                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "PLACEHOLDER": "Select the industry that matches business.",
+                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
                         "VALIDATION_ERROR": "Enter valid email or phone number."
                     },
                     "WEBSITE": {

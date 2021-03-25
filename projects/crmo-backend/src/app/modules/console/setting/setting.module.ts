@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Application Modules
+import { NgSelectModule } from '@ng-select/ng-select';
 import { SettingRoutingModule } from './setting-routing.module';
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'ellaisys-lib';
 
@@ -33,6 +34,9 @@ import { OrganizationMailTemplateListComponent } from './organization/organizati
     CommonModule,
     FormsModule, 
     ReactiveFormsModule,
+
+    //Imported Modules
+    NgSelectModule,
 
     //EllaiSys Library
     TranslateModule,

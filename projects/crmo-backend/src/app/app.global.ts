@@ -34,6 +34,9 @@ export class Globals {
     public static readonly _SESSION_APP_PARAMS_KEY: string='_APP_PARAMS_KEY';
     public static readonly _STORAGE_LOOKUP_KEY: string='_LOCAL_STORAGE_LOOKUP_DATA';
 
+    //Event Broker constants
+    public static readonly EVENT_SHOW_SUBMENU: string = "show-submenu";
+
     //Date Format
     public static readonly _DATE_FORMAT_SERVER: string='DD-MM-YYYY HH:mm:ss';
     public static readonly _TIME_FORMAT_SERVER: string='HH:mm:ss';
@@ -190,7 +193,7 @@ export class Globals {
     public getLookup(): ILookup[] {
         if (this.lookup == null) {
             var strJsonData = this._localStorageService.getItem(Globals._STORAGE_LOOKUP_KEY);
-            this.lookup = JSON.parse(strJsonData);
+            this.lookup = strJsonData;
         } //End if
         return this.lookup;
     } //Function ends

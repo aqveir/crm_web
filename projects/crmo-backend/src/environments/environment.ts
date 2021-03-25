@@ -33,7 +33,6 @@ export const environment = {
         time_out: 2*60*1000, // 2 minutes
 
         params: [
-          { key:'key', value:'o202102ac746f64402fe866f88df092f41bd6a0' },
           { key:'lang', value:'en_US' },
           { key:'source', value:'website' },
         ],

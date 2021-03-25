@@ -146,6 +146,7 @@ export const DynamicAsideMenuConfig = {
       type: 'link',
       icon: 'flaticon-add-label-button',
       page: '/secure/account',
+      permission: ['list_all_organization_accounts'],
       translate: 'MENU.ACCOUNT_LIST.LABEL'
     },
     {
@@ -155,6 +156,7 @@ export const DynamicAsideMenuConfig = {
       type: 'link',
       icon: 'flaticon2-avatar',
       page: '/secure/contact',
+      permission: ['list_all_contacts'],
       translate: 'MENU.CONTACT_LIST.LABEL'
     },
     {
@@ -202,7 +204,7 @@ export const DynamicAsideMenuConfig = {
       alignment: 'center',
       page: '/secure/setting/organization',
       permission: ['list_all_organizations'],
-      translate: 'MENU.SETTING.ORGANIZATION.LABEL',
+      translate: 'MENU.SETTING.ORGANIZATION.LABEL'
     },
     {
       name: 'aside_tab_setting_list',

@@ -27,9 +27,9 @@ export class LookupService extends BaseService {
   /**
    * Get List of Lookup Data
    */
-  public getAll(): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.get('lookup')
+  public getAll(_params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.get('lookup', _params)
         .then((response: any) => {
           let data: ILookup[] = response.data;
 
@@ -47,8 +47,8 @@ export class LookupService extends BaseService {
   /**
    * Get Lookup by Hash Identifier
    */
-  public show(key: string): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+  public show(key: string, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.get('lookup/'+key)
         .then((response: any) => {
           let data: ILookup = response.data;
@@ -64,8 +64,8 @@ export class LookupService extends BaseService {
   /**
    * Update Lookup Data by Key Identifier
    */
-  public update(key: string, data: ILookup): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+  public update(key: string, data: ILookup, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.put('lookup/'+key, data)
         .then((response: any) => {
           observer.next(response);

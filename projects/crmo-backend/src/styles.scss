@@ -23,6 +23,9 @@
 // Metronic Color variables
 @import "./assets/sass/components/variables.demo";
 
+//Import NgSelect Default Theme
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 // For RTL, check this documentation https://keenthemes.com/metronic/?page=docs&section=angular-rtl
 // @import "./assets/sass/style.angular.rtl.css";
 
@@ -79,7 +82,15 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
 
-// CRMO Common
+// CRMO NgSelect Customization
+.form-control.ng-select {
+    outline: none;
+    padding: 0px;
+
+    > .ng-select-container {
+        border: none;
+    }
+}
 
 
 // CRMO Card Customizations

@@ -23,9 +23,9 @@ export class UserStatusService extends BaseService {
   /**
    * Get current user status
    */
-  public get(): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.get('user/status')
+  public get(_params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.get('user/status', _params)
         .then((response: any) => {
           let data: IUserStatusResponse = response.data;
 
@@ -42,7 +42,7 @@ export class UserStatusService extends BaseService {
    * Set current user status
    */
   public set(statusKey: string, data: any=null): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.post('user/status/' + statusKey, data)
         .then((response: any) => {
           let data: any = response.data;

@@ -11,6 +11,8 @@ import { environment } from '@env-backend/environment';
 //Application Modules
 import { InlineSVGModule } from 'ng-inline-svg';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { 
   EllaisysLibModule, NotificationModule, ValidatorModule, PipeModule, 
   TranslateModule, TranslateLoader, TranslateHttpLoader, HttpLoaderFactory,
@@ -27,8 +29,6 @@ import { GlobalErrorHandler } from './handlers/global-error-handler.handler';
 
 //Application Components
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 /**
  * Translate Module Factory Loader
@@ -57,6 +57,7 @@ export function GetApplicationLocation(_location: Location) {
     HttpClientModule,
     AppRoutingModule,
     InlineSVGModule.forRoot(),
+    NgSelectModule,
 
     //EllaiSys Library
     EllaisysLibModule.forRoot(

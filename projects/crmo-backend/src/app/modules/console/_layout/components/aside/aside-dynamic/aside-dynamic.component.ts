@@ -150,7 +150,7 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
         let strMenupath: string = item.page;
         let strSearch = /oHash/gi;
 
-        strMenupath = strMenupath.replace(strSearch, 'o2020101603735319507');
+        strMenupath = strMenupath.replace(strSearch, this.objSettingInfo.oHash);
         objReturnValue[0]=strMenupath;
       } //End if
     } catch(error) {

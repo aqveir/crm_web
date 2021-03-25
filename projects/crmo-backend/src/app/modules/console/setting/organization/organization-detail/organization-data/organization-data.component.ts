@@ -8,7 +8,7 @@ import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.compon
 
 //Application Libraries
 import { NotificationService } from 'ellaisys-lib';
-import { OrganizationService, IOrganization } from 'crmo-lib';
+import { OrganizationService, IOrganization, ILookup, ILookupValue } from 'crmo-lib';
 
 
 @Component({
@@ -24,6 +24,8 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
   public hasError: boolean = false;
 
   public organizationDetailForm!: FormGroup;
+  public objLookupIndustry: ILookup;
+  public listLookupIndustryValues: ILookupValue[];
   
 
   /**
@@ -61,6 +63,9 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
     //Load form
     this.fnInitializeForm();
 
+    //Load lookup values
+    this.objLookupIndustry = this._globals.getLookupByKey('industry_type');
+    this.listLookupIndustryValues = (this.objLookupIndustry.values).filter((x: ILookupValue) => {return x.is_active==true});
   } //Function ends
 
 
@@ -128,13 +133,14 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
         name: this.objOrganization.name?this.objOrganization.name:'',
         hash: this.objOrganization.hash?this.objOrganization.hash:'',
         logo: this.objOrganization.logo?this.objOrganization.logo:'',
-        sub_domain: this.objOrganization.sub_domain?this.objOrganization.sub_domain:'',
+        subdomain: this.objOrganization.subdomain?this.objOrganization.subdomain:'',
+        industry_id:this.objOrganization.industry?(this.objOrganization.industry?.id):'',
         website: this.objOrganization.website?this.objOrganization.website:'',
         search_tag: this.objOrganization.search_tag?this.objOrganization.search_tag:'',
 
         contact_person_name: this.objOrganization.contact_person_name?this.objOrganization.contact_person_name:'',
-        contact_phone: this.objOrganization.contact_phone?this.objOrganization.contact_phone:'',
-        contact_email: this.objOrganization.contact_email?this.objOrganization.contact_email:'',
+        phone: this.objOrganization.phone?this.objOrganization.phone:'',
+        email: this.objOrganization.email?this.objOrganization.email:'',
       });
     } //End if
   }  //Function ends
@@ -157,12 +163,13 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
       name: ['', [ Validators.required ]],
       hash: [{value: null, disabled: true}],
       logo: [''],
-      sub_domain: ['', [ Validators.required ]],
+      subdomain: ['', [ Validators.required ]],
+      industry_id: [''],
       website: ['', [Validators.pattern(Globals._REGEX_PATTERN_UEL)]],
       search_tag: [''],
       contact_person_name: [''],
-      contact_phone: [''],
-      contact_email: ['', [ Validators.email ]],
+      phone: [''],
+      email: ['', [ Validators.email ]],
     });
   } //Function ends
 

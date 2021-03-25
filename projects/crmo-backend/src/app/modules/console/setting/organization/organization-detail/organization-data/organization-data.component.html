@@ -38,7 +38,7 @@
                         </label>
                         <div class="col-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" formControlName="sub_domain" 
+                                <input type="text" class="form-control" formControlName="subdomain" 
                                     placeholder="{{ 'PAGE.ORGANIZATION.DETAIL.TAB_DETAIL.SUBDOMAIN.PLACEHOLDER' | translate }}" 
                                     autocomplete="off" tabindex="2" />
                                 <div class="input-group-append">
@@ -55,13 +55,13 @@
                         </label>
                         <div class="col-9">
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">http://</span>
-                                </div>
-                                <input type="text" class="form-control" formControlName="industry"
+                                <ng-select class="form-control" #agreeSelect formControlName="industry_id"
                                     placeholder="{{ 'PAGE.ORGANIZATION.DETAIL.TAB_DETAIL.INDUSTRY.PLACEHOLDER' | translate }}"
-                                    autocomplete="off" tabindex="3" />
+                                    [items]="listLookupIndustryValues" bindLabel="display_value" bindValue="id"
+                                    [searchable]="false" autocomplete="off" tabindex="3">
+                                </ng-select>
                             </div>
+                            <span class="form-text text-muted">{{ 'PAGE.ORGANIZATION.DETAIL.TAB_DETAIL.INDUSTRY.FINE_TEXT' | translate }}</span>
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@
                                         <i class="la la-phone"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" formControlName="contact_phone"
+                                <input type="text" class="form-control" formControlName="phone"
                                     placeholder="{{ 'PAGE.ORGANIZATION.DETAIL.TAB_DETAIL.PHONE.PLACEHOLDER' | translate }}"
                                     autocomplete="off" tabindex="6" />
                             </div>
@@ -137,7 +137,7 @@
 
                         <div class="col-9">
                             <intl-tel-input
-                                formControlName="contact_phone"
+                                formControlName="phone"
                                 [enablePlaceholder]="true"
                                 [searchCountryFlag]="true"
                             ></intl-tel-input>
@@ -154,7 +154,7 @@
                                         <i class="la la-at"></i>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control" formControlName="contact_email"
+                                <input type="email" class="form-control" formControlName="email"
                                     autocomplete="off" tabindex="7" />
                             </div>
                         </div>
