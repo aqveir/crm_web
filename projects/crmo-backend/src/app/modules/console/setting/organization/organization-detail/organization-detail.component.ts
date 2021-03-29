@@ -75,6 +75,9 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
           //Stop loader
           this.boolLoading = false;
 
+          //Update Setting Information
+          this._globals.updateSettingInfo('selected_oHash', oHash);
+
           //Raise event to show submenu
           this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, true);
 

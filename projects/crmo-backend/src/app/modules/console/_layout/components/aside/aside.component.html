@@ -43,6 +43,7 @@
     <!-- start: with submenu-->
     <a class="nav-link btn btn-icon btn-clean btn-lg" data-toggle="tab" role="tab"
       data-target="#kt_aside_tab_1" [ngClass]="{'active': currentPage==tab.name}" 
+      [routerLink]="tab.page"
       (click)="fnSelectTab(tab)" *ngIf="tab.submenu">
 
       <i [ngClass]="tab.icon" *ngIf="tab.icon && !tab.svg"></i>

@@ -20,6 +20,8 @@ export interface ILanguage {
 export class SettingInfo {
     oHash: string=null;
     uHash: string=null;
+
+    selected_oHash: string=null;
 } //Class ends
 
 @Injectable()
@@ -32,6 +34,7 @@ export class Globals {
     //Storage-Session keys
     public static readonly _STORAGE_AUTH_CLAIM_KEY: string=environment.storage_config.storage_keys.auth_claim_key;
     public static readonly _SESSION_APP_PARAMS_KEY: string='_APP_PARAMS_KEY';
+    public static readonly _SESSION_SETTING_INFO_KEY: string='_SETTING_INFO_KEY';
     public static readonly _STORAGE_LOOKUP_KEY: string='_LOCAL_STORAGE_LOOKUP_DATA';
 
     //Event Broker constants
@@ -250,15 +253,19 @@ export class Globals {
      */
     public getSettingInfo(): SettingInfo {
         if(this.objSettingInfo == null) {
-            let objSettingInfo: SettingInfo = new SettingInfo();
-            objSettingInfo['oHash'] = this.getAppParams().oHash;
-
-            this.objSettingInfo = objSettingInfo;
+            let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_SETTING_INFO_KEY);
+            this.objSettingInfo = (strJsonData)?strJsonData:(new SettingInfo());
         } //End if
         return this.objSettingInfo;
     } //Function ends
     public setSettingInfo(_settingInfo: SettingInfo): void {
+        this._sessionStorageService.setItem(Globals._SESSION_SETTING_INFO_KEY, _settingInfo);
         this.objSettingInfo = _settingInfo;
+    } //Function ends
+    public updateSettingInfo(_settingKey: string, _settingValue: any): void {
+        let objSettingInfo = this.getSettingInfo();
+        objSettingInfo[_settingKey] = _settingValue;
+        this.setSettingInfo(objSettingInfo);
     } //Function ends
 
 
@@ -295,8 +302,9 @@ export class Globals {
 
             //Create Setting Model
             let objSettingInfo: SettingInfo = this.getSettingInfo();
-            objSettingInfo['oHash'] = this.getAppParams().oHash;
+            objSettingInfo['oHash'] = this.getClaim()?.organization?.hash;
             objSettingInfo['uHash'] = this.getClaim().hash;
+            objSettingInfo['selected_oHash'] = objSettingInfo['oHash'];
             this.setSettingInfo(objSettingInfo);
 
             //Load lookup data

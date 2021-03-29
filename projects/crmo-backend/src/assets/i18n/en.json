@@ -74,6 +74,15 @@
                     "ROLE": {
                         "LABEL": "Role"
                     }
+                },
+                "META_DATA": {
+                    "LABEL": "Master Data",
+                    "LOOKUP": {
+                        "LABEL": "Lists"
+                    },
+                    "PREFERENCES": {
+                        "LABEL": "Preferences"
+                    }
                 }
             }
         },

@@ -45,16 +45,16 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
     private _router: Router,
     private menu: DynamicAsideMenuService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {     
+    //Get Setting Model
+    this.objSettingInfo = this._global.getSettingInfo();
+  }
 
 
   /**
    * Lifecycle Hook's
    */
   ngOnInit(): void {
-    //Get Setting Model
-    this.objSettingInfo = this._global.getSettingInfo();
-
     // Load view settings
     this.brandSkin = this.layout.getProp('brand.self.theme');
     this.headerLogo = this.getLogo();
@@ -130,9 +130,10 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
 
       // Navigate for valid url
       if (item.path && item.path!='' && this.objSettingInfo) {
-        let pathRoute: any = item.path.replace(/{oHash}/gi, this.objSettingInfo.oHash);
-
-        this._router.navigate(pathRoute)
+        //Change the oHash to selected organization
+        let pathRoute: any = item.path.replace(/{oHash}/gi, this.objSettingInfo.selected_oHash);
+        
+        this._router.navigate(pathRoute);
       } //End if
 
     } catch(error) {
@@ -150,7 +151,8 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
         let strMenupath: string = item.page;
         let strSearch = /oHash/gi;
 
-        strMenupath = strMenupath.replace(strSearch, this.objSettingInfo.oHash);
+        //Change the oHash to selected organization
+        strMenupath = strMenupath.replace(strSearch, this.objSettingInfo.selected_oHash);
         objReturnValue[0]=strMenupath;
       } //End if
     } catch(error) {

@@ -72,8 +72,13 @@
                         <div class="col-9">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">http://</span>
+                                    <ng-select class="form-control" #website formControlName="website_protocal"
+                                        [searchable]="false" [clearable]="false" autocomplete="off">
+                                        <ng-option [value]="'http://'">http:&#47;&#47;</ng-option>
+                                        <ng-option [value]="'https://'">https:&#47;&#47;</ng-option>
+                                    </ng-select>
                                 </div>
+                                
                                 <input type="text" class="form-control" formControlName="website"
                                     placeholder="{{ 'PAGE.ORGANIZATION.DETAIL.TAB_DETAIL.WEBSITE.PLACEHOLDER' | translate }}"
                                     autocomplete="off" tabindex="3" />

@@ -129,13 +129,18 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
    */
   private fnUpdateData() {
     if (this.objOrganization) {
+      //website protocal
+      let strWebsiteProtocal: string = ((this.objOrganization.website?.indexOf('https'))<0)?'http://':'https://';
+      let strWebsiteURL: string = (this.objOrganization.website)?this.objOrganization.website?.replace(strWebsiteProtocal, ''):'';
+
       this.organizationDetailForm.patchValue({
         name: this.objOrganization.name?this.objOrganization.name:'',
         hash: this.objOrganization.hash?this.objOrganization.hash:'',
         logo: this.objOrganization.logo?this.objOrganization.logo:'',
         subdomain: this.objOrganization.subdomain?this.objOrganization.subdomain:'',
         industry_id:this.objOrganization.industry?(this.objOrganization.industry?.id):'',
-        website: this.objOrganization.website?this.objOrganization.website:'',
+        website_protocal: strWebsiteProtocal,
+        website: strWebsiteURL,
         search_tag: this.objOrganization.search_tag?this.objOrganization.search_tag:'',
 
         contact_person_name: this.objOrganization.contact_person_name?this.objOrganization.contact_person_name:'',
@@ -165,6 +170,7 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
       logo: [''],
       subdomain: ['', [ Validators.required ]],
       industry_id: [''],
+      website_protocal: ['http://'],
       website: ['', [Validators.pattern(Globals._REGEX_PATTERN_UEL)]],
       search_tag: [''],
       contact_person_name: [''],

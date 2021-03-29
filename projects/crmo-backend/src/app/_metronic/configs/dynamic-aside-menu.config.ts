@@ -204,7 +204,52 @@ export const DynamicAsideMenuConfig = {
       alignment: 'center',
       page: '/secure/setting/organization',
       permission: ['list_all_organizations'],
-      translate: 'MENU.SETTING.ORGANIZATION.LABEL'
+      translate: 'MENU.SETTING.ORGANIZATION.LABEL',
+      submenu: [
+        {
+          title: 'organization detail',
+          bullet: 'dot',
+          icon: 'flaticon2-shelter',
+          permission: 'accessToECommerceModule',
+          page: '/secure/setting/organization/oHash',
+          translate: 'MENU.SETTING.ORGANIZATION.DETAIL.LABEL',
+        },
+        {
+          title: 'User Management',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'users',
+              page: '/secure/setting/organization/oHash/user',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
+            },
+            {
+              title: 'roles',
+              page: '/secure/setting/organization/oHash/role',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
+            }
+          ]
+        },
+        {
+          title: 'Meta Data',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.META_DATA.LABEL',
+          submenu: [
+            {
+              title: 'lists',
+              page: '/secure/setting/organization/oHash/lists',
+              translate: 'MENU.SETTING.ORGANIZATION.META_DATA.LOOKUP.LABEL',
+            },
+            {
+              title: 'preferences',
+              page: '/secure/setting/organization/oHash/preferences',
+              translate: 'MENU.SETTING.ORGANIZATION.META_DATA.PREFERENCES.LABEL',
+            }
+          ]
+        }
+      ]
     },
     {
       name: 'aside_tab_setting_list',
@@ -301,5 +346,5 @@ export const DynamicAsideMenuConfig = {
         }
       ]
     }
-  ]
+  ],
 };
