@@ -1,3 +1,7 @@
+.switch {
+    background-color: inherit !important;
+}
+
 .switch.user_status_online input:checked ~ span:after {
     background-color: #1BC5BD;
 }

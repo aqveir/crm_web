@@ -23,7 +23,7 @@ export class UserService extends BaseService {
    * Get users for an organization
    */
   public getUsers(oHash: string): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.get('organization/' + oHash + '/user')
         .then((response: any) => {
           let data: any = response.data;
@@ -41,7 +41,7 @@ export class UserService extends BaseService {
    * Get user by identifier for an organization
    */
   public getUserByIdentifier(oHash: string, uHash: string): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.get('organization/' + oHash + '/user/' + uHash)
         .then((response: any) => {
           let data: any = response.data;
@@ -59,7 +59,7 @@ export class UserService extends BaseService {
    * Get current user information
    */
   public show(): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.get('user')
         .then((response: any) => {
           observer.next(response);

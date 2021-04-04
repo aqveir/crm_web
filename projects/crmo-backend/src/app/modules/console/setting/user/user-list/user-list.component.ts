@@ -19,7 +19,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
 
   public oHash: string;
-  public objUser: IUser[];
+  public listUsers: IUser[];
 
 
   /**
@@ -49,7 +49,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
    */
   private fnInitialize(): void {
     let oHash: string = this._route.snapshot.paramMap.get('ohash');
-    this.oHash = oHash; //this._globals.getAppParams().oHash;
+    this.oHash = oHash;
 
     //Load form
     this.fnLoadData();
@@ -69,7 +69,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
           this.boolLoading = false;
 
           //Fill Data into variable
-          this.objUser = response;
+          this.listUsers = response;
         },(error) => {
           //Stop loader
           this.boolLoading = false;

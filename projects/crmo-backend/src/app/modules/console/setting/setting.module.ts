@@ -10,6 +10,10 @@ import { LoggerModule, NotificationModule, PipeModule, TranslateModule, Validato
 // Application Components
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { UserProfileComponent } from './user/user-detail/user-profile/user-profile.component';
+import { UserAccountComponent } from './user/user-detail/user-account/user-account.component';
+import { UserSettingComponent } from './user/user-detail/user-setting/user-setting.component';
+import { UserChangepasswordComponent } from './user/user-detail/user-changepassword/user-changepassword.component';
 
 import { OrganizationListComponent } from './organization/organization-list/organization-list.component';
 import { OrganizationDetailComponent } from './organization/organization-detail/organization-detail.component';
@@ -22,6 +26,10 @@ import { OrganizationMailTemplateListComponent } from './organization/organizati
   declarations: [
     UserListComponent,
     UserDetailComponent,
+    UserProfileComponent,
+    UserAccountComponent,
+    UserSettingComponent,
+    UserChangepasswordComponent,    
 
     OrganizationListComponent,
     OrganizationDetailComponent,

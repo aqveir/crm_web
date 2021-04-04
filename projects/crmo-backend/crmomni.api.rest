@@ -1,0 +1,17 @@
+@crmomni_api=http://ellaisys.crmomni.com/api/
+@user_hash=u202103f85da82b802873e2847311a54d09595d
+@org_key=o202103b26c1e3de5b441e0305f8abbf5e3058c
+@auth_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9lbGxhaXN5cy5jcm1vbW5pLmNvbVwvYXBpXC91c2VyXC9sb2dpbiIsImlhdCI6MTYxNzI3MDM2NSwiZXhwIjoxNjE3MjczOTY1LCJuYmYiOjE2MTcyNzAzNjUsImp0aSI6Ik8zYk02VTcwYzFuZjB2Y3IiLCJzdWIiOjEsInBydiI6ImIwNzM2Y2Y4ZDYzOTg5NDkxMzM1OTkxNmFiODA0NjVjYjAyZDE1ZTUifQ.8MwhDvQP3QUHshaqFNO3MZKIhtCLAofX1QQKloi5VwY
+
+# Login User
+POST {{crmomni_api}}user/login HTTP/1.1
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+username=admin%40ellaisys.com&password=password
+
+###
+# Get User Information by Hash
+GET {{crmomni_api}}organization/{{org_key}}/user/{{user_hash}}?key={{org_key}} HTTP/1.1
+content-type: application/json
+Authorization: bearer {{auth_token}}

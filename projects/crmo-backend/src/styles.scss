@@ -141,3 +141,17 @@ table.table {
         }
     }
 }
+
+// CRMO User Availability Status Colors
+.user_status_offline {
+    background-color: #ddd;
+}
+.user_status_online {
+    background-color: #1BC5BD;
+}
+.user_status_busy {
+    background-color: #F64E60;
+}
+.user_status_away {
+    background-color: rgb(240, 228, 64);
+}

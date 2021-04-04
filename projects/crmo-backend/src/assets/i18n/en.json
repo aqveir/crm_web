@@ -139,6 +139,70 @@
                 
             }
         },
+        "USER": {
+            "LIST": {
+                "TITLE": "Users"
+            },
+            "DETAIL": {
+                "TAB_PROFILE": {
+                    "TITLE": "User Profile",
+                    "FIRST_NAME": {
+                        "LABEL": "First Name",
+                        "PLACEHOLDER": "Enter the given name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "LAST_NAME": {
+                        "LABEL": "Last Name",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "SUBDOMAIN": {
+                        "LABEL": "Sub-Domain",
+                        "PLACEHOLDER": "Enter the subdomain name",
+                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "INDUSTRY": {
+                        "LABEL": "Industry",
+                        "PLACEHOLDER": "Select the industry that matches business.",
+                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "WEBSITE": {
+                        "LABEL": "Website",
+                        "PLACEHOLDER": "Enter the website url",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "SEARCH_TAG": {
+                        "LABEL": "Search Tags",
+                        "PLACEHOLDER": "Enter the tag name",
+                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PERSON_NAME": {
+                        "LABEL": "Person's Name",
+                        "PLACEHOLDER": "Enter the biller or contact person's name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "EMail",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "This email will be used to communicate with user.",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                }
+            }
+        },
         "ORGANIZATION": {
             "LIST": {
                 "TITLE": "Oraganization List"

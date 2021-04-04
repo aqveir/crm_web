@@ -310,6 +310,12 @@ export class Globals {
             //Load lookup data
             this.fnLoadLookupnData();
 
+            /**
+             * 
+             * TODO: Add more method here that needs to be called on user login.
+             * 
+             */
+
             //Set the data uploaded status to true
             this.boolDataLoaded=true;            
         } //End if

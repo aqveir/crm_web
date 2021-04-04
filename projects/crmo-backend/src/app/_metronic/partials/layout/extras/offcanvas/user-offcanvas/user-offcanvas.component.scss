@@ -1,3 +1,7 @@
+.switch {
+    background-color: inherit !important;
+}
+
 .switch.user_status_online input:checked ~ span:after {
     background-color: #1BC5BD;
 }
@@ -9,17 +13,4 @@
 .symbol-badge {
     height: 18px !important;
     width: 18px !important;
-}
-
-.symbol-badge.user_status_offline {
-    background-color: #ddd !important;
-}
-.symbol-badge.user_status_online {
-    background-color: #1BC5BD !important;
-}
-.symbol-badge.user_status_busy {
-    background-color: #F64E60 !important;
-}
-.symbol-badge.user_status_away {
-    background-color: rgb(240, 228, 64) !important;
 }
