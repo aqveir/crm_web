@@ -5,11 +5,11 @@ import { IUserStatusResponse } from './user-status.interface';
 export interface IUser {
     hash?: string;
     username: string;
+    avatar?: string;
     first_name?: string;
     last_name?: string;
     full_name?: string;
     name_initials?: string;
-    avatar?: string;
 
     last_login_at?: Date;
     last_updated_at?: Date;
@@ -20,16 +20,26 @@ export interface IUser {
 
     email: string;
     phone?: string;
+
     virtual_phone_number?: string;
+    is_pool?: boolean;
+    is_default?: boolean;
     
     country?: ICountry;
     timezone?: any;
     organization?: IOrganizationMinimal;
     availability?: IUserStatusResponse;
+
+    language?: string;
 }
 
 export interface IUserMinimal {
     hash: string;
     name_initials: string;
     full_name: string;
+
+    is_active?: boolean;
+    is_verified?: boolean;
+
+    availability?: IUserStatusResponse;
 }

@@ -7,6 +7,7 @@ import { BaseService } from '../base.service';
 
 // Interfaces
 import { IResponseError } from '../../interfaces/common/response.interface';
+import { IUser, IUserMinimal } from '../../interfaces/user/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class UserService extends BaseService {
     return new Observable((observer: Observer<any>) => {
       this._httpService.get('organization/' + oHash + '/user')
         .then((response: any) => {
-          let data: any = response.data;
+          let data: IUserMinimal = response.data;
 
           //Set observer state
           observer.next(data);
@@ -44,7 +45,7 @@ export class UserService extends BaseService {
     return new Observable((observer: Observer<any>) => {
       this._httpService.get('organization/' + oHash + '/user/' + uHash)
         .then((response: any) => {
-          let data: any = response.data;
+          let data: IUser = response.data;
 
           //Set observer state
           observer.next(data);
