@@ -28,7 +28,7 @@ export class NoteService extends BaseService {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('note', data)
         .then((response: any) => {
-          let data: any = response.data;
+          let data: INote = response.data;
 
           //Set observer state
           observer.next(data);
@@ -46,7 +46,7 @@ export class NoteService extends BaseService {
     return new Observable((observer: Observer<any>) => {
       this._httpService.put('note/' + id.toString, data)
         .then((response: any) => {
-          let data: any = response.data;
+          let data: INote = response.data;
 
           //Set observer state
           observer.next(data);
@@ -64,7 +64,7 @@ export class NoteService extends BaseService {
     return new Observable((observer: Observer<any>) => {
       this._httpService.delete('note/' + id.toString)
         .then((response: any) => {
-          let data: any = response.data;
+          let data: INote = response.data;
 
           //Set observer state
           observer.next(data);

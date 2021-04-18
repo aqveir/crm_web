@@ -56,6 +56,7 @@ These are some CLI commands that would be essential for development.
     npx ng generate library crmo-lib --lintFix=true --prefix=crmo-lib
     npx ng generate module modules/user --project=crmo-backend --routing=true --module=modules/user
     npx ng generate component modules/user/auth --project=crmo-backend --module=modules/user
+    npx ng generate component modules/console/setting/role/role-detail --project=crmo-backend --module=modules/console/setting
 ```
 
 #### CRMO Library

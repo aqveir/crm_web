@@ -5,9 +5,13 @@
         <div class="col-xl-4">
             <!--begin::Group-->
             <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">Avatar</label>
+                <label class="col-form-label col-3 text-lg-right text-left">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.AVATAR.LABEL' | translate }}
+                </label>
                 <div class="col-9">
-                    <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url(assets/media/users/blank.png)">
+                    <div class="image-input image-input-empty image-input-outline" 
+                        id="kt_user_edit_avatar" 
+                        [style.background-image]="(objUser?.avatar)?'url('+objUser.avatar+')':'url(assets/media/users/blank.png)'">
                         <div class="image-input-wrapper"></div>
                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                             <i class="fa fa-pen icon-sm text-muted"></i>

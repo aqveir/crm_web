@@ -244,7 +244,7 @@ export const DynamicAsideMenuConfig = {
             },
             {
               title: 'preferences',
-              page: '/secure/setting/organization/oHash/preferences',
+              page: '/secure/setting/organization/oHash/preference',
               translate: 'MENU.SETTING.ORGANIZATION.META_DATA.PREFERENCES.LABEL',
             }
           ]
@@ -287,6 +287,12 @@ export const DynamicAsideMenuConfig = {
               translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
             }
           ]
+        },
+        {
+          title: 'Manage Preferences',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.PREFERENCES.LABEL',
         },
         {
           title: 'Error Pages',

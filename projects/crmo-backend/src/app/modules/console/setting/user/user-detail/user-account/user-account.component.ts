@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -17,6 +17,7 @@ import { IUser, IResponse, UserService, ILookup, ILookupValue } from 'crmo-lib';
 })
 export class UserAccountComponent  extends BaseComponent implements OnInit, OnChanges {
   @Input('user') objUser: IUser = null;
+  @Input('refresh') boolRefresh: boolean = false;
   @Output('user') user: EventEmitter<IUser> = new EventEmitter<IUser>();
   @Output('save') saveEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -25,6 +26,8 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
   public hasError: boolean = false;
 
   public userAccountForm!: FormGroup;
+  public boolIsNewUser: boolean = false;
+  public listLanguages: any;
   
 
   /**
@@ -36,7 +39,7 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
     private _route: ActivatedRoute,
     private _formBuilder: FormBuilder,
     private _userService: UserService,
-    private _notification : NotificationService
+    private _notification: NotificationService,
   ) { super(); }
 
 
@@ -49,7 +52,7 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
     this.fnInitialize();
   } //Function ends
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.objUser) {
+    if (changes && (changes.objUser || changes.boolRefresh)) {
 
       //Load data on form
       this.fnLoadData();
@@ -61,6 +64,10 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
    * Initialize
    */
   private fnInitialize(): void {
+    //Load languages supported
+    let listLanguages: [] = Globals.APPLICATION_CONSTANT.LANGUAGES;
+    this.listLanguages = listLanguages.filter((x: any) => { return x.is_active==true });
+
     //Load form
     this.fnInitializeForm();
   } //Function ends
@@ -108,13 +115,14 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
    * Load form data
    */
   private fnLoadData(): void {
-    if (this.objUser) {
+    if (this.objUser && this.userAccountForm) {
+      //check the new user status
+      this.boolIsNewUser = (this.objUser?.hash==null)?true:false;
+
       this.userAccountForm.patchValue({
-        avatar: this.objUser.avatar?this.objUser.avatar:'',
-        first_name: this.objUser.first_name?this.objUser.first_name:'',
-        last_name: this.objUser.last_name?this.objUser.last_name:'',
-        phone: this.objUser.phone?this.objUser.phone:'',
-        email: this.objUser.email?this.objUser.email:'',
+        username: this.objUser.username?this.objUser.username:'',
+        language: this.objUser.language?this.objUser.language:'en',
+        is_remote_access_only: this.objUser.is_remote_access_only?this.objUser.is_remote_access_only:false,
       });
     } //End if
   } //Function ends
@@ -133,11 +141,10 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
    */
   private fnInitializeForm(): void {
     this.userAccountForm = this._formBuilder.group({
-      avatar: [''],
-      first_name: ['', [ Validators.required ]],
-      last_name: [''],
-      phone: [''],
-      email: ['', [ Validators.email ]],
+      username: ['', [ Validators.required ]],
+      timezone_id: ['', [ Validators.required ]],
+      language: ['en'],
+      is_remote_access_only: [false],
     });
   } //Function ends
 

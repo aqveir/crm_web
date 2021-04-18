@@ -1,4 +1,6 @@
 import { ICountry } from '../common/country.interface';
+import { IPrivilege } from '../common/privilege.interface';
+import { IRole } from '../common/role.interface';
 import { IOrganizationMinimal } from '../organization/organization.interface';
 import { IUserStatusResponse } from './user-status.interface';
 
@@ -29,6 +31,8 @@ export interface IUser {
     timezone?: any;
     organization?: IOrganizationMinimal;
     availability?: IUserStatusResponse;
+    roles?: IRole[];
+    privileges?: IPrivilege[];
 
     language?: string;
 }
@@ -36,6 +40,7 @@ export interface IUser {
 export interface IUserMinimal {
     hash: string;
     name_initials: string;
+    avatar?: string;
     full_name: string;
 
     is_active?: boolean;

@@ -2,6 +2,8 @@
  * Public API Surface of crmo-lib
  */
 
+import { from } from 'rxjs';
+
 export * from './lib/crmo-lib.service';
 export * from './lib/crmo-lib.component';
 export * from './lib/crmo-lib.module';
@@ -11,20 +13,26 @@ export * from './lib/interfaces/common/response.interface';
 export * from './lib/interfaces/common/lookup.interface';
 export * from './lib/interfaces/common/country.interface';
 export * from './lib/interfaces/common/configuration.interface';
+export * from './lib/interfaces/common/privilege.interface';
+export * from './lib/interfaces/common/role.interface';
 export * from './lib/interfaces/organization/organization.interface';
 export * from './lib/interfaces/user/user.interface';
 export * from './lib/interfaces/user/user-auth.interface';
 export * from './lib/interfaces/user/user-status.interface';
+export * from './lib/interfaces/preference/preference.interface';
 export * from './lib/interfaces/contact/contact.interface';
 export * from './lib/interfaces/note/note.interface';
 export * from './lib/interfaces/document/document.interface';
 
 //Exported Services
 export * from './lib/services/common/lookup/lookup.service';
+export * from './lib/services/common/role/role.service';
+export * from './lib/services/common/privilege/privilege.service';
 export * from './lib/services/organization/organization.service';
 export * from './lib/services/user/user.service';
 export * from './lib/services/user/user-auth.service';
 export * from './lib/services/user/user-status.service';
+export * from './lib/services/preference/preference.service';
 export * from './lib/services/contact/contact.service';
 export * from './lib/services/contact/contact-auth.service';
 export * from './lib/services/contact/contact-communication.service';

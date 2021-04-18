@@ -8,6 +8,9 @@ import { SettingRoutingModule } from './setting-routing.module';
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'ellaisys-lib';
 
 // Application Components
+import { RoleListComponent } from './role/role-list/role-list.component';
+import { RoleDetailComponent } from './role/role-detail/role-detail.component';
+
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserProfileComponent } from './user/user-detail/user-profile/user-profile.component';
@@ -21,9 +24,15 @@ import { OrganizationDataComponent } from './organization/organization-detail/or
 import { OrganizationConfigurationListComponent } from './organization/organization-detail/organization-configuration-list/organization-configuration-list.component';
 import { OrganizationConfigurationDataComponent } from './organization/organization-detail/organization-configuration-data/organization-configuration-data.component';
 import { OrganizationMailTemplateListComponent } from './organization/organization-detail/organization-mail-template-list/organization-mail-template-list.component';
+import { PreferenceListComponent } from './preference/preference-list/preference-list.component';
+import { PreferenceDetailComponent } from './preference/preference-detail/preference-detail.component';
+
 
 @NgModule({
   declarations: [
+    RoleListComponent,
+    RoleDetailComponent,
+
     UserListComponent,
     UserDetailComponent,
     UserProfileComponent,
@@ -37,6 +46,8 @@ import { OrganizationMailTemplateListComponent } from './organization/organizati
     OrganizationConfigurationDataComponent,
     OrganizationMailTemplateListComponent,
     OrganizationConfigurationListComponent,
+    PreferenceListComponent,
+    PreferenceDetailComponent,
   ],
   imports: [
     CommonModule,

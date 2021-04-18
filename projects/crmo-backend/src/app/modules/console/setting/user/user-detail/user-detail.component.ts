@@ -21,6 +21,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   public oHash: string;
   public uhash: string;
   public objUser: any;
+  public boolRefresh: boolean = false;
 
 
   /**
@@ -76,12 +77,14 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
    */
   private fnCreateData(): void {
     this.objUser = {
+      hash: null,
       avatar: null,
       username: null,
       first_name: null,
       last_name: null,
       email: null,
       phone: null,
+      language: 'en',
       is_remote_access_only: false
     };
   } //Function ends
@@ -115,5 +118,27 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
+
+
+  public fnUpdateData(_objUser: IUser): boolean {
+    try {
+      this.boolRefresh = false;
+      this.objUser = _objUser;
+      this.boolRefresh = true;
+      return true;
+    } catch (error) {
+      throw error;
+    } //Try-catch ends 
+  }
+
+
+  public fnSaveData(event): boolean {
+    try {
+      this.boolRefresh = true;
+      return true;
+    } catch (error) {
+      throw error;
+    } //Try-catch ends 
+  }
 
 } //Class ends

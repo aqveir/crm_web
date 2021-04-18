@@ -108,7 +108,7 @@ export class UserSettingComponent  extends BaseComponent implements OnInit, OnCh
    * Load form data
    */
   private fnLoadData(): void {
-    if (this.objUser) {
+    if (this.objUser && this.userSettingForm) {
       this.userSettingForm.patchValue({
         avatar: this.objUser.avatar?this.objUser.avatar:'',
         first_name: this.objUser.first_name?this.objUser.first_name:'',

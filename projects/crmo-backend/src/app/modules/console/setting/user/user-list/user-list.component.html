@@ -71,7 +71,8 @@
                                 <span class="label label-lg label-inline label-light-primary" *ngIf="user.is_active">Active</span>
                                 <span class="label label-lg label-inline label-light-danger" *ngIf="!user.is_active">Inactive</span>
                                 <span class="label label-lg label-inline ml-2 rounded-pill"
-                                    [class]="user.availability?.status?.key">&nbsp;</span>
+                                    [class]="user.availability?.status?.key"
+                                    [title]="user.availability?.status?.display_value">&nbsp;</span>
                             </td>
                             <td>
                                 <span class="text-dark-75 d-block">{{ user.last_login_at | date }}</span>

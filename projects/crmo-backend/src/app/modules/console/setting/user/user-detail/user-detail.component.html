@@ -97,16 +97,23 @@
 
 	<!--begin::Card body-->
 	<div class="card-body">
+		<div class="row">{{ objUser|json }}</div>
 		<div class="tab-content">
 			<!--begin::Tab-->
 			<div class="tab-pane show active px-7" id="kt_tab_user_profile" role="tabpanel">
-				<crmo-backend-user-profile [(user)]="objUser"></crmo-backend-user-profile>
+				<crmo-backend-user-profile [user]="objUser"
+					(user)="fnUpdateData($event)"
+					[refresh]="boolRefresh"
+					(save)="fnSaveData($event)"></crmo-backend-user-profile>
 			</div>
 			<!--end::Tab-->
 
 			<!--begin::Tab-->
 			<div class="tab-pane px-7" id="kt_tab_user_account" role="tabpanel">
-				<crmo-backend-user-account [(user)]="objUser"></crmo-backend-user-account>
+				<crmo-backend-user-account [user]="objUser"
+					(user)="fnUpdateData($event)"
+					[refresh]="boolRefresh"
+					(save)="fnSaveData($event)"></crmo-backend-user-account>
 			</div>
 			<!--end::Tab-->
 
@@ -118,7 +125,8 @@
 			
 			<!--begin::Tab-->
 			<div class="tab-pane px-7" id="kt_tab_user_setting" role="tabpanel">
-				<crmo-backend-user-setting [(user)]="objUser"></crmo-backend-user-setting>
+				<crmo-backend-user-setting [(user)]="objUser"
+					></crmo-backend-user-setting>
 			</div>
 			<!--end::Tab-->
 		</div>

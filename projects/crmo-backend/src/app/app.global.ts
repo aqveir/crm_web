@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 //Propritery Library
 import { IResponseUserLogin, IPrivilege, IUserStatusResponse, ILookupValue,
-    ApplicationParams, LookupService, ILookup,  UserStatusService,  } from 'crmo-lib';
+    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole,  } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
@@ -35,6 +35,8 @@ export class Globals {
     public static readonly _STORAGE_AUTH_CLAIM_KEY: string=environment.storage_config.storage_keys.auth_claim_key;
     public static readonly _SESSION_APP_PARAMS_KEY: string='_APP_PARAMS_KEY';
     public static readonly _SESSION_SETTING_INFO_KEY: string='_SETTING_INFO_KEY';
+    public static readonly _SESSION_ORG_ROLES: string='_SESSION_ORG_ROLES_KEY';
+    public static readonly _SESSION_ORG_PRIVILEGES: string='_SESSION_ORG_PRIVILEGES_KEY';
     public static readonly _STORAGE_LOOKUP_KEY: string='_LOCAL_STORAGE_LOOKUP_DATA';
 
     //Event Broker constants
@@ -96,6 +98,8 @@ export class Globals {
     private boolDataLoaded: boolean = false;
     private lookup: ILookup[] = null;
     private objSettingInfo: SettingInfo = null;
+    private listPrivileges: IPrivilege[] = null;
+    private listRoles: IRole[] = null;
 
 
     //Default Constructor
@@ -266,6 +270,38 @@ export class Globals {
         let objSettingInfo = this.getSettingInfo();
         objSettingInfo[_settingKey] = _settingValue;
         this.setSettingInfo(objSettingInfo);
+    } //Function ends
+
+
+    /**
+     * Getter and Setters for Organization Roles
+     */
+    public getOrgRoles(): IRole[] {
+        if(this.listRoles == null) {
+            let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_ORG_ROLES);
+            this.listRoles = strJsonData;
+        } //End if
+        return this.listRoles;
+    } //Function ends
+    public setOrgRoles(_listRoles: IRole[]): void {
+        this._sessionStorageService.setItem(Globals._SESSION_ORG_ROLES, _listRoles);
+        this.listRoles = _listRoles;
+    } //Function ends
+
+
+    /**
+     * Getter and Setters for Application Privileges
+     */
+    public getOrgPrivileges(): IPrivilege[] {
+        if(this.listPrivileges == null) {
+            let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_ORG_PRIVILEGES);
+            this.listPrivileges = strJsonData;
+        } //End if
+        return this.listPrivileges;
+    } //Function ends
+    public setOrgPrivileges(_listPrivileges: IPrivilege[]): void {
+        this._sessionStorageService.setItem(Globals._SESSION_ORG_PRIVILEGES, _listPrivileges);
+        this.listPrivileges = _listPrivileges;
     } //Function ends
 
 

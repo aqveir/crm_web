@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -7,18 +7,19 @@ import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'ellaisys-lib';
-import { OrganizationService, IOrganization, IResponse } from 'crmo-lib';
-
+import { IRole, IResponse, RoleService } from 'crmo-lib';
 
 @Component({
-  selector: 'crmo-backend-organization-list',
-  templateUrl: './organization-list.component.html',
-  styleUrls: ['./organization-list.component.scss']
+  selector: 'crmo-backend-role-list',
+  templateUrl: './role-list.component.html',
+  styleUrls: ['./role-list.component.scss']
 })
-export class OrganizationListComponent extends BaseComponent implements OnInit {
+export class RoleListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
-  public objOrganization: IOrganization[];
+
+  public oHash: string;
+  public listRoles: IRole[];
 
 
   /**
@@ -27,7 +28,8 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _router: Router,
-    private _organizationService: OrganizationService,
+    private _route: ActivatedRoute,
+    private _roleService: RoleService,
     private _broker: EventBrokerService,
     private _notification : NotificationService
   ) { super(); }
@@ -47,6 +49,9 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
    * Initialize
    */
   private fnInitialize(): void {
+    let oHash: string = this._route.snapshot.paramMap.get('ohash');
+    this.oHash = oHash;
+
     //Load form
     this.fnLoadData();
 
@@ -54,21 +59,24 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
 
 
   /**
-   * Get Data for the Organization
+   * Get Data
    */
   public fnLoadData(): boolean {
     try {
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
+
       this.boolLoading = true;
-      this._organizationService.get()
-        .subscribe((response: IResponse) => {
+      this._roleService.getAll(params)
+        .subscribe((response: IRole[]) => {
           //Stop loader
           this.boolLoading = false;
 
           //Fill Data into variable
-          this.objOrganization = response.data;
+          this.listRoles = response;
 
-          //Raise event to hide submenu
-          this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, false);
+          //Raise event to show submenu
+          this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, true);
         },(error) => {
           //Stop loader
           this.boolLoading = false;
@@ -83,22 +91,6 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
 
       throw error;
     } //Try-catch ends
-  } //Function ends
-
-
-  /**
-   * Show the Organization Details page
-   * @param organization 
-   */
-  public fnSelectOrganization(organization: IOrganization): boolean {
-    let objReturnValue: boolean=false;
-    try {
-      this._router.navigate(['/secure/setting/organization', organization.hash]);
-    } catch(error) {
-      throw error;
-    } //Try-catch ends
-
-    return objReturnValue;
   } //Function ends
 
 } //Class ends

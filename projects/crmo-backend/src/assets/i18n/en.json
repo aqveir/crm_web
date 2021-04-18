@@ -20,6 +20,9 @@
             "EMAIL": "Email",
 
             "PLEASE_WAIT": "Please wait ..."
+        },
+        "NO_DATA": {
+            "TITLE": "No records found."
         }
     },
 
@@ -141,11 +144,25 @@
         },
         "USER": {
             "LIST": {
-                "TITLE": "Users"
+                "TITLE": "Users",
+                "FINE_TEXT": "List of all the Roles in an Organization.",
+                "COLUMNS": {
+                    "FULL_NAME": "Name",
+                    "CONTACT": "Phone",
+                    "STATUS": "Status",
+                    "LAST_LOGIN": "Last Login",
+                    "LAST_MODIFIED": "Last modified"
+                }
             },
             "DETAIL": {
                 "TAB_PROFILE": {
                     "TITLE": "User Profile",
+                    "AVATAR": {
+                        "LABEL": "Avatar",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
                     "FIRST_NAME": {
                         "LABEL": "First Name",
                         "PLACEHOLDER": "Enter the given name",
@@ -195,10 +212,40 @@
                         "VALIDATION_ERROR": "Enter valid phone number."
                     },
                     "EMAIL": {
-                        "LABEL": "EMail",
+                        "LABEL": "Email Address",
                         "PLACEHOLDER": "Enter the email address",
-                        "FINE_TEXT": "This email will be used to communicate with user.",
+                        "FINE_TEXT": "Email will not be publicly displayed and just used to communicate.",
                         "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                },
+                "TAB_ACCOUNT": {
+                    "TITLE": "Account",
+                    "USERNAME": {
+                        "LABEL": "Username",
+                        "PLACEHOLDER": "Enter the user name",
+                        "FINE_TEXT": "Email address is the default username.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "LANGUAGE": {
+                        "LABEL": "Language",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "TIMEZONE": {
+                        "LABEL": "Timezone",
+                        "PLACEHOLDER": "Select the timezone",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "CUSTOMIZE": {
+                        "LABEL": "Customize",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name",
+                        "REMOTE_ONLY": {
+                            "LABEL": "Remote Only"
+                        }
                     }
                 }
             }
@@ -359,6 +406,219 @@
                 "ACCOUNT_NAME": "Account",
                 "LAST_MODIFIED": "Last modified",
                 "ACTION_CONTROLS": ""
+            }
+        },
+        "ROLE": {
+            "LIST": {
+                "TITLE": "Roles",
+                "FINE_TEXT": "List of all the Roles in an Organization.",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "STATUS": "Status",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "DETAIL": {
+                "TAB_PROFILE": {
+                    "TITLE": "User Profile",
+                    "AVATAR": {
+                        "LABEL": "Avatar",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "FIRST_NAME": {
+                        "LABEL": "First Name",
+                        "PLACEHOLDER": "Enter the given name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "LAST_NAME": {
+                        "LABEL": "Last Name",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "SUBDOMAIN": {
+                        "LABEL": "Sub-Domain",
+                        "PLACEHOLDER": "Enter the subdomain name",
+                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "INDUSTRY": {
+                        "LABEL": "Industry",
+                        "PLACEHOLDER": "Select the industry that matches business.",
+                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "WEBSITE": {
+                        "LABEL": "Website",
+                        "PLACEHOLDER": "Enter the website url",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "SEARCH_TAG": {
+                        "LABEL": "Search Tags",
+                        "PLACEHOLDER": "Enter the tag name",
+                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PERSON_NAME": {
+                        "LABEL": "Person's Name",
+                        "PLACEHOLDER": "Enter the biller or contact person's name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "Email will not be publicly displayed and just used to communicate.",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                },
+                "TAB_ACCOUNT": {
+                    "TITLE": "Account",
+                    "USERNAME": {
+                        "LABEL": "Username",
+                        "PLACEHOLDER": "Enter the user name",
+                        "FINE_TEXT": "Email address is the default username.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "LANGUAGE": {
+                        "LABEL": "Language",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "TIMEZONE": {
+                        "LABEL": "Timezone",
+                        "PLACEHOLDER": "Select the timezone",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "CUSTOMIZE": {
+                        "LABEL": "Customize",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name",
+                        "REMOTE_ONLY": {
+                            "LABEL": "Remote Only"
+                        }
+                    }
+                }
+            }
+        },
+        "PREFERENCE": {
+            "LIST": {
+                "TITLE": "Preferences",
+                "FINE_TEXT": "List of all the Preferences in an Organization.",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "TYPE": "Data Type",
+                    "STATUS": "Status",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "DETAIL": {
+                "TAB_PROFILE": {
+                    "TITLE": "User Profile",
+                    "AVATAR": {
+                        "LABEL": "Avatar",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "FIRST_NAME": {
+                        "LABEL": "First Name",
+                        "PLACEHOLDER": "Enter the given name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "LAST_NAME": {
+                        "LABEL": "Last Name",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "SUBDOMAIN": {
+                        "LABEL": "Sub-Domain",
+                        "PLACEHOLDER": "Enter the subdomain name",
+                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "INDUSTRY": {
+                        "LABEL": "Industry",
+                        "PLACEHOLDER": "Select the industry that matches business.",
+                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "WEBSITE": {
+                        "LABEL": "Website",
+                        "PLACEHOLDER": "Enter the website url",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "SEARCH_TAG": {
+                        "LABEL": "Search Tags",
+                        "PLACEHOLDER": "Enter the tag name",
+                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PERSON_NAME": {
+                        "LABEL": "Person's Name",
+                        "PLACEHOLDER": "Enter the biller or contact person's name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "Email will not be publicly displayed and just used to communicate.",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                },
+                "TAB_ACCOUNT": {
+                    "TITLE": "Account",
+                    "USERNAME": {
+                        "LABEL": "Username",
+                        "PLACEHOLDER": "Enter the user name",
+                        "FINE_TEXT": "Email address is the default username.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "LANGUAGE": {
+                        "LABEL": "Language",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "TIMEZONE": {
+                        "LABEL": "Timezone",
+                        "PLACEHOLDER": "Select the timezone",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "CUSTOMIZE": {
+                        "LABEL": "Customize",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name",
+                        "REMOTE_ONLY": {
+                            "LABEL": "Remote Only"
+                        }
+                    }
+                }
             }
         }
     },

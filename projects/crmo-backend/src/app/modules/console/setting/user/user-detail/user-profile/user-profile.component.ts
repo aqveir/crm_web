@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -17,6 +17,7 @@ import { IUser, IResponse, UserService, ILookup, ILookupValue } from 'crmo-lib';
 })
 export class UserProfileComponent  extends BaseComponent implements OnInit, OnChanges {
   @Input('user') objUser: IUser = null;
+  @Input('refresh') boolRefresh: boolean = false;
   @Output('user') user: EventEmitter<IUser> = new EventEmitter<IUser>();
   @Output('save') saveEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -25,7 +26,7 @@ export class UserProfileComponent  extends BaseComponent implements OnInit, OnCh
   public hasError: boolean = false;
 
   public userProfileForm!: FormGroup;
-  
+  public boolIsNewUser: boolean = false;
 
   /**
    * Default constructor
@@ -40,6 +41,7 @@ export class UserProfileComponent  extends BaseComponent implements OnInit, OnCh
   ) { super(); }
 
 
+
   /**
    * Lifecycle Hook's
    */
@@ -49,11 +51,11 @@ export class UserProfileComponent  extends BaseComponent implements OnInit, OnCh
     this.fnInitialize();
   } //Function ends
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.objUser) {
+    if (changes && (changes.objUser || changes.boolRefresh)) {
 
       //Load data on form
       this.fnLoadData();
-    } //End if
+    } //End if   
   } //Function ends
 
   
@@ -108,7 +110,10 @@ export class UserProfileComponent  extends BaseComponent implements OnInit, OnCh
    * Load form data
    */
   private fnLoadData(): void {
-    if (this.objUser) {
+    if (this.objUser && this.userProfileForm) {
+      //check the new user status
+      this.boolIsNewUser = (this.objUser?.hash==null)?true:false;
+
       this.userProfileForm.patchValue({
         avatar: this.objUser.avatar?this.objUser.avatar:'',
         first_name: this.objUser.first_name?this.objUser.first_name:'',
