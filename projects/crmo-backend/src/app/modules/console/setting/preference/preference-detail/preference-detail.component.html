@@ -71,30 +71,54 @@
                                 {{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.FINE_TEXT' | translate }}
                             </span>
 
-                            <div class="checkbox-inline" *ngIf="strDataType=='data_type_number'">
+                            <!-- Type::Number -->
+                            <div class="checkbox-inline mt-4" *ngIf="strDataType=='data_type_number'">
                                 <label class="checkbox">
                                 <input type="checkbox" formControlName="is_minimum" />
-                                <span></span>{{ 'PAGE.PREFERENCE.DETAIL.MINIMUM_VALUE.LABEL' | translate }}</label>
+                                <span></span>{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.MINIMUM_VALUE.LABEL' | translate }}</label>
 
                                 <label class="checkbox">
                                 <input type="checkbox" formControlName="is_maximum" />
-                                <span></span>{{ 'PAGE.PREFERENCE.DETAIL.MAXIMUM_VALUE.LABEL' | translate }}</label>
+                                <span></span>{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.MAXIMUM_VALUE.LABEL' | translate }}</label>
                             </div>
 
-                            <div *ngIf="strDataType=='data_type_lookup'">
+                            <!-- Type::Lookup -->
+                            <div class="mt-4" *ngIf="strDataType=='data_type_lookup'">
                                 <div [formGroup]="preferencesDataForm">
                                     <div class="d-flex flex-row-reverse">
-                                        <span class="cursor-pointer" (click)="fnAddPreferenceDataValue()"><i class="flaticon-plus icon-lg"></i></span>
+                                        <span class="cursor-pointer" (click)="fnAddPreferenceDataValue()"
+                                            title="{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.LOOKUP_DATA.ADD_BTN.LABEL' | translate }}">
+                                            <i class="flaticon2-add icon-lg text-hover-primary"></i>
+                                        </span>
                                     </div>
                                     <ng-container *ngFor="let preferencesDataValueForm of fnPreferencesDataValueForm(); let i = index">
-                                        <div class="d-flex flex-row" [formGroup]="preferencesDataValueForm">
+                                        <div class="d-flex flex-row mb-2" [formGroup]="preferencesDataValueForm">
                                             <input type="hidden" formControlName="value" />
                                             <input class="form-control" type="text" formControlName="display_value"
-                                                placeholder="{{ 'PAGE.PREFERENCE.DETAIL.NAME.PLACEHOLDER' | translate }}"
+                                                placeholder="{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.LOOKUP_DATA.PLACEHOLDER' | translate }}"
                                                 autocomplete="off" />
-                                            <span class="cursor-pointer ml-3 mt-1" (click)="fnRemovePreferenceDataValue(i)"><i class="flaticon-close icon-lg"></i></span>
+                                            <span class="cursor-pointer ml-3 mt-1" (click)="fnRemovePreferenceDataValue(i)" 
+                                                title="{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.LOOKUP_DATA.REMOVE_BTN.LABEL' | translate }}">
+                                                <i class="flaticon2-trash icon-lg text-dark-25 text-hover-danger"></i>
+                                            </span>
                                         </div>
                                     </ng-container>
+                                </div>
+                            </div>
+
+                            <!-- Type::External -->
+                            <div class="d-flex flex-row mt-4" *ngIf="strDataType=='data_type_external'">
+                                <div class="form-group row">
+                                    <div class="input-group col-12">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="flaticon-download"></i></span></div>
+                                        <input class="form-control" type="text" formControlName="keywords"
+                                            placeholder="{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.EXTERNAL_DATA.PLACEHOLDER' | translate }}"
+                                            autocomplete="off" tabindex="2" />                                        
+                                    </div>
+
+                                    <span class="form-text text-muted col-12" 
+                                        innerHTML="{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.EXTERNAL_DATA.FINE_TEXT' | translate }}">
+                                    </span>
                                 </div>
                             </div>
                         </div>

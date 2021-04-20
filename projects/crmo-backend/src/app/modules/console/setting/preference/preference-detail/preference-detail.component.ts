@@ -74,7 +74,12 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
 
     //Load lookup values
     this.objLookup = this._globals.getLookupByKey('data_type');
-    this.listDataTypes = (this.objLookup.values).filter((x: ILookupValue) => {return x.is_active==true});
+    this.listDataTypes = (this.objLookup.values).filter((x: ILookupValue) => {
+      return (
+        (x.is_active==true) &&
+        ((['data_type_string', 'data_type_json'].find((z: string) => {return z==x.key}))==null)
+      )
+    });
 
     //Create User Object
     if (uuid=='new') {
@@ -91,9 +96,7 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
    * Create data
    */
   private fnCreateData(): IPreferenceRequest {
-    let objPreference: IPreferenceRequest;
-
-    return objPreference = {
+    return <IPreferenceRequest> {
       name: null,
       display_value: null,
       type_key: 'industry_type_vanilla'
@@ -196,16 +199,19 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
         is_active: this.objPreference.is_active?this.objPreference.is_active:true,
         is_minimum: this.objPreference.is_minimum?this.objPreference.is_minimum:false,
         is_maximum: this.objPreference.is_maximum?this.objPreference.is_maximum:false,
-        is_multiple: this.objPreference.is_multiple?this.objPreference.is_multiple:false
+        is_multiple: this.objPreference.is_multiple?this.objPreference.is_multiple:false,
+        //external_url:this.objPreference.external_url?this.objPreference.external_url:'',
       });
 
       //Set Data Type
       this.strDataType = this.objPreference.type?.key;
 
       //Enable-Disable some controls
+      this.preferencesForm.controls['is_active'].enable();
       this.preferencesForm.controls['name'].disable();
       this.preferencesForm.controls['is_minimum'].disable();
       this.preferencesForm.controls['is_maximum'].disable();
+      this.preferencesForm.controls['external_url'].disable();
 
       switch (this.strDataType) {
         case 'data_type_number':
@@ -214,8 +220,8 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
           break;
   
         case 'data_type_lookup':
+          //Create data form and set values
           this.preferencesDataForm = this.fnDataForm();
-          //this.preferencesDataForm.addControl()
           this.preferencesForm.addControl('data', this.preferencesDataForm);
           this.preferencesForm.controls['data'].patchValue({
             id: (this.objPreference?.data)?(this.objPreference?.data.id):null,
@@ -243,6 +249,10 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
           } //Loop ends
           break;
       
+        case 'data_type_external':
+          this.preferencesForm.controls['external_url'].enable();
+          break;
+
         default:
           break;
       } //End switch
@@ -269,7 +279,13 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
     this.preferencesForm.controls['is_minimum'].disable();
     this.preferencesForm.controls['is_maximum'].setValue(false);
     this.preferencesForm.controls['is_maximum'].disable();
+    this.preferencesForm.controls['external_url'].setValue('');
+    this.preferencesForm.controls['external_url'].disable();
     this.strDataType = event?.key;
+
+    if (this.preferencesForm.contains('data')) {
+      this.preferencesForm.removeControl('data');        
+    } //End if  
 
     switch (event?.key) {
       case 'data_type_number':
@@ -278,7 +294,15 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
         break;
 
       case 'data_type_lookup':
-        this.preferencesForm.addControl('data', this.fnDataForm());
+        //Create data form and set values
+        if (!this.preferencesForm.contains('data')) {
+          this.preferencesDataForm = this.fnDataForm();
+          this.preferencesForm.addControl('data', this.preferencesDataForm);          
+        } //End if
+        break;
+
+      case 'data_type_external':
+        this.preferencesForm.controls['external_url'].enable();
         break;
     
       default:
@@ -295,28 +319,33 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
     return preferencesDataValues.controls as FormGroup[];
   } //Function ends
 
-  public fnAddPreferenceDataValue(): boolean {
+
+  /**
+   * Add Value Form to the Preferences Form
+   */
+  public fnAddPreferenceDataValue(): void {
     try {
-      this.boolRefresh = true;
-
+      //Add new data value form to the form array
       let preferenceDataValues = this.preferencesDataForm.controls.values as FormArray;
-      preferenceDataValues.controls.push(this.fnDataForm());
+      preferenceDataValues.controls.push(this.fnDataValueForm());
 
-      return true;
+      //Assign the value back
+      this.preferencesDataForm.controls.values = preferenceDataValues;
     } catch (error) {
       throw error;
     } //Try-catch ends 
-  }
+  } //FUnction ends
 
 
-  public fnRemovePreferenceDataValue(index): boolean {
+  /**
+   * Remove the Data Value by Position Index
+   * 
+   * @param index 
+   */
+  public fnRemovePreferenceDataValue(index): void {
     try {
-      this.boolRefresh = true;
-
       let preferenceDataValues = this.preferencesDataForm.controls.values as FormArray;
       preferenceDataValues.removeAt(index);
-
-      return true;
     } catch (error) {
       throw error;
     } //Try-catch ends 
@@ -334,10 +363,11 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       type_key: ['', [ Validators.required ]],
       keywords: [''],
       order: [0, [ Validators.min(0)]],
-      is_active: [true],
-      is_minimum: [false],
-      is_maximum: [false],
-      is_multiple: [false]
+      is_active: [{value: true, disable: true}],
+      is_minimum: [{value: false, disable: true}],
+      is_maximum: [{value: false, disable: true}],
+      is_multiple: [{value: false, disable: true}],
+      external_url: [{value: '', disable: true}]
     });
   } //Function ends
   private fnDataForm(): FormGroup {

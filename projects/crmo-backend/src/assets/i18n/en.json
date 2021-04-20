@@ -543,7 +543,26 @@
                     "LABEL": "Data Type",
                     "PLACEHOLDER": "Select the data type",
                     "FINE_TEXT": "For dropdown/multiselect type, do provide the possible values",
-                    "VALIDATION_ERROR": ""
+                    "VALIDATION_ERROR": "",
+                    "MINIMUM_VALUE": {
+                        "LABEL": "Mininum Value"
+                    },
+                    "MAXIMUM_VALUE": {
+                        "LABEL": "Maximum Value"
+                    },
+                    "LOOKUP_DATA": {
+                        "PLACEHOLDER": "",
+                        "ADD_BTN": {
+                            "LABEL": "Add Data Value"
+                        },
+                        "REMOVE_BTN": {
+                            "LABEL": "Remove Data Value"
+                        }
+                    },
+                    "EXTERNAL_DATA": {
+                        "PLACEHOLDER": "Enter external data link",
+                        "FINE_TEXT":"The external link should return a JSON data.</br>The json array should have below given structure."
+                    }
                 },                
                 "COLUMN_NAME": {
                     "LABEL": "External Data Reference",
@@ -568,12 +587,6 @@
                     "PLACEHOLDER": "Select the data type",
                     "FINE_TEXT": "For dropdown/multiselect type, do provide the possible values",
                     "VALIDATION_ERROR": ""
-                },
-                "MINIMUM_VALUE": {
-                    "LABEL": "Mininum Value"
-                },
-                "MAXIMUM_VALUE": {
-                    "LABEL": "Maximum Value"
                 }
             }
         }
