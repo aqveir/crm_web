@@ -9,8 +9,6 @@ import { LayoutService } from '../../../../core';
   templateUrl: './subheader5.component.html',
 })
 export class Subheader5Component implements OnInit {
-  public cacheSVG: boolean = false;
-  
   subheaderCSSClasses = '';
   subheaderContainerCSSClasses = '';
   subheaderMobileToggle = false;

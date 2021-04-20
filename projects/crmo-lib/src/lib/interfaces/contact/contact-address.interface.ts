@@ -1,4 +1,5 @@
 import { ICountry } from '../common/country.interface';
+import { INote } from '../note/note.interface';
 
 export interface IContactAddress {
     id: number;
@@ -6,16 +7,18 @@ export interface IContactAddress {
     address1: string;
     address2: string;
     locality: string;
-    apartment: string;
-    society: string;    
     city: string;
     zipcode: string;
     level: any;
-    notes: [];
+    notes: INote[];
     longitude: number;
     latitude: number;
     is_default: boolean; 
     is_verified: boolean;
     is_active: boolean;
     country: ICountry;
+
+    //Used in Order Management Module
+    apartment: string;
+    society: string;     
 }

@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './_layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WorkQueueComponent } from './work-queue/work-queue.component';
-import { ContactListComponent } from './contact-list/contact-list.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { EventListComponent } from './event-list/event-list.component';
 
@@ -12,9 +11,11 @@ const routes: Routes = [
   { path: '', component: LayoutComponent, children: [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'queue', component: WorkQueueComponent },
-    { path: 'contact', component: ContactListComponent },
-    { path: 'task', component: TaskListComponent },
-    { path: 'event', component: EventListComponent },
+    { path: 'tasks', component: TaskListComponent },
+    { path: 'events', component: EventListComponent },
+    { path: 'account', loadChildren: () => import('../console/account/account.module').then(m => m.AccountModule) },
+    { path: 'contact', loadChildren: () => import('../console/contact/contact.module').then(m => m.ContactModule) },
+    { path: 'setting', loadChildren: () => import('../console/setting/setting.module').then(m => m.SettingModule) },
     { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   ]}
 ];

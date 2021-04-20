@@ -15,31 +15,21 @@
     <div class="d-flex flex-row flex-column-fluid page">
       <!-- begin:: Aside Left -->
       <ng-container *ngIf="boolAsideSelfDisplay">
-        <!--begin::STATIC Aside-->
-        <!-- <app-aside
-          #ktAside
-          id="kt_aside"
-          class="aside aside-left d-flex flex-column flex-row-auto"
-          [ngClass]="cssAside"
-        ></app-aside> -->
-        <!--end::STATIC Aside-->
-
-        <!--begin::DYNAMIC Aside-->
-        <app-aside-dynamic #ktAside id="kt_aside"
-          class="aside aside-left d-flex flex-column flex-row-auto"
-          [ngClass]="cssAside"></app-aside-dynamic>
-        <!--end::DYNAMIC Aside-->
+        <!--begin::Aside-->
+        <app-aside #ktAside id="kt_aside" class="aside aside-left d-flex" [ngClass]="cssAside"></app-aside>
+        <!--end::Aside-->
       </ng-container>
       <!-- end:: Aside Left -->
 
       <!--begin::Wrapper-->
       <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
         <!-- begin:: Header -->
-        <app-header #ktHeader id="kt_header" class="header" [ngClass]="headerCSSClasses"></app-header>
+        <!-- <app-header #ktHeader id="kt_header" class="header" [ngClass]="headerCSSClasses"></app-header> -->
         <!-- end:: Header -->
 
         <!-- begin:: Content -->
-        <div id="kt_content" class="content d-flex flex-column flex-column-fluid" [ngClass]="cssContent">
+        <div id="kt_content" class="content d-flex flex-column flex-column-fluid" 
+          [ngClass]="cssContent" style="min-height: calc(100vh - 70px);">
           <!-- begin:: Content Head -->
           <ng-container *ngIf="boolSubHeaderDisplay">
             <app-subheader-wrapper></app-subheader-wrapper>
@@ -66,12 +56,14 @@
         </div>
         <!-- end:: Content -->
 
+        <!--begin::Footer-->
         <ng-container *ngIf="boolFooterDisplay">
-          <!--begin::Footer-->
-          <app-footer id="kt_footer" class="footer bg-white py-4 d-flex flex-lg-column w-100"
+          <!--doc: add "bg-white" class to have footer with solod background color-->
+          <app-footer id="kt_footer" class="footer py-4 d-flex flex-lg-column"
             [ngClass]="cssFooter"></app-footer>
-          <!--end::Footer-->
         </ng-container>
+        <!--end::Footer-->
+
       </div>
       <!--end::Wrapper-->
     </div>
@@ -100,13 +92,14 @@
     </ng-container>
 
     <ng-container *ngIf="extrasUserOffcanvasDisplay">
-      <!-- <app-user-offcanvas></app-user-offcanvas> -->
+      <app-user-offcanvas></app-user-offcanvas>
     </ng-container>
 
+    <!-- This is the floating toolbar on RH side -->
     <app-toolbar></app-toolbar>
 
     <ng-container *ngIf="boolExtrasScroll2TopDisplay">
-      <!-- <app-scroll-top></app-scroll-top> -->
+      <app-scroll-top></app-scroll-top>
     </ng-container>
     <!--end::Offcanvases-->
   </div>
@@ -114,7 +107,7 @@
 
 <ng-template #blankLayout>
   <div class="d-flex flex-column flex-root">
-    <!-- <router-outlet></router-outlet> -->
+    <router-outlet></router-outlet>
   </div>
 </ng-template>
 

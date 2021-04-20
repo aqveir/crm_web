@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Globals } from '../../../app.global';
 
 @Component({
   selector: 'crmo-backend-dashboard',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  public claim: any;
+
+  constructor(private _globals: Globals) { }
 
   ngOnInit(): void {
+    this.claim = this._globals.getClaim();
   }
 
 }

@@ -7,7 +7,7 @@ import { LayoutService } from '../../../../../_metronic/core';
   styleUrls: ['./header-mobile.component.scss'],
 })
 export class HeaderMobileComponent implements OnInit, AfterViewInit {
-  headerLogo = '';
+  headerLogo: string = '';
   boolAsideSelfDisplay = true;
   headerMenuSelfDisplay = true;
   headerMobileClasses = '';
@@ -46,6 +46,7 @@ export class HeaderMobileComponent implements OnInit, AfterViewInit {
         result = 'logo-dark.png';
       }
     }
-    return `./assets/media/logos/${result}`;
+    return './assets/media/logos/logo-letter-2.png';
+    //return `./assets/media/logos/${result}`;
   }
 }

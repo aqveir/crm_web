@@ -1,24 +1,13 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
-  OnDestroy,
-} from '@angular/core';
-import {
-  Router,
-  NavigationStart,
-  RouteConfigLoadStart,
-  RouteConfigLoadEnd,
-  NavigationEnd,
-  NavigationCancel,
-} from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Router, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd,
+  NavigationEnd, NavigationCancel } from '@angular/router';
+import { Subscription, Observable, BehaviorSubject } from 'rxjs';  
+
 import { LayoutService } from '../../../../../_metronic/core';
 import KTLayoutHeader from '@asset-backend/js/layout/base/header';
 import KTLayoutHeaderMenu from '@asset-backend/js/layout/base/header-menu';
 import { KTUtil } from '@asset-backend/js/components/util';
-import { Subscription, Observable, BehaviorSubject } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -38,13 +27,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('ktHeaderMenu', { static: true }) ktHeaderMenu: ElementRef;
   loader$: Observable<number>;
 
-  private loaderSubject: BehaviorSubject<number> = new BehaviorSubject<number>(
-    0
-  );
+  private loaderSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
   constructor(private layout: LayoutService, private router: Router) {
+
     this.loader$ = this.loaderSubject;
+
     // page progress bar percentage
     const routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -68,6 +57,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 300);
       }
     });
+    
     this.unsubscribe.push(routerSubscription);
   }
 
@@ -113,11 +103,11 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     KTUtil.ready(() => {
-      // Init Desktop & Mobile Headers
-      KTLayoutHeader.init('kt_header', 'kt_header_mobile');
-      
-      // Init Header Menu
-      KTLayoutHeaderMenu.init('kt_header_menu', 'kt_header_menu_wrapper');
+      // // Init Desktop & Mobile Headers
+      // KTLayoutHeader.init('kt_header', 'kt_header_mobile');
+
+      // // Init Header Menu
+      // KTLayoutHeaderMenu.init('kt_header_menu', 'kt_header_menu_wrapper');
     });
   }
 

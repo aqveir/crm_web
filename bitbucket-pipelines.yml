@@ -1,0 +1,96 @@
+#  CRMO Web NodeJS build
+
+image: node:10.15.3
+
+clone:
+  lfs: true
+
+definitions: 
+  caches:
+    submodule: ellaisys-lib
+
+  steps:
+    - step: &load-submodules
+        name: Load GIT Submodules
+        caches:
+          - submodule
+        script:
+          - git submodule update --init --recursive
+
+    - step: &install-angular
+        name: Install Anugular & Project Dependencies
+        caches:
+          - node
+        script:
+          - cd /
+          - node -v
+          - npm -v
+          - npm install -g @angular/cli@11.0.7
+          - echo "Angular Installed"
+          - npm install
+          - echo "Project Dependencies installed"
+
+    - step: &code-linting
+        name: Code linting
+        caches:
+          - node
+        script:
+          - npm install eslint
+
+    - step: &deploy
+        name: Deploy to AWS S3
+        image: atlassian/pipelines-awscli
+        script:
+          - cd dist/
+          - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/dev
+          - echo "Uploaded to AWS S3 WEB"
+
+pipelines:          
+  branches:
+    master:
+      - parallel:
+        - step:
+            name: Build and Test
+            script:
+              - echo "Starting CRM Omni PROD Build"
+              - npm run build:crmo-build-all
+              - echo "Ng Build Complete"
+              - cp .htaccess dist
+              - echo "HTACCESS Copied"
+            artifacts:
+              - dist/**
+        - step:
+            name: Code linting
+            script:
+              - npm install eslint
+              - npx eslint .
+            caches:
+              - node  
+    
+    phase1.0:
+      - step: 
+          <<: *load-submodules
+
+      - step: *install-angular
+
+      - step:
+          name: Build and Test
+          caches:
+            - submodule
+            - node
+          script:
+            - echo "Starting CRM Omni Dev Build"
+            - npm run ng build -prod ellaisys-lib
+            - echo "EllaiSys Library Build Complete"
+            - npm run ng build -prod crmo-lib
+            - echo "CRMO Library Build Complete"
+            - npm run ng build -prod --base-href=/$NG_BACKEND_BASE_HREF/ crmo-backend
+            - echo "Ng Build Complete"
+            - cp .htaccess.dev dist/.htaccess
+            - echo "HTACCESS Copied"
+          artifacts:
+            - dist/**
+
+      - step: *code-linting
+
+      - step: *deploy

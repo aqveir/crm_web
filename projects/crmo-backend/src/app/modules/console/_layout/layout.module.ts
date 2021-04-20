@@ -6,24 +6,33 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import {
   NgbDropdownModule,
   NgbProgressbarModule,
+  NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
-//import { TranslationModule } from '../modules/i18n/translation.module';
 
+//Application Module
+import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
 import { CoreModule } from '../../../_metronic/core';
 import { SubheaderModule } from '../../../_metronic/partials/layout/subheader/subheader.module';
 
 import { LayoutComponent } from './layout.component';
 import { ScriptsInitComponent } from './init/scipts-init/scripts-init.component';
 import { HeaderMobileComponent } from './components/header-mobile/header-mobile.component';
-import { AsideComponent } from './components/aside/aside.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderMenuComponent } from './components/header/header-menu/header-menu.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { ExtrasModule } from '../../../_metronic/partials/layout/extras/extras.module';
 import { LanguageSelectorComponent } from './components/topbar/language-selector/language-selector.component';
-import { AsideDynamicComponent } from './components/aside-dynamic/aside-dynamic.component';
 import { HeaderMenuDynamicComponent } from './components/header/header-menu-dynamic/header-menu-dynamic.component';
+
+import { AsideComponent } from './components/aside/aside.component';
+import { AsideStaticComponent } from './components/aside/aside-static/aside-static.component';
+import { AsideSearchComponent } from './components/aside/aside-search/aside-search.component';
+import { AsideDynamicComponent } from './components/aside/aside-dynamic/aside-dynamic.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+
+//Directives
+import { TableCellSortableDirective } from './directives/table-cell-sortable/table-cell-sortable.directive';
 
 
 @NgModule({
@@ -38,17 +47,35 @@ import { HeaderMenuDynamicComponent } from './components/header/header-menu-dyna
     TopbarComponent,
     LanguageSelectorComponent,
     AsideDynamicComponent,
+    AsideStaticComponent,
+    AsideSearchComponent,
     HeaderMenuDynamicComponent,
+
+    //Common Directives
+    TableCellSortableDirective,
+
+    //CRMO Custom Component
+    SpinnerComponent,
   ],
   imports: [
+    //DropdownMenusModule,
+
     CommonModule,
     RouterModule,
 
-    //TranslationModule,
     InlineSVGModule,
     ExtrasModule,
     NgbDropdownModule,
     NgbProgressbarModule,
+    NgbTooltipModule,
+
+    //EllaiSys Library
+    TranslateModule,
+    NotificationModule,
+    ValidatorModule,
+    PipeModule,
+    LoggerModule,
+
     CoreModule,
     SubheaderModule,
   ],
@@ -63,7 +90,15 @@ import { HeaderMenuDynamicComponent } from './components/header/header-menu-dyna
     TopbarComponent,
     LanguageSelectorComponent,
     AsideDynamicComponent,
+    AsideStaticComponent,
+    AsideSearchComponent,
     HeaderMenuDynamicComponent,
+
+    //Common Directives
+    TableCellSortableDirective,
+
+    //CRMO Custom Component
+    SpinnerComponent,
   ]
 })
 export class LayoutModule { }

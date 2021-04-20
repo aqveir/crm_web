@@ -22,7 +22,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   public cssContentContainer: string = null;
   public cssFooter: string = null;
 
-  public boolSubHeaderDisplay: boolean = true;
+  public boolSubHeaderDisplay: boolean = false;
   public boolAsideSelfDisplay: boolean = true;
   public boolContentExtended: boolean = false;
   public boolFooterDisplay: boolean = false;
@@ -57,7 +57,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // build view by layout config settings
     this.selfLayout = this.layout.getProp('self.layout');
-    
     this.cssAside = this.layout.getStringCSSClasses('aside');
     this.cssContent = this.layout.getStringCSSClasses('content');
     this.cssContentContainer = this.layout.getStringCSSClasses('content_container');

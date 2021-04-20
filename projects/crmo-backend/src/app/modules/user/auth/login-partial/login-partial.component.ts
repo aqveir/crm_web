@@ -2,14 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+//Application global files
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { BaseComponent } from '../../../base.component';
+
+//Application CRMO Library
+import { IRequestUserLogin, IResponseUserLogin, UserAuthService } from 'crmo-lib';
+import { NotificationService } from 'ellaisys-lib';
+
+
 @Component({
   selector: 'crmo-backend-login-partial',
   templateUrl: './login-partial.component.html',
   styleUrls: ['./login-partial.component.scss']
 })
-export class LoginPartialComponent implements OnInit {
+export class LoginPartialComponent extends BaseComponent implements OnInit {
   //Common attributes
-  public boolLoading: boolean = false;
+  public isLoading: boolean = false;
 
   public loginForm!: FormGroup;
   public hasError: boolean = false;
@@ -20,11 +29,12 @@ export class LoginPartialComponent implements OnInit {
    * Default constructor
    */
   constructor(
-    //private _globals: Globals,
+    private _globals: Globals,
     private _router: Router,
     private _formBuilder: FormBuilder,
-    //private _custauthService: CustomerAuthService
-  ) { }
+    private _userAuthService: UserAuthService,
+    private _notification : NotificationService
+  ) { super(); }
 
 
   /**
@@ -42,49 +52,65 @@ export class LoginPartialComponent implements OnInit {
    */
   private fnInitialize(): void {
     //Load form
-    this.fnLoginForm();
+    this.fnInitializeForm();
 
   } //Function ends
 
+
   /**
-   * Authenticate the Customer
+   * Authenticate the User
    */
   public fnAuthenticateUserAction(): boolean {
     try {
       //Check form validity
       this.loginForm.updateValueAndValidity();
-      if (this.loginForm.invalid) { /*this.fnRaiseErrors(this.loginForm);*/ return false; }
+      if (this.loginForm.invalid) { 
+        this.fnRaiseErrors(this.loginForm); 
 
-      // let objLoginForm: RequestCustomerLogin = this.loginForm.value;
-      // this.boolLoading = true;
-      // // this._logger.log('Your log message goes here');
-      // this._custauthService.login(objLoginForm)
-      //   .subscribe((response: ResponseCustomerLogin) => {
-      //     //Save the data into globals
-      //     this._globals.setClaim(response);
+        return false; 
+      } //End if
 
-      //     //Stop loader
-      //     this.boolLoading = false;
+      let objFormData: IRequestUserLogin = this.loginForm.value;
+      this.isLoading = true;
+      this._userAuthService.login(objFormData)
+        .subscribe((response: IResponseUserLogin) => {
+          //Save the data into globals
+          this._globals.setClaim(response);
 
-      //     //Navidate to my account page
-      //     this._router.navigate(['/user/my-account']);
-      //   },() => {});
-        // .then ((response) => {
-        //   // this._logger.log('Your log message goes here');
-        //   // this._logger.debug("Your Debug message goes here");
-        //   // this._logger.warn("Your Warning message goes here");
+          //Stop loader
+          this.isLoading = false;
 
-        //   // this._router.navigate(['home']);
-        // })
-        // .catch()
-        // .finally();
+          //Load the application data
+          this._globals.fnLoadApplicationData();
+
+          //Navidate to my account page
+          this._router.navigate(['/secure']);
+        },(error) => {
+          //Stop loader
+          this.isLoading = false;
+
+          throw error;
+        });
+
         return true;
     } catch (error) {
       //Stop loader
-      this.boolLoading = false;
-      return false;
+      this.isLoading = false;
 
-      // this._objError = this._error.handleError(error);
+      throw error;
+    } //Try-catch ends
+  } //Function ends
+
+
+
+  /**
+   * Authenticate the User with Social login
+   */
+  public fnSocialAuthenticateUserAction(provider: string): void {
+    try {
+      this._notification.error('success', 'now it works');
+    } catch(error) {
+
     } //Try-catch ends
   } //Function ends
 
@@ -99,14 +125,13 @@ export class LoginPartialComponent implements OnInit {
 
 
   /**
-   * Login Reactive Form
+   * Initialize Reactive Form
    */
-  private fnLoginForm() {
+  private fnInitializeForm() {
     this.loginForm = this._formBuilder.group({
-      email: ['amit.dhongde@gmail.com', Validators.required],
-      password: ['12345678', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
+      username: ['admin@ellaisys.com', Validators.required],
+      password: ['password', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
       remember_me: true,
-      country_idd: ['91'],
       device_id: ['xxxx']
     });
   } //Function ends

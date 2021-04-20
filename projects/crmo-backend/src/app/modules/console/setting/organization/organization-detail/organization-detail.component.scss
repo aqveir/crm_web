@@ -1,0 +1,7 @@
+.card-body > .tab-pane.fade {
+    display: none;
+}
+
+.card-body > .tab-pane.fade.active {
+    display: block;
+}

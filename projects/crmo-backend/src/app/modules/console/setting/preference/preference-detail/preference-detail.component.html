@@ -1,0 +1,166 @@
+<!--begin::Card-->
+<div class="card card-custom mb-5">
+    <form class="form" id="kt_user_profile_form" novalidate="novalidate"
+        [formGroup]="preferencesForm" (ngSubmit)="fnSaveAction()" autocomplete="off">    
+        <!--begin::Card header-->
+        <div class="card-header border-0 py-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label font-weight-bolder text-dark">
+                    {{ 'PAGE.PREFERENCE.DETAIL.TITLE' | translate }}
+                </span>
+            </h3>
+        </div>
+        <!--end::Card header-->
+
+        <!--begin::Card body-->
+        <div class="card-body">
+            <div class="row">{{ objPreference|json }}</div>
+
+            <!--begin::Row-->
+            <div class="row" style="min-height: calc(100vh - 330px);">    
+                <div class="col-xl-6 my-2">
+                    <!--begin::Group-->
+                    <div class="form-group row">
+                        <label class="col-form-label col-3 text-lg-right text-left">
+                            {{ 'PAGE.PREFERENCE.DETAIL.NAME.LABEL' | translate }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="name"
+                            placeholder="{{ 'PAGE.PREFERENCE.DETAIL.NAME.PLACEHOLDER' | translate }}"
+                            autocomplete="off" tabindex="1" autofocus />
+                            <span class="form-text text-muted">
+                                {{ 'PAGE.PREFERENCE.DETAIL.NAME.FINE_TEXT' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                    <!--end::Group-->
+                    
+                    <!--begin::Group-->
+                    <div class="form-group row">
+                        <label class="col-form-label col-3 text-lg-right text-left">
+                            {{ 'PAGE.PREFERENCE.DETAIL.DESCRIPTION.LABEL' | translate }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-9">
+                            <textarea class="form-control" formControlName="display_value" rows="4"
+                                placeholder="{{ 'PAGE.PREFERENCE.DETAIL.DESCRIPTION.PLACEHOLDER' | translate }}"
+                                autocomplete="off" tabindex="2"></textarea>
+                            <span class="form-text text-muted">
+                                {{ 'PAGE.PREFERENCE.DETAIL.DESCRIPTION.FINE_TEXT' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                    <!--end::Group-->
+
+                    <!--begin::Group-->
+                    <div class="form-group row">
+                        <label class="col-form-label col-3 text-lg-right text-left">
+                            {{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.LABEL' | translate }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-9">
+                            <ng-select class="form-control" #selectDataType formControlName="type_key"
+                                placeholder="{{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.PLACEHOLDER' | translate }}"
+                                [items]="listDataTypes" bindLabel="display_value" bindValue="key"
+                                (change)="fnChangeDataType($event)"
+                                [searchable]="false" autocomplete="off" tabindex="3">
+                            </ng-select>
+
+                            <span class="form-text text-muted">
+                                {{ 'PAGE.PREFERENCE.DETAIL.DATA_TYPE.FINE_TEXT' | translate }}
+                            </span>
+
+                            <div class="checkbox-inline" *ngIf="strDataType=='data_type_number'">
+                                <label class="checkbox">
+                                <input type="checkbox" formControlName="is_minimum" />
+                                <span></span>{{ 'PAGE.PREFERENCE.DETAIL.MINIMUM_VALUE.LABEL' | translate }}</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox" formControlName="is_maximum" />
+                                <span></span>{{ 'PAGE.PREFERENCE.DETAIL.MAXIMUM_VALUE.LABEL' | translate }}</label>
+                            </div>
+
+                            <div *ngIf="strDataType=='data_type_lookup'">
+                                <div [formGroup]="preferencesDataForm">
+                                    <div class="d-flex flex-row-reverse">
+                                        <span class="cursor-pointer" (click)="fnAddPreferenceDataValue()"><i class="flaticon-plus icon-lg"></i></span>
+                                    </div>
+                                    <ng-container *ngFor="let preferencesDataValueForm of fnPreferencesDataValueForm(); let i = index">
+                                        <div class="d-flex flex-row" [formGroup]="preferencesDataValueForm">
+                                            <input type="hidden" formControlName="value" />
+                                            <input class="form-control" type="text" formControlName="display_value"
+                                                placeholder="{{ 'PAGE.PREFERENCE.DETAIL.NAME.PLACEHOLDER' | translate }}"
+                                                autocomplete="off" />
+                                            <span class="cursor-pointer ml-3 mt-1" (click)="fnRemovePreferenceDataValue(i)"><i class="flaticon-close icon-lg"></i></span>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Group-->
+                </div>
+
+                <div class="col-xl-6 my-2">
+                    <!--begin::Group-->
+                    <div class="form-group row">
+                        <label class="col-form-label col-3 text-lg-right text-left">
+                            {{ 'PAGE.PREFERENCE.DETAIL.COLUMN_NAME.LABEL' | translate }}
+                        </label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="column_name"
+                            placeholder="{{ 'PAGE.PREFERENCE.DETAIL.COLUMN_NAME.PLACEHOLDER' | translate }}"
+                            autocomplete="off" tabindex="2" />
+                            <span class="form-text text-muted">
+                                {{ 'PAGE.PREFERENCE.DETAIL.COLUMN_NAME.FINE_TEXT' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                    <!--end::Group-->
+
+                    <!--begin::Group-->
+                    <div class="form-group row">
+                        <label class="col-form-label col-3 text-lg-right text-left">
+                            {{ 'PAGE.PREFERENCE.DETAIL.KEYWORDS.LABEL' | translate }}
+                        </label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="keywords"
+                                placeholder="{{ 'PAGE.PREFERENCE.DETAIL.KEYWORDS.PLACEHOLDER' | translate }}"
+                                autocomplete="off" tabindex="2" />
+                            <span class="form-text text-muted">
+                                {{ 'PAGE.PREFERENCE.DETAIL.KEYWORDS.FINE_TEXT' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                    <!--end::Group-->
+
+                    <!--begin::Group-->
+                    <div class="form-group row align-items-center">
+                        <label class="col-form-label col-3 text-lg-right text-left">
+                            {{ 'PAGE.PREFERENCE.DETAIL.CONFIGURATION.LABEL' | translate }}
+                        </label>
+                        <div class="col-9 col-form-label">
+                            <div class="checkbox-list">
+                                <label class="checkbox">
+                                <input type="checkbox" formControlName="is_multiple" />
+                                <span></span>{{ 'PAGE.PREFERENCE.DETAIL.CONFIGURATION.MULTI_SELECT.LABEL' | translate }}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Group-->
+                </div>
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--begin::Card body-->
+        
+        <div class="card-footer">
+            <div class="row">{{ preferencesForm.value |json }}</div>
+
+            <button type="submit" class="btn btn-primary mr-2" tabindex="8">{{ 'COMMON.LABEL.SAVE' | translate }}</button>
+            <button type="reset" class="btn btn-secondary" tabindex="9">{{ 'COMMON.LABEL.CANCEL' | translate }}</button>
+        </div>
+    </form>
+</div>
+<!--end::Card-->

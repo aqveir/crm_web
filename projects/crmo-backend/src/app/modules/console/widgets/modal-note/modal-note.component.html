@@ -1,0 +1,43 @@
+<div class="modal-dialog m-0" role="document">
+    <div class="modal-content">
+        <div class="card card-custom">
+            <!--begin::Header-->
+            <div class="card-header border-0">
+                <h3 class="card-title font-weight-bold text-dark">
+                    {{ 'MODAL.NOTE.TITLE' | translate }}
+                </h3>
+            </div>
+            <!--end::Header-->
+
+            <!--begin::Body-->
+            <div class="card-body pt-2">
+                <form class="form" id="kt_form_1" novalidate="novalidate"
+                    [formGroup]="noteForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
+                    <div class="form-group">
+                        <textarea class="form-control border-0" rows="8" formControlName="note"
+                            id="kt_forms_widget_1_input"
+                            placeholder="{{ 'MODAL.NOTE.FORM.TEXT.PLACEHOLDER' | translate }}"
+                            autocomplete="off" tabindex="1" autofocus></textarea>
+
+                        <span *ngIf="noteForm.controls.note.invalid && (noteForm.controls.note.dirty || noteForm.controls.note.touched)">
+                            {{ noteForm.controls.note.errors | json }}
+                        </span>
+                    </div>
+
+                    <div class="mt-10">
+                        <div class="d-flex flex-lg-row-reverse">
+                            <button type="submit" class="btn btn-primary font-weight-bold" [ngClass]="{ 'spinner spinner-white spinner-left': boolLoading }" data-style="expand-left">
+                                {{ 'COMMON.LABEL.SAVE' | translate }}
+                            </button>
+                            <button type="button" class="btn btn-clean font-weight-bold mr-2" (click)="fnCloseModal();">
+                                {{ 'COMMON.LABEL.CANCEL' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--end::Body-->
+        </div>
+    </div>
+</div>
+                

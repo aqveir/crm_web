@@ -5,7 +5,7 @@ export const DynamicHeaderMenuConfig = {
       root: true,
       alignment: 'left',
       page: '/dashboard',
-      translate: 'MENU.DASHBOARD',
+      translate: 'MENU.DASHBOARD.LABEL',
     },
     {
       title: 'Builder',
@@ -388,43 +388,37 @@ export const DynamicHeaderMenuConfig = {
       ]
     },
     {
-      title: 'Setting',
+      title: 'setting',
       root: true,
       alignment: 'left',
       toggle: 'click',
       page: '',
-      //translate: 'MENU.SETTING',
+      translate: 'MENU.SETTING.LABEL',
       submenu: [
         {
-          title: 'Users',
+          title: 'organization',
           bullet: 'dot',
           icon: 'flaticon-business',
           permission: 'accessToECommerceModule',
-          page: '/setting/user',
-          submenu: [
-            {
-              title: 'Customers',
-              page: '/ecommerce/customers'
-            },
-            {
-              title: 'Products',
-              page: '/ecommerce/products'
-            },
-          ]
+          page: '/secure/setting/organization',
+          translate: 'MENU.SETTING.ORGANIZATION.LABEL',
         },
         {
           title: 'User Management',
           bullet: 'dot',
           icon: 'flaticon-user',
           page: '',
+          translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',
           submenu: [
             {
-              title: 'Users',
-              page: '/user-management/users'
+              title: 'users',
+              page: 'organization/:ohash/user',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
             },
             {
-              title: 'Roles',
-              page: '/user-management/roles'
+              title: 'roles',
+              page: '/user-management/roles',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
             }
           ]
         },

@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="d-flex flex-lg-row-reverse mb-2">
+        <button class="btn btn-light-primary font-weight-bold" (click)="fnAddEditNote();">Add Note</button>
+    </div>
+
+    <!--begin::Timeline-->
+    <div class="timeline timeline-justified timeline-4" *ngIf="objContact?.notes?.length>0">
+        <div class="timeline-bar"></div>
+        <div class="timeline-items">
+            
+            <div class="timeline-item" *ngFor="let objNote of objContact?.notes;">
+                <div class="timeline-badge">
+                    <div class="bg-primary"></div>
+                </div>
+
+                <div class="timeline-label text-primary">
+                    <span class="text-primary font-weight-bold">{{ objNote?.last_updated_at }}</span>
+                </div>
+
+                <div class="timeline-content">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <div class="mr-2">
+                            <span class="text-muted">Owner:</span>
+                            <span class="text-dark-75 text-hover-primary font-weight-bold ml-2">
+                                {{ objNote?.owner?.full_name }}
+                            </span>
+                        </div>
+
+                        <div class="dropdown ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                            <a href="#" class="btn btn-icon btn-icon-dark-25 btn-hover-icon-primary border-0 font-weight-bold btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="fnAddEditNote(objNote);">
+                                <i class="flaticon-edit icon-md"></i>
+                            </a>
+                            <a href="#" class="btn btn-icon btn-icon-dark-25 btn-hover-icon-danger border-0 font-weight-bold btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="flaticon-delete icon-md"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <p class="p-0 text-justify">{{ objNote.note }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Timeline-->
+</div>

@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { HttpParams } from '@angular/common/http';
 
 //Framework files
-import { HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
-
-//Interfaces
-import { IResponse } from '../../interfaces/common/response.interface';
-
-//Models
-import { ResponseContact } from '../../models/contact/contact.model';
+import { HttpService } from 'ellaisys-lib';
 
 //Services
 import { BaseService } from '../base.service';
+import { IContact } from '../../interfaces/contact/contact.interface';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,28 +17,85 @@ export class ContactService extends BaseService {
     //Default Constructor
     constructor(
         private _httpService: HttpService,
-        private _localStorageService: LocalStorageService,
-        private _sessionStorageService: SessionStorageService
     ) { super(); }
 
 
     /**
-     * Get information for the existing Contact
+     * Get All Contacts
      */
-    public get(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            this._httpService.get('contact')
-            .then((response: any) => {
-                if (response.status=='success') {
-                    let data: ResponseContact = response.data;
-                    observer.next(data);                    
-                } else {
-                    observer.error(response);
-                } //End if
-            })
-            .catch((error: any) =>  { observer.error(error); })
-            .finally();
-        });
+    public getAll(_viewName?: string, _filter?: string, _page: string='1', _size: string='10', _payload: any=null): Observable<any> {
+
+      //Set HTTP Params
+      let params = new HttpParams()
+      .set('view', _viewName)
+      .set('filter', _filter)
+      .set('page', _page)
+      .set('size', _size);
+
+      return new Observable((observer: Observer<any>) => {
+        this._httpService.post('contact/fetch', _payload, false, false, params)
+          .then((response: any) => {
+            let data: IContact[] = response.data;
+            observer.next(data); 
+          })                          
+          .catch((error: any) =>  { observer.error(error); })
+          .finally();
+      });
+    } //Function ends
+
+
+    /**
+     * Get existing Contact information by Identifier
+     * 
+     * @param cHash string
+     */
+    public get(cHash: string): Observable<any> {
+      return new Observable((observer: Observer<any>) => {
+          this._httpService.get('contact/' + cHash)
+          .then((response: any) => {
+            let data: IContact = response.data;
+            observer.next(data); 
+          })
+          .catch((error: any) =>  { observer.error(error); })
+          .finally();
+      });
+    } //Function ends
+
+
+    /**
+     * Create Contact
+     * 
+     * @param data IContact
+     */
+    public create(data: IContact): Observable<any> {
+      return new Observable((observer: Observer<any>) => {
+          this._httpService.post('contact', data)
+          .then((response: any) => {
+            let data: IContact = response.data;
+            observer.next(data); 
+          })
+          .catch((error: any) =>  { observer.error(error); })
+          .finally();
+      });
+    } //Function ends
+
+
+    /**
+     * Update existing Contact Information
+     * 
+     * @param cHash string
+     * @param data IContact
+     */
+    public update(cHash: string, data: IContact): Observable<any> {
+      return new Observable((observer: Observer<any>) => {
+          this._httpService.put('contact/' + cHash, data)
+          .then((response: any) => {
+            let data: IContact = response.data;
+            observer.next(data); 
+          })
+          .catch((error: any) =>  { observer.error(error); })
+          .finally();
+      });
     } //Function ends
 
 } //Class ends
