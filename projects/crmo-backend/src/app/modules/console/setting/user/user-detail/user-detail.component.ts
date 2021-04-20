@@ -19,7 +19,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
 
   public oHash: string;
-  public uhash: string;
+  public uuid: string;
   public objUser: any;
   public boolRefresh: boolean = false;
 
@@ -56,13 +56,13 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
 
     //Get params from the page route
     let oHash: string = this._route.snapshot.paramMap.get('ohash');
-    let uHash: string = this._route.snapshot.paramMap.get('uhash');
+    let uuid: string = this._route.snapshot.paramMap.get('uhash');
 
     this.oHash = oHash;
-    this.uhash = uHash;
+    this.uuid = uuid;
 
     //Create User Object
-    if (uHash=='0') {
+    if (uuid=='0') {
       this.fnCreateData();
     } else {
       //Load form
@@ -96,7 +96,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   public fnLoadData(): boolean {
     try {
       this.boolLoading = true;
-      this._userService.getUserByIdentifier(this.oHash, this.uhash)
+      this._userService.getUserByIdentifier(this.oHash, this.uuid)
         .subscribe((response: IUser) => {
           //Stop loader
           this.boolLoading = false;

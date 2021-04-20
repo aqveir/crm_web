@@ -155,3 +155,8 @@ table.table {
 .user_status_away {
     background-color: rgb(240, 228, 64);
 }
+
+//Page full hight
+.full-content-page-height > .card {
+    min-height: calc(100vh - 145px);
+}

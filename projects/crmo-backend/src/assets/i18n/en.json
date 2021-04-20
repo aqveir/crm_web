@@ -526,98 +526,54 @@
                 }
             },
             "DETAIL": {
-                "TAB_PROFILE": {
-                    "TITLE": "User Profile",
-                    "AVATAR": {
-                        "LABEL": "Avatar",
-                        "PLACEHOLDER": "Enter the surname or family name",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid name"
-                    },
-                    "FIRST_NAME": {
-                        "LABEL": "First Name",
-                        "PLACEHOLDER": "Enter the given name",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid name"
-                    },
-                    "LAST_NAME": {
-                        "LABEL": "Last Name",
-                        "PLACEHOLDER": "Enter the surname or family name",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid name"
-                    },
-                    "SUBDOMAIN": {
-                        "LABEL": "Sub-Domain",
-                        "PLACEHOLDER": "Enter the subdomain name",
-                        "FINE_TEXT": "This URL that will be associated for your use.",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "INDUSTRY": {
-                        "LABEL": "Industry",
-                        "PLACEHOLDER": "Select the industry that matches business.",
-                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "WEBSITE": {
-                        "LABEL": "Website",
-                        "PLACEHOLDER": "Enter the website url",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "SEARCH_TAG": {
-                        "LABEL": "Search Tags",
-                        "PLACEHOLDER": "Enter the tag name",
-                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "PERSON_NAME": {
-                        "LABEL": "Person's Name",
-                        "PLACEHOLDER": "Enter the biller or contact person's name",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "PHONE": {
-                        "LABEL": "Phone",
-                        "PLACEHOLDER": "Enter the phone number.",
-                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
-                        "VALIDATION_ERROR": "Enter valid phone number."
-                    },
-                    "EMAIL": {
-                        "LABEL": "Email Address",
-                        "PLACEHOLDER": "Enter the email address",
-                        "FINE_TEXT": "Email will not be publicly displayed and just used to communicate.",
-                        "VALIDATION_ERROR": "Enter valid email address."
+                "TITLE": "Manage Preference",
+                "NAME": {
+                    "LABEL": "Name",
+                    "PLACEHOLDER": "Enter name for the preference",
+                    "FINE_TEXT": "This name should be a unique name, as this is used by the application.",
+                    "VALIDATION_ERROR": "Enter unique names only."
+                },
+                "DESCRIPTION": {
+                    "LABEL": "Description",
+                    "PLACEHOLDER": "Enter details for the preference",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
+                },
+                "DATA_TYPE": {
+                    "LABEL": "Data Type",
+                    "PLACEHOLDER": "Select the data type",
+                    "FINE_TEXT": "For dropdown/multiselect type, do provide the possible values",
+                    "VALIDATION_ERROR": ""
+                },                
+                "COLUMN_NAME": {
+                    "LABEL": "External Data Reference",
+                    "PLACEHOLDER": "Enter external data field for the preference",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
+                },
+                "KEYWORDS": {
+                    "LABEL": "Keywords",
+                    "PLACEHOLDER": "Enter the keywords",
+                    "FINE_TEXT": "These keywords will be used for searching into the auto input.",
+                    "VALIDATION_ERROR": ""
+                },
+                "CONFIGURATION": {
+                    "LABEL": "Configuration",
+                    "MULTI_SELECT": {
+                        "LABEL": "Allow Multiple Values"
                     }
                 },
-                "TAB_ACCOUNT": {
-                    "TITLE": "Account",
-                    "USERNAME": {
-                        "LABEL": "Username",
-                        "PLACEHOLDER": "Enter the user name",
-                        "FINE_TEXT": "Email address is the default username.",
-                        "VALIDATION_ERROR": "Enter valid user name"
-                    },
-                    "LANGUAGE": {
-                        "LABEL": "Language",
-                        "PLACEHOLDER": "Select the language",
-                        "FINE_TEXT": "Default language is English. Select the language that best suits.",
-                        "VALIDATION_ERROR": "Enter valid user name"
-                    },
-                    "TIMEZONE": {
-                        "LABEL": "Timezone",
-                        "PLACEHOLDER": "Select the timezone",
-                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
-                        "VALIDATION_ERROR": "Enter valid user name"
-                    },
-                    "CUSTOMIZE": {
-                        "LABEL": "Customize",
-                        "PLACEHOLDER": "Select the language",
-                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
-                        "VALIDATION_ERROR": "Enter valid user name",
-                        "REMOTE_ONLY": {
-                            "LABEL": "Remote Only"
-                        }
-                    }
+                "ORDER": {
+                    "LABEL": "Order",
+                    "PLACEHOLDER": "Select the data type",
+                    "FINE_TEXT": "For dropdown/multiselect type, do provide the possible values",
+                    "VALIDATION_ERROR": ""
+                },
+                "MINIMUM_VALUE": {
+                    "LABEL": "Mininum Value"
+                },
+                "MAXIMUM_VALUE": {
+                    "LABEL": "Maximum Value"
                 }
             }
         }
