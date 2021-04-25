@@ -63,7 +63,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
   public fnLoadData(): boolean {
     try {
       this.boolLoading = true;
-      this._userService.getUsers(this.oHash)
+      this._userService.getAll(this.oHash)
         .subscribe((response: IUser[]) => {
           //Stop loader
           this.boolLoading = false;

@@ -3,10 +3,11 @@
         "LABEL": {
             "BLANK": "",
 
-            "SAVE": "Save",
+            "BACK": "Back",
             "CANCEL": "Cancel",
             "CLOSE": "Close",
-            "BACK": "Back",
+            "SAVE": "Save",
+            "SAVE_N_CONTINUE": "Save & continue",
 
             "ADD": "Add",
             "ADD_NEW": "Add New",
@@ -155,13 +156,17 @@
                 }
             },
             "DETAIL": {
+                "TITLE": {
+                    "ADD": "Add User",
+                    "EDIT": "Edit User"
+                },
                 "TAB_PROFILE": {
-                    "TITLE": "User Profile",
+                    "TITLE": "Profile",
                     "AVATAR": {
                         "LABEL": "Avatar",
-                        "PLACEHOLDER": "Enter the surname or family name",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid name"
+                        "PLACEHOLDER": "Upload avatar/image file",
+                        "FINE_TEXT": "The image file should be of jpg, png",
+                        "VALIDATION_ERROR": "Enter valid avatar image file"
                     },
                     "FIRST_NAME": {
                         "LABEL": "First Name",
@@ -238,14 +243,19 @@
                         "FINE_TEXT": "Default language is English. Select the language that best suits you.",
                         "VALIDATION_ERROR": "Enter valid user name"
                     },
-                    "CUSTOMIZE": {
-                        "LABEL": "Customize",
-                        "PLACEHOLDER": "Select the language",
-                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
-                        "VALIDATION_ERROR": "Enter valid user name",
-                        "REMOTE_ONLY": {
-                            "LABEL": "Remote Only"
-                        }
+                    "REMOTE_ONLY": {
+                        "LABEL": "Remote Access Only",
+                        "PLACEHOLDER": "Allow restricted application access for remote integration.",
+                        "FINE_TEXT": "The feature allows the user to interact with the application remotely. This feature should be enabled for accessing the data or saving data over REST API.</br></br><b>For safety reasons, the user will not have Console Access.</b>",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "DEACTIVATE_ACCOUNT": {
+                        "LABEL": "Deactivate the user account ?",
+                        "FINE_TEXT": "<b class='text-capitalize text-dark-50'>Important:</b> This action will <b class='text-capitalize'>disable</b> the user account and shall <b class='text-capitalize'>prohibit</b> the user from using the application."
+                    },
+                    "ACTIVATE_ACCOUNT": {
+                        "LABEL": "Activate the account ?",
+                        "FINE_TEXT": "<b class='text-capitalize text-dark-50'>Important:</b> This will enable the user account. <b class='text-capitalize text-dark-25'>beware</b>, the user will be allowed to use that application."
                     }
                 }
             }

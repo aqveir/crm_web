@@ -1,6 +1,6 @@
 import { ICountry } from '../common/country.interface';
 import { IPrivilege } from '../common/privilege.interface';
-import { IRole } from '../common/role.interface';
+import { IRole, IRoleRequest } from '../common/role.interface';
 import { IOrganizationMinimal } from '../organization/organization.interface';
 import { IUserStatusResponse } from './user-status.interface';
 
@@ -47,4 +47,26 @@ export interface IUserMinimal {
     is_verified?: boolean;
 
     availability?: IUserStatusResponse;
+}
+
+export interface IUserRequest {
+    username?: string;
+    avatar?: string;
+    first_name: string;
+    last_name?: string;
+    
+    is_active?: boolean;
+
+    email: string;
+    phone?: string;
+
+    virtual_phone_number?: string;
+    is_pool?: boolean;
+
+    country_idd?: string;
+    timezone_id?: number;
+    roles?: IRoleRequest[];
+    privileges?: [];
+
+    language?: string;
 }

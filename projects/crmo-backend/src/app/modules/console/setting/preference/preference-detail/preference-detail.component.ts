@@ -149,16 +149,6 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   //   } //Try-catch ends 
   // }
 
-
-  // public fnSaveData(event): boolean {
-  //   try {
-  //     this.boolRefresh = true;
-  //     return true;
-  //   } catch (error) {
-  //     throw error;
-  //   } //Try-catch ends 
-  // }
-
   
   
   /**

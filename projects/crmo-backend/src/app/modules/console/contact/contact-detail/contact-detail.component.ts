@@ -55,13 +55,13 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
     this.fnLoadData();
   } //Function ends
 
+
   /**
    * Load the data from the server
    * 
    * @param showLoader 
    */
   private fnLoadData(showLoader: boolean = true): void {
-
     //Set loading status
     this.boolLoading = showLoader;
 

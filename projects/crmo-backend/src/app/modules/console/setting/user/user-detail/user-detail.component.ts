@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -22,6 +23,9 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   public uuid: string;
   public objUser: any;
   public boolRefresh: boolean = false;
+  public boolIsNew: boolean = false;
+
+  public userForm!: FormGroup;
 
 
   /**
@@ -32,6 +36,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute,
     private _userService: UserService,
+    private _formBuilder: FormBuilder,
     private _notification : NotificationService,
     private _broker: EventBrokerService
   ) { super(); }
@@ -61,6 +66,9 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
     this.oHash = oHash;
     this.uuid = uuid;
 
+    //Initialize Form
+    this.fnInitializeForm();
+
     //Create User Object
     if (uuid=='0') {
       this.fnCreateData();
@@ -76,17 +84,11 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
    * Create data
    */
   private fnCreateData(): void {
-    this.objUser = {
-      hash: null,
-      avatar: null,
-      username: null,
-      first_name: null,
-      last_name: null,
-      email: null,
-      phone: null,
-      language: 'en',
-      is_remote_access_only: false
-    };
+    //Set new flag
+    this.boolIsNew = true;
+
+    //Initialize form
+    this.fnInitializeForm();
   } //Function ends
  
   
@@ -96,13 +98,14 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   public fnLoadData(): boolean {
     try {
       this.boolLoading = true;
-      this._userService.getUserByIdentifier(this.oHash, this.uuid)
+      this._userService.show(this.oHash, this.uuid)
         .subscribe((response: IUser) => {
           //Stop loader
           this.boolLoading = false;
 
           //Fill Data into variable
           this.objUser = response;
+          this.fnFillData();
         },(error) => {
           //Stop loader
           this.boolLoading = false;
@@ -132,13 +135,88 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   }
 
 
-  public fnSaveData(event): boolean {
+  /**
+   * Save Data
+   */
+  public fnSaveAction(): boolean {
     try {
-      this.boolRefresh = true;
+      //Check form validity
+      this.userForm.updateValueAndValidity();
+      if (this.userForm.invalid) { 
+        this.fnRaiseErrors(this.userForm); 
+
+        return false; 
+      } //End if
+
+      //Set values
+      let dataUser: any = this.userForm.controls;
+
       return true;
     } catch (error) {
+      //Stop loader
+      this.boolLoading = false;
+
       throw error;
-    } //Try-catch ends 
-  }
+    } //Try-catch ends
+  } //Function ends
+
+
+  /**
+   * Load form data
+   */
+  private fnFillData(): void {
+    if (this.objUser && this.userForm) {
+      this.userForm.patchValue({
+        avatar: this.objUser.avatar?this.objUser.avatar:'',
+        username: this.objUser.username?this.objUser.username:'',
+        first_name: this.objUser.first_name?this.objUser.first_name:'',
+        last_name: this.objUser.last_name?this.objUser.last_name:'',
+        phone: this.objUser.phone?this.objUser.phone:'',
+        email: this.objUser.email?this.objUser.email:'',
+        timezone_id: 0,
+        language: this.objUser.language?this.objUser.language:'en',
+        is_remote_access_only: this.objUser.is_remote_access_only?this.objUser.is_remote_access_only:false,
+        is_active: this.objUser.is_active?this.objUser.is_active:true,
+        roles: null,
+        privileges: null
+      });
+
+      //Enable-Disable controls
+      this.userForm.controls['username'].disable();
+    } //End if
+  } //Function ends
+
+
+  /**
+   * Reset form
+   */
+  public fnResetForm(boolNavBack: boolean=false): void {
+    this.userForm.reset();
+
+    if (boolNavBack) {
+      this._router.navigate(['secure/setting/organization', this.oHash, 'user' ]);
+    } //End if
+  } //Function ends
+
+
+  /**
+   * Initialize Reactive Form
+   */
+  private fnInitializeForm(): void {
+    this.userForm = this._formBuilder.group({
+      avatar: [''],
+      username: ['', [ Validators.required ]],
+      first_name: ['', [ Validators.required ]],
+      last_name: [''],
+      phone: [''],
+      email: ['', [ Validators.required, Validators.email ]],
+      timezone_id: ['', [ Validators.required ]],
+      language: ['en'],
+      is_remote_access_only: [false],
+      is_active: [true],
+      roles: ['', [ Validators.required ]],
+      privileges: ['']
+    });
+  } //Function ends
 
 } //Class ends

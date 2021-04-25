@@ -8,3 +8,8 @@ export interface IRole {
     last_updated_at?: Date;
     privileges?: IPrivilege[];
 }
+
+export interface IRoleRequest {
+    key: string;
+    account_id?:number;
+}
