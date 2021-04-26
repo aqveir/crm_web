@@ -16,16 +16,28 @@ export abstract class BaseComponent {
    * 
    * @param formGroup 
    */
-  public fnRaiseErrors(_formGroup : FormGroup) {
-    Object.keys(_formGroup.controls).forEach(field => {
-      const control = _formGroup.get(field);
+  public fnRaiseErrors(_formGroup : FormGroup): string {
+    let strReturnValue: string = '';
+    try {
+      Object.keys(_formGroup.controls).forEach(field => {
+        const control = _formGroup.get(field);
 
-      if (control instanceof FormControl) {
-        control.markAsDirty({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.fnRaiseErrors(control);
-      } //End if
-    });
+        //Set all controls dirty to trigger validation
+        if (control instanceof FormControl) {
+          control.markAsDirty({ onlySelf: true });
+
+          if (control.invalid) {
+            strReturnValue += field + ': ' + JSON.stringify(control.errors);
+          } //End if
+        } else if (control instanceof FormGroup) {
+          strReturnValue += this.fnRaiseErrors(control);
+        } //End if
+      });
+      
+      return strReturnValue;
+    } catch(error) {
+      throw error;
+    } //Try-catch ends
   } //Function ends
 
 

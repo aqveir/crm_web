@@ -180,40 +180,10 @@
                         "FINE_TEXT": "",
                         "VALIDATION_ERROR": "Enter valid name"
                     },
-                    "SUBDOMAIN": {
-                        "LABEL": "Sub-Domain",
-                        "PLACEHOLDER": "Enter the subdomain name",
-                        "FINE_TEXT": "This URL that will be associated for your use.",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "INDUSTRY": {
-                        "LABEL": "Industry",
-                        "PLACEHOLDER": "Select the industry that matches business.",
-                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "WEBSITE": {
-                        "LABEL": "Website",
-                        "PLACEHOLDER": "Enter the website url",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "SEARCH_TAG": {
-                        "LABEL": "Search Tags",
-                        "PLACEHOLDER": "Enter the tag name",
-                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
-                    "PERSON_NAME": {
-                        "LABEL": "Person's Name",
-                        "PLACEHOLDER": "Enter the biller or contact person's name",
-                        "FINE_TEXT": "",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
-                    },
                     "PHONE": {
                         "LABEL": "Phone",
                         "PLACEHOLDER": "Enter the phone number.",
-                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
+                        "FINE_TEXT": "This number will be used to contact the user in case of any issues with the account. In case you have configured Cloud Telephony services, this number will be used to connect for calls and messages.",
                         "VALIDATION_ERROR": "Enter valid phone number."
                     },
                     "EMAIL": {
@@ -230,6 +200,12 @@
                         "PLACEHOLDER": "Enter the user name",
                         "FINE_TEXT": "Email address is the default username.",
                         "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "PASSWORD": {
+                        "LABEL": "Password",
+                        "PLACEHOLDER": "Enter the password",
+                        "FINE_TEXT": "Password to include uppercase & lowercase letters, numbers, and characters. Minimum 8 characters required.",
+                        "VALIDATION_ERROR": "Enter valid password as per given policy"
                     },
                     "LANGUAGE": {
                         "LABEL": "Language",
@@ -613,6 +589,12 @@
                     "VALIDATION_ERROR": "Enter valid email or phone number."
                 }
             }
+        }
+    },
+
+    "NOTIFICATION": {
+        "USER_DETAILS": {
+            "SUCCESS_MESSAGE": "User information was successfully saved."
         }
     },
 

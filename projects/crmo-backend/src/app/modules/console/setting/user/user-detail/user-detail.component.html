@@ -38,19 +38,15 @@
 
 				<!--begin::Dropdown-->
 				<div class="btn-group ml-2">
-					<button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">{{ 'COMMON.LABEL.SAVE' | translate }}</button>
-					<button type="button" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" 
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+					<button type="submit" 
+						class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base"
+						[ngClass]="{'spinner spinner-white spinner-right pr-15': boolLoading}">{{ 'COMMON.LABEL.SAVE_N_CONTINUE' | translate }}</button>
+						
+					<button type="button" 
+						class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" 
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon2-down icon-xs"></i></button>
 					<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
 						<ul class="navi py-5">
-							<li class="navi-item">
-								<a href="#" class="navi-link">
-									<span class="navi-icon">
-										<i class="flaticon2-writing"></i>
-									</span>
-									<span class="navi-text">{{ 'COMMON.LABEL.SAVE_N_CONTINUE' | translate }}</span>
-								</a>
-							</li>
 							<li class="navi-item">
 								<a href="#" class="navi-link">
 									<span class="navi-icon">
@@ -175,7 +171,7 @@
 
 		<!--begin::Card body-->
 		<div class="card-body">
-			<div class="row">{{ objUser|json }}</div>
+			<div class="d-none">{{ objUser|json }}</div>
 			<div class="tab-content">
 				<!--begin::Tab-->
 				<div class="tab-pane show active px-7" id="kt_tab_user_profile" role="tabpanel">
@@ -207,11 +203,8 @@
 		</div>
 		<!--begin::Card body-->
 
-		<div class="card-footer">
-			<div class="row">{{ userForm.value|json }}</div>
-
-			<button type="submit" class="btn btn-primary mr-2" tabindex="8">{{ 'COMMON.LABEL.SAVE' | translate }}</button>
-			<button type="reset" class="btn btn-secondary" tabindex="9">{{ 'COMMON.LABEL.CANCEL' | translate }}</button>
+		<div class="card-footer d-none">
+			<div class="d-flex">{{ userForm.value|json }}</div>
 		</div>
 	</div>
 	<!--end::Card-->

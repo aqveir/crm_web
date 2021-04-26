@@ -51,6 +51,7 @@ export interface IUserMinimal {
 
 export interface IUserRequest {
     username?: string;
+    password?:string;
     avatar?: string;
     first_name: string;
     last_name?: string;
@@ -63,9 +64,9 @@ export interface IUserRequest {
     virtual_phone_number?: string;
     is_pool?: boolean;
 
-    country_idd?: string;
+    phone_idd?: string;
     timezone_id?: number;
-    roles?: IRoleRequest[];
+    roles: IRoleRequest[];
     privileges?: [];
 
     language?: string;

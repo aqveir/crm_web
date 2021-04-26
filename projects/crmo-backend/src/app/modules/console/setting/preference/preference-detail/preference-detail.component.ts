@@ -190,7 +190,7 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
         is_minimum: this.objPreference.is_minimum?this.objPreference.is_minimum:false,
         is_maximum: this.objPreference.is_maximum?this.objPreference.is_maximum:false,
         is_multiple: this.objPreference.is_multiple?this.objPreference.is_multiple:false,
-        //external_url:this.objPreference.external_url?this.objPreference.external_url:'',
+        external_url:this.objPreference.external_url?this.objPreference.external_url:'',
       });
 
       //Set Data Type

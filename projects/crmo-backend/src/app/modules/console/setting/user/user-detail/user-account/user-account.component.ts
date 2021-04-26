@@ -61,7 +61,10 @@ export class UserAccountComponent  extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnToggleActiveActon(): void {
+  /**
+   * Toggle the User (active/deactive status)
+   */
+  public fnToggleActiveAction(): void {
     let boolCurrActiveState: boolean = (this.userAccountForm.contains('is_active'))?(this.userAccountForm.controls['is_active'].value):false;
     
     this.userAccountForm.patchValue({
@@ -84,6 +87,36 @@ export class UserAccountComponent  extends BaseComponent implements OnInit {
       interval(1000);
       //this.boolValidatingUsername=false;
     } //End if    
+  } //Function ends
+
+
+  /**
+   * Generate Ramdom Password for User
+   * 
+   * @param elem 
+   */
+  public fnGeneratePassword(elem): void {
+    try {
+      let dictionary = [].concat(
+        Globals._PASSWORD_POLICY.RULES.LOWERCASE.library.split(""),
+        Globals._PASSWORD_POLICY.RULES.UPPERCASE.library.split(""),
+        Globals._PASSWORD_POLICY.RULES.NUMBERS.library.split(""),
+        Globals._PASSWORD_POLICY.RULES.SYMBOLS.library.split("")
+      );
+
+      // Generate random password from array
+      let lenPassword: number = (Math.random() * 20) + Globals._PASSWORD_POLICY.MIN_LENGTH;
+
+      let generatedPassword: string = "";
+      for (let i: number = 0; i < lenPassword; i++) {
+        generatedPassword += dictionary[Math.floor(Math.random() * dictionary.length)];
+      } //Loop ends
+
+      //Set Generated password into the field
+      elem.value=generatedPassword;
+    } catch(error) {
+      throw error;
+    } //Try-catch ends
   } //Function ends
 
 } //Class ends

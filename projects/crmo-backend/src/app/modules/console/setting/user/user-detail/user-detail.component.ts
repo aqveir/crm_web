@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -8,7 +8,7 @@ import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'ellaisys-lib';
-import { IUser, IResponse, UserService } from 'crmo-lib';
+import { IUser, UserService, IUserRequest, IRoleRequest, IRole } from 'crmo-lib';
 
 @Component({
   selector: 'crmo-backend-user-detail',
@@ -97,8 +97,11 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
    */
   public fnLoadData(): boolean {
     try {
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
+
       this.boolLoading = true;
-      this._userService.show(this.oHash, this.uuid)
+      this._userService.show(this.uuid, params)
         .subscribe((response: IUser) => {
           //Stop loader
           this.boolLoading = false;
@@ -140,17 +143,61 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
    */
   public fnSaveAction(): boolean {
     try {
+      //Set values
+      let controlPhoneData: any = this.userForm.controls['phone_form_control'].value;
+      if (controlPhoneData['number'].length>0) {
+        this.userForm.patchValue({
+          phone: controlPhoneData['number'],
+          phone_idd: controlPhoneData['iddCode'],
+        });
+      } else {
+        this.userForm.controls['phone'].disable();
+        this.userForm.controls['phone_idd'].disable();
+      } //End if
+
       //Check form validity
       this.userForm.updateValueAndValidity();
       if (this.userForm.invalid) { 
-        this.fnRaiseErrors(this.userForm); 
-
+        let msgError: string = this.fnRaiseErrors(this.userForm);
+        console.log(msgError);
+        this._notification.error('Error', msgError);
         return false; 
       } //End if
 
-      //Set values
-      let dataUser: any = this.userForm.controls;
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
 
+      //Set form value to request object
+      let dataUser: IUserRequest = this.userForm.value;
+
+      this.boolLoading = true;
+      if (this.boolIsNew) {
+        this._userService.create(dataUser, params)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Stop loader
+          this.boolLoading = false;
+        },(error) => {
+          //Stop loader
+          this.boolLoading = false;
+          throw error;
+        });
+      } else {
+        this._userService.update(this.uuid, dataUser, params)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Stop loader
+          this.boolLoading = false;
+        },(error) => {
+          //Stop loader
+          this.boolLoading = false;
+          throw error;
+        });
+      } //End if
       return true;
     } catch (error) {
       //Stop loader
@@ -165,13 +212,13 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
    * Load form data
    */
   private fnFillData(): void {
-    if (this.objUser && this.userForm) {
+    if (this.objUser && this.userForm) {     
       this.userForm.patchValue({
         avatar: this.objUser.avatar?this.objUser.avatar:'',
         username: this.objUser.username?this.objUser.username:'',
         first_name: this.objUser.first_name?this.objUser.first_name:'',
         last_name: this.objUser.last_name?this.objUser.last_name:'',
-        phone: this.objUser.phone?this.objUser.phone:'',
+        phone_form_control: this.objUser.phone?this.objUser.phone:'',
         email: this.objUser.email?this.objUser.email:'',
         timezone_id: 0,
         language: this.objUser.language?this.objUser.language:'en',
@@ -183,6 +230,23 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
 
       //Enable-Disable controls
       this.userForm.controls['username'].disable();
+      this.userForm.controls['password'].disable();
+      this.userForm.controls['password_confirmation'].disable();
+
+      //Set roles collection
+      let userRoles: IRole[] = this.objUser?.roles;
+      let countValue: number = (userRoles)?(userRoles).length:0;
+      for (let index = 0; index < countValue; index++) {
+        let userRoleForm: FormGroup = this.fnRoleForm();
+        userRoleForm.patchValue({
+          key: userRoles[index].key,
+          account_id: null,
+          description: null
+        });
+
+        //Push the data into FormArray
+        (<FormArray>this.userForm.controls['roles']).push(userRoleForm);
+      } //Loop ends
     } //End if
   } //Function ends
 
@@ -206,16 +270,30 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
     this.userForm = this._formBuilder.group({
       avatar: [''],
       username: ['', [ Validators.required ]],
+      password: ['', [ 
+        Validators.minLength(Globals._PASSWORD_POLICY.MIN_LENGTH), 
+        Validators.maxLength(Globals._PASSWORD_POLICY.MAX_LENGTH), 
+        Validators.pattern(Globals._PASSWORD_POLICY.REGEX_PATTERN) ]],
+      password_confirmation: [''],
       first_name: ['', [ Validators.required ]],
       last_name: [''],
       phone: [''],
+      phone_idd: [''],
+      phone_form_control: [''],
       email: ['', [ Validators.required, Validators.email ]],
-      timezone_id: ['', [ Validators.required ]],
+      timezone_id: [''],
       language: ['en'],
       is_remote_access_only: [false],
       is_active: [true],
-      roles: ['', [ Validators.required ]],
+      roles: this._formBuilder.array([]),
       privileges: ['']
+    });
+  } //Function ends
+  private fnRoleForm(): FormGroup {
+    return this._formBuilder.group({
+      key: ['', [ Validators.required ]],
+      account_id: [''],
+      description: ['']
     });
   } //Function ends
 

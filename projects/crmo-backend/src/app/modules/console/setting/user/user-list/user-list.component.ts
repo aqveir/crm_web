@@ -62,8 +62,11 @@ export class UserListComponent extends BaseComponent implements OnInit {
    */
   public fnLoadData(): boolean {
     try {
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
+
       this.boolLoading = true;
-      this._userService.getAll(this.oHash)
+      this._userService.getAll(params)
         .subscribe((response: IUser[]) => {
           //Stop loader
           this.boolLoading = false;

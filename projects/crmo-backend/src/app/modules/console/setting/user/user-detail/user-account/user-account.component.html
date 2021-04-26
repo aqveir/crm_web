@@ -39,6 +39,32 @@
                 <!--end::Group-->
 
                 <!--begin::Group-->
+                <div class="form-group row" *ngIf="boolIsNew">
+                    <label class="col-form-label col-3 text-lg-right text-left">
+                        {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.LABEL' | translate }}
+                    </label>
+                    <div class="col-7">
+                        <div class="spinner-darker-primary spinner-input">
+                            <input class="form-control" type="text" formControlName="password" #passwordUser
+                                placeholder="{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.PLACEHOLDER' | translate }}"
+                                autocomplete="off" tabindex="2"/>
+                            <span class="form-text text-muted">
+                                {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.FINE_TEXT' | translate }}
+                            </span>
+
+                            <span class="form-text text-danger" 
+                                *ngIf="userAccountForm.controls.password.dirty && userAccountForm.controls.password.invalid">
+                                {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.VALIDATION_ERROR' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-2" style="margin-left: -20px;">
+                        <button type="button" class="btn btn-primary" (click)="fnGeneratePassword(passwordUser)">Generate</button>
+                    </div>
+                </div>
+                <!--end::Group-->
+
+                <!--begin::Group-->
                 <div class="form-group row">
                     <label class="col-form-label col-3 text-lg-right text-left">
                         {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.LANGUAGE.LABEL' | translate }}
@@ -230,16 +256,6 @@
                 </div>
             </div>
             <!--end::Row-->
-            <!--begin::Group-->
-            <!-- <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">Login verification</label>
-                <div class="col-9">
-                    <button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
-                    <div class="form-text text-muted mt-3">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised.
-                    <a href="#">Learn more</a>.</div>
-                </div>
-            </div> -->
-            <!--end::Group-->
 
             <!--begin::Group-->
             <div class="form-group row">
@@ -263,7 +279,7 @@
 
                     <div *ngIf="userAccountForm.controls.is_active.value==true">
                         <button type="button" class="btn btn-light-danger font-weight-bold btn-sm" 
-                            (click)="fnToggleActiveActon()">
+                            (click)="fnToggleActiveAction()">
                             {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.DEACTIVATE_ACCOUNT.LABEL' | translate }}
                         </button>
 
@@ -274,7 +290,7 @@
 
                     <div *ngIf="userAccountForm.controls.is_active.value==false">
                         <button type="button" class="btn btn-light-primary font-weight-bold btn-sm"
-                            (click)="fnToggleActiveActon()">
+                            (click)="fnToggleActiveAction()">
                             {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.ACTIVATE_ACCOUNT.LABEL' | translate }}
                         </button>
 

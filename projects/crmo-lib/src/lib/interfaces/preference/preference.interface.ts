@@ -9,6 +9,7 @@ export interface IPreference {
     is_minimum: boolean;
     is_maximum: boolean;
     is_multiple: boolean;
+    external_url: string;
     keywords: string;
     order: number;
     is_active: true;

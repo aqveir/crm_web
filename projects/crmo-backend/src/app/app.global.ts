@@ -9,6 +9,14 @@ import { LocalStorageService, SessionStorageService, TranslateService, Notificat
 import { environment } from '@env-backend/environment';
 
 //Language Interface
+export interface IPasswordPolicy {
+    MIN_LENGTH: number;
+    MAX_LENGTH: number;
+    REGEX_PATTERN: RegExp;
+    RULES: any;
+} //Interface ends
+
+//Language Interface
 export interface ILanguage {
     name: string;
     code: string;
@@ -49,9 +57,40 @@ export class Globals {
 
     //Application constants
     public static readonly _SCROLL_RELOAD_FACTOR: number = 0.9;
+    public static readonly _PASSWORD_POLICY: IPasswordPolicy = {
+        MIN_LENGTH: 8,
+        MAX_LENGTH: 99,
+        REGEX_PATTERN: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\^$*.\[\]{}\(\)?\-“!@#%&\/,><\’:;|_~`])\S{8,99}$/,
+        RULES: {
+            LOWERCASE: {
+                "id": "lowercase",
+                "label": "a-z",
+                "library": "abcdefghijklmnopqrstuvwxyz",
+                "checked": true
+            }, 
+            UPPERCASE: {
+                "id": "uppercase",
+                "label": "A-Z",
+                "library": "ABCDEFGHIJKLMNOPWRSTUVWXYZ",
+                "checked": true
+            }, 
+            NUMBERS: {
+                "id": "numbers",
+                "label": "0-9",
+                "library": "0123456789",
+                "checked": true
+            }, 
+            SYMBOLS: {
+                "id": "symbols",
+                "label": "!-?",
+                "library": "+-^$*[]{}()?!@#%&><:|_~",
+                "checked": true
+            }
+        }
+    };
 
     //RegEx Patterns
-    public static readonly _REGEX_PATTERN_UEL: string="/^(http[s]?://){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/";
+    public static readonly _REGEX_PATTERN_UEL: RegExp=/^(http[s]?:\/\/){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/;
 
     //Notification Options
     public static readonly NotificationDefaultOptions: any = {
@@ -191,6 +230,17 @@ export class Globals {
     } //Function ends
     public setStoreData(_claim: IResponseUserLogin): void {
         this.claimUser = _claim;
+    } //Function ends
+
+    //Show notification
+    public showSuccess(message: string, boolTranslate: boolean=false): void {
+        message = (boolTranslate)?this._translateService.instant(message):message;
+
+        this._notificationService.success(
+            this._translateService.instant('NOTIFICATION_COMMON_SUCCESS_TITLE'), 
+            message, 
+            Globals.NotificationDefaultOptions
+        );
     } //Function ends
 
 

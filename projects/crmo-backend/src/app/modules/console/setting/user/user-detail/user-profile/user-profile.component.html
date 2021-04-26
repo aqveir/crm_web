@@ -68,17 +68,18 @@
 
         <!--begin::Group-->
         <div class="form-group row">
-            <label class="col-form-label col-3 text-lg-right text-left">Contact Phone</label>
+            <label class="col-form-label col-3 text-lg-right text-left">
+                {{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.LABEL' | translate }}
+            </label>
             <div class="col-9">
-                <div class="input-group input-group-lg input-group-solid">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="la la-phone"></i>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control form-control-lg form-control-solid" value="+45678967456" placeholder="Phone" />
-                </div>
-                <span class="form-text text-muted">We'll never share your email with anyone else.</span>
+                <intl-tel-input [cssClass]="'form-control pl-5'" formControlName="phone_form_control"
+                    [searchCountryFlag]="true" [enablePlaceholder]="true" [separateDialCode]="false"
+                    [phoneValidation]="true" [selectedCountryISO]="objUser?.country?.alpha2_code"></intl-tel-input>
+                <span class="form-text text-muted">{{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.FINE_TEXT' | translate }}</span>
+
+                <span class="form-text text-danger" *ngIf="userProfileForm.controls.phone_form_control.dirty && userProfileForm.controls.phone_form_control.invalid">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.VALIDATION_ERROR' | translate }}
+                </span>
             </div>
         </div>
         <!--end::Group-->
