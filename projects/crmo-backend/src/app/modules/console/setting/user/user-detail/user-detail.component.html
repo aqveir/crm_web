@@ -1,5 +1,5 @@
 <form class="form" id="kt_user_profile_form" novalidate="novalidate"
-	[formGroup]="userForm" (ngSubmit)="fnSaveAction()" autocomplete="off">	
+	[formGroup]="userForm" (ngSubmit)="fnSaveAction($event)" autocomplete="off">	
 	
 	<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
 		<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap p-0">
@@ -38,7 +38,7 @@
 
 				<!--begin::Dropdown-->
 				<div class="btn-group ml-2">
-					<button type="submit" 
+					<button type="submit" id="save_and_continue"
 						class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base"
 						[ngClass]="{'spinner spinner-white spinner-right pr-15': boolLoading}">{{ 'COMMON.LABEL.SAVE_N_CONTINUE' | translate }}</button>
 						
@@ -48,20 +48,20 @@
 					<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
 						<ul class="navi py-5">
 							<li class="navi-item">
-								<a href="#" class="navi-link">
+								<button type="submit" id="save_and_new" class="btn btn-bg-white d-block navi-link">
 									<span class="navi-icon">
 										<i class="flaticon2-medical-records"></i>
 									</span>
-									<span class="navi-text">Save &amp; add new</span>
-								</a>
+									<span class="navi-text pl-2">{{ 'COMMON.LABEL.SAVE_N_ADDNEW' | translate }}</span>
+								</button>
 							</li>
 							<li class="navi-item">
-								<a href="#" class="navi-link">
+								<button type="submit" id="save_and_exit" class="btn btn-bg-white d-block navi-link">
 									<span class="navi-icon">
-										<i class="flaticon2-hourglass-1"></i>
+										<i class="flaticon2-download-2"></i>
 									</span>
-									<span class="navi-text">Save &amp; exit</span>
-								</a>
+									<span class="navi-text pl-2">{{ 'COMMON.LABEL.SAVE_N_EXIT' | translate }}</span>
+								</button>
 							</li>
 						</ul>
 					</div>

@@ -1,23 +1,52 @@
-<div>
+<div class="d-block">
+	<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+		<div class="d-flex flex-grow-1 flex-wrap flex-sm-nowrap">
+			<!--begin::Details-->
+			<div class="d-flex align-items-center flex-wrap flex-grow-1">
+				<!--begin::Title-->
+				<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
+					{{ 'PAGE.USER.LIST.TITLE' | translate }}
+				</h5>
+				<!--end::Title-->
+
+				<!--begin::Separator-->
+				<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+				<!--end::Separator-->
+
+				<!--begin::Search Form-->
+				<div class="d-flex align-items-center" id="kt_subheader_search">
+					<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">
+					</span>
+				</div>
+				<!--end::Search Form-->
+			</div>
+			<!--end::Details-->
+
+			<!--begin::Toolbar-->
+			<div class="d-flex align-items-center">
+				<!--begin::Button-->
+				<div class="btn-group ml-2">
+                    <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
+                        [routerLink]="['/secure/setting/organization/', oHash, 'user', 'new']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
+				</div>
+				<!--end::Button-->
+			</div>
+			<!--end::Toolbar-->
+		</div>
+	</div>
+
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">
-                    {{ 'PAGE.ORGANIZATION.USER_LIST.TITLE' | translate }}
-                </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
             </h3>
             <div class="card-toolbar">
-                <div class="form-group mr-2 mt-8">
+                <div class="">
                     <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control" placeholder="Search..."/>
+                        <input type="text" class="form-control search-control" placeholder="Search..."/>
                         <span><i class="flaticon2-search-1 icon-md"></i></span>
                     </div>  
                 </div>
-                
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
-                [routerLink]="['/secure/setting/organization/', oHash, 'user', '0']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
             </div>
         </div>
 
@@ -74,11 +103,11 @@
                                     [class]="user.availability?.status?.key"
                                     [title]="user.availability?.status?.display_value">&nbsp;</span>
                             </td>
-                            <td>
+                            <td class="pl-2">
                                 <span class="text-dark-75 d-block">{{ user.last_login_at | date }}</span>
                                 <span class="text-muted">{{ user.last_login_at | date:'shortTime' }}</span>
                             </td>
-                            <td>
+                            <td class="pl-2">
                                 <span class="text-dark-75 d-block">{{ user.last_updated_at | date }}</span>
                                 <span class="text-muted">{{ user.last_updated_at | date:'shortTime' }}</span>
                             </td>

@@ -97,6 +97,10 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
 .card.card-screen-height {
     min-height: calc(100vh - 150px);
 }
+.card .card-toolbar .form-control.search-control {
+    width: 25vw;
+    min-width: 250px;
+}
 
 // CRMO Table style for listing
 $TABLE-CELL-WIDTH-DATE: 130px;

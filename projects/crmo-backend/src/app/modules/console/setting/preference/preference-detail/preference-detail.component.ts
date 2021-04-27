@@ -22,7 +22,9 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   public oHash: string;
   public uuid: string;
   public objPreference: IPreference;
+
   public boolRefresh: boolean = false;
+  public boolIsNew: boolean = false;
   
   public preferencesForm!: FormGroup;
   public preferencesDataForm!: FormGroup;
@@ -88,7 +90,6 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       //Load form
       this.fnLoadData();      
     } //End if
-
   } //Function ends
 
   
@@ -96,6 +97,9 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
    * Create data
    */
   private fnCreateData(): IPreferenceRequest {
+    //Set new flag
+    this.boolIsNew = true;
+
     return <IPreferenceRequest> {
       name: null,
       display_value: null,
@@ -136,33 +140,23 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
-
-
-  // public fnUpdateData(_objUser: IUser): boolean {
-  //   try {
-  //     this.boolRefresh = false;
-  //     this.objPreference = _objUser;
-  //     this.boolRefresh = true;
-  //     return true;
-  //   } catch (error) {
-  //     throw error;
-  //   } //Try-catch ends 
-  // }
-
   
   
   /**
    * Save Data
    */
-  public fnSaveAction(): boolean {
+  public fnSaveAction(event: any): boolean {
     try {
       //Check form validity
       this.preferencesForm.updateValueAndValidity();
       if (this.preferencesForm.invalid) { 
-        this.fnRaiseErrors(this.preferencesForm); 
-
+        let msgError: string = this.fnRaiseErrors(this.preferencesForm); 
+        this._notification.error('Error', msgError);
         return false; 
       } //End if
+
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
 
       return true;
     } catch (error) {
@@ -172,6 +166,33 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
+
+
+  /**
+   * Post Save Action
+   * 
+   * @param submitterId
+   */
+  private fnPostSaveAction(submitterId: string): void {
+    //Action based on submitter
+    switch (submitterId) {
+      case 'save_and_new':
+        this._router.navigate(['secure/setting/organization', this.oHash, 'user', 'new'])
+          .then(() => {
+            window.location.reload();
+          });
+        break;
+
+      case 'save_and_exit':
+        this._router.navigate(['secure/setting/organization', this.oHash, 'user']);
+        break;
+    
+      case 'save_and_continue':
+      default:
+        //Do nothing
+        break;
+    } //End switch
+  } //function ends
 
 
   /**
@@ -253,8 +274,13 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   /**
    * Reset form
    */
-  public fnResetForm(): void {
+  public fnResetForm(boolNavBack: boolean=false): void {
     this.preferencesForm.reset();
+
+ 
+    if (boolNavBack) {
+      this._router.navigate(['secure/setting/organization', this.oHash, 'preference' ]);
+    } //End if
   } //Function ends
 
 
@@ -351,7 +377,7 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       display_value: ['', [ Validators.required ]],
       column_name: [''],
       type_key: ['', [ Validators.required ]],
-      keywords: [''],
+      keywords: ['', [ Validators.required ]],
       order: [0, [ Validators.min(0)]],
       is_active: [{value: true, disable: true}],
       is_minimum: [{value: false, disable: true}],
@@ -372,7 +398,7 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   private fnDataValueForm(): FormGroup {
     return this._formBuilder.group({
       id: [0],
-      value: [''],
+      value: ['', [ Validators.required ]],
       display_value: ['', [ Validators.required ]],
       description: [''],
       is_active: [true]
