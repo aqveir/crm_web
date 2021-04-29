@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { HttpParams } from '@angular/common/http';
 
 //Framework files
 import { HttpService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
-import { IOrganization } from '../../interfaces/organization/organization.interface';
+import { IOrganization, IOrganizationMinimal, IOrganizationRequest } from '../../interfaces/organization/organization.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,9 @@ export class OrganizationService extends BaseService {
     return Observable.create((observer: Observer<any>) => {
       this._httpService.get('organization')
         .then((response: any) => {
-          observer.next(response);
+          let data: IOrganizationMinimal[] = response.data;
+
+          observer.next(data);
         })
         .catch((error: any) =>  { observer.error(error); })
         .finally()
@@ -38,11 +39,30 @@ export class OrganizationService extends BaseService {
   /**
    * Get Organizations by Hash Identifier
    */
-  public show(hash: string): Observable<any> {
+  public show(hash: string, _params: Object=null): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
-      this._httpService.get('organization/'+hash)
+      this._httpService.get('organization/'+hash, _params)
         .then((response: any) => {
-          observer.next(response);
+          let data: IOrganization = response.data;
+
+          observer.next(data);
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally()
+    });
+  } //Function ends
+
+
+  /**
+   * Create Organization Data
+   */
+  public create(data: IOrganizationRequest, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('organization', data, false, false, _params)
+        .then((response: any) => {
+          let data: any = response.data;
+
+          observer.next(data);
         })
         .catch((error: any) =>  { observer.error(error); })
         .finally()
@@ -53,11 +73,36 @@ export class OrganizationService extends BaseService {
   /**
    * Update Organization Data by Hash Identifier
    */
-  public update(hash: string, data: IOrganization): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.put('organization/'+hash, data)
+  public update(oHash: string, data: IOrganizationRequest, _params: Object=null): Observable<any> {
+
+    if (_params == null) {
+      _params = {};
+    } //End if
+    _params['_method'] = 'PUT';
+
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('organization/'+oHash, data, false, false, _params)
         .then((response: any) => {
-          observer.next(response);
+          let data: any = response.data;
+
+          observer.next(data);
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally()
+    });
+  } //Function ends
+
+
+  /**
+   * Update Organization Data by Hash Identifier
+   */
+  public delete(oHash: string, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.delete('organization/'+oHash, _params)
+        .then((response: any) => {
+          let data: any = response.data;
+
+          observer.next(data);
         })
         .catch((error: any) =>  { observer.error(error); })
         .finally()
