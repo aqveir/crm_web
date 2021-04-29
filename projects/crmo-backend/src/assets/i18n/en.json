@@ -25,7 +25,12 @@
             "PLEASE_WAIT": "Please wait ..."
         },
         "NO_DATA": {
-            "TITLE": "No records found."
+            "TITLE": "No records found.",
+            "GET_STARTED": {
+                "TITLE": "Yet to start ?",
+                "MESSAGE": "You seem to have still not configured this feature </br>for your organization. Enjoy a seamless experience </br>of the system and explore it to its potential.",
+                "BUTTON": "Start Now !!"
+            }
         }
     },
 
@@ -240,11 +245,22 @@
         },
         "ORGANIZATION": {
             "LIST": {
-                "TITLE": "Oraganization List"
+                "TITLE": "Manage Oraganizations"
             },
             "DETAIL": {
+                "TITLE": {
+                    "ADD": "Add Organization",
+                    "EDIT": "Edit Organization"
+                },
                 "TAB_DETAIL": {
                     "TITLE": "Detail",
+                    "SUBSECTION_CONTACT_PERSON": "Contact Person",
+                    "LOGO": {
+                        "LABEL": "Logo",
+                        "PLACEHOLDER": "Upload logo/image file",
+                        "FINE_TEXT": "The image file should be square (ratio 1:1) with jpg, png extensions.",
+                        "VALIDATION_ERROR": "Enter valid logo image file"
+                    },
                     "NAME": {
                         "LABEL": "Name",
                         "PLACEHOLDER": "Enter organization name",
@@ -294,7 +310,7 @@
                         "VALIDATION_ERROR": "Enter valid phone number."
                     },
                     "EMAIL": {
-                        "LABEL": "EMail",
+                        "LABEL": "Email Address",
                         "PLACEHOLDER": "Enter the email address",
                         "FINE_TEXT": "This email will be used to contact the biller for account based communication.",
                         "VALIDATION_ERROR": "Enter valid email address."

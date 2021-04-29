@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 //Application global files
@@ -26,15 +25,12 @@ export class UserProfileComponent  extends BaseComponent implements OnInit {
   public hasError: boolean = false;
 
   public strUserAvatar: string=null;
-  public boolIsNewUser: boolean = false;
 
   /**
    * Default constructor
    */
   constructor(
     private _globals: Globals,
-    private _router: Router,
-    private _route: ActivatedRoute,
     private _notification : NotificationService
   ) { super(); }
 

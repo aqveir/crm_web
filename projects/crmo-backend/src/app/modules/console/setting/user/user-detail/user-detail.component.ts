@@ -108,6 +108,8 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
 
           //Fill Data into variable
           this.objUser = response;
+
+          //Full the form controls with data
           this.fnFillData();
         },(error) => {
           //Stop loader

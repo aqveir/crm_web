@@ -1,76 +1,11 @@
 <form class="form" id="kt_user_profile_form" novalidate="novalidate"
-	[formGroup]="userForm" (ngSubmit)="fnSaveAction($event)" autocomplete="off">	
-	
-	<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
-		<div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap p-0">
-			<!--begin::Details-->
-			<div class="d-flex align-items-center flex-wrap mr-2">
-				<!--begin::Title-->
-				<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5" *ngIf="boolIsNew">
-					{{ 'PAGE.USER.DETAIL.TITLE.ADD' | translate }}
-				</h5>
-				<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5" *ngIf="!boolIsNew">
-					{{ 'PAGE.USER.DETAIL.TITLE.EDIT' | translate }}
-				</h5>
-				<!--end::Title-->
+	[formGroup]="userForm" (ngSubmit)="fnSaveAction($event)" autocomplete="off">
 
-				<!--begin::Separator-->
-				<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
-				<!--end::Separator-->
-
-				<!--begin::Search Form-->
-				<div class="d-flex align-items-center" id="kt_subheader_search">
-					<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">
-						{{ userForm.controls['first_name'].value }} {{ userForm.controls['last_name'].value }}
-					</span>
-				</div>
-				<!--end::Search Form-->
-			</div>
-			<!--end::Details-->
-
-			<!--begin::Toolbar-->
-			<div class="d-flex align-items-center">
-				<!--begin::Button-->
-				<button type="button" (click)="fnResetForm(true)"
-					class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">
-					{{ 'COMMON.LABEL.BACK' | translate }}</button>
-				<!--end::Button-->
-
-				<!--begin::Dropdown-->
-				<div class="btn-group ml-2">
-					<button type="submit" id="save_and_continue"
-						class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base"
-						[ngClass]="{'spinner spinner-white spinner-right pr-15': boolLoading}">{{ 'COMMON.LABEL.SAVE_N_CONTINUE' | translate }}</button>
-						
-					<button type="button" 
-						class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split" 
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon2-down icon-xs"></i></button>
-					<div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
-						<ul class="navi py-5">
-							<li class="navi-item">
-								<button type="submit" id="save_and_new" class="btn btn-bg-white d-block navi-link">
-									<span class="navi-icon">
-										<i class="flaticon2-medical-records"></i>
-									</span>
-									<span class="navi-text pl-2">{{ 'COMMON.LABEL.SAVE_N_ADDNEW' | translate }}</span>
-								</button>
-							</li>
-							<li class="navi-item">
-								<button type="submit" id="save_and_exit" class="btn btn-bg-white d-block navi-link">
-									<span class="navi-icon">
-										<i class="flaticon2-download-2"></i>
-									</span>
-									<span class="navi-text pl-2">{{ 'COMMON.LABEL.SAVE_N_EXIT' | translate }}</span>
-								</button>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!--end::Dropdown-->
-			</div>
-			<!--end::Toolbar-->
-		</div>
-	</div>
+	<crmo-backend-widget-subheader 
+		[title]="boolIsNew?'PAGE.USER.DETAIL.TITLE.ADD':'PAGE.USER.DETAIL.TITLE.EDIT'"
+		[page-info]="userForm.controls['first_name'].value + ' ' + userForm.controls['last_name'].value"
+		[save-group]="true" [back]="true" [loading]="boolLoading"
+		(back)="fnResetForm(true)"></crmo-backend-widget-subheader>
 
 	<!--begin::Card-->
 	<div class="card card-custom mb-5">
@@ -171,7 +106,9 @@
 
 		<!--begin::Card body-->
 		<div class="card-body">
+			<!-- TODO: DELETE on Release -->
 			<div class="d-none">{{ objUser|json }}</div>
+			
 			<div class="tab-content">
 				<!--begin::Tab-->
 				<div class="tab-pane show active px-7" id="kt_tab_user_profile" role="tabpanel">
@@ -203,6 +140,7 @@
 		</div>
 		<!--begin::Card body-->
 
+		<!-- TODO: DELETE on Release -->
 		<div class="card-footer d-none">
 			<div class="d-flex">{{ userForm.value|json }}</div>
 		</div>

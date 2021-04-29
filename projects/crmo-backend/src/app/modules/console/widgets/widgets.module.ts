@@ -14,6 +14,7 @@ import { WidgetsRoutingModule } from './widgets-routing.module';
 import { ModalNoteComponent } from './modal-note/modal-note.component';
 import { ModalDocumentComponent } from './modal-document/modal-document.component';
 import { ModalDeleteConfimComponent } from './modal-delete-confim/modal-delete-confim.component';
+import { WidgetSubheaderComponent } from './widget-subheader/widget-subheader.component';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { ModalDeleteConfimComponent } from './modal-delete-confim/modal-delete-c
     //CRMO Widgets
     ModalNoteComponent, 
     ModalDocumentComponent, 
-    ModalDeleteConfimComponent],
+    ModalDeleteConfimComponent,
+    WidgetSubheaderComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule, 
@@ -42,7 +45,10 @@ import { ModalDeleteConfimComponent } from './modal-delete-confim/modal-delete-c
     LoggerModule
   ],
   exports: [
-    ModalNoteComponent
+    ModalNoteComponent, 
+    ModalDocumentComponent, 
+    ModalDeleteConfimComponent,
+    WidgetSubheaderComponent,
   ]
 })
 export class WidgetsModule { }

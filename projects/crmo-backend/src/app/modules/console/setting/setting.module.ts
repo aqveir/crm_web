@@ -4,8 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Application Modules
 import { NgSelectModule } from '@ng-select/ng-select';
-import { SettingRoutingModule } from './setting-routing.module';
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'ellaisys-lib';
+import { SettingRoutingModule } from './setting-routing.module';
+import { WidgetsModule } from '../widgets/widgets.module';
+import { LayoutModule } from '../_layout/layout.module';
 
 // Application Components
 import { RoleListComponent } from './role/role-list/role-list.component';
@@ -66,6 +68,8 @@ import { PreferenceDetailComponent } from './preference/preference-detail/prefer
     IntlTelInputModule,
 
     //Application Modules
+    WidgetsModule,
+    LayoutModule,
     SettingRoutingModule
   ]
 })

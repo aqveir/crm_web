@@ -19,10 +19,15 @@ import { OrganizationService, IOrganization, IResponse } from 'crmo-lib';
 export class OrganizationDetailComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
+  public boolSaving: boolean = false;
   public hasError: boolean = false;
 
   public oHash: string;
   public objOrganization: IOrganization;
+  public boolRefresh: boolean = false;
+  public boolIsNew: boolean = false;
+  
+  public organizationForm!: FormGroup;
   
 
   /**
@@ -32,6 +37,7 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
     private _globals: Globals,
     private _router: Router,
     private _route: ActivatedRoute,
+    private _formBuilder: FormBuilder,
     private _organizationService: OrganizationService,
     private _notification : NotificationService,
     private _broker: EventBrokerService
@@ -55,34 +61,54 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
     let oHash: string = this._route.snapshot.paramMap.get('ohash');
     this.oHash = oHash;
 
-    //Load data for existing hash value
-    if (oHash!='new') {
-      //Fetch Data
-      this.fnShowData(oHash);      
+    //Initialize form
+    this.fnInitializeForm();
+
+    //Load page depending upon org hash
+    if (oHash=='new') {
+      this.fnCreateData();
+    } else {
+      //Load data for existing hash value
+      this.fnLoadData();     
     } //End if
 
+  } //Function ends
+  
+
+  /**
+   * Create data
+   */
+  private fnCreateData(): void {
+    //Set new flag
+    this.boolIsNew = true;
   } //Function ends
 
 
   /**
    * Get Data
    */
-  public fnShowData(oHash: string): boolean {
+  public fnLoadData(): boolean {
     try {
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
+
       this.boolLoading = true;
-      this._organizationService.show(oHash)
-        .subscribe((response: IResponse) => {
+      this._organizationService.show(this.oHash, params)
+        .subscribe((response: IOrganization) => {
           //Stop loader
           this.boolLoading = false;
 
           //Update Setting Information
-          this._globals.updateSettingInfo('selected_oHash', oHash);
+          this._globals.updateSettingInfo('selected_oHash', this.oHash);
 
           //Raise event to show submenu
           this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, true);
 
           //Set param
-          this.objOrganization = response.data;          
+          this.objOrganization = response;
+
+          //Full the form controls with data
+          this.fnFillData();
         },(error) => {
           //Stop loader
           this.boolLoading = false;
@@ -104,19 +130,181 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
    * Refresh Organization Data
    */
   public fnRefreshOrganizationData(oHash: string): void {
-    this.fnShowData(this.oHash);
+    this.oHash = oHash;
+    this.fnLoadData();
+  } //Function ends
+  
+
+  /**
+   * Save Data
+   */
+  public fnSaveAction(event: any): boolean {
+    try {
+      //Process Phone values
+      let controlPhoneData: any = this.organizationForm.controls['phone_form_control'].value;
+      if (controlPhoneData && controlPhoneData['number'] && controlPhoneData['number'].length>0) {
+        this.organizationForm.patchValue({
+          phone: controlPhoneData['number'],
+          phone_idd: controlPhoneData['iddCode'],
+        });
+      } else {
+        this.organizationForm.controls['phone'].disable();
+        this.organizationForm.controls['phone_idd'].disable();
+      } //End if
+
+      //Process Website URL values
+      let controlWebsiteData: any = this.organizationForm.controls['website'].value;
+      if (controlWebsiteData) {
+        let controlWebsiteProtocalData: any = this.organizationForm.controls['website_protocal'].value;
+        controlWebsiteData = controlWebsiteProtocalData + controlWebsiteData;
+        this.organizationForm.patchValue({
+          website: controlWebsiteData
+        });
+      } //End if
+
+      //Check form validity
+      this.organizationForm.updateValueAndValidity();
+      if (this.organizationForm.invalid) {  
+        let msgError: string = this.fnRaiseErrors(this.organizationForm);
+        this._notification.error('Error', msgError);
+        return false;
+      } //End if
+
+      //Set form value to request object
+      let dataUser: any = this.organizationForm.value;
+
+      this.boolSaving=true;
+      if (this.boolIsNew) {
+        //New Organization
+        this._organizationService.create(dataUser)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
+
+          //Stop loader
+          this.boolSaving = false;
+        },(error) => {
+          //Stop loader
+          this.boolSaving = false;
+          throw error;
+        });
+      } else {
+        //Update Organization
+        this._organizationService.update(this.oHash, dataUser)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
+
+          //Stop loader
+          this.boolSaving = false;
+        },(error) => {
+          //Stop loader
+          this.boolSaving = false;
+          throw error;
+        });
+      } //End if
+
+      return true;
+    } catch (error) {
+      //Stop loader
+      this.boolSaving = false;
+
+      throw error;
+    } //Try-catch ends
+  } //Function ends
+  
+
+  /**
+   * Post Save Action
+   * 
+   * @param submitterId
+   */
+  private fnPostSaveAction(submitterId: string): void {
+    //Action based on submitter
+    switch (submitterId) {
+      case 'save_and_new':
+        this._router.navigate(['secure/setting/organization', 'new'])
+          .then(() => {
+            window.location.reload();
+          });
+        break;
+
+      case 'save_and_exit':
+        this._router.navigate(['secure/setting/organization']);
+        break;
+    
+      case 'save_and_continue':
+      default:
+        //Do nothing
+        break;
+    } //End switch
+  } //function ends
+
+
+  /**
+   * Update form data
+   */
+  private fnFillData() {
+    if (this.objOrganization && this.organizationForm) {
+      //website protocal
+      let strWebsiteProtocal: string = ((this.objOrganization.website?.indexOf('https'))<0)?'http://':'https://';
+      let strWebsiteURL: string = (this.objOrganization.website)?this.objOrganization.website?.replace(strWebsiteProtocal, ''):'';
+
+      this.organizationForm.patchValue({
+        name: this.objOrganization.name?this.objOrganization.name:'',
+        hash: this.objOrganization.hash?this.objOrganization.hash:'',
+        logo: this.objOrganization.logo?this.objOrganization.logo:'',
+        subdomain: this.objOrganization.subdomain?this.objOrganization.subdomain:'',
+        industry_key:this.objOrganization.industry?(this.objOrganization.industry?.key):'',
+        website_protocal: strWebsiteProtocal,
+        website: strWebsiteURL,
+        search_tag: this.objOrganization.search_tag?this.objOrganization.search_tag:'',
+
+        contact_person_name: this.objOrganization.contact_person_name?this.objOrganization.contact_person_name:'',
+        phone: this.objOrganization.phone?this.objOrganization.phone:'',
+        email: this.objOrganization.email?this.objOrganization.email:'',
+      });
+    } //End if
+  }  //Function ends
+
+
+  /**
+   * Reset form
+   */
+  public fnResetForm(boolNavBack: boolean=false): void {
+    this.organizationForm.reset();
+
+    if (boolNavBack) {
+      this._router.navigate(['secure/setting/organization']);
+    } //End if
   } //Function ends
 
 
   /**
-   * Navigate back
+   * Initialize Reactive Form
    */
-  public fnNavigateBack(): void {
-    try {
-      this._notification.error('success', 'now it works');
-    } catch(error) {
-
-    } //Try-catch ends
+  private fnInitializeForm() {
+    this.organizationForm = this._formBuilder.group({
+      name: ['', [ Validators.required ]],
+      hash: [{value: null, disabled: true}],
+      logo: [''],
+      subdomain: ['', [ Validators.required ]],
+      industry_key: ['', [ Validators.required ]],
+      website_protocal: ['http://'],
+      website: ['', [ Validators.pattern(Globals._REGEX_PATTERN_UEL) ]],
+      search_tag: [''],
+      contact_person_name: ['', [ Validators.required ]],
+      phone_form_control: [''],
+      phone: [''],
+      phone_idd: [''],
+      email: ['', [ Validators.email ]],
+    });
   } //Function ends
 
 } //Class ends

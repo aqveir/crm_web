@@ -7,7 +7,7 @@ import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'ellaisys-lib';
-import { OrganizationService, IOrganization, IResponse } from 'crmo-lib';
+import { OrganizationService, IOrganizationMinimal } from 'crmo-lib';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { OrganizationService, IOrganization, IResponse } from 'crmo-lib';
 export class OrganizationListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
-  public objOrganization: IOrganization[];
+  public objOrganization: IOrganizationMinimal[];
 
 
   /**
@@ -60,12 +60,12 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
     try {
       this.boolLoading = true;
       this._organizationService.get()
-        .subscribe((response: IResponse) => {
+        .subscribe((response: IOrganizationMinimal[]) => {
           //Stop loader
           this.boolLoading = false;
 
           //Fill Data into variable
-          this.objOrganization = response.data;
+          this.objOrganization = response;
 
           //Raise event to hide submenu
           this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, false);
@@ -90,7 +90,7 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
    * Show the Organization Details page
    * @param organization 
    */
-  public fnSelectOrganization(organization: IOrganization): boolean {
+  public fnSelectOrganization(organization: IOrganizationMinimal): boolean {
     let objReturnValue: boolean=false;
     try {
       this._router.navigate(['/secure/setting/organization', organization.hash]);

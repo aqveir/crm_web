@@ -158,6 +158,44 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       //Build the params for passing
       let params: Object = {'key': this.oHash};
 
+      //Set form value to request object
+      let dataPreference: IPreferenceRequest = this.preferencesForm.value;
+
+      this.boolLoading = true;
+      if (this.boolIsNew) {
+        this._preferenceService.create(dataPreference, params)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
+
+          //Stop loader
+          this.boolLoading = false;
+        },(error) => {
+          //Stop loader
+          this.boolLoading = false;
+          throw error;
+        });
+      } else {
+        this._preferenceService.update(parseInt(this.uuid), dataPreference, params)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
+
+          //Stop loader
+          this.boolLoading = false;
+        },(error) => {
+          //Stop loader
+          this.boolLoading = false;
+          throw error;
+        });
+      } //End if
+
       return true;
     } catch (error) {
       //Stop loader
@@ -177,14 +215,14 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
     //Action based on submitter
     switch (submitterId) {
       case 'save_and_new':
-        this._router.navigate(['secure/setting/organization', this.oHash, 'user', 'new'])
+        this._router.navigate(['secure/setting/organization', this.oHash, 'preference', 'new'])
           .then(() => {
             window.location.reload();
           });
         break;
 
       case 'save_and_exit':
-        this._router.navigate(['secure/setting/organization', this.oHash, 'user']);
+        this._router.navigate(['secure/setting/organization', this.oHash, 'preference']);
         break;
     
       case 'save_and_continue':

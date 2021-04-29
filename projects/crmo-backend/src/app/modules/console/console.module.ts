@@ -27,8 +27,8 @@ import { WorkQueueComponent } from './work-queue/work-queue.component';
     //CRMO Components
     DashboardComponent,
     WorkQueueComponent,
-    TaskListComponent,
     EventListComponent,
+    TaskListComponent,
   ],
   imports: [
     CommonModule,
