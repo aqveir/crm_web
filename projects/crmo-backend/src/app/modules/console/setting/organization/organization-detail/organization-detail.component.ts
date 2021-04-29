@@ -162,6 +162,21 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
         });
       } //End if
 
+      //Split Contact Name into First/Last for New Organization
+      if (this.boolIsNew) {
+        let strContactName: string = this.organizationForm.controls['contact_person_name'].value;
+        if (strContactName && strContactName.length>0) {
+          let posFirstSpace: number = strContactName.indexOf(' ', 0);
+          let firstName: string = strContactName.substring(0, posFirstSpace);
+          let lastName: string = strContactName.substring((posFirstSpace+1), strContactName.length);
+
+          this.organizationForm.patchValue({
+            first_name: firstName,
+            last_name: lastName
+          });
+        } //End if
+      } //End if
+
       //Check form validity
       this.organizationForm.updateValueAndValidity();
       if (this.organizationForm.invalid) {  
@@ -270,6 +285,11 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
         phone: this.objOrganization.phone?this.objOrganization.phone:'',
         email: this.objOrganization.email?this.objOrganization.email:'',
       });
+
+      //Enable-Disable Controls
+      this.organizationForm.controls['first_name'].disable();
+      this.organizationForm.controls['last_name'].disable();
+      this.organizationForm.controls['logo'].disable();
     } //End if
   }  //Function ends
 
@@ -299,6 +319,8 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
       website_protocal: ['http://'],
       website: ['', [ Validators.pattern(Globals._REGEX_PATTERN_UEL) ]],
       search_tag: [''],
+      first_name: [''],
+      last_name: [''],
       contact_person_name: ['', [ Validators.required ]],
       phone_form_control: [''],
       phone: [''],

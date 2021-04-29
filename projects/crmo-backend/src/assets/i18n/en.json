@@ -119,6 +119,12 @@
     },
 
     "PAGE": {
+        "DASHBOARD": {
+            "TITLE": "Dashboard"
+        },
+        "WORK_QUEUE": {
+            "TITLE": "Work Queue"
+        },
         "AUTH": {
             "SIGNIN": {
                 "TITLE": "Welcome to CRM OMNI",

@@ -53,4 +53,20 @@ export class UserProfileComponent  extends BaseComponent implements OnInit {
 
   } //Function ends
 
+
+  /**
+   * Update Email Address event
+   * 
+   * @param event 
+   */
+  public fnUpdateEmailAddress(event): void {
+    if (this.boolIsNew) {
+      if (this.userProfileForm && (this.userProfileForm.controls['email'].valid)) {
+        this.userProfileForm.patchValue({
+          username: event?.target?.value
+        });
+      } //End if
+    } //End if
+  } //Function ends
+
 } //Class ends

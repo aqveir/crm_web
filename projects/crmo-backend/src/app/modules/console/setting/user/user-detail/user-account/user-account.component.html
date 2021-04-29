@@ -19,6 +19,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-3 text-lg-right text-left">
                         {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.USERNAME.LABEL' | translate }}
+                        <span class="text-danger" *ngIf="boolIsNew">*</span>
                     </label>
                     <div class="col-9">
                         <div class="spinner-darker-primary spinner-input" [ngClass]="{'spinner spinner-sm spinner-right': boolValidatingUsername }">
@@ -42,6 +43,7 @@
                 <div class="form-group row" *ngIf="boolIsNew">
                     <label class="col-form-label col-3 text-lg-right text-left">
                         {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.LABEL' | translate }}
+                        <span class="text-danger">*</span>
                     </label>
                     <div class="col-7">
                         <div class="spinner-darker-primary spinner-input">

@@ -133,7 +133,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
    */
   public fnSaveAction(event: any): boolean {
     try {
-      //Set values
+      //Set phone values
       let controlPhoneData: any = this.userForm.controls['phone_form_control'].value;
       if (controlPhoneData && controlPhoneData['number'] && controlPhoneData['number'].length>0) {
         this.userForm.patchValue({
@@ -143,6 +143,13 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
       } else {
         this.userForm.controls['phone'].disable();
         this.userForm.controls['phone_idd'].disable();
+      } //End if
+
+      //Set confirm password
+      if (this.boolIsNew) {
+        this.userForm.patchValue({
+          password_confirmation: this.userForm.controls['password'].value
+        })
       } //End if
 
       //Check form validity
@@ -293,6 +300,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
       avatar: [''],
       username: ['', [ Validators.required ]],
       password: ['', [ 
+        Validators.required,
         Validators.minLength(Globals._PASSWORD_POLICY.MIN_LENGTH), 
         Validators.maxLength(Globals._PASSWORD_POLICY.MAX_LENGTH), 
         Validators.pattern(Globals._PASSWORD_POLICY.REGEX_PATTERN) ]],

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -8,7 +8,7 @@ import { BaseComponent } from '../../../../../base.component';
 
 //Application Libraries
 import { NotificationService } from 'ellaisys-lib';
-import { IUser } from 'crmo-lib';
+import { IUser, UserService } from 'crmo-lib';
 import { interval } from 'rxjs';
 
 @Component({
@@ -37,6 +37,7 @@ export class UserAccountComponent  extends BaseComponent implements OnInit {
     private _globals: Globals,
     private _router: Router,
     private _route: ActivatedRoute,
+    private _userService: UserService,
     private _notification: NotificationService,
   ) { super(); }
 
@@ -77,15 +78,31 @@ export class UserAccountComponent  extends BaseComponent implements OnInit {
    * Validate Username for Duplicate
    * @param event 
    */
-  public fnValidateUsername(event): void {
+  public fnValidateUsername(event: any): void {
     let username: string = event?.target?.value;
 
     if (username.length>=3) {
       this.boolValidatingUsername=true;
-      console.log(event?.target?.value);
 
-      interval(1000);
-      //this.boolValidatingUsername=false;
+      //Create object
+      let param: Object = { 'username': username };
+
+      this._userService.exists(param)
+      .subscribe((response: any) => {
+        let boolExists: boolean = response.data;
+
+        if (boolExists) {
+          this.userAccountForm.controls['username'].setErrors({'exists': boolExists});
+        } //End if
+
+        //Stop animation
+        this.boolValidatingUsername = false;
+      },(error) => {
+        //Stop animation
+        this.boolValidatingUsername = false;
+
+        throw error;
+      });
     } //End if    
   } //Function ends
 
