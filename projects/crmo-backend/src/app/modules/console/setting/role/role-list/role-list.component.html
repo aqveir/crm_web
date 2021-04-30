@@ -1,25 +1,22 @@
-<div class="full-content-page-height">
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.ROLE.LIST.TITLE'" 
+        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'role', 'new']"></crmo-backend-widget-subheader>
+
+    <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
+
     <!--begin::Card-->
     <div class="card card-custom card-stretch gutter-b">
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">
-                    {{ 'PAGE.ROLE.LIST.TITLE' | translate }}
-                </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">
-                    {{ 'PAGE.ROLE.LIST.FINE_TEXT' | translate }}
-                </span>
             </h3>
             <div class="card-toolbar">
-                <div class="form-group mr-2 mt-8">
+                <div>
                     <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control" placeholder="Search..."/>
+                        <input type="text" class="form-control search-control" placeholder="Search..."/>
                         <span><i class="flaticon2-search-1 icon-md"></i></span>
                     </div>  
                 </div>
-                
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
-                [routerLink]="['/secure/setting/organization/', oHash, 'role', '0']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
             </div>
         </div>
 
@@ -28,8 +25,8 @@
                 <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
                     <thead>
                         <tr class="text-uppercase">
-                            <th class="pl-0" style="min-width: 150px">{{ 'PAGE.ROLE.LIST.COLUMNS.NAME' | translate }}</th>
-                            <th style="min-width: 130px">{{ 'PAGE.ROLE.LIST.COLUMNS.STATUS' | translate }}</th>
+                            <th class="pl-0" style="width:100%;">{{ 'PAGE.ROLE.LIST.COLUMNS.NAME' | translate }}</th>
+                            <th style="min-width: 110px">{{ 'PAGE.ROLE.LIST.COLUMNS.STATUS' | translate }}</th>
                             <th style="min-width: 150px">
                                 <span class="text-primary">{{ 'PAGE.ROLE.LIST.COLUMNS.LAST_MODIFIED' | translate }}</span>
                                 <span class="svg-icon svg-icon-sm svg-icon-primary">
@@ -50,7 +47,7 @@
                     <tbody>
                         <tr *ngFor="let role of listRoles" class="cursor-pointer" style="outline: none;"
                             [routerLink]="['/secure/setting/organization', oHash, 'role', role.key]">
-                            <td>
+                            <td class="">
                                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ role.display_value }}</span>
                                 <span class="text-muted">{{ role.key }}</span>
                             </td>

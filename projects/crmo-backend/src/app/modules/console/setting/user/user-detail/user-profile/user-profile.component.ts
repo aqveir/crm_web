@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 //Application global files
@@ -26,15 +25,12 @@ export class UserProfileComponent  extends BaseComponent implements OnInit {
   public hasError: boolean = false;
 
   public strUserAvatar: string=null;
-  public boolIsNewUser: boolean = false;
 
   /**
    * Default constructor
    */
   constructor(
     private _globals: Globals,
-    private _router: Router,
-    private _route: ActivatedRoute,
     private _notification : NotificationService
   ) { super(); }
 
@@ -55,6 +51,22 @@ export class UserProfileComponent  extends BaseComponent implements OnInit {
    */
   private fnInitialize(): void {
 
+  } //Function ends
+
+
+  /**
+   * Update Email Address event
+   * 
+   * @param event 
+   */
+  public fnUpdateEmailAddress(event): void {
+    if (this.boolIsNew) {
+      if (this.userProfileForm && (this.userProfileForm.controls['email'].valid)) {
+        this.userProfileForm.patchValue({
+          username: event?.target?.value
+        });
+      } //End if
+    } //End if
   } //Function ends
 
 } //Class ends

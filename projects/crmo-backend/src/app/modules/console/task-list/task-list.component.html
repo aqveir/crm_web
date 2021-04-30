@@ -1,29 +1,26 @@
-<div>
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.TASK_LIST.TITLE'"
+        ></crmo-backend-widget-subheader>
+
     <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
 
     <!--begin::Card-->
     <div class="card card-custom gutter-b card-screen-height">
-        <div class="card-header border-0 py-2">
+        <div class="card-header border-0 py-5" *ngIf="listContact?.length>0">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">
-                    {{ 'PAGE.TASK_LIST.TITLE' | translate }}
-                </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
             </h3>
-            <div class="card-toolbar align-items-baseline">
-                <div class="form-group mr-2" *ngIf="listContact?.length>0">
+            <div class="card-toolbar">
+                <div class="mr-2">
                     <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control" placeholder="Search..."/>
+                        <input type="text" class="form-control search-control" placeholder="Search..."/>
                         <span><i class="flaticon2-search-1 icon-md"></i></span>
                     </div>  
                 </div>
 
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm mr-2" *ngIf="listContact?.length>0">
+                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
                     <span class="navi-icon"><i class="la la-filter icon-md p-0"></i></span>
                 </a>
-                
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
-                [routerLink]="['/secure/setting/user/', '0']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
             </div>
         </div>
 

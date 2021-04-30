@@ -1,28 +1,26 @@
-<div>
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.ORGANIZATION.LIST.TITLE'" 
+        [routerLinkAdd]="['/secure/setting/organization/', 'new']"></crmo-backend-widget-subheader>
+
+    <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
+
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">
-                    {{ 'PAGE.ORGANIZATION.LIST.TITLE' | translate }}
-                </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
             </h3>
             <div class="card-toolbar">
-                <div class="form-group mr-2 mt-8">
+                <div class="mr-2">
                     <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control" placeholder="Search..."/>
+                        <input type="text" class="form-control search-control" placeholder="Search..."/>
                         <span><i class="flaticon2-search-1 icon-md"></i></span>
                     </div>  
                 </div>
 
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm mr-2">
+                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
                     <span class="navi-icon"><i class="la la-filter icon-md"></i></span>
                 </a>
-                
-
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
-                [routerLink]="['/secure/setting/organization/', 'new']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
             </div>
         </div>
 

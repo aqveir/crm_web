@@ -74,7 +74,7 @@
             <div class="col-9">
                 <intl-tel-input [cssClass]="'form-control pl-5'" formControlName="phone_form_control"
                     [searchCountryFlag]="true" [enablePlaceholder]="true" [separateDialCode]="false"
-                    [phoneValidation]="true" [selectedCountryISO]="objUser?.country?.alpha2_code"></intl-tel-input>
+                    [phoneValidation]="true" [selectedCountryISO]="(objUser?.country)?(objUser?.country?.alpha2_code):'in'"></intl-tel-input>
                 <span class="form-text text-muted">{{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.FINE_TEXT' | translate }}</span>
 
                 <span class="form-text text-danger" *ngIf="userProfileForm.controls.phone_form_control.dirty && userProfileForm.controls.phone_form_control.invalid">
@@ -99,6 +99,7 @@
                     </div>
                     <input class="form-control" type="email" formControlName="email"
                         placeholder="{{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.PLACEHOLDER' | translate }}"
+                        (keyup)="fnUpdateEmailAddress($event)"
                         autocomplete="off" tabindex="4" />
                 </div>
                 <span class="form-text text-muted">

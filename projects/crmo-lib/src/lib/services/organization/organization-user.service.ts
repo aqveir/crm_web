@@ -7,9 +7,10 @@ import { BaseService } from '../base.service';
 
 // Interfaces
 import { IResponseError } from '../../interfaces/common/response.interface';
+import { IUser } from '../../interfaces/user/user.interface';
 
 // Models
-import { IUser } from 'dist/crmo-lib/lib/interfaces/user/user.interface';
+
 
 @Injectable({
   providedIn: 'root'

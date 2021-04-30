@@ -1,23 +1,22 @@
-<div>
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.USER.LIST.TITLE'" 
+        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'user', 'new']"></crmo-backend-widget-subheader>
+
+    <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
+
     <!--begin::Card-->
     <div class="card card-custom gutter-b">
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">
-                    {{ 'PAGE.ORGANIZATION.USER_LIST.TITLE' | translate }}
-                </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
             </h3>
             <div class="card-toolbar">
-                <div class="form-group mr-2 mt-8">
+                <div class="">
                     <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control" placeholder="Search..."/>
+                        <input type="text" class="form-control search-control" placeholder="Search..."/>
                         <span><i class="flaticon2-search-1 icon-md"></i></span>
                     </div>  
                 </div>
-                
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
-                [routerLink]="['/secure/setting/organization/', oHash, 'user', '0']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
             </div>
         </div>
 
@@ -74,11 +73,11 @@
                                     [class]="user.availability?.status?.key"
                                     [title]="user.availability?.status?.display_value">&nbsp;</span>
                             </td>
-                            <td>
+                            <td class="pl-2">
                                 <span class="text-dark-75 d-block">{{ user.last_login_at | date }}</span>
                                 <span class="text-muted">{{ user.last_login_at | date:'shortTime' }}</span>
                             </td>
-                            <td>
+                            <td class="pl-2">
                                 <span class="text-dark-75 d-block">{{ user.last_updated_at | date }}</span>
                                 <span class="text-muted">{{ user.last_updated_at | date:'shortTime' }}</span>
                             </td>

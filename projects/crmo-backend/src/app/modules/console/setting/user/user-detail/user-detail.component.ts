@@ -70,7 +70,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
     this.fnInitializeForm();
 
     //Create User Object
-    if (uuid=='0') {
+    if (uuid=='new') {
       this.fnCreateData();
     } else {
       //Load form
@@ -108,6 +108,8 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
 
           //Fill Data into variable
           this.objUser = response;
+
+          //Full the form controls with data
           this.fnFillData();
         },(error) => {
           //Stop loader
@@ -126,26 +128,14 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnUpdateData(_objUser: IUser): boolean {
-    try {
-      this.boolRefresh = false;
-      this.objUser = _objUser;
-      this.boolRefresh = true;
-      return true;
-    } catch (error) {
-      throw error;
-    } //Try-catch ends 
-  }
-
-
   /**
    * Save Data
    */
-  public fnSaveAction(): boolean {
+  public fnSaveAction(event: any): boolean {
     try {
-      //Set values
+      //Set phone values
       let controlPhoneData: any = this.userForm.controls['phone_form_control'].value;
-      if (controlPhoneData['number'].length>0) {
+      if (controlPhoneData && controlPhoneData['number'] && controlPhoneData['number'].length>0) {
         this.userForm.patchValue({
           phone: controlPhoneData['number'],
           phone_idd: controlPhoneData['iddCode'],
@@ -155,11 +145,17 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
         this.userForm.controls['phone_idd'].disable();
       } //End if
 
+      //Set confirm password
+      if (this.boolIsNew) {
+        this.userForm.patchValue({
+          password_confirmation: this.userForm.controls['password'].value
+        })
+      } //End if
+
       //Check form validity
       this.userForm.updateValueAndValidity();
       if (this.userForm.invalid) { 
         let msgError: string = this.fnRaiseErrors(this.userForm);
-        console.log(msgError);
         this._notification.error('Error', msgError);
         return false; 
       } //End if
@@ -177,6 +173,9 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
           //Show notification
           this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
 
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
+
           //Stop loader
           this.boolLoading = false;
         },(error) => {
@@ -189,6 +188,9 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
         .subscribe((response: any) => {
           //Show notification
           this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
 
           //Stop loader
           this.boolLoading = false;
@@ -206,6 +208,33 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
+
+
+  /**
+   * Post Save Action
+   * 
+   * @param submitterId
+   */
+  private fnPostSaveAction(submitterId: string): void {
+    //Action based on submitter
+    switch (submitterId) {
+      case 'save_and_new':
+        this._router.navigate(['secure/setting/organization', this.oHash, 'user', 'new'])
+          .then(() => {
+            window.location.reload();
+          });
+        break;
+
+      case 'save_and_exit':
+        this._router.navigate(['secure/setting/organization', this.oHash, 'user']);
+        break;
+    
+      case 'save_and_continue':
+      default:
+        //Do nothing
+        break;
+    } //End switch
+  } //function ends
 
 
   /**
@@ -271,6 +300,7 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
       avatar: [''],
       username: ['', [ Validators.required ]],
       password: ['', [ 
+        Validators.required,
         Validators.minLength(Globals._PASSWORD_POLICY.MIN_LENGTH), 
         Validators.maxLength(Globals._PASSWORD_POLICY.MAX_LENGTH), 
         Validators.pattern(Globals._PASSWORD_POLICY.REGEX_PATTERN) ]],
