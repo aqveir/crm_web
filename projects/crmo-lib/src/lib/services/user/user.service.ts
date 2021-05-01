@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
 // Framework files
-import { HttpService } from 'ellaisys-lib';
+import { ContentType, HttpService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 
 // Interfaces
@@ -76,7 +76,7 @@ export class UserService extends BaseService {
    */
   public create(data: IUserRequest, _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user', data)
+      this._httpService.post('user', data, false, _params)
         .then((response: any) => {
           let data: any = response.data;
 
@@ -92,8 +92,15 @@ export class UserService extends BaseService {
    * Update Organization User by Identifier
    */
   public update(uHash: string, data: IUserRequest, _params: Object=null): Observable<any> {
+
+    //Add method to PUT
+    if (_params == null) {
+      _params = {};
+    } //End if
+    _params['_method'] = 'PUT';
+
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('user/' + uHash, data, _params)
+      this._httpService.post('user/' + uHash, data, false, _params, ContentType.NOTHING)
         .then((response: any) => {
           let data: any = response.data;
 

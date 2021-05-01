@@ -25,7 +25,6 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public strOrgLogo: string = null;
   public objLookupIndustry: ILookup;
   public listLookupIndustryValues: ILookupValue[];
   
@@ -46,6 +45,28 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit {
 
     //Initilaize component
     this.fnInitialize();
+  } //Function ends
+
+
+  /**
+   * File control change event
+   * 
+   * @param event 
+   */
+  public fnFileUploadChangeEvent(event): void {
+    try {
+      let uploadedFile: File;
+
+      if (event?.target?.files) {
+        uploadedFile = event?.target?.files[0];
+        this.organizationDetailForm.patchValue({
+          logo: uploadedFile
+        });
+        console.log(uploadedFile);
+      } //End if
+    } catch(error) {
+      throw error;
+    } //Try-catch ends
   } //Function ends
 
 

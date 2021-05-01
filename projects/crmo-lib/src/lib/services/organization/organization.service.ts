@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
 //Framework files
-import { HttpService } from 'ellaisys-lib';
+import { ContentType, HttpService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 import { IOrganization, IOrganizationMinimal, IOrganizationRequest } from '../../interfaces/organization/organization.interface';
 
@@ -58,7 +58,7 @@ export class OrganizationService extends BaseService {
    */
   public create(data: IOrganizationRequest, _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('organization', data, false, false, _params)
+      this._httpService.post('organization', data, false, _params)
         .then((response: any) => {
           let data: any = response.data;
 
@@ -81,7 +81,7 @@ export class OrganizationService extends BaseService {
     _params['_method'] = 'PUT';
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('organization/'+oHash, data, false, false, _params)
+      this._httpService.post('organization/'+oHash, data, false, _params, ContentType.NOTHING)
         .then((response: any) => {
           let data: any = response.data;
 

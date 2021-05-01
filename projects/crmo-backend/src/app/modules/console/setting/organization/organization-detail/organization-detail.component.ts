@@ -185,11 +185,11 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
         return false;
       } //End if
 
-      //Set form value to request object
-      let dataUser: any = this.organizationForm.value;
+      //Set form value to request object (transform to FormData)
+      let dataUser: any = this.fnTransformReactiveFormGroup2FormData(this.organizationForm);
 
       this.boolSaving=true;
-      if (this.boolIsNew) {
+      if (this.boolIsNew) { //Create
         //New Organization
         this._organizationService.create(dataUser)
         .subscribe((response: any) => {
@@ -207,8 +207,11 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
           throw error;
         });
       } else {
+        //Build the params for passing
+        let params: Object = {'key': this.oHash};
+
         //Update Organization
-        this._organizationService.update(this.oHash, dataUser)
+        this._organizationService.update(this.oHash, dataUser, params)
         .subscribe((response: any) => {
           //Show notification
           this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
@@ -274,7 +277,6 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
       this.organizationForm.patchValue({
         name: this.objOrganization.name?this.objOrganization.name:'',
         hash: this.objOrganization.hash?this.objOrganization.hash:'',
-        logo: this.objOrganization.logo?this.objOrganization.logo:'',
         subdomain: this.objOrganization.subdomain?this.objOrganization.subdomain:'',
         industry_key:this.objOrganization.industry?(this.objOrganization.industry?.key):'',
         website_protocal: strWebsiteProtocal,
@@ -289,7 +291,7 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
       //Enable-Disable Controls
       this.organizationForm.controls['first_name'].disable();
       this.organizationForm.controls['last_name'].disable();
-      this.organizationForm.controls['logo'].disable();
+      this.organizationForm.controls['logo'].enable();
     } //End if
   }  //Function ends
 
@@ -313,7 +315,7 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
     this.organizationForm = this._formBuilder.group({
       name: ['', [ Validators.required ]],
       hash: [{value: null, disabled: true}],
-      logo: [''],
+      logo: [{value: null, disabled: true}],
       subdomain: ['', [ Validators.required ]],
       industry_key: ['', [ Validators.required ]],
       website_protocal: ['http://'],

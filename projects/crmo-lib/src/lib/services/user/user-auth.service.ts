@@ -3,7 +3,7 @@ import { Observable, Observer } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
 // Framework files
-import { HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
+import { ContentType, HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 
 // Interfaces
@@ -37,7 +37,7 @@ export class UserAuthService extends BaseService {
       .set('device_id', _data.device_id);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user/login', params, true, false)
+      this._httpService.post('user/login', params, false, null, ContentType.ENCODED_FORM_DATA)
         .then((response: any) => {
           let claim: IResponseUserLogin = response.data;
 
@@ -63,7 +63,7 @@ export class UserAuthService extends BaseService {
    * Logout the user using the backend service.
    */
   public logout(): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.put('user/logout', null)
         .then((response: any) => {
 

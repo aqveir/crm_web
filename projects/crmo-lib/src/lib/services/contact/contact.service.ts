@@ -33,7 +33,7 @@ export class ContactService extends BaseService {
       .set('size', _size);
 
       return new Observable((observer: Observer<any>) => {
-        this._httpService.post('contact/fetch', _payload, false, false, params)
+        this._httpService.post('contact/fetch', _payload, false, params)
           .then((response: any) => {
             let data: IContact[] = response.data;
             observer.next(data); 

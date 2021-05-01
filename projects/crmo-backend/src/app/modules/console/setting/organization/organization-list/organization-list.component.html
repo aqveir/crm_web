@@ -57,11 +57,12 @@
                             (click)="fnSelectOrganization(organization)">
                             <td class="">
                                 <div class="symbol symbol-50 symbol-light mt-1">
-                                    <span class="symbol-label" *ngIf="organization.logo">
-                                        <img [src]="'assets/media/svg/avatars/001-boy.svg'" class="h-75 align-self-end" alt="" />
+                                    <span class="symbol-label" *ngIf="organization?.logo">
+                                        <img [src]="organization?.logo" class="align-self-end bg-hover-gray-100 img-thumbnail" alt="Logo" 
+                                            onerror="this.src='assets/media/organizations/logo-sample_200_200.png'" />
                                     </span>
 
-                                    <span class="symbol-label font-size-h4 font-weight-bold" *ngIf="!organization.logo">{{ organization.name|shorten:1 }}</span>
+                                    <span class="symbol-label font-size-h4 font-weight-bold" *ngIf="!(organization?.logo)">{{ organization.name|shorten:1 }}</span>
                                 </div>
                             </td>
                             <td>

@@ -12,6 +12,22 @@ export abstract class BaseComponent {
 
 
   /**
+   * Transform Reactive Form Group into HttpFormData
+   * 
+   * @param dataForm FormGroup
+   */
+  public fnTransformReactiveFormGroup2FormData(dataForm: FormGroup): any {
+    let formData: FormData = new FormData();
+
+    Object.keys(dataForm.controls).forEach((name: string) => {
+      let value: any = dataForm.controls[name].value;
+      formData.append(name, value); 
+    });
+    return formData;
+  } //Function ends
+
+
+  /**
    * Raise Errors as Appropriate
    * 
    * @param formGroup 
