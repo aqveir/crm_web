@@ -1,0 +1,112 @@
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.LEAD.LEAD_LIST.TITLE'"
+        ></crmo-backend-widget-subheader>
+
+        <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
+
+    <!--begin::Card-->
+    <div class="card card-custom gutter-b card-screen-height">
+        <div class="card-header border-0 py-5" *ngIf="listLead?.length>0">
+            <h3 class="card-title align-items-start flex-column">
+            </h3>
+
+            <div class="card-toolbar align-items-baseline">
+                <div class="mr-2">
+                    <div class="input-icon input-icon-right">
+                        <input type="text" class="form-control search-control" placeholder="Search..."/>
+                        <span><i class="flaticon2-search-1 icon-md"></i></span>
+                    </div>  
+                </div>
+
+                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
+                    <span class="navi-icon"><i class="la la-filter icon-md"></i></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body py-0">
+            <div class="table-responsive" *ngIf="listLead?.length>0">
+                <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
+                    <thead class="thead-dark">
+                        <tr class="text-uppercase">
+                            <th scope="col" class="pl-5" colspan="2" style="width:100%;">{{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.CONTACT_FULL_NAME' | translate }}</th>
+                            <th scope="col" style="min-width: 150px">{{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.ACTION_CONTROLS' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.TYPE' | translate }}</th>
+                            <th scope="col" style="min-width: 130px">{{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.STAGE' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 130px">{{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.STATUS' | translate }}</th>
+                            <th scope="col" class="d-none d-md-table-cell" style="min-width: 150px">{{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.ACCOUNT_NAME' | translate }}</th>
+                            <th scope="col" style="min-width: 130px">{{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.OWNER' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
+                                {{ 'PAGE.LEAD.LEAD_LIST.COLUMNS.LAST_MODIFIED' | translate }}
+                                <span class="ml-2 cursor-pointer">
+                                    <i class="la la-sort text-white icon-lg" (click)="fnSortColumn('last_date', 'asc')"></i>
+                                    <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'desc')" [ngClass]="{'d-none': true}"></i>
+                                    <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'asc')" [ngClass]="{'d-none': true}"></i>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let lead of listLead" class="cursor-pointer" style="outline: none;"
+                            [routerLink]="['/secure/lead', lead.hash]">
+                            <td class="pr-3">
+                                <div class="symbol symbol-50 symbol-light mt-1">
+                                    <span class="symbol-label" *ngIf="lead.contact?.avatar">
+                                        <img [src]="lead.contact?.avatar" class="h-75 align-self-end rounded-circle" alt="Avatar" />
+                                    </span>
+
+                                    <span class="symbol-label font-size-h6 font-weight-bold rounded-circle" *ngIf="!lead.contact?.avatar">{{ lead.contact?.name_initials }}</span>
+                                </div>
+                            </td>
+
+                            <td class="w-100">
+                                <span class="text-dark-75 font-weight-bolder d-block" 
+                                    placement="bottom" [ngbTooltip]="lead.contact?.full_name">
+                                    {{ lead.contact?.full_name | shorten:25 }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.SMS' | translate"><i class="la la-sms icon-xl"></i></button>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate"><i class="la la-envelope icon-xl"></i></button>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell">
+                                <span class="text-dark-50">{{ lead.type?.display_value }}</span>
+                            </td>
+
+                            <td>
+                                <span class="text-dark-50">{{ lead.stage?.display_value }}</span>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell">
+                                <span class="text-dark-50">{{ lead.status?.display_value }}</span>
+                            </td>
+
+                            <td class="d-none d-md-table-cell">
+                                <span class="text-dark-50" placement="bottom" [ngbTooltip]="lead.account?.name">
+                                    {{ lead.account?.name | shorten:20:'...' }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="text-dark-50" placement="bottom" [ngbTooltip]="lead.owner?.full_name">
+                                    {{ lead.owner?.full_name | shorten:20:'...' }}
+                                </span>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell table-cell-date">
+                                <span class="text-dark-75 d-block ml-5">{{ lead.last_updated_at | date }}</span>
+                                <span class="text-muted d-block ml-5">{{ lead.last_updated_at | date:'shortTime' }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--end::Card-->
+</div>

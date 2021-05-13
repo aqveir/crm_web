@@ -2,19 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { InlineSVGModule } from 'ng-inline-svg';
-
 //Plugin Modules
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { InlineSVGModule } from 'ng-inline-svg';
+
+//Application Libraries
+import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
 
 // Application Modules
 import { LayoutModule } from './_layout/layout.module';
 import { ConsoleRoutingModule } from './console-routing.module';
 import { ContactModule } from './contact/contact.module';
+import { LeadModule } from './lead/lead.module';
+import { OpportunityModule } from './opportunity/opportunity.module';
+import { SupportModule } from './support/support.module';
 import { AccountModule } from './account/account.module';
 import { SettingModule } from './setting/setting.module';
 import { WidgetsModule } from './widgets/widgets.module';
-import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
 
 // Application Components
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -55,8 +59,18 @@ import { WorkQueueComponent } from './work-queue/work-queue.component';
     SettingModule,
     ContactModule,
     AccountModule,
+    LeadModule,
+    OpportunityModule,
+    SupportModule,
   ],
   exports: [
+    //EllaiSys Library
+    TranslateModule,
+    NotificationModule,
+    ValidatorModule,
+    PipeModule,
+    LoggerModule,
+
     //CRMO Modules
     LayoutModule,
     WidgetsModule,
