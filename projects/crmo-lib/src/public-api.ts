@@ -23,6 +23,7 @@ export * from './lib/interfaces/preference/preference.interface';
 export * from './lib/interfaces/contact/contact.interface';
 export * from './lib/interfaces/note/note.interface';
 export * from './lib/interfaces/document/document.interface';
+export * from './lib/interfaces/account/account.interface';
 
 //Exported Services
 export * from './lib/services/common/lookup/lookup.service';
@@ -40,6 +41,7 @@ export * from './lib/services/note/note.service';
 export * from './lib/services/document/document.service';
 //export * from './lib/services/catalogue/catalogue-category.service';
 //export * from './lib/services/wallet/wallet.service';
+export * from './lib/services/account/account.service';
 
 //Exported Models
 export * from './lib/models/common/common.model';

@@ -350,6 +350,17 @@
                     "LAST_LOGIN": "Last Login",
                     "LAST_MODIFIED": "Last modified"
                 }
+            },
+            "ACCOUNT_LIST":{
+                "TITLE": "Account List",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "OWNER": "Owner",
+                    "TYPE": "Type",
+                    "LOCATION":"City",
+                    "LAST_LOGIN": "Last Login",
+                    "LAST_MODIFIED": "Last modified"
+                }
             }
         },
         "CONTACT": {
