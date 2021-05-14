@@ -22,7 +22,10 @@
             "SMS": "SMS",
             "EMAIL": "Email",
 
-            "PLEASE_WAIT": "Please wait ..."
+            "PLEASE_WAIT": "Please wait ...",
+
+            "SEARCH": "Search",
+            "SEARCH_AND_ELLIPSIS": "Search ..."
         },
         "NO_DATA": {
             "TITLE": "No records found.",
@@ -397,6 +400,23 @@
                 },
                 "TAB_SETTINGS": {
                     "TITLE": "Settings"
+                }
+            }
+        },
+        "LEAD": {
+            "LEAD_LIST": {
+                "TITLE": "Leads",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACT_FULL_NAME": "Name",
+                    "TYPE": "Type",
+                    "OWNER": "Owner",
+                    "SOURCES": "Source",
+                    "STAGE": "Stage",
+                    "STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
                 }
             }
         },

@@ -164,7 +164,7 @@ export const DynamicAsideMenuConfig = {
       title: 'request-leads',
       root: true,
       type: 'link',
-      icon: 'flaticon2-expand',
+      icon: 'flaticon-add-label-button',
       page: '/secure/leads',
       translate: 'MENU.LEAD_LIST.LABEL'
     },
