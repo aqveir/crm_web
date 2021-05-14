@@ -39,6 +39,8 @@ export * from './lib/services/note/note.service';
 export * from './lib/services/document/document.service';
 
 export * from './lib/services/service-request/lead.service';
+export * from './lib/services/service-request/opportunity.service';
+export * from './lib/services/service-request/support.service';
 //export * from './lib/services/catalogue/catalogue-category.service';
 //export * from './lib/services/wallet/wallet.service';
 export * from './lib/services/account/account.service';

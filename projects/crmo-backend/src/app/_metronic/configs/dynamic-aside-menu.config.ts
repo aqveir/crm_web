@@ -164,8 +164,8 @@ export const DynamicAsideMenuConfig = {
       title: 'request-leads',
       root: true,
       type: 'link',
-      icon: 'flaticon-add-label-button',
-      page: '/secure/leads',
+      icon: 'flaticon-envelope',
+      page: '/secure/lead',
       translate: 'MENU.LEAD_LIST.LABEL'
     },
     {
@@ -173,9 +173,18 @@ export const DynamicAsideMenuConfig = {
       title: 'request-opportunities',
       root: true,
       type: 'link',
-      icon: 'flaticon2-expand',
-      page: '/secure/opportunities',
+      icon: 'flaticon-add-label-button',
+      page: '/secure/opportunity',
       translate: 'MENU.OPPORTUNITY_LIST.LABEL'
+    },
+    {
+      name: 'aside_tab_support_list',
+      title: 'request-support',
+      root: true,
+      type: 'link',
+      icon: 'flaticon-businesswoman',
+      page: '/secure/support',
+      translate: 'MENU.SUPPORT_LIST.LABEL'
     },
     {
       name: 'aside_tab_task_list',

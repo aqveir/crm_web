@@ -16,8 +16,11 @@ const routes: Routes = [
     { path: 'account', loadChildren: () => import('../console/account/account.module').then(m => m.AccountModule) },
     { path: 'contact', loadChildren: () => import('../console/contact/contact.module').then(m => m.ContactModule) },
     { path: 'lead', loadChildren: () => import('../console/lead/lead.module').then(m => m.LeadModule) },
+    { path: 'opportunity', loadChildren: () => import('../console/opportunity/opportunity.module').then(m => m.OpportunityModule) },
+    { path: 'support', loadChildren: () => import('../console/support/support.module').then(m => m.SupportModule) },
     { path: 'setting', loadChildren: () => import('../console/setting/setting.module').then(m => m.SettingModule) },
     { path: 'leads', pathMatch: 'full', redirectTo: 'lead' },
+    { path: 'opportunities', pathMatch: 'full', redirectTo: 'opportunity' },
     { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   ]}
 ];

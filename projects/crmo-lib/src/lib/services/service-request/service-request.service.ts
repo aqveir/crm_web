@@ -5,7 +5,7 @@ import { Observable, Observer } from 'rxjs';
 import { HttpService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 
-import { IServiceRequestMinimal } from '../../interfaces/service-request/service-request.interface';
+import { IServiceRequestMinimal, IServiceRequest } from '../../interfaces/service-request/service-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,7 @@ export abstract class ServiceRequestService extends BaseService {
     return new Observable((observer: Observer<any>) => {
       this._httpService.get('preference/'+id.toString())
         .then((response: any) => {
-          let data: any = response.data;
+          let data: IServiceRequest = response.data;
 
           observer.next(data);
         })
@@ -104,7 +104,6 @@ export abstract class ServiceRequestService extends BaseService {
   } //Function ends
 
 
-
   /**
    * Set Default Params
    * 
@@ -147,8 +146,5 @@ export abstract class ServiceRequestService extends BaseService {
 
     return objReturnValue;
   } //Function ends
-
-
-  
 
 } //Class ends

@@ -67,6 +67,9 @@
         "OPPORTUNITY_LIST": {
             "LABEL": "Opportunities"
         },
+        "SUPPORT_LIST": {
+            "LABEL": "Support Requests"
+        },
         "TASK_LIST": {
             "LABEL": "Tasks"
         },
@@ -408,7 +411,41 @@
                 "TITLE": "Leads",
                 "SUB_TITLE": "Loaded 30 of total 5000",
                 "COLUMNS": {
-                    "CONTACT_FULL_NAME": "Name",
+                    "CONTACT_FULL_NAME": "Contact Name",
+                    "TYPE": "Type",
+                    "OWNER": "Owner",
+                    "SOURCES": "Source",
+                    "STAGE": "Stage",
+                    "STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
+                }
+            }
+        },
+        "OPPORTUNITY": {
+            "OPPORTUNITY_LIST": {
+                "TITLE": "Opportunities",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACT_FULL_NAME": "Contact Name",
+                    "TYPE": "Type",
+                    "OWNER": "Owner",
+                    "SOURCES": "Source",
+                    "STAGE": "Stage",
+                    "STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
+                }
+            }
+        },
+        "SUPPORT": {
+            "SUPPORT_LIST": {
+                "TITLE": "Support Requests",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACT_FULL_NAME": "Contact Name",
                     "TYPE": "Type",
                     "OWNER": "Owner",
                     "SOURCES": "Source",

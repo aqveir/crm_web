@@ -17,9 +17,13 @@ import { LeadRoutingModule } from './lead-routing.module';
 
 // Application Components
 import { LeadListComponent } from './lead-list/lead-list.component';
+import { LeadDetailComponent } from './lead-detail/lead-detail.component';
 
 @NgModule({
-  declarations: [LeadListComponent],
+  declarations: [
+    LeadListComponent, 
+    LeadDetailComponent
+  ],
   imports: [
     CommonModule,
     FormsModule, 
