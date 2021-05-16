@@ -463,7 +463,7 @@
             "COLUMNS": {
                 "TASK_TYPE": "Type",
                 "TASK_OWNER": "Owner",
-                "TASK_CONTACT": "Contact",
+                "TASK_ASSIGNEE": "Assignee",
                 "TASK_TITLE": "Subject",
                 "TASK_STATUS": "Status",
                 "TASK_PRIORITY": "Priority",
