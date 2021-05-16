@@ -110,7 +110,7 @@ export abstract class ServiceRequestService extends BaseService {
    * @param _params 
    * @param _categoryKey 
    */
-  protected setDefaultParams(_categoryKey: string, _params: Object=null): Object {
+  protected setDefaultParamsWithPagination(_categoryKey: string, _params: Object=null): Object {
     let objReturnValue: Object;
 
     try {
@@ -118,25 +118,16 @@ export abstract class ServiceRequestService extends BaseService {
       if (_params==null) { 
         _params = {
           'category_key': _categoryKey,
-          'page': 1,
-          'size': 10
         }; 
       } else { 
         //Set category key to fetch data
         if (!(super.hasProperty(_params, 'category_key'))) {
           _params['category_key'] = _categoryKey;
         } //End if
-
-        //Set page number to fetch data
-        if (!super.hasProperty(_params, 'page')) {
-          _params['page'] = 1;
-        } //End if
-
-        //Set page size to fetch data
-        if (!(super.hasProperty(_params, 'size'))) {
-          _params['size'] = 10;
-        } //End if        
       } //End if
+
+      //Add Pagination params, if missing
+      _params = super.setDefaultParamsForPagination(_params);
 
       //Set Object
       objReturnValue=_params;

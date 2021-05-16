@@ -22,6 +22,21 @@
 
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
+            <div class="ml-2" *ngIf="boolShowSearchControl">
+                <div class="input-icon input-icon-right">
+                    <input type="text" class="form-control search-control" placeholder="{{ 'COMMON.LABEL.SEARCH_AND_ELLIPSIS' | translate }}"/>
+                    <span><i class="flaticon2-search-1 icon-md"></i></span>
+                </div>  
+            </div>
+
+            <!--begin::Button-->
+            <div class="btn-group ml-2" *ngIf="boolShowFilterButton">
+                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
+                    <span class="navi-icon"><i class="la la-filter icon-md p-0"></i></span>
+                </a>
+            </div>
+            <!--end::Button-->         
+
             <!--begin::Button-->
             <div class="btn-group ml-2" *ngIf="strRouterLinkAddBtn!=null">
                 <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"

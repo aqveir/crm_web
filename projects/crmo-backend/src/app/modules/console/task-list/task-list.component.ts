@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { ContactService, IContact } from 'crmo-lib';
+import { TaskService, ITaskMinimal } from 'crmo-lib';
 import { BaseComponent } from '../../base.component';
 
 
@@ -15,7 +15,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public isLoading: boolean = false;
 
-  public listContact: IContact[] = null;
+  public listTask: ITaskMinimal[] = null;
   public pageRecordsLoaded: number = 0;
   public pageTotalSize: number = 100;  
 
@@ -27,14 +27,14 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   private elemPage: any;
   private scrollId: string = 'abcd';
   private payload: any = null;
-
+  
 
   /**
    * Default constructor
    */
   constructor(
     private _globals: Globals,
-    private _contactService: ContactService,
+    private _taskService: TaskService,
   ) { super(); }
 
 
@@ -70,26 +70,32 @@ export class TaskListComponent extends BaseComponent implements OnInit {
     this.isLoading = showLoader;
     this.isScrollLoading = true;
 
-    console.log('this.pageFrom.toString()', this.pageFrom.toString());
+    //Build Params
+    let params: Object = {
+      'view': this.viewName,
+      'filter': this.filterName,
+      'page': pageFrom,
+      'size': pageSize,
+    };
 
     //Fetch data from server
-    this._contactService.getAll(this.viewName, this.filterName, pageFrom, pageSize, this.payload)
-      .subscribe((response: IContact[]) => {
+    this._taskService.getAll(this.payload, params)
+      .subscribe((response: ITaskMinimal[]) => {
         //Clear leading status
         this.isLoading = false;
         this.isScrollLoading = false;
 
-        let dataArray: IContact[] = response;
+        let dataArray: ITaskMinimal[] = response;
         if (dataArray && dataArray.length > 0) {
-          if (!this.listContact) { this.listContact = []; }
+          if (!this.listTask) { this.listTask = []; }
 
           //Fill list array
-          dataArray.forEach((data: IContact) => {
-            this.listContact.push(data);
+          dataArray.forEach((data: ITaskMinimal) => {
+            this.listTask.push(data);
           });
 
           //Set records loaded size
-          this.pageRecordsLoaded = (this.listContact && this.listContact.length > 0) ? this.listContact.length : 0;
+          this.pageRecordsLoaded = (this.listTask && this.listTask.length > 0) ? this.listTask.length : 0;
           if (this.pageRecordsLoaded < 1) {
             this.fnResetPageCounters();
           } //End if
@@ -111,7 +117,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
 
   public fnSortColumn(columnName: string, sortDir: string): void {
 
-  }
+  } //Function ends
 
 
   /**
@@ -166,7 +172,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
    */
   private fnResetPageCounters(): void {
     //Reset array object
-    this.listContact = [];
+    this.listTask = [];
 
     //Reset variables
     this.pageRecordsLoaded = 0;
@@ -178,4 +184,3 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 } //Class ends
-

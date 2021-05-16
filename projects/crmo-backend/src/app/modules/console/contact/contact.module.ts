@@ -7,6 +7,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Application Modules
 import { ContactRoutingModule } from './contact-routing.module';
+import { LayoutModule } from '../_layout/layout.module';
 import { WidgetsModule } from '../widgets/widgets.module';
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'ellaisys-lib';
 
@@ -49,9 +50,12 @@ import { TabAccessControlComponent } from './contact-detail/tab-access-control/t
     LoggerModule,
     IntlTelInputModule,
 
+    //CRMO Modules
+    LayoutModule,
+    WidgetsModule,
+
     //Application Modules
     ContactRoutingModule,
-    WidgetsModule
   ]
 })
 export class ContactModule { }

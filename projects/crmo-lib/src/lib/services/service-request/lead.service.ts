@@ -15,10 +15,10 @@ export class LeadService extends ServiceRequestService {
    */
   constructor(
     private httpService: HttpService
-    ) { 
-      super(); 
-      super._httpService = httpService;
-    }
+  ) { 
+    super(); 
+    super._httpService = httpService;
+  }
 
 
   /**
@@ -27,7 +27,7 @@ export class LeadService extends ServiceRequestService {
   public getAll(_payload: any=null, _params: Object=null): Observable<any> {
 
     //Check default params and set defaults
-    _params = this.setDefaultParams('service_request_category_lead', _params);
+    _params = this.setDefaultParamsWithPagination('service_request_category_lead', _params);
 
     return super.getAll(_payload, _params);
   } //Function ends

@@ -7,25 +7,7 @@
 
     <!--begin::Card-->
     <div class="card card-custom gutter-b card-screen-height">
-        <div class="card-header border-0 py-5" *ngIf="listSupport?.length>0">
-            <h3 class="card-title align-items-start flex-column">
-            </h3>
-
-            <div class="card-toolbar align-items-baseline">
-                <div class="mr-2">
-                    <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control search-control" placeholder="Search..."/>
-                        <span><i class="flaticon2-search-1 icon-md"></i></span>
-                    </div>  
-                </div>
-
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
-                    <span class="navi-icon"><i class="la la-filter icon-md"></i></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="card-body py-0">
+        <div class="card-body">
             <div class="table-responsive" *ngIf="listSupport?.length>0">
                 <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
                     <thead class="thead-dark">
@@ -52,7 +34,7 @@
                         <tr *ngFor="let support of listSupport" class="cursor-pointer" style="outline: none;"
                             [routerLink]="['/secure/support', support.hash]">
                             <td class="pr-3">
-                                <div class="symbol symbol-50 symbol-light mt-1">
+                                <div class="symbol symbol-40 symbol-light">
                                     <span class="symbol-label" *ngIf="support.contact?.avatar">
                                         <img [src]="support.contact?.avatar" class="h-75 align-self-end rounded-circle" alt="Avatar" />
                                     </span>

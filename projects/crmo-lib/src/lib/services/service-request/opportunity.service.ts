@@ -27,7 +27,7 @@ export class OpportunityService extends ServiceRequestService {
   public getAll(_payload: any=null, _params: Object=null): Observable<any> {
 
     //Check default params and set defaults
-    _params = this.setDefaultParams('service_request_category_opportunity', _params);
+    _params = this.setDefaultParamsWithPagination('service_request_category_opportunity', _params);
 
     return super.getAll(_payload, _params);
   } //Function ends

@@ -140,23 +140,13 @@ export const DynamicAsideMenuConfig = {
       translate: 'MENU.WORK_QUEUE.LABEL'
     },
     {
-      name: 'aside_tab_account_list',
-      title: 'accounts',
-      root: true,
-      type: 'link',
-      icon: 'flaticon-add-label-button',
-      page: '/secure/account',
-      permission: ['list_all_organization_accounts'],
-      translate: 'MENU.ACCOUNT_LIST.LABEL'
-    },
-    {
       name: 'aside_tab_contact_list',
       title: 'contacts',
       root: true,
       type: 'link',
       icon: 'flaticon2-avatar',
       page: '/secure/contact',
-      permission: ['list_all_contacts'],
+      permissions: ['list_all_contacts'],
       translate: 'MENU.CONTACT_LIST.LABEL'
     },
     {
