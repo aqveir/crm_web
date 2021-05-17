@@ -97,6 +97,12 @@
                     "PREFERENCES": {
                         "LABEL": "Preferences"
                     }
+                },
+                "ACCOUNT MANAGEMENT": {
+                    "LABEL": "Account Management",
+                    "USER": {
+                        "LABEL": "Account List"
+                    }
                 }
             }
         },
