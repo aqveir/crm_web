@@ -1,12 +1,13 @@
-import { ILookupValue } from '../common/lookup.interface';
 import { IContactMinimal } from '../contact/contact.interface';
+import { IAccountMinimal } from '../account/account.interface';
 import { IUserMinimal } from '../user/user.interface';
+import { ILookupValue } from '../common/lookup.interface';
 
 
 export interface IServiceRequestMinimal {
     hash: string;
     contact: IContactMinimal;
-    account: any;
+    account: IAccountMinimal;
     owner: IUserMinimal
     category: ILookupValue;
     type: ILookupValue;
@@ -24,7 +25,7 @@ export interface IServiceRequestMinimal {
 export interface IServiceRequest {
     hash: string;
     contact: IContactMinimal;
-    account: any;
+    account: IAccountMinimal;
     owner: IUserMinimal
     category: ILookupValue;
     type: ILookupValue;

@@ -9,6 +9,8 @@ export class WidgetSubheaderComponent implements OnInit {
   @Input('title') strTitle: string=null;
   @Input('page-info') strPageInformation: string=null;
   @Input('routerLinkAdd') strRouterLinkAddBtn: string|any[]=null;
+  @Input('search') boolShowSearchControl: boolean=false;
+  @Input('filter') boolShowFilterButton: boolean=false;
   @Input('save') boolShowSaveButton: boolean=false;
   @Input('save-group') boolShowSaveButtonGroup: boolean=false;
   @Input('back') boolShowBackButton: boolean=false;

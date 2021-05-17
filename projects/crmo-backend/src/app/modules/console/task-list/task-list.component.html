@@ -1,41 +1,22 @@
 <div class="d-block full-content-page-height">
     <crmo-backend-widget-subheader 
-        [title]="'PAGE.TASK_LIST.TITLE'"
+        [title]="'PAGE.TASK_LIST.TITLE'" [filter]="true" [search]="true"
         ></crmo-backend-widget-subheader>
 
     <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
 
     <!--begin::Card-->
     <div class="card card-custom gutter-b card-screen-height">
-        <div class="card-header border-0 py-5" *ngIf="listContact?.length>0">
-            <h3 class="card-title align-items-start flex-column">
-            </h3>
-            <div class="card-toolbar">
-                <div class="mr-2">
-                    <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control search-control" placeholder="Search..."/>
-                        <span><i class="flaticon2-search-1 icon-md"></i></span>
-                    </div>  
-                </div>
-
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
-                    <span class="navi-icon"><i class="la la-filter icon-md p-0"></i></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="card-body py-0">
-            <div class="table-responsive" *ngIf="listContact?.length>0">
+        <div class="card-body">
+            <div class="table-responsive" *ngIf="listTask?.length>0">
                 <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
                     <thead class="thead-dark">
                         <tr class="text-uppercase">
                             <th scope="col" class="pl-5" style="min-width: 95px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_TYPE' | translate }}</th>
-
-                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 130px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_OWNER' | translate }}</th>
-                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 130px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_CONTACT' | translate }}</th>
-                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_TITLE' | translate }}</th>
-                            <th scope="col" class="d-none d-md-table-cell" style="min-width: 75px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_PRIORITY' | translate }}</th>
-                            <th scope="col" class="d-none d-md-table-cell" style="min-width: 90px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_STATUS' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_TITLE' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_ASSIGNEE' | translate }}</th>
+                            <th scope="col" class="d-none d-md-table-cell" style="min-width: 100px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_PRIORITY' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_OWNER' | translate }}</th>
 
                             <th scope="col" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
                                 {{ 'PAGE.TASK_LIST.COLUMNS.DUE_DATE' | translate }}
@@ -57,44 +38,60 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let contact of listContact" class="cursor-pointer" style="outline: none;"
-                            [routerLink]="['/secure/setting/organization', contact.hash]">
+                        <tr *ngFor="let task of listTask" class="cursor-pointer" style="outline: none;"
+                            [routerLink]="['/secure/setting/organization', task.id]">
                             <td>
-                                    <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
-                                    <button class="btn btn-icon btn-clean d-none" placement="bottom" [ngbTooltip]="'COMMON.LABEL.SMS' | translate"><i class="la la-sms icon-xl"></i></button>
-                                    <button class="btn btn-icon btn-clean d-none" placement="bottom" [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate"><i class="la la-envelope icon-xl"></i></button>
-                                
-                                    <span class="text-dark-75 font-weight-bolder ml-2">Call</span>
+                                <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_call'"
+                                    placement="bottom" 
+                                    [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
+
+                                <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_sms'"
+                                    placement="bottom" 
+                                    [ngbTooltip]="'COMMON.LABEL.SMS' | translate"><i class="la la-sms icon-xl"></i></button>
+
+                                <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_email'"
+                                    placement="bottom" 
+                                    [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate"><i class="la la-envelope icon-xl"></i></button>
+
+                                <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_other'"
+                                    disabled><i class="la icon-xl"></i></button>
+                            
+                                <span class="text-dark-75 font-weight-bolder ml-2">{{ task.subtype?.display_value }}</span>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell w-100">
+                                <span class="text-dark-50">{{ task.subject | shorten:30:'...' }}</span>
+                            </td>                            
+
+                            <td>
+                                <span class="text-dark-50">{{ task.assignee?.full_name | shorten:20:'...' }}</span>
                             </td>
 
                             <td>
-                                <span class="text-dark-50">John Doe</span>
+                                <span class="label font-weight-bold label-lg label-inline label-inlinetext-dark-50"
+                                    [ngClass]="{'priority_high':'label-light-danger', 'priority_moderate':'label-light-warning', 'priority_low':'label-light-info'}[task.priority?.key]">
+                                    {{ task.priority?.display_value }}
+                                </span>
                             </td>
 
                             <td class="d-none d-xl-table-cell">
-                                <span class="text-dark-50">{{ contact.full_name }}r</span>
-                            </td>
-
-                            <td>
-                                <span class="text-dark-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                            </td>
-
-                            <td>
-                                <span class="text-dark-50">High</span>
-                            </td>
-
-                            <td class="d-none d-md-table-cell">
-                                <span class="text-dark-50">Not Started</span>
-                            </td>                            
+                                <span class="text-dark-50">{{ task.owner?.full_name | shorten:20:'...' }}</span>
+                            </td>                           
 
                             <td class="d-none d-xl-table-cell table-cell-date">
-                                <span class="text-dark-75 d-block ml-2">{{ contact.last_updated_at | date }}</span>
-                                <span class="text-muted d-block ml-2">{{ contact.last_updated_at | date:'shortTime' }}</span>
+                                <span class="text-dark-75 d-block ml-2">{{ task.scheduled_at | date }}</span>
+                                <span class="text-muted d-block ml-2">{{ task.scheduled_at | date:'shortTime' }}</span>
                             </td>
 
-                            <td class="d-none d-xl-table-cell table-cell-date">
-                                <span class="text-dark-75 d-block ml-2">{{ contact.last_updated_at | date }}</span>
-                                <span class="text-muted d-block ml-2">{{ contact.last_updated_at | date:'shortTime' }}</span>
+                            <td class="d-none d-xl-table-cell table-cell-date" *ngIf="task.is_completed">
+                                <span class="text-dark-75 d-block ml-2">{{ task.last_updated_at | date }}</span>
+                                <span class="text-muted d-block ml-2">{{ task.last_updated_at | date:'shortTime' }}</span>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell" *ngIf="!task.is_completed">
+                                <button class="btn btn-clean text-dark-75"
+                                    placement="bottom" 
+                                    [ngbTooltip]="'COMMON.LABEL.CALL' | translate">MARK COMPLETE</button>
                             </td>
                         </tr>
                     </tbody>

@@ -1,21 +1,24 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
+//Referenced Modules
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { TaskService, ITaskMinimal } from 'crmo-lib';
-import { BaseComponent } from '../../base.component';
+import { IServiceRequestMinimal, OpportunityService } from 'crmo-lib';
+import { BaseComponent } from '../../../base.component';
 
 
 @Component({
-  selector: 'crmo-backend-task-list',
-  templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  selector: 'crmo-backend-opportunity-list',
+  templateUrl: './opportunity-list.component.html',
+  styleUrls: ['./opportunity-list.component.scss']
 })
-export class TaskListComponent extends BaseComponent implements OnInit {
+export class OpportunityListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public isLoading: boolean = false;
 
-  public listTask: ITaskMinimal[] = null;
+  public listOpportunity: IServiceRequestMinimal[] = null;
   public pageRecordsLoaded: number = 0;
   public pageTotalSize: number = 100;  
 
@@ -34,7 +37,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
    */
   constructor(
     private _globals: Globals,
-    private _taskService: TaskService,
+    private _opportunityService: OpportunityService,
   ) { super(); }
 
 
@@ -79,23 +82,23 @@ export class TaskListComponent extends BaseComponent implements OnInit {
     };
 
     //Fetch data from server
-    this._taskService.getAll(this.payload, params)
-      .subscribe((response: ITaskMinimal[]) => {
+    this._opportunityService.getAll(this.payload, params)
+      .subscribe((response: IServiceRequestMinimal[]) => {
         //Clear leading status
         this.isLoading = false;
         this.isScrollLoading = false;
 
-        let dataArray: ITaskMinimal[] = response;
+        let dataArray: IServiceRequestMinimal[] = response;
         if (dataArray && dataArray.length > 0) {
-          if (!this.listTask) { this.listTask = []; }
+          if (!this.listOpportunity) { this.listOpportunity = []; }
 
           //Fill list array
-          dataArray.forEach((data: ITaskMinimal) => {
-            this.listTask.push(data);
+          dataArray.forEach((data: IServiceRequestMinimal) => {
+            this.listOpportunity.push(data);
           });
 
           //Set records loaded size
-          this.pageRecordsLoaded = (this.listTask && this.listTask.length > 0) ? this.listTask.length : 0;
+          this.pageRecordsLoaded = (this.listOpportunity && this.listOpportunity.length > 0) ? this.listOpportunity.length : 0;
           if (this.pageRecordsLoaded < 1) {
             this.fnResetPageCounters();
           } //End if
@@ -172,7 +175,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
    */
   private fnResetPageCounters(): void {
     //Reset array object
-    this.listTask = [];
+    this.listOpportunity = [];
 
     //Reset variables
     this.pageRecordsLoaded = 0;
