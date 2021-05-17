@@ -13,7 +13,7 @@ const routes: Routes = [
     { path: 'queue', component: WorkQueueComponent },
     { path: 'tasks', component: TaskListComponent },
     { path: 'events', component: EventListComponent },
-    { path: 'account', loadChildren: () => import('../console/account/account.module').then(m => m.AccountModule) },
+   // { path: 'account', loadChildren: () => import('../console/account/account.module').then(m => m.AccountModule) },
     { path: 'contact', loadChildren: () => import('../console/contact/contact.module').then(m => m.ContactModule) },
     { path: 'lead', loadChildren: () => import('../console/lead/lead.module').then(m => m.LeadModule) },
     { path: 'setting', loadChildren: () => import('../console/setting/setting.module').then(m => m.SettingModule) },

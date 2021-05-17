@@ -11,6 +11,7 @@ import { RoleListComponent } from './role/role-list/role-list.component';
 import { RoleDetailComponent } from './role/role-detail/role-detail.component';
 import { PreferenceListComponent } from './preference/preference-list/preference-list.component';
 import { PreferenceDetailComponent } from './preference/preference-detail/preference-detail.component';
+import { AccountListComponent } from './account/account-list/account-list.component';
 
 const routes: Routes = [
   { path: 'organization', component: OrganizationListComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'organization/:ohash/role/:key', component: RoleDetailComponent },
   { path: 'organization/:ohash/preference', component: PreferenceListComponent },
   { path: 'organization/:ohash/preference/:id', component: PreferenceDetailComponent },
+  { path: 'organization/:ohash/account/', component: AccountListComponent },
   { path: '', pathMatch: 'full', redirectTo: 'organizations' },
 ];
 

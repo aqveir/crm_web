@@ -16,7 +16,7 @@ import { ContactModule } from './contact/contact.module';
 import { LeadModule } from './lead/lead.module';
 import { OpportunityModule } from './opportunity/opportunity.module';
 import { SupportModule } from './support/support.module';
-import { AccountModule } from './account/account.module';
+//import { AccountModule } from './account/account.module';
 import { SettingModule } from './setting/setting.module';
 import { WidgetsModule } from './widgets/widgets.module';
 
@@ -58,7 +58,7 @@ import { WorkQueueComponent } from './work-queue/work-queue.component';
     WidgetsModule,
     SettingModule,
     ContactModule,
-    AccountModule,
+    //AccountModule,
     LeadModule,
     OpportunityModule,
     SupportModule,

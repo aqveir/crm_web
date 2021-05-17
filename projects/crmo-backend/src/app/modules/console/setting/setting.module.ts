@@ -28,6 +28,9 @@ import { OrganizationConfigurationDataComponent } from './organization/organizat
 import { OrganizationMailTemplateListComponent } from './organization/organization-detail/organization-mail-template-list/organization-mail-template-list.component';
 import { PreferenceListComponent } from './preference/preference-list/preference-list.component';
 import { PreferenceDetailComponent } from './preference/preference-detail/preference-detail.component';
+import {AccountListComponent} from './account/account-list/account-list.component';
+
+
 
 
 @NgModule({
@@ -50,6 +53,8 @@ import { PreferenceDetailComponent } from './preference/preference-detail/prefer
     OrganizationConfigurationListComponent,
     PreferenceListComponent,
     PreferenceDetailComponent,
+
+    AccountListComponent
   ],
   imports: [
     CommonModule,
