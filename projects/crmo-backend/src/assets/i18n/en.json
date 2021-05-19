@@ -101,9 +101,9 @@
                         "LABEL": "Preferences"
                     }
                 },
-                "ACCOUNT MANAGEMENT": {
+                "ACCOUNT_MANAGEMENT": {
                     "LABEL": "Account Management",
-                    "USER": {
+                    "ACCOUNT": {
                         "LABEL": "Account List"
                     }
                 }

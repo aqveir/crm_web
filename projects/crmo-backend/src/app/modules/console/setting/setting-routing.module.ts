@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'organization/:ohash/role/:key', component: RoleDetailComponent },
   { path: 'organization/:ohash/preference', component: PreferenceListComponent },
   { path: 'organization/:ohash/preference/:id', component: PreferenceDetailComponent },
-  { path: 'organization/:ohash/account/', component: AccountListComponent },
+  { path: 'organization/:ohash/account', component: AccountListComponent },
   { path: '', pathMatch: 'full', redirectTo: 'organizations' },
 ];
 
