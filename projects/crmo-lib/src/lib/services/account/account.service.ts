@@ -6,12 +6,12 @@ import { Observable, Observer } from 'rxjs';
 import { HttpService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 import { IAccountMinimal } from '../../interfaces/account/account.interface';
-
+import { IBaseInterface }  from '../base.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService extends BaseService{
+export class AccountService extends BaseService implements IBaseInterface {
 
   /**
    * Default constructor
@@ -22,11 +22,14 @@ export class AccountService extends BaseService{
     super(); 
     //super.httpService = _httpService;
   }
+  
+
+  //#region IBaseInterface Implementation
 
   /**
-   * Get List of Accounts
+   * Get All the records for the entity
    */
-   public getAll(_params: Object=null): Observable<any> {
+  public get(_params: Object=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
@@ -40,5 +43,28 @@ export class AccountService extends BaseService{
         .catch((error: any) =>  { observer.error(error); })
         .finally()
     });
+  }
+
+  /**
+   * Get List of Accounts
+   */
+  public getById(_hash:string,_params: Object=null): Observable<any> {
+    //Add Pagination params, if missing
+    _params = super.setDefaultParamsForPagination(_params);
+
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.get('account/'+_hash, _params)
+        .then((response: any) => {
+          let data: IAccountMinimal[] = response.data;
+
+          observer.next(data);
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally()
+    });
   } //Function ends
+
+  //#endregion
+  
+  
 }

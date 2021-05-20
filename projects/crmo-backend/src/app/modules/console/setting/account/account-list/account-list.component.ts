@@ -76,7 +76,7 @@ export class AccountListComponent extends BaseComponent implements OnInit {
     };
 
     //Calling Account Service to get list of accounts
-    this._accountService.getAll()
+    this._accountService.get()
       .subscribe((response: IAccountMinimal[]) => {
         //Clear leading status
         this.isLoading = false;
