@@ -5,7 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InlineSVGModule } from 'ng-inline-svg';
 
 //Plugin Modules
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltipModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 //Application Modules
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
@@ -13,8 +14,11 @@ import { LoggerModule, NotificationModule, PipeModule, TranslateModule, Validato
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { ModalNoteComponent } from './modal-note/modal-note.component';
 import { ModalDocumentComponent } from './modal-document/modal-document.component';
-import { ModalDeleteConfimComponent } from './modal-delete-confim/modal-delete-confim.component';
 import { WidgetSubheaderComponent } from './widget-subheader/widget-subheader.component';
+import { ModalSendMailComponent } from './modal-send-mail/modal-send-mail.component';
+import { ModalSendSmsComponent } from './modal-send-sms/modal-send-sms.component';
+import { ModalConfirmCallComponent } from './modal-confirm-call/modal-confirm-call.component';
+import { ModalConfirmDeleteComponent } from './modal-confirm-delete/modal-confirm-delete.component';
 
 
 @NgModule({
@@ -22,8 +26,11 @@ import { WidgetSubheaderComponent } from './widget-subheader/widget-subheader.co
     //CRMO Widgets
     ModalNoteComponent, 
     ModalDocumentComponent, 
-    ModalDeleteConfimComponent,
     WidgetSubheaderComponent,
+    ModalSendMailComponent,
+    ModalSendSmsComponent,
+    ModalConfirmCallComponent,
+    ModalConfirmDeleteComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +43,8 @@ import { WidgetSubheaderComponent } from './widget-subheader/widget-subheader.co
 
     //Pluin Modules
     NgbTooltipModule,
+    NgbModalModule,
+    CKEditorModule,
 
     //EllaiSys Library
     TranslateModule,
@@ -47,8 +56,11 @@ import { WidgetSubheaderComponent } from './widget-subheader/widget-subheader.co
   exports: [
     ModalNoteComponent, 
     ModalDocumentComponent, 
-    ModalDeleteConfimComponent,
     WidgetSubheaderComponent,
+    ModalSendMailComponent,
+    ModalSendSmsComponent,
+    ModalConfirmCallComponent,
+    ModalConfirmDeleteComponent,
   ]
 })
 export class WidgetsModule { }

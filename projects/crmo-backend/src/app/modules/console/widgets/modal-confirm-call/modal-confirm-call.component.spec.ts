@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalDeleteConfimComponent } from './modal-delete-confim.component';
+import { ModalConfirmCallComponent } from './modal-confirm-call.component';
 
-describe('ModalDeleteConfimComponent', () => {
-  let component: ModalDeleteConfimComponent;
-  let fixture: ComponentFixture<ModalDeleteConfimComponent>;
+describe('ModalConfirmCallComponent', () => {
+  let component: ModalConfirmCallComponent;
+  let fixture: ComponentFixture<ModalConfirmCallComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalDeleteConfimComponent ]
+      declarations: [ ModalConfirmCallComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalDeleteConfimComponent);
+    fixture = TestBed.createComponent(ModalConfirmCallComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,6 +7,7 @@ import {
   NgbDropdownModule,
   NgbProgressbarModule,
   NgbTooltipModule,
+  NgbModalModule,
 } from '@ng-bootstrap/ng-bootstrap';
 
 //Application Module
@@ -33,6 +34,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 
 //Directives
 import { TableCellSortableDirective } from './directives/table-cell-sortable/table-cell-sortable.directive';
+import { WidgetsModule } from '../widgets/widgets.module';
 
 
 @NgModule({
@@ -68,6 +70,7 @@ import { TableCellSortableDirective } from './directives/table-cell-sortable/tab
     NgbDropdownModule,
     NgbProgressbarModule,
     NgbTooltipModule,
+    NgbModalModule,
 
     //EllaiSys Library
     TranslateModule,
@@ -78,6 +81,8 @@ import { TableCellSortableDirective } from './directives/table-cell-sortable/tab
 
     CoreModule,
     SubheaderModule,
+
+    WidgetsModule
   ],
   exports: [
     LayoutComponent,

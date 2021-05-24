@@ -8,10 +8,21 @@ import {
 import { LayoutService, LayoutInitService } from '../../../_metronic/core';
 import KTLayoutContent from '@asset-backend/js/layout/base/content';
 
+//Third Party referenced libraries
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
+//Application common libraries
+import { EventBrokerService } from 'ellaisys-lib';
+
+//Application Modal Components
+import { ModalSendSmsComponent } from '../widgets/modal-send-sms/modal-send-sms.component';
+import { ModalSendMailComponent } from '../widgets/modal-send-mail/modal-send-mail.component';
+import { ModalConfirmDeleteComponent } from '../widgets/modal-confirm-delete/modal-confirm-delete.component';
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
+  styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
   // Public variables
@@ -47,11 +58,22 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild('ktHeaderMobile', { static: true }) ktHeaderMobile: ElementRef;
   @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
 
+  /**
+   * Default constructor
+   */
   constructor(
     private initService: LayoutInitService,
-    private layout: LayoutService
+    private layout: LayoutService,
+    private _broker: EventBrokerService,
+    private _modalService: NgbModal,
+    private _modalConfig: NgbModalConfig
   ) {
     this.initService.init();
+
+    // Set Modal Config
+    _modalConfig.backdrop = 'static';
+    _modalConfig.keyboard = false;
+    _modalConfig.animation = true;
   }
 
   ngOnInit(): void {
@@ -109,6 +131,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    //Load broker listeners
+    this.fnLoadBrokerListeners();
+
     if (this.ktAside) {
       for (const key in this.asideHTMLAttributes) {
         if (this.asideHTMLAttributes.hasOwnProperty(key)) {
@@ -141,5 +166,38 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     // Init Content
     KTLayoutContent.init('kt_content');
-  }
-}
+  } //Function closes
+
+
+  /**
+   * Load Broker Listeners for the application
+   * 
+   * This is very useful for applicaton level modals.
+   */
+  private fnLoadBrokerListeners(): void {
+    //Broker Lister - Modal Component for SMS Send
+    this._broker.listen<any>('show_sms_modal', (x) => {
+      const modalSendSmsRef = this._modalService.open(ModalSendSmsComponent, this._modalConfig);
+      modalSendSmsRef.componentInstance.objServiceRequest = x?.servicerequest;
+
+      console.log(modalSendSmsRef.componentInstance);
+      console.log(x);
+    });
+
+    //Broker Lister - Modal Component for Mail Send
+    this._broker.listen<any>('show_mail_modal', (x) => {
+      const modalSendSmsRef = this._modalService.open(ModalSendMailComponent, this._modalConfig);
+      modalSendSmsRef.componentInstance.objServiceRequest = x?.servicerequest;
+
+      console.log(modalSendSmsRef.componentInstance);
+      console.log(x);
+    });
+
+    //Broker Lister - Modal Component for Confirm Delete
+    this._broker.listen<any>('modal-confirm-delete', (x) => {
+      const modalConfirmDeleteRef = this._modalService.open(ModalConfirmDeleteComponent, this._modalConfig);
+      console.log(x);
+    });
+  } //Function ends
+
+} //Class ends

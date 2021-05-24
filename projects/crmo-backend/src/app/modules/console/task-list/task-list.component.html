@@ -42,18 +42,18 @@
                             [routerLink]="['/secure/setting/organization', task.id]">
                             <td>
                                 <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_call'"
-                                    placement="bottom" 
+                                    type="button" placement="bottom" 
                                     [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
 
                                 <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_sms'"
-                                    placement="bottom" 
+                                    type="button" placement="bottom" (click)="fnOpenModal($event, 'show_sms_modal', task)"
                                     [ngbTooltip]="'COMMON.LABEL.SMS' | translate"><i class="la la-sms icon-xl"></i></button>
 
                                 <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_email'"
-                                    placement="bottom" 
+                                    type="button" placement="bottom" (click)="fnOpenModal($event, 'show_mail_modal', task)"
                                     [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate"><i class="la la-envelope icon-xl"></i></button>
 
-                                <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_other'"
+                                <button type="button" class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_other'"
                                     disabled><i class="la icon-xl"></i></button>
                             
                                 <span class="text-dark-75 font-weight-bolder ml-2">{{ task.subtype?.display_value }}</span>

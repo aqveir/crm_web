@@ -679,15 +679,45 @@
         }
     },
 
-    "MODAL": {
-        "NOTE": {
-            "TITLE": "Add/Edit Note",
-            "FORM": {
-                "TEXT": {
-                    "LABEL": "Message",
-                    "PLACEHOLDER": "Enter a note",
-                    "FINE_TEXT": "Your invoices will be addressed to this company.",
-                    "VALIDATION_ERROR": "Enter valid email or phone number."
+    "WIDGET": {
+        "MODAL": {
+            "NOTE": {
+                "TITLE": "Add/Edit Note",
+                "FORM": {
+                    "TEXT": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter a note",
+                        "FINE_TEXT": "Your invoices will be addressed to this company.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    }
+                }
+            },
+            "SMS_SEND": {
+                "TITLE": "Send Message",
+                "FORM": {
+                    "MESSAGE": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter the message to send",
+                        "FINE_TEXT": "Your invoices will be addressed to this company.",
+                        "VALIDATION_ERROR": "Enter valid message"
+                    }
+                }
+            },
+            "MAIL_SEND": {
+                "TITLE": "Send Mail",
+                "FORM": {
+                    "SUBJECT": {
+                        "LABEL": "Subject",
+                        "PLACEHOLDER": "Enter the subject to mail",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid subject"
+                    },
+                    "MESSAGE": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter the message to send",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid mail content"
+                    }
                 }
             }
         }
