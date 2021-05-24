@@ -118,10 +118,17 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
+  /**
+   * Open Modal for SMS and Mail
+   * 
+   * @param event 
+   * @param key 
+   * @param task 
+   */
   public fnOpenModal(event, key: string, task: ITaskMinimal): void {
-    this._broker.emit(key, task);
+    this._broker.emit(key, task?.servicerequest);
     event.stopPropagation();
-  }
+  } //Function ends
 
 
   public fnSortColumn(columnName: string, sortDir: string): void {

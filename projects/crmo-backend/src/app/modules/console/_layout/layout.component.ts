@@ -176,21 +176,15 @@ export class LayoutComponent implements OnInit, AfterViewInit {
    */
   private fnLoadBrokerListeners(): void {
     //Broker Lister - Modal Component for SMS Send
-    this._broker.listen<any>('show_sms_modal', (x) => {
+    this._broker.listen<any>('show_sms_modal', (x: any) => {
       const modalSendSmsRef = this._modalService.open(ModalSendSmsComponent, this._modalConfig);
-      modalSendSmsRef.componentInstance.objServiceRequest = x?.servicerequest;
-
-      console.log(modalSendSmsRef.componentInstance);
-      console.log(x);
+      modalSendSmsRef.componentInstance.objServiceRequest = x;
     });
 
     //Broker Lister - Modal Component for Mail Send
-    this._broker.listen<any>('show_mail_modal', (x) => {
+    this._broker.listen<any>('show_mail_modal', (x: any) => {
       const modalSendSmsRef = this._modalService.open(ModalSendMailComponent, this._modalConfig);
-      modalSendSmsRef.componentInstance.objServiceRequest = x?.servicerequest;
-
-      console.log(modalSendSmsRef.componentInstance);
-      console.log(x);
+      modalSendSmsRef.componentInstance.objServiceRequest = x;
     });
 
     //Broker Lister - Modal Component for Confirm Delete

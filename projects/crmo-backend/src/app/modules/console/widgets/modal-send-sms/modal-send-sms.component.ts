@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { INote, IServiceRequest, NoteService } from 'crmo-lib';
+import { ISendSmsRequest, IServiceRequest, CommunicationService } from 'crmo-lib';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
@@ -28,8 +28,8 @@ export class ModalSendSmsComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _formBuilder: FormBuilder,
-    private _noteService: NoteService,
-    private modalActive: NgbActiveModal
+    private _modalActive: NgbActiveModal,
+    private _commService: CommunicationService
   ) {
     super();
   }
@@ -66,16 +66,16 @@ export class ModalSendSmsComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
-      let objFormData: INote = this.smsForm.value;
+      let objFormData: ISendSmsRequest = this.smsForm.value;
       this.boolLoading = true;
 
-      this._noteService.create(objFormData)
+      this._commService.sendSMS(this.objServiceRequest.hash, objFormData)
         .subscribe((response: any) => {
           //Stop loader
           this.boolLoading = false;
 
           //Close the modal window
-          this.modalActive.close({refresh: true});
+          this._modalActive.close({refresh: true});
         },(error) => {
           //Stop loader
           this.boolLoading = false;
@@ -111,9 +111,9 @@ export class ModalSendSmsComponent extends BaseComponent implements OnInit {
    */
   public fnCloseModal(isDismissed: boolean=false): void {
     if (isDismissed) {
-      this.modalActive.dismiss({refresh: false});
+      this._modalActive.dismiss({refresh: false});
     } else {
-      this.modalActive.close({refresh: false});
+      this._modalActive.close({refresh: false});
     } //End if    
   } //Function ends
 

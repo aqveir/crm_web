@@ -5,8 +5,9 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { LeadService, IServiceRequestMinimal } from 'crmo-lib';
+import { LeadService, IServiceRequestMinimal, IServiceRequest } from 'crmo-lib';
 import { BaseComponent } from '../../../base.component';
+import { EventBrokerService } from 'ellaisys-lib';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class LeadListComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _leadService: LeadService,
+    private _broker: EventBrokerService
   ) { super(); }
 
 
@@ -116,6 +118,19 @@ export class LeadListComponent extends BaseComponent implements OnInit {
 
         throw error;
       });
+  } //Function ends
+
+
+  /**
+   * Open Modal for SMS and Mail
+   * 
+   * @param event 
+   * @param key 
+   * @param servicerequest 
+   */
+  public fnOpenModal(event, key: string, servicerequest: IServiceRequestMinimal): void {
+    this._broker.emit(key, servicerequest);
+    event.stopPropagation();
   } //Function ends
 
 
