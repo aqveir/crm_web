@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" formControlName="email_subject" name="email_subject"
                         placeholder="{{ 'WIDGET.MODAL.MAIL_SEND.FORM.SUBJECT.PLACEHOLDER' | translate }}"
-                        autofocus tabindex="1" />
+                        autofocus autocomplete="none" tabindex="1" />
 
                     <span class="form-text text-danger" *ngIf="mailForm.controls.email_subject.dirty && mailForm.controls.email_subject.invalid">
                         {{ 'WIDGET.MODAL.MAIL_SEND.FORM.SUBJECT.VALIDATION_ERROR' | translate }}
@@ -26,10 +26,6 @@
                     <ckeditor [editor]="mailEditor" tagName="textarea" formControlName="email_body" 
                         tabindex="2"></ckeditor>
                         <!-- [config]="mailEditorConfig" placeholder="efgh" -->
-
-                    <!-- <textarea class="form-control" formControlName="email_body" name="email_body"
-                        rows="10" placeholder="{{ 'WIDGET.MODAL.MAIL_SEND.FORM.MESSAGE.PLACEHOLDER' | translate }}"
-                        ></textarea> -->
                 </div>
 
                 <span class="form-text text-danger" *ngIf="mailForm.controls.email_body.dirty && mailForm.controls.email_body.invalid">
@@ -37,14 +33,18 @@
                 </span>
 
                 <div>
-                    {{ objServiceRequest|json }}
+                    {{ objServiceRequest.hash }}
                 </div>
             </div>
 
             <div class="modal-footer border-0 pt-0">
                 <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="4"
                     (click)="fnCloseModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
-                <button type="submit" class="btn btn-primary font-weight-bold ml-2" tabindex="3">{{ 'COMMON.LABEL.SAVE' | translate }}</button>
+
+                <button type="submit" class="btn btn-primary font-weight-bold ml-2" tabindex="3" [disabled]="boolLoading">
+                    {{ 'COMMON.LABEL.SAVE' | translate }}
+                    <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolLoading"></span>
+                </button>
             </div>
         </form>
     </div>

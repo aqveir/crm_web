@@ -7,7 +7,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { INote, IServiceRequest, NoteService } from 'crmo-lib';
+import { ISendMailRequest, IServiceRequest, CommunicationService } from 'crmo-lib';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
@@ -26,10 +26,10 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
   public objServiceRequest: IServiceRequest;
   public mailForm!: FormGroup;
   public mailEditor = ClassicEditor;
-  // public mailEditorConfig: any = { 
-  //   toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-  //   placeholder: this._translateService.getTranslation('WIDGET.MODAL.MAIL_SEND.FORM.MESSAGE.PLACEHOLDER')
-  // };
+  public mailEditorConfig: any = { 
+    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+    //placeholder: this._translateService.getTranslation('WIDGET.MODAL.MAIL_SEND.FORM.MESSAGE.PLACEHOLDER')
+  };
 
   /**
    * Default constructor
@@ -37,8 +37,8 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _formBuilder: FormBuilder,
-    private _noteService: NoteService,
-    private modalActive: NgbActiveModal,
+    private _modalActive: NgbActiveModal,
+    private _commService: CommunicationService,
     private _translateService: TranslateService
   ) {
     super();
@@ -76,16 +76,16 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
-      let objFormData: INote = this.mailForm.value;
+      let objFormData: ISendMailRequest = this.mailForm.value;
       this.boolLoading = true;
 
-      this._noteService.create(objFormData)
+      this._commService.sendMail(this.objServiceRequest.hash, objFormData)
         .subscribe((response: any) => {
           //Stop loader
           this.boolLoading = false;
 
           //Close the modal window
-          this.modalActive.close({refresh: true});
+          this._modalActive.close({refresh: true});
         },(error) => {
           //Stop loader
           this.boolLoading = false;
@@ -121,9 +121,9 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
    */
   public fnCloseModal(isDismissed: boolean=false): void {
     if (isDismissed) {
-      this.modalActive.dismiss({refresh: false});
+      this._modalActive.dismiss({refresh: false});
     } else {
-      this.modalActive.close({refresh: false});
+      this._modalActive.close({refresh: false});
     } //End if    
   } //Function ends
 
@@ -136,7 +136,7 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
       // entity_type: [(this.strEntityType?this.strEntityType:''), Validators.required],
       // reference_id: [(this.intReferenceId?this.intReferenceId:''), Validators.required],
       email_subject: ['', [ Validators.required, Validators.maxLength(200) ]],
-      email_body: ['abcd', [ Validators.required, Validators.maxLength(4000) ]]
+      email_body: ['', [ Validators.required, Validators.maxLength(4000) ]]
     });
   } //Function ends
 
