@@ -25,11 +25,11 @@
                                 </span>
                             </th>
                     </thead>
-                   
+                     
                     <tbody>
                         <tr *ngFor="let account of listAccounts" class="cursor-pointer" style="outline: none;"
-                        [routerLink]="['/secure/setting/organization', oHash, 'account']">
-                           
+                        (click)="fnShowAccountDtl(account)">
+                           {{account.hash}}
                             <td>
                                 <span class="text-dark-75 font-weight-bolder d-block">{{ account.name }}</span>
                             </td>

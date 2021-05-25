@@ -1,0 +1,53 @@
+<form class="form" id="frm_account_detail" novalidate="novalidate"
+    [formGroup]="accountForm" (ngSubmit)="fnSave($event)" autocomplete="off">
+    
+    <div class="d-block full-content-page-height">
+        <crmo-backend-widget-subheader 
+            [title]="(boolIsNew)?'PAGE.ACCOUNT.DETAIL.TITLE.ADD':'PAGE.ACCOUNT.DETAIL.TITLE.EDIT'" 
+            [page-info]="accountForm.controls['name'].value"
+            [save-group]="true" [back]="true" [loading]="boolSave"
+            (back)="fnReset(true)"></crmo-backend-widget-subheader>
+
+        <!--begin::Card-->
+        <div class="card card-custom mb-5" id="kt_page_sticky_card">
+            <div class="card-header card-header-tabs-line">
+                <div class="card-toolbar">
+                    <ul class="nav nav-tabs nav-bold nav-tabs-line nav-boldest">
+                        <li class="nav-item">
+                            <a href="#tab_account_detail" class="nav-link active" 
+                                data-toggle="tab" data-target="#tab_account_detail">
+                                {{ 'PAGE.ACCOUNT.DETAIL.TAB_DETAIL.TITLE' | translate }}
+                            </a>
+                        </li>
+ 
+                        <li class="nav-item">
+                            <a href="#tab_account_address" class="nav-link" 
+                                data-toggle="tab" data-target="#tab_account_address">
+                                {{ 'PAGE.ACCOUNT.DETAIL.TAB_ADDRESS.TITLE' | translate }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card-body tab-contents mt-5" id="tabAccount"> <!-- Account Details -->
+                
+                <div class="tab-pane fade show active" id="#tab_account_detail" role="tabpanel" aria-labelledby="tab_account_detail">
+                               
+                </div>
+
+                <!-- Account Address -->
+                <div class="tab-pane fade" id="tab_account_address" role="tabpanel" aria-labelledby="tab_account_address">
+                    <!-- <crmo-backend-account-address
+                        [account]="objAccount"
+                        [address]="objAccount?.address"
+                        (refresh)="fnReload(objAccount.hash)"></crmo-backend-account-address> -->
+
+                        <crmo-backend-address></crmo-backend-address>
+                </div>
+
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</form>
