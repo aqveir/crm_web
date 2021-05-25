@@ -1,6 +1,6 @@
 <div class="d-block full-content-page-height">
     <crmo-backend-widget-subheader 
-        [title]="'PAGE.ORGANIZATION.LIST.TITLE'" 
+        [title]="'PAGE.ORGANIZATION.LIST.TITLE'" [search]="true" (search)="fnFilterRecords($event)"
         [routerLinkAdd]="['/secure/setting/organization/', 'new']"></crmo-backend-widget-subheader>
 
     <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
@@ -19,7 +19,7 @@
                             <th scope="col" style="min-width: 130px">status</th>
                             <th scope="col" style="min-width: 130px">users</th>
                             <th scope="col" style="min-width: 150px" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
-                                Last &amp; modified
+                                {{ 'PAGE.ORGANIZATION.USER_LIST.COLUMNS.LAST_MODIFIED' | translate }}
                             </th>
                         </tr>
                     </thead>

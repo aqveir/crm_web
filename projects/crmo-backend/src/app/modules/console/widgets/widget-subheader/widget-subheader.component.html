@@ -22,12 +22,26 @@
 
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
+            <!--begin:Page Search-->
             <div class="ml-2" *ngIf="boolShowSearchControl">
+                <div class="input-icon input-icon-right">
+                    <input type="text" class="form-control search-control" 
+                        placeholder="{{ 'COMMON.LABEL.SEARCH_AND_ELLIPSIS' | translate }}"
+                        autocomplete="off"
+                        (keyup)="fnSearch($event)" />
+                    <span><i class="flaticon2-search-1 icon-md"></i></span>
+                </div>  
+            </div>
+            <!--begin:Page Search-->
+
+            <!--begin:Full Search-->
+            <div class="ml-2" *ngIf="boolShowFullSearchControl">
                 <div class="input-icon input-icon-right">
                     <input type="text" class="form-control search-control" placeholder="{{ 'COMMON.LABEL.SEARCH_AND_ELLIPSIS' | translate }}"/>
                     <span><i class="flaticon2-search-1 icon-md"></i></span>
                 </div>  
             </div>
+            <!--begin:Full Search-->
 
             <!--begin::Button-->
             <div class="btn-group ml-2" *ngIf="boolShowFilterButton">

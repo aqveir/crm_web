@@ -1,5 +1,10 @@
-<!--begin::Card-->
-<div class="card card-custom mb-5">
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+		[title]="(boolIsNew)?'PAGE.ROLE.DETAIL.TITLE.ADD':'PAGE.ROLE.DETAIL.TITLE.EDIT'" 
+		[page-info]="roleForm?.controls['name'].value"
+		[save-group]="true" [back]="true" [loading]="boolSaving"
+		(back)="fnResetForm(true)"></crmo-backend-widget-subheader>
+		
 	<!--begin::Card header-->
 	<div class="card-header">
 	</div>

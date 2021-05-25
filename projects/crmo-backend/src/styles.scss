@@ -97,7 +97,7 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
 .card.card-screen-height {
     min-height: calc(100vh - 150px);
 }
-.card .card-toolbar .form-control.search-control {
+.subheader .form-control.search-control {
     width: 25vw;
     min-width: 250px;
 }
