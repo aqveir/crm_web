@@ -123,12 +123,7 @@ export class ModalSendSmsComponent extends BaseComponent implements OnInit {
    */
   private fnInitializeForm() {
     this.smsForm = this._formBuilder.group({
-      // entity_type: [(this.strEntityType?this.strEntityType:''), Validators.required],
-      // reference_id: [(this.intReferenceId?this.intReferenceId:''), Validators.required],
-      sms_message: ['', [
-        Validators.required,
-        Validators.maxLength(200)
-      ]],
+      sms_message: ['', [ Validators.required, Validators.maxLength(200) ]],
     });
   } //Function ends
 

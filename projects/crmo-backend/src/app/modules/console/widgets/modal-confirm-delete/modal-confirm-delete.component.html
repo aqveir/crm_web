@@ -1,1 +1,41 @@
-<p>modal-confirm-delete works!</p>
+<div class="modal-dialog m-0" role="document">
+    <div class="modal-content">
+        <form class="form" id="kt_modal_send_sms" novalidate="novalidate"
+            [formGroup]="delConfirmForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
+
+            <div class="modal-header badge-danger border-0">
+                <h5 class="modal-title text-white" id="exampleModalLabel">{{ 'WIDGET.MODAL.CONFIRM_DELETE.TITLE' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
+                    <i aria-hidden="true" class="ki ki-close text-white"></i>
+                </button>
+            </div>
+
+            <div class="modal-body p-5">
+                <p class="text-justify mb-5"
+                    [innerHTML]="'WIDGET.MODAL.CONFIRM_DELETE.FORM.MESSAGE.LABEL' | translate:{deleteConfirmationText: strDeleteConfirmText} "></p>
+
+                <p class="text-justify mb-1"
+                    [innerHTML]="'WIDGET.MODAL.CONFIRM_DELETE.FORM.MESSAGE.FINE_TEXT' | translate:{deleteConfirmationText: strDeleteConfirmText} "></p>
+
+                <div class="form-group mb-0">
+                    <input type="text" class="form-control" formControlName="delete_confirmation" name="delete_confirmation"
+                        rows="10" placeholder="{{ 'WIDGET.MODAL.CONFIRM_DELETE.FORM.MESSAGE.PLACEHOLDER' | translate:{deleteConfirmationText: strDeleteConfirmText} }}"
+                        tabindex="1" autofocus autocomplete="off" />
+                </div>
+
+                <span class="form-text text-danger" *ngIf="delConfirmForm.controls.delete_confirmation.dirty && delConfirmForm.controls.delete_confirmation.invalid">
+                    {{ 'WIDGET.MODAL.CONFIRM_DELETE.FORM.MESSAGE.VALIDATION_ERROR' | translate }}
+                </span>
+            </div>
+
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="3" 
+                    (click)="fnCloseModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
+
+                <button type="submit" class="btn btn-danger font-weight-bold ml-2" [disabled]="delConfirmForm.invalid" tabindex="2">
+                    {{ 'COMMON.LABEL.DELETE' | translate }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" formControlName="email_subject" name="email_subject"
                         placeholder="{{ 'WIDGET.MODAL.MAIL_SEND.FORM.SUBJECT.PLACEHOLDER' | translate }}"
-                        autofocus autocomplete="none" tabindex="1" />
+                        autofocus autocomplete="off" tabindex="1" />
 
                     <span class="form-text text-danger" *ngIf="mailForm.controls.email_subject.dirty && mailForm.controls.email_subject.invalid">
                         {{ 'WIDGET.MODAL.MAIL_SEND.FORM.SUBJECT.VALIDATION_ERROR' | translate }}

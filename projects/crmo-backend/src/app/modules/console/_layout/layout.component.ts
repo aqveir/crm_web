@@ -188,8 +188,19 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     });
 
     //Broker Lister - Modal Component for Confirm Delete
-    this._broker.listen<any>('modal-confirm-delete', (x) => {
+    this._broker.listen<any>('modal-confirm-delete', (x: string) => {
       const modalConfirmDeleteRef = this._modalService.open(ModalConfirmDeleteComponent, this._modalConfig);
+      if (x != null) {
+        modalConfirmDeleteRef.componentInstance.strDeleteConfirmText = 'xxxxxx';
+      } //End if      
+      modalConfirmDeleteRef.result
+        .then((result: any) => {
+          console.log(result);
+        }, (reason: any) => {
+          console.log(reason);
+        });
+
+
       console.log(x);
     });
   } //Function ends

@@ -719,6 +719,17 @@
                         "VALIDATION_ERROR": "Enter valid mail content"
                     }
                 }
+            },
+            "CONFIRM_DELETE": {
+                "TITLE": "Confirm Delete",
+                "FORM": {
+                    "MESSAGE": {
+                        "LABEL": "Do you want to continue and delete? This acton cannot be undone. Proceeding with this action could result into loss of data and/or changed behaviour of the application.",
+                        "PLACEHOLDER": "Enter {{deleteConfirmationText}} to confirm",
+                        "FINE_TEXT": "To confirm deletion, type <strong>{{deleteConfirmationText}}</strong> in the field.",
+                        "VALIDATION_ERROR": "Enter valid confirmation text (This field is case sensitive)."
+                    }
+                }
             }
         }
     },

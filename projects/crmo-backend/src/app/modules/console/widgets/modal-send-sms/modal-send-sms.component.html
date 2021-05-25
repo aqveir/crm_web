@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <textarea class="form-control" formControlName="sms_message" name="sms_message"
                         rows="10" placeholder="{{ 'WIDGET.MODAL.SMS_SEND.FORM.MESSAGE.PLACEHOLDER' | translate }}"
-                        tabindex="1" autofocus autocomplete="none"></textarea>
+                        tabindex="1" autofocus autocomplete="off"></textarea>
                 </div>
 
                 <span class="form-text text-danger" *ngIf="smsForm.controls.sms_message.dirty && smsForm.controls.sms_message.invalid">

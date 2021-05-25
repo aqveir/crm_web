@@ -42,7 +42,7 @@
                             [routerLink]="['/secure/setting/organization', task.id]">
                             <td>
                                 <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_call'"
-                                    type="button" placement="bottom" 
+                                    type="button" placement="bottom" (click)="fnOpenModal($event, 'modal-confirm-call', task)"
                                     [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
 
                                 <button class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_sms'"

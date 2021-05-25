@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';

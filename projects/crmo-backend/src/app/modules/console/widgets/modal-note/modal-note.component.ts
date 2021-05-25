@@ -1,13 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+//Third Party components and libraries
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { INote, NoteService } from 'crmo-lib';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { INote, NoteService } from 'crmo-lib';
 
 @Component({
   selector: 'crmo-backend-modal-note',
@@ -15,17 +17,14 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-note.component.scss']
 })
 export class ModalNoteComponent extends BaseComponent implements OnInit {
-  @Input('entity_type') strEntityType: string = null;
-  @Input('reference_id') intReferenceId: number = 0;
-  @Input('note') objNote: INote = null;
-  @Output('saved') boolSaved: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
+  public strEntityType: string = null;
+  public intReferenceId: number = 0;
+  public objNote: INote = null;
   public noteForm!: FormGroup;
-  public modalNote: NgbActiveModal;
 
   /**
    * Default constructor
@@ -34,13 +33,9 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
     private _globals: Globals,
     private _formBuilder: FormBuilder,
     private _noteService: NoteService,
-    private _activeModal: NgbActiveModal,
-    private _modalService: NgbModal
+    private _modalActive: NgbActiveModal
   ) {
     super();
-
-    //Set Active Modal
-    this.modalNote = _activeModal;
   }
 
 
@@ -83,11 +78,8 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
           //Stop loader
           this.boolLoading = false;
 
-          //Refresh data
-          this.boolSaved.emit(true);
-
           //Close the modal window
-          this.modalNote.close({refresh: true});
+          this._modalActive.close({refresh: true});
         },(error) => {
           //Stop loader
           this.boolLoading = false;
@@ -116,8 +108,17 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnCloseModal(): void {
-    this.modalNote.dismiss();
+  /**
+   * Close Modal window
+   * 
+   * @param isDismissed 
+   */
+  public fnCloseModal(isDismissed: boolean=false): void {
+    if (isDismissed) {
+      this._modalActive.dismiss({refresh: false});
+    } else {
+      this._modalActive.close({refresh: false});
+    } //End if    
   } //Function ends
 
 

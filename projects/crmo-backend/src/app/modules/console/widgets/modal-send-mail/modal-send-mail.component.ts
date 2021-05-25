@@ -133,8 +133,6 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
    */
   private fnInitializeForm() {
     this.mailForm = this._formBuilder.group({
-      // entity_type: [(this.strEntityType?this.strEntityType:''), Validators.required],
-      // reference_id: [(this.intReferenceId?this.intReferenceId:''), Validators.required],
       email_subject: ['', [ Validators.required, Validators.maxLength(200) ]],
       email_body: ['', [ Validators.required, Validators.maxLength(4000) ]]
     });
