@@ -34,6 +34,51 @@
                 "MESSAGE": "You seem to have still not configured this feature </br>for your organization. Enjoy a seamless experience </br>of the system and explore it to its potential.",
                 "BUTTON": "Start Now !!"
             }
+        },
+        "ADDRESS":{
+            "TITLE":"Address",
+            "ADDRESS": {
+                "LABEL": "Address",
+                "PLACEHOLDER": "Enter Address",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Address."
+            },
+            "AREA": {
+                "LABEL": "AREA",
+                "PLACEHOLDER": "Enter Area name",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Area."
+            },
+            "CITY": {
+                "LABEL": "City",
+                "PLACEHOLDER": "Enter City",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid City."
+            },
+            "STATE": {
+                "LABEL": "State",
+                "PLACEHOLDER": "Select State",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid State."
+            },
+            "COUNTRY": {
+                "LABEL": "Country",
+                "PLACEHOLDER": "Enter Country",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Country."
+            },
+            "ZIPCODE": {
+                "LABEL": "Zipcode",
+                "PLACEHOLDER": "Enter Zipcode",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Zipcode."
+            },
+            "LOCATION": {
+                "LABEL": "Select Location",
+                "PLACEHOLDER": "Select Location",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Location."
+            }
         }
     },
 
@@ -373,6 +418,56 @@
                     "LAST_LOGIN": "Last Login",
                     "LAST_MODIFIED": "Last modified"
                 }
+            },
+            "ACCOUNT_DETAIL":{
+                "TITLE": "Account Details",
+                "TAB_DETAILS": {              
+                    "NAME": {
+                        "LABEL": "Name",
+                        "PLACEHOLDER": "Enter Account name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid Account name."
+                    },
+                    "DESCRIPTION": {
+                        "LABEL": "Description",
+                        "PLACEHOLDER": "Enter Account Description",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid Account Description."
+                    },
+                    "TYPE":{
+                        "LABEL": "Type",
+                        "PLACEHOLDER": "Select Account Type",
+                        "FINE_TEXT":"",
+                        "VALIDATION_ERROR": "Account Type must be selected"
+                    },
+                    "OWNER":{
+                        "LABEL": "Owner",
+                        "PLACEHOLDER": "Select Owner",
+                        "FINE_TEXT":"",
+                        "VALIDATION_ERROR": "Account Owner must be assigned"
+                    },                
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "Phone number of account owner",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "Account email used for communication",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    },
+                    "DEFAULT_ACCOUNT": {
+                        "LABEL": "Default Account",
+                        "PLACEHOLDER": "Is this the Default Account for Organization",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Value must be selected"
+                    } 
+                },
+                "TAB_ADDRESS": {
+                    "TITLE": "Address"                    
+                }
             }
         },
         "CONTACT": {
@@ -679,6 +774,7 @@
         }
     },
 
+    
     "MODAL": {
         "NOTE": {
             "TITLE": "Add/Edit Note",

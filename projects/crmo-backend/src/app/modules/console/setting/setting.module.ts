@@ -29,9 +29,9 @@ import { OrganizationMailTemplateListComponent } from './organization/organizati
 import { PreferenceListComponent } from './preference/preference-list/preference-list.component';
 import { PreferenceDetailComponent } from './preference/preference-detail/preference-detail.component';
 import {AccountListComponent} from './account/account-list/account-list.component';
-
-
-
+import { AccountDetailComponent } from './account/account-detail/account-detail.component';
+import { AddressComponent } from '../shared/address/address.component';
+//import { AccountDataComponent } from './account/account-detail/account-data.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,11 @@ import {AccountListComponent} from './account/account-list/account-list.componen
     PreferenceListComponent,
     PreferenceDetailComponent,
 
-    AccountListComponent
+    AccountListComponent,
+    AccountDetailComponent,
+    //AccountDataComponent,
+    
+    AddressComponent
   ],
   imports: [
     CommonModule,

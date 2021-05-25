@@ -4,11 +4,8 @@ import { ILookupValue } from '../common/lookup.interface';
 import { ICountry } from '../common/country.interface';
 
 export interface IAccount {
-    id?: number;
-    
-    //Added by Geeta
-    //hash: string; TODO: No decision has been made on having hash field, hence commented. 
-    
+    id?: number;    
+    hash: string;    
     name: string;
     org: IOrganization;
     owner:IUser;
@@ -29,6 +26,7 @@ export interface IAccount {
 }
 
 export interface IAccountMinimal {
+    id?:number;
     hash: string;
     name: string;
     owner:IUser;

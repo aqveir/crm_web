@@ -52,6 +52,7 @@ export class AccountListComponent extends BaseComponent implements OnInit {
 
   }
 
+  //#region Private Methods
   /**
    * Function to load account list
    * @param showLoader
@@ -142,5 +143,18 @@ export class AccountListComponent extends BaseComponent implements OnInit {
         acc.target.scrollTop = scrollTop;
       } //End if
     } //Function ends
+
+    //#endregion
+
+//#region Public Methods
+
+public fnShowAccountDtl(account:IAccountMinimal):void{
+  try {
+    this._router.navigate(['/secure/setting/organization/'+ this.oHash +'/account',account.id]);
+  } catch(error) {
+    throw error;
+  } //Try-catch ends
+}
+//#endregion
 
 }
