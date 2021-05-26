@@ -3,15 +3,19 @@
         <form class="form" id="kt_modal_send_sms" novalidate="novalidate"
             [formGroup]="delConfirmForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
 
-            <div class="modal-header badge-danger border-0">
-                <h5 class="modal-title text-white" id="exampleModalLabel">{{ 'WIDGET.MODAL.CONFIRM_DELETE.TITLE' | translate }}</h5>
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fas fa-exclamation-triangle mr-2 text-danger"></i>
+                    <span>{{ 'WIDGET.MODAL.CONFIRM_DELETE.TITLE' | translate }}</span>
+                </h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
-                    <i aria-hidden="true" class="ki ki-close text-white"></i>
+                    <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
 
             <div class="modal-body p-5">
-                <p class="text-justify mb-5"
+                <p class="text-justify mb-5 font-size-lg text-dark-50"
                     [innerHTML]="'WIDGET.MODAL.CONFIRM_DELETE.FORM.MESSAGE.LABEL' | translate:{deleteConfirmationText: strDeleteConfirmText} "></p>
 
                 <p class="text-justify mb-1"

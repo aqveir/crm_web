@@ -26,6 +26,7 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
   public objNote: INote = null;
   public noteForm!: FormGroup;
 
+
   /**
    * Default constructor
    */

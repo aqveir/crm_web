@@ -4,7 +4,8 @@
             [formGroup]="noteForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
 
             <div class="modal-header border-0">
-                <h5 class="modal-title" id="exampleModalLabel">{{ 'WIDGET.MODAL.NOTE.TITLE' | translate }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="objNote==null">{{ 'WIDGET.MODAL.NOTE.TITLE.ADD' | translate }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel" *ngIf="objNote!=null">{{ 'WIDGET.MODAL.NOTE.TITLE.EDIT' | translate }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
@@ -17,8 +18,8 @@
                         placeholder="{{ 'WIDGET.MODAL.NOTE.FORM.TEXT.PLACEHOLDER' | translate }}"
                         autocomplete="off" tabindex="1" autofocus></textarea>
 
-                    <span *ngIf="noteForm.controls.note.invalid && (noteForm.controls.note.dirty || noteForm.controls.note.touched)">
-                        {{ noteForm.controls.note.errors | json }}
+                    <span class="form-text text-danger" *ngIf="noteForm.controls.note.dirty && noteForm.controls.note.invalid">
+                        {{ 'WIDGET.MODAL.NOTE.FORM.TEXT.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>                        
             </div>

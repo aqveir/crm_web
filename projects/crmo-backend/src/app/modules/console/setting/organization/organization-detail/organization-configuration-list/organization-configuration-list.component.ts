@@ -57,9 +57,18 @@ export class OrganizationConfigurationListComponent extends BaseComponent implem
    * @param task 
    */
   public fnDeleteRecord(event, configuration: IConfiguration): void {
-    this._broker.emit('modal-confirm-delete', null);
+    this._broker.emit('modal-confirm-delete', [null, (boolResponse: boolean)=>{
+      if (boolResponse) {
+        //TODO: Delete the configuration
+        console.log(configuration);
 
-    this.eventRefreshData.emit(true);
+
+        this.eventRefreshData.emit(true);
+      } else {
+        //Do nothing
+      } //End if
+    }]);
+    
     event.stopPropagation();
   } //Function ends
 

@@ -31,10 +31,6 @@
                 <span class="form-text text-danger" *ngIf="mailForm.controls.email_body.dirty && mailForm.controls.email_body.invalid">
                     {{ 'WIDGET.MODAL.MAIL_SEND.FORM.MESSAGE.VALIDATION_ERROR' | translate }}
                 </span>
-
-                <div>
-                    {{ objServiceRequest.hash }}
-                </div>
             </div>
 
             <div class="modal-footer border-0 pt-0">

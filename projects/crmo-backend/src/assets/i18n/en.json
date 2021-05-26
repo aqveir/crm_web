@@ -777,13 +777,16 @@
     "WIDGET": {
         "MODAL": {
             "NOTE": {
-                "TITLE": "Add/Edit Note",
+                "TITLE": {
+                    "ADD": "Add Note",
+                    "EDIT": "Edit Note"
+                },
                 "FORM": {
                     "TEXT": {
                         "LABEL": "Message",
                         "PLACEHOLDER": "Enter a note",
-                        "FINE_TEXT": "Your invoices will be addressed to this company.",
-                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the note."
                     }
                 }
             },
@@ -819,12 +822,26 @@
                 "TITLE": "Confirm Delete",
                 "FORM": {
                     "MESSAGE": {
-                        "LABEL": "Do you want to continue and delete? This acton cannot be undone. Proceeding with this action could result into loss of data and/or changed behaviour of the application.",
+                        "LABEL": "Do you want to continue and delete? This action cannot be undone. Proceeding with this action could result into loss of data and/or changed behaviour of the application.",
                         "PLACEHOLDER": "Enter {{deleteConfirmationText}} to confirm",
                         "FINE_TEXT": "To confirm deletion, type <strong>{{deleteConfirmationText}}</strong> in the field.",
                         "VALIDATION_ERROR": "Enter valid confirmation text (This field is case sensitive)."
                     }
     
+                }
+            },
+            "CONFIRM_CALL": {
+                "TITLE": "Continue Call?",
+                "BTN": {
+                    "CALL": {
+                        "LABEL": "Call"
+                    },
+                    "REJECT": {
+                        "LABEL": "Reject"
+                    }
+                },
+                "MESSAGE": {
+                    "LABEL": "Do you want to continue and connect the call? Proceeding with this action may result into additional telephony charges by your provider."
                 }
             }
         }

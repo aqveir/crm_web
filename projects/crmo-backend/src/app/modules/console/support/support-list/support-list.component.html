@@ -51,11 +51,14 @@
                             </td>
 
                             <td>
-                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.CALL' | translate"
+                                    (click)="fnOpenModal($event, 'show_call_modal', support)"><i class="la la-phone icon-xl"></i></button>
 
-                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.SMS' | translate" (click)="fnOpenModal($event, 'show_sms_modal', support)"><i class="la la-sms icon-xl"></i></button>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.SMS' | translate"
+                                    (click)="fnOpenModal($event, 'show_sms_modal', support)"><i class="la la-sms icon-xl"></i></button>
 
-                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate" (click)="fnOpenModal($event, 'show_mail_modal', support)"><i class="la la-envelope icon-xl"></i></button>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate"
+                                    (click)="fnOpenModal($event, 'show_mail_modal', support)"><i class="la la-envelope icon-xl"></i></button>
                             </td>
 
                             <td class="d-none d-xl-table-cell">
