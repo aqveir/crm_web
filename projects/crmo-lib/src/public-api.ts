@@ -24,6 +24,7 @@ export * from './lib/interfaces/account/account.interface';
 export * from './lib/interfaces/service-request/service-request.interface';
 export * from './lib/interfaces/service-request/task.interface';
 export * from './lib/interfaces/service-request/event.interface';
+export * from './lib/interfaces/service-request/communication.interface';
 export * from './lib/interfaces/common/address.interface';
 
 //Exported Services
@@ -45,6 +46,7 @@ export * from './lib/services/account/account.service';
 export * from './lib/services/service-request/lead.service';
 export * from './lib/services/service-request/opportunity.service';
 export * from './lib/services/service-request/support.service';
+export * from './lib/services/service-request/communication.service';
 export * from './lib/services/task/task.service';
 
 

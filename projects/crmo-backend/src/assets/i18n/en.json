@@ -773,16 +773,74 @@
         }
     },
 
+    "WIDGET": {
+        "MODAL": {
+            "NOTE": {
+                "TITLE": {
+                    "ADD": "Add Note",
+                    "EDIT": "Edit Note"
+                },
+                "FORM": {
+                    "TEXT": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter a note",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the note."
+                    }
+                }
+            },
+            "SMS_SEND": {
+                "TITLE": "Send Message",
+                "FORM": {
+                    "MESSAGE": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter the message to send",
+                        "FINE_TEXT": "Your invoices will be addressed to this company.",
+                        "VALIDATION_ERROR": "Enter valid message"
+                    }
+                }
+            },
+            "MAIL_SEND": {
+                "TITLE": "Send Mail",
+                "FORM": {
+                    "SUBJECT": {
+                        "LABEL": "Subject",
+                        "PLACEHOLDER": "Enter the subject to mail",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid subject"
+                    },
+                    "MESSAGE": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter the message to send",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid mail content"
+                    }
+                }
+            },
+            "CONFIRM_DELETE": {
+                "TITLE": "Confirm Delete",
+                "FORM": {
+                    "MESSAGE": {
+                        "LABEL": "Do you want to continue and delete? This action cannot be undone. Proceeding with this action could result into loss of data and/or changed behaviour of the application.",
+                        "PLACEHOLDER": "Enter {{deleteConfirmationText}} to confirm",
+                        "FINE_TEXT": "To confirm deletion, type <strong>{{deleteConfirmationText}}</strong> in the field.",
+                        "VALIDATION_ERROR": "Enter valid confirmation text (This field is case sensitive)."
+                    }
     
-    "MODAL": {
-        "NOTE": {
-            "TITLE": "Add/Edit Note",
-            "FORM": {
-                "TEXT": {
-                    "LABEL": "Message",
-                    "PLACEHOLDER": "Enter a note",
-                    "FINE_TEXT": "Your invoices will be addressed to this company.",
-                    "VALIDATION_ERROR": "Enter valid email or phone number."
+                }
+            },
+            "CONFIRM_CALL": {
+                "TITLE": "Continue Call?",
+                "BTN": {
+                    "CALL": {
+                        "LABEL": "Call"
+                    },
+                    "REJECT": {
+                        "LABEL": "Reject"
+                    }
+                },
+                "MESSAGE": {
+                    "LABEL": "Do you want to continue and connect the call? Proceeding with this action may result into additional telephony charges by your provider."
                 }
             }
         }

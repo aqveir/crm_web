@@ -138,11 +138,17 @@
                         <div class="font-weight-bold text-success mt-9 mb-5">3:30PM - 4:20PM</div>
                         <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">Craft a headline that is informative
                         <br />and will capture readers</p>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" (click)="fnShowModal('show_note_modal')">Note</button>
+                            <button type="button" class="btn btn-primary" (click)="fnShowModal('show_document_modal')">Document</button>
+                        </div>
+                        
                     </div>
                     <!--end::Body-->
                 </div>
                 <!--end::Stats Widget 1-->
             </div>
+
             <div class="col-xl-4">
                 <!--begin::Stats Widget 2-->
                 <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(assets/media/svg/shapes/abstract-2.svg)">
@@ -157,6 +163,7 @@
                 </div>
                 <!--end::Stats Widget 2-->
             </div>
+
             <div class="col-xl-4">
                 <!--begin::Stats Widget 3-->
                 <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(assets/media/svg/shapes/abstract-1.svg)">

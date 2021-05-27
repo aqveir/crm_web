@@ -8,10 +8,26 @@ import {
 import { LayoutService, LayoutInitService } from '../../../_metronic/core';
 import KTLayoutContent from '@asset-backend/js/layout/base/content';
 
+//Third Party referenced libraries
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
+//Application common libraries
+import { EventBrokerService } from 'ellaisys-lib';
+import { INote } from 'crmo-lib';
+
+//Application Modal Components
+import { ModalNoteComponent } from '../widgets/modal-note/modal-note.component';
+import { ModalSendSmsComponent } from '../widgets/modal-send-sms/modal-send-sms.component';
+import { ModalSendMailComponent } from '../widgets/modal-send-mail/modal-send-mail.component';
+import { ModalConfirmDeleteComponent } from '../widgets/modal-confirm-delete/modal-confirm-delete.component';
+import { ModalConfirmCallComponent } from '../widgets/modal-confirm-call/modal-confirm-call.component';
+
+
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
+  styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
   // Public variables
@@ -47,11 +63,22 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild('ktHeaderMobile', { static: true }) ktHeaderMobile: ElementRef;
   @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
 
+  /**
+   * Default constructor
+   */
   constructor(
     private initService: LayoutInitService,
-    private layout: LayoutService
+    private layout: LayoutService,
+    private _broker: EventBrokerService,
+    private _modalService: NgbModal,
+    private _modalConfig: NgbModalConfig
   ) {
     this.initService.init();
+
+    // Set Modal Config
+    _modalConfig.backdrop = 'static';
+    _modalConfig.keyboard = false;
+    _modalConfig.animation = true;
   }
 
   ngOnInit(): void {
@@ -109,6 +136,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    //Load broker listeners
+    this.fnLoadBrokerListeners();
+
     if (this.ktAside) {
       for (const key in this.asideHTMLAttributes) {
         if (this.asideHTMLAttributes.hasOwnProperty(key)) {
@@ -141,5 +171,69 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     // Init Content
     KTLayoutContent.init('kt_content');
-  }
-}
+  } //Function closes
+
+
+  /**
+   * Load Broker Listeners for the application
+   * 
+   * This is very useful for applicaton level modals.
+   */
+  private fnLoadBrokerListeners(): void {
+    //Broker Lister - Modal Component for Note Amend
+    this._broker.listen<any>('show_note_modal', (x: any) => {
+      const modalNoteRef = this._modalService.open(ModalNoteComponent, this._modalConfig);
+      
+      let strEntityType: string = x[0];
+      let intReferenceId: number = x[1];
+      let objNote: INote = x[2];
+
+      modalNoteRef.componentInstance.strEntityType = strEntityType;
+      modalNoteRef.componentInstance.intReferenceId = intReferenceId;
+      modalNoteRef.componentInstance.objNote = objNote;
+    });
+
+    //Broker Lister - Modal Component for Initiating Outgoing Call
+    this._broker.listen<any>('show_call_modal', (x: any) => {
+      const modalCallContactRef = this._modalService.open(ModalConfirmCallComponent, this._modalConfig);
+      modalCallContactRef.componentInstance.objServiceRequest = x;
+    });
+
+    //Broker Lister - Modal Component for SMS Send
+    this._broker.listen<any>('show_sms_modal', (x: any) => {
+      const modalSendSmsRef = this._modalService.open(ModalSendSmsComponent, this._modalConfig);
+      modalSendSmsRef.componentInstance.objServiceRequest = x;
+    });
+
+    //Broker Lister - Modal Component for Mail Send
+    this._broker.listen<any>('show_mail_modal', (x: any) => {
+      const modalSendSmsRef = this._modalService.open(ModalSendMailComponent, this._modalConfig);
+      modalSendSmsRef.componentInstance.objServiceRequest = x;
+    });
+
+    //Broker Lister - Modal Component for Confirm Delete
+    this._broker.listen<any>('modal-confirm-delete', (x: any) => {
+      const modalConfirmDeleteRef = this._modalService.open(ModalConfirmDeleteComponent, this._modalConfig);
+      let strDeleteConfirmText = x[0];
+      let callback: any = x[1];
+
+      //Set Delete Confirmation Text to match
+      if ((strDeleteConfirmText != null) && (typeof(strDeleteConfirmText) === 'string')) {
+        modalConfirmDeleteRef.componentInstance.strDeleteConfirmText = strDeleteConfirmText;
+      } //End if
+
+      //Waiting for modal response
+      modalConfirmDeleteRef.result
+        .then((result: any) => {
+          if (result && result['delete']) {
+            callback(result['delete']);            
+          } else {
+            callback(false);
+          } //End if
+        }, (reason: any) => {
+          callback(false);
+        });
+    });
+  } //Function ends
+
+} //Class ends

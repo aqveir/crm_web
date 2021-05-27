@@ -4,6 +4,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { TaskService, ITaskMinimal } from 'crmo-lib';
 import { BaseComponent } from '../../base.component';
+import { EventBrokerService } from 'ellaisys-lib';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _taskService: TaskService,
+    private _broker: EventBrokerService
   ) { super(); }
 
 
@@ -112,6 +114,19 @@ export class TaskListComponent extends BaseComponent implements OnInit {
 
         throw error;
       });
+  } //Function ends
+
+
+  /**
+   * Open Modal for SMS and Mail
+   * 
+   * @param event 
+   * @param key 
+   * @param task 
+   */
+  public fnOpenModal(event, key: string, task: ITaskMinimal): void {
+    this._broker.emit(key, task?.servicerequest);
+    event.stopPropagation();
   } //Function ends
 
 

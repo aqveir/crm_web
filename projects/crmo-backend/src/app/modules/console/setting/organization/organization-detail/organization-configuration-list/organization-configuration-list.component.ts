@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angu
 
 //Application Libraries
 import { IOrganization, IConfiguration } from 'crmo-lib';
+import { EventBrokerService } from 'ellaisys-lib';
 import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
 
 
@@ -26,7 +27,7 @@ export class OrganizationConfigurationListComponent extends BaseComponent implem
   /**
    * Default constructor
    */
-  constructor() { super(); }
+  constructor(private _broker: EventBrokerService) { super(); }
 
 
   /**
@@ -49,10 +50,25 @@ export class OrganizationConfigurationListComponent extends BaseComponent implem
 
 
   /**
-   * Delete Record
+   * Open Modal for Delete Confirmation
+   * 
+   * @param event 
+   * @param key 
+   * @param task 
    */
-  public fnDeleteRecord(configuration: IConfiguration): void {
-    this.eventRefreshData.emit(true);
+  public fnDeleteRecord(event, configuration: IConfiguration): void {
+    this._broker.emit('modal-confirm-delete', [null, (boolResponse: boolean)=>{
+      if (boolResponse) {
+        //TODO: Delete the configuration
+        console.log(configuration);
+
+
+        this.eventRefreshData.emit(true);
+      } else {
+        //Do nothing
+      } //End if
+    }]);
+    
     event.stopPropagation();
   } //Function ends
 

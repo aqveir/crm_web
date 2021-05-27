@@ -1,31 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-//Third Party components and libraries
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { ISendSmsRequest, IServiceRequest, CommunicationService } from 'crmo-lib';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { INote, NoteService } from 'crmo-lib';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'crmo-backend-modal-note',
-  templateUrl: './modal-note.component.html',
-  styleUrls: ['./modal-note.component.scss']
+  selector: 'crmo-backend-modal-send-sms',
+  templateUrl: './modal-send-sms.component.html',
+  styleUrls: ['./modal-send-sms.component.scss']
 })
-export class ModalNoteComponent extends BaseComponent implements OnInit {
+export class ModalSendSmsComponent extends BaseComponent implements OnInit { 
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
-
-  public strEntityType: string = null;
-  public intReferenceId: number = 0;
-  public objNote: INote = null;
-  public noteForm!: FormGroup;
-
+  
+  public objServiceRequest: IServiceRequest;
+  public smsForm!: FormGroup;
 
   /**
    * Default constructor
@@ -33,8 +28,8 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _formBuilder: FormBuilder,
-    private _noteService: NoteService,
-    private _modalActive: NgbActiveModal
+    private _modalActive: NgbActiveModal,
+    private _commService: CommunicationService
   ) {
     super();
   }
@@ -56,7 +51,7 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
   private fnInitialize(): void {
     this.fnInitializeForm();
   } //Function ends
-
+  
 
   /**
    * Save Data
@@ -64,17 +59,17 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
   public fnSaveAction(): boolean {
     try {
       //Check form validity
-      this.noteForm.updateValueAndValidity();
-      if (this.noteForm.invalid) { 
-        this.fnRaiseErrors(this.noteForm); 
+      this.smsForm.updateValueAndValidity();
+      if (this.smsForm.invalid) { 
+        this.fnRaiseErrors(this.smsForm); 
 
         return false; 
       } //End if
 
-      let objFormData: INote = this.noteForm.value;
+      let objFormData: ISendSmsRequest = this.smsForm.value;
       this.boolLoading = true;
 
-      this._noteService.create(objFormData)
+      this._commService.sendSMS(this.objServiceRequest.hash, objFormData)
         .subscribe((response: any) => {
           //Stop loader
           this.boolLoading = false;
@@ -105,7 +100,7 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
    * Reset form
    */
   public fnResetForm(): void {
-    this.noteForm.reset();
+    this.smsForm.reset();
   } //Function ends
 
 
@@ -127,14 +122,8 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
    * Initialize Reactive Form
    */
   private fnInitializeForm() {
-    this.noteForm = this._formBuilder.group({
-      entity_type: [(this.strEntityType?this.strEntityType:''), Validators.required],
-      reference_id: [(this.intReferenceId?this.intReferenceId:''), Validators.required],
-      note: [(this.objNote?this.objNote.note:''), [
-        Validators.required,
-        Validators.maxLength(4000),
-        //Validators.pattern('[\\S]*')
-      ]],
+    this.smsForm = this._formBuilder.group({
+      sms_message: ['', [ Validators.required, Validators.maxLength(200) ]],
     });
   } //Function ends
 

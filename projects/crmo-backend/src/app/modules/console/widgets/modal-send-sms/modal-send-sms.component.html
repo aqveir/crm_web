@@ -1,11 +1,10 @@
 <div class="modal-dialog m-0" role="document">
     <div class="modal-content">
-        <form class="form" id="kt_form_1" novalidate="novalidate"
-            [formGroup]="noteForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
+        <form class="form" id="kt_modal_send_sms" novalidate="novalidate"
+            [formGroup]="smsForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
 
             <div class="modal-header border-0">
-                <h5 class="modal-title" id="exampleModalLabel" *ngIf="objNote==null">{{ 'WIDGET.MODAL.NOTE.TITLE.ADD' | translate }}</h5>
-                <h5 class="modal-title" id="exampleModalLabel" *ngIf="objNote!=null">{{ 'WIDGET.MODAL.NOTE.TITLE.EDIT' | translate }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ 'WIDGET.MODAL.SMS_SEND.TITLE' | translate }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
@@ -13,15 +12,14 @@
 
             <div class="modal-body p-5">
                 <div class="form-group">
-                    <textarea class="form-control border-0" rows="8" formControlName="note"
-                        id="kt_forms_widget_1_input"
-                        placeholder="{{ 'WIDGET.MODAL.NOTE.FORM.TEXT.PLACEHOLDER' | translate }}"
-                        autocomplete="off" tabindex="1" autofocus></textarea>
+                    <textarea class="form-control" formControlName="sms_message" name="sms_message"
+                        rows="10" placeholder="{{ 'WIDGET.MODAL.SMS_SEND.FORM.MESSAGE.PLACEHOLDER' | translate }}"
+                        tabindex="1" autofocus autocomplete="off"></textarea>
+                </div>
 
-                    <span class="form-text text-danger" *ngIf="noteForm.controls.note.dirty && noteForm.controls.note.invalid">
-                        {{ 'WIDGET.MODAL.NOTE.FORM.TEXT.VALIDATION_ERROR' | translate }}
-                    </span>
-                </div>                        
+                <span class="form-text text-danger" *ngIf="smsForm.controls.sms_message.dirty && smsForm.controls.sms_message.invalid">
+                    {{ 'WIDGET.MODAL.SMS_SEND.FORM.MESSAGE.VALIDATION_ERROR' | translate }}
+                </span>
             </div>
 
             <div class="modal-footer border-0 pt-0">
@@ -36,4 +34,3 @@
         </form>
     </div>
 </div>
-                

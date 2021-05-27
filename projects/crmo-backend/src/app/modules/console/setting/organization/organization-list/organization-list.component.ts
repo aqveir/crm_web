@@ -19,7 +19,7 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
   public objOrganization: IOrganizationMinimal[];
-
+  public objRawData: IOrganizationMinimal[];
 
   /**
    * Default constructor
@@ -65,7 +65,7 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
           this.boolLoading = false;
 
           //Fill Data into variable
-          this.objOrganization = response;
+          this.objRawData = this.objOrganization = response;
 
           //Raise event to hide submenu
           this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, false);
@@ -99,6 +99,16 @@ export class OrganizationListComponent extends BaseComponent implements OnInit {
     } //Try-catch ends
 
     return objReturnValue;
+  } //Function ends
+
+
+  /**
+   * Filter data from the Search Bar
+   * 
+   * @param strSearch 
+   */
+  public fnFilterRecords(strSearch: string): void {
+    this.objOrganization = this.fnFilterData(this.objRawData, strSearch);
   } //Function ends
 
 } //Class ends

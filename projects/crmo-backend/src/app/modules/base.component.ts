@@ -12,6 +12,25 @@ export abstract class BaseComponent {
 
 
   /**
+   * Filter Data from the given collection using search string
+   * 
+   * @param collection 
+   * @param strSearch 
+   */
+  public fnFilterData(collection: any, strSearch: string): any {
+    try {
+      if (strSearch && strSearch.length > 0) {
+        return collection.filter((data: any) => JSON.stringify(data).toLowerCase().includes(strSearch.toLowerCase()));
+      } else {
+        return collection;
+      } //End if
+    } catch(error) {
+      throw error;
+    } //Try-Catch ends
+  } //Function ends
+
+
+  /**
    * Transform Reactive Form Group into HttpFormData
    * 
    * @param dataForm FormGroup

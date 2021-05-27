@@ -8,11 +8,13 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 //Application Environment
 import { environment } from '@env-backend/environment';
 
-//Application Modules
+//Third Party Application Modules
 import { InlineSVGModule } from 'ng-inline-svg';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+
+//Application Modules
 import { 
   EllaisysLibModule, NotificationModule, ValidatorModule, PipeModule, 
   TranslateModule, TranslateLoader, TranslateHttpLoader, HttpLoaderFactory,
@@ -56,8 +58,11 @@ export function GetApplicationLocation(_location: Location) {
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+
+    //Third Party Referenced Modules
     InlineSVGModule.forRoot(),
     NgSelectModule,
+    NgbModule,
 
     //EllaiSys Library
     EllaisysLibModule.forRoot(
@@ -96,7 +101,6 @@ export function GetApplicationLocation(_location: Location) {
     //CRMO Modules
     UserModule,
     ConsoleModule,
-    NgbModule
   ],
   providers: [
     Globals,
