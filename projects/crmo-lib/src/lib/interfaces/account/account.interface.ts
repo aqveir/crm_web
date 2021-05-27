@@ -2,12 +2,13 @@ import { IUser } from '../user/user.interface';
 import { IOrganization } from '../organization/organization.interface';
 import { ILookupValue } from '../common/lookup.interface';
 import { ICountry } from '../common/country.interface';
+import { IOrganizationMinimal } from '../organization/organization.interface';
 
 export interface IAccount {
     id?: number;    
     hash: string;    
     name: string;
-    org: IOrganization;
+    org: IOrganizationMinimal;
     owner:IUser;
     is_default:boolean;
     type:ILookupValue;
@@ -16,7 +17,7 @@ export interface IAccount {
     address?: string;
     locality?: string;
     city?: string;
-    state_id?: number;
+    state_id?: ILookupValue;
     country?: ICountry[];
     zipcode?: string;
     google_place_id?: string;

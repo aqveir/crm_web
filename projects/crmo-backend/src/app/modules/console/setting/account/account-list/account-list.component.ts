@@ -48,6 +48,8 @@ export class AccountListComponent extends BaseComponent implements OnInit {
   //Default Life cycle Function - Initialize 
   ngOnInit(): void {
     
+    this.oHash = this._route.snapshot.paramMap.get('ohash');
+
     this.fnLoadListData(true);
 
   }
@@ -60,24 +62,11 @@ export class AccountListComponent extends BaseComponent implements OnInit {
    */
   private fnLoadListData(showLoader: boolean =true)
   {
-    //Page view, position and size
-    let startAt: string = (this.startAt > 0) ? this.startAt.toString() : '1';
-    let pageSize: string = (this.pageSize > 0) ? this.pageSize.toString() : '10';
-
-    //Set loading status
-    this.isLoading = showLoader;
-    this.isScrollLoading = true;
-
-    //Build Params
-    let params: Object = {
-      'view': this.viewName,
-      'filter': this.filterName,
-      'page': startAt,
-      'size': pageSize,
-    };
+     //Build the params for passing
+     let params: Object = {'key': this.oHash};
 
     //Calling Account Service to get list of accounts
-    this._accountService.get()
+    this._accountService.get(params)
       .subscribe((response: IAccountMinimal[]) => {
         //Clear leading status
         this.isLoading = false;
@@ -150,6 +139,8 @@ export class AccountListComponent extends BaseComponent implements OnInit {
 
 public fnShowAccountDtl(account:IAccountMinimal):void{
   try {
+    let temp:Globals;
+    this.oHash = temp.getSettingInfo().oHash;
     this._router.navigate(['/secure/setting/organization/'+ this.oHash +'/account',account.id]);
   } catch(error) {
     throw error;
