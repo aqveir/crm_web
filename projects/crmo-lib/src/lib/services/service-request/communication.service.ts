@@ -20,12 +20,26 @@ export class CommunicationService extends BaseService {
 
 
   /**
+   * Make a Call to Contact (having the Service Request)
+   */
+  public makeCall(srhash: string, _payload: any=null, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('servicerequest/'+srhash+'/call', _payload, false, _params)
+        .then((response: any) => {
+          let data: any = response.data;
+
+          observer.next(data);
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally()
+    });
+  } //Function ends
+
+
+  /**
    * Send SMS to Contact (having the Service Request)
    */
   public sendSMS(srhash: string, _payload: ISendSmsRequest=null, _params: Object=null): Observable<any> {
-    //Add Pagination params, if missing
-    _params = super.setDefaultParamsForPagination(_params);
-
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('servicerequest/'+srhash+'/sms', _payload, false, _params)
         .then((response: any) => {
@@ -43,9 +57,6 @@ export class CommunicationService extends BaseService {
    * Send Mail/Email to Contact (having the Service Request)
    */
   public sendMail(srhash: string, _payload: ISendMailRequest=null, _params: Object=null): Observable<any> {
-    //Add Pagination params, if missing
-    _params = super.setDefaultParamsForPagination(_params);
-
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('servicerequest/'+srhash+'/mail', _payload, false, _params)
         .then((response: any) => {

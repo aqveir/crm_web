@@ -1,42 +1,32 @@
 <div class="d-block full-content-page-height">
     <crmo-backend-widget-subheader 
-        [title]="'PAGE.EVENT_LIST.TITLE'"
+        [title]="'PAGE.EVENT_LIST.TITLE'" [filter]="true"
         ></crmo-backend-widget-subheader>
 
     <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
 
     <!--begin::Card-->
     <div class="card card-custom gutter-b card-screen-height">
-        <div class="card-header border-0 py-5" *ngIf="listContact?.length>0">
-            <h3 class="card-title align-items-start flex-column">
-            </h3>
-            <div class="card-toolbar">
-                <div class="mr-2">
-                    <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control search-control" placeholder="Search..."/>
-                        <span><i class="flaticon2-search-1 icon-md"></i></span>
-                    </div>  
-                </div>
-
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
-                    <span class="navi-icon"><i class="la la-filter icon-md p-0"></i></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="card-body py-0">
-            <div class="table-responsive" *ngIf="listContact?.length>0">
+        <div class="card-body">
+            <div class="table-responsive" *ngIf="listEvent?.length>0">
                 <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
                     <thead class="thead-dark">
                         <tr class="text-uppercase">
-                            <th scope="col" class="pl-5" colspan="2">{{ 'PAGE.CONTACT_LIST.COLUMNS.CONTACTC_FULL_NAME' | translate }}</th>
-                            <th scope="col" style="min-width: 150px">{{ 'PAGE.CONTACT_LIST.COLUMNS.ACTION_CONTROLS' | translate }}</th>
-                            <th scope="col" style="min-width: 150px">{{ 'PAGE.CONTACT_LIST.COLUMNS.CONTACT_TYPE' | translate }}</th>
-                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.CONTACT_LIST.COLUMNS.CONTACT_SOURCES' | translate }}</th>
-                            <th scope="col" class="d-none d-md-table-cell" style="min-width: 150px">{{ 'PAGE.CONTACT_LIST.COLUMNS.ACCOUNT_NAME' | translate }}</th>
-                            <th scope="col" style="min-width: 150px">{{ 'PAGE.CONTACT_LIST.COLUMNS.CONTACT_OWNER' | translate }}</th>
+                            <th scope="col" class="pl-5" style="min-width: 95px">{{ 'PAGE.EVENT_LIST.COLUMNS.EVENT_TYPE' | translate }}</th>
+                            <th scope="col" class="">{{ 'PAGE.EVENT_LIST.COLUMNS.EVENT_TITLE' | translate }}</th>
+                            <th scope="col" class="" style="min-width: 225px">{{ 'PAGE.EVENT_LIST.COLUMNS.EVENT_LOCATION' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.EVENT_LIST.COLUMNS.EVENT_OWNER' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.EVENT_LIST.COLUMNS.EVENT_PARTICIPANTS' | translate }}</th>
                             <th scope="col" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
-                                {{ 'PAGE.CONTACT_LIST.COLUMNS.LAST_MODIFIED' | translate }}
+                                {{ 'PAGE.EVENT_LIST.COLUMNS.EVENT_START_AT' | translate }}
+                                <span class="ml-2 cursor-pointer">
+                                    <i class="la la-sort text-white icon-lg" (click)="fnSortColumn('last_date', 'asc')"></i>
+                                    <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'desc')" [ngClass]="{'d-none': true}"></i>
+                                    <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'asc')" [ngClass]="{'d-none': true}"></i>
+                                </span>
+                            </th>
+                            <th scope="col" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
+                                {{ 'PAGE.EVENT_LIST.COLUMNS.EVENT_END_AT' | translate }}
                                 <span class="ml-2 cursor-pointer">
                                     <i class="la la-sort text-white icon-lg" (click)="fnSortColumn('last_date', 'asc')"></i>
                                     <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'desc')" [ngClass]="{'d-none': true}"></i>
@@ -47,46 +37,38 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let contact of listContact" class="cursor-pointer" style="outline: none;"
-                            [routerLink]="['/secure/setting/organization', contact.hash]">
-                            <td style="width: 65px;">
-                                <div class="symbol symbol-50 symbol-light mt-1">
-                                    <span class="symbol-label" *ngIf="contact.avatar">
-                                        <img [src]="contact.avatar" class="h-75 align-self-end rounded-circle" alt="Avatar" />
-                                    </span>
-
-                                    <span class="symbol-label font-size-h6 font-weight-bold rounded-circle" *ngIf="!contact.avatar">{{ contact.name_initials }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="text-dark-75 font-weight-bolder d-block">{{ contact.full_name }}</span>
+                        <tr *ngFor="let task of listEvent" class="cursor-pointer" style="outline: none;"
+                            [routerLink]="['/secure/setting/organization', task.id]">
+                            <td>                           
+                                <span class="text-dark-75 font-weight-bolder ml-2">{{ task.subtype?.display_value }}</span>
                             </td>
 
-                            <td>
-                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
-                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.SMS' | translate"><i class="la la-sms icon-xl"></i></button>
-                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate"><i class="la la-envelope icon-xl"></i></button>
-                            </td>
+                            <td class="w-100">
+                                <span class="text-dark-50">{{ task.subject | shorten:30:'...' }}</span>
+                            </td>                            
 
                             <td>
-                                <span class="text-dark-50">Retail</span>
+                                <span class="text-dark-50">{{ task.location | shorten:30:'...' }}</span>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell" (click)="fnShowTaskModal($event, task)">
+                                <span class="text-dark-50">{{ task.owner?.full_name | shorten:20:'...' }}</span>
                             </td>
 
                             <td class="d-none d-xl-table-cell">
-                                <span class="text-dark-50">Trip Advisor</span>
-                            </td>
+                                <span class="d-block text-dark-50" *ngFor="let participant of task.participants">
+                                    {{ participant.participant?.full_name | shorten:20:'...' }}
+                                </span>
+                            </td>                           
 
-                            <td class="d-none d-md-table-cell">
-                                <span class="text-dark-50">Default</span>
-                            </td>
-
-                            <td>
-                                <span class="text-dark-50">John Doe</span>
+                            <td class="d-none d-xl-table-cell table-cell-date">
+                                <span class="text-dark-75 d-block ml-2">{{ task.end_at | date }}</span>
+                                <span class="text-muted d-block ml-2">{{ task.end_at | date:'shortTime' }}</span>
                             </td>
 
                             <td class="d-none d-xl-table-cell table-cell-date">
-                                <span class="text-dark-75 d-block ml-5">{{ contact.last_updated_at | date }}</span>
-                                <span class="text-muted d-block ml-5">{{ contact.last_updated_at | date:'shortTime' }}</span>
+                                <span class="text-dark-75 d-block ml-2">{{ task.last_updated_at | date }}</span>
+                                <span class="text-muted d-block ml-2">{{ task.last_updated_at | date:'shortTime' }}</span>
                             </td>
                         </tr>
                     </tbody>

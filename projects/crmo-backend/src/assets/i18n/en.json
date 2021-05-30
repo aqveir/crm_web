@@ -564,10 +564,10 @@
                 "TASK_TYPE": "Type",
                 "TASK_OWNER": "Owner",
                 "TASK_ASSIGNEE": "Assignee",
-                "TASK_TITLE": "Subject",
+                "TASK_TITLE": "Title",
                 "TASK_STATUS": "Status",
                 "TASK_PRIORITY": "Priority",
-                "DUE_DATE": "Due On",
+                "TASK_DUE_DATE": "Due On",
                 "COMPLETED_DATE": "Completed",
                 "ACTION_CONTROLS": ""
             }
@@ -576,12 +576,13 @@
             "TITLE": "Events",
             "SUB_TITLE": "Loaded 30 of total 5000",
             "COLUMNS": {
-                "CONTACTC_FULL_NAME": "Name",
-                "CONTACT_TYPE": "Type",
-                "CONTACT_OWNER": "Owner",
-                "CONTACT_SOURCES": "Source",
-                "CONTACT_STATUS": "Status",
-                "ACCOUNT_NAME": "Account",
+                "EVENT_TYPE": "Type",
+                "EVENT_OWNER": "Owner",
+                "EVENT_TITLE": "Title",
+                "EVENT_LOCATION": "Location",
+                "EVENT_START_AT": "Start On",
+                "EVENT_END_AT": "Ends On",
+                "EVENT_PARTICIPANTS": "Participants",
                 "LAST_MODIFIED": "Last modified",
                 "ACTION_CONTROLS": ""
             }
@@ -777,7 +778,7 @@
         "MODAL": {
             "NOTE": {
                 "TITLE": {
-                    "ADD": "Add Note",
+                    "ADD": "Create Note",
                     "EDIT": "Edit Note"
                 },
                 "FORM": {
@@ -786,6 +787,65 @@
                         "PLACEHOLDER": "Enter a note",
                         "FINE_TEXT": "",
                         "VALIDATION_ERROR": "Enter valid text for the note."
+                    }
+                }
+            },
+            "TASK": {
+                "TITLE": {
+                    "ADD": "Create Task",
+                    "EDIT": "Edit Task"
+                },
+                "ADVANCED": {
+                    "LABEL":"Advanced"
+                },
+                "FORM": {
+                    "SUBJECT": {
+                        "LABEL": "Title",
+                        "PLACEHOLDER": "Enter a task title",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text as title."
+                    },
+                    "DESCRIPTION": {
+                        "LABEL": "Detail",
+                        "PLACEHOLDER": "Enter a task detail",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for task detail."
+                    },
+                    "START_DATE": {
+                        "LABEL": "Start Date",
+                        "PLACEHOLDER": "Enter a description",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "END_DATE": {
+                        "LABEL": "Target Date",
+                        "PLACEHOLDER": "Enter a description",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "STATUS": {
+                        "LABEL": "Status",
+                        "PLACEHOLDER": "Select an assignee",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "ASSIGNEE": {
+                        "LABEL": "Assignee",
+                        "PLACEHOLDER": "Select an assignee",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter select a task assignee."
+                    },
+                    "PRIORITY": {
+                        "LABEL": "Priority",
+                        "PLACEHOLDER": "Select a priority",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "SUBTYPE": {
+                        "LABEL": "Type",
+                        "PLACEHOLDER": "Select a priority",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
                     }
                 }
             },

@@ -21,6 +21,7 @@ import { ModalSendSmsComponent } from '../widgets/modal-send-sms/modal-send-sms.
 import { ModalSendMailComponent } from '../widgets/modal-send-mail/modal-send-mail.component';
 import { ModalConfirmDeleteComponent } from '../widgets/modal-confirm-delete/modal-confirm-delete.component';
 import { ModalConfirmCallComponent } from '../widgets/modal-confirm-call/modal-confirm-call.component';
+import { ModalTaskComponent } from '../widgets/modal-task/modal-task.component';
 
 
 
@@ -171,7 +172,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     // Init Content
     KTLayoutContent.init('kt_content');
-  } //Function closes
+  } //Function ends
+
+
+  public fnCloseCanvas(event): void {
+
+  } //Function ends
 
 
   /**
@@ -193,6 +199,20 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       modalNoteRef.componentInstance.objNote = objNote;
     });
 
+    //Broker Lister - Modal Component for Task Amend
+    this._broker.listen<any>('show_task_modal', (x: any) => {
+      let customConfig: any = this._modalConfig;
+      customConfig['size']='lg';
+      const modalTaskRef = this._modalService.open(ModalTaskComponent, customConfig);
+
+      let srHash: string = x[0];
+      let objTask: INote = x[1];
+      let callback: any = x[2];
+
+      modalTaskRef.componentInstance.srHash = srHash;
+      modalTaskRef.componentInstance.objTask = objTask;
+    });
+    
     //Broker Lister - Modal Component for Initiating Outgoing Call
     this._broker.listen<any>('show_call_modal', (x: any) => {
       const modalCallContactRef = this._modalService.open(ModalConfirmCallComponent, this._modalConfig);
@@ -235,5 +255,5 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         });
     });
   } //Function ends
-
+  
 } //Class ends

@@ -6,17 +6,17 @@ import { IServiceRequestMinimal } from './service-request.interface';
 export interface ITaskMinimal {
     id: number;
     subject: string;
-    scheduled_at: Date;
+    start_at: Date;
+    end_at: Date;
     completed_at: Date|null;
     last_updated_at: Date;
-    is_scheduled: boolean;
-    is_completed: boolean;
     type: ILookupValue;
     subtype: ILookupValue;
     servicerequest: IServiceRequestMinimal;
-    assignee: IUserMinimal;
-    owner: IUserMinimal;
     priority: ILookupValue;
+    status: ILookupValue;
+    owner: IUserMinimal;
+    assignee: ITaskAssignee;
 }
 
 
@@ -24,30 +24,40 @@ export interface ITask {
     id: number;
     subject: string;
     description: string;
-    scheduled_at: Date;
+    start_at: Date;
+    end_at: Date;
     completed_at: Date|null;
     last_updated_at: Date;
-    is_scheduled: boolean;
-    is_completed: boolean;
     type: ILookupValue;
     subtype: ILookupValue;
     servicerequest: IServiceRequestMinimal;
-    assignee: IUserMinimal;
-    owner: IUserMinimal;
     priority: ILookupValue;
+    status: ILookupValue;
+    owner: IUserMinimal;
+    assignee: ITaskAssignee;
 }
 
+
+export interface ITaskAssignee {
+    completed_at: Date|null;
+    type: ILookupValue;
+    participant: IUserMinimal;
+}
+
+
+
 export interface ITaskRequest {
-    id?: number;
     sr_hash: string;
     subject: string;
     description: string;
-    scheduled_at: Date;
-    completed_at?: Date|null;
-    last_updated_at: Date;
-    is_scheduled: boolean;
-    is_completed: boolean;
+    start_at: Date;
+    end_at: Date|null;
     subtype_key: string;
-    assignee_hash: string;
     priority_key: string;
+    status_key: string;
+    assignee: ITaskAssigneeRequest[]; 
+}
+export interface ITaskAssigneeRequest {
+    participant_type_key: string;
+    participant_hash: string;
 }

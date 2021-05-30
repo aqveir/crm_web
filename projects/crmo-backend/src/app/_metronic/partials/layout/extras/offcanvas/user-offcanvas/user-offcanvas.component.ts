@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 //Application Modules
 import { IResponseUserLogin, UserAuthService, IUserStatusResponse } from 'crmo-lib';
@@ -7,7 +8,7 @@ import { IResponseUserLogin, UserAuthService, IUserStatusResponse } from 'crmo-l
 //Application Services
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { LayoutService } from '../../../../../core';
-import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -16,9 +17,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-offcanvas.component.scss'],
 })
 export class UserOffcanvasComponent implements OnInit {
+  @Output('close') boolClose: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public extrasUserOffcanvasDirection: string = 'offcanvas-right';
   public objUser: IResponseUserLogin;
-  //user$: any = null;
 
   public keyUserStatus: string = 'user_status_offline';
   public langKeyUserStatus: string = 'MENU.AUTH_USER.USER_STATUS.USER_STATUS_OFFLINE';
@@ -71,8 +73,6 @@ export class UserOffcanvasComponent implements OnInit {
    * @param event 
    */
   public fnUserStatusChangeAction(event: any): void {
-    console.log(event?.target?.checked);
-
     //Set the changed user status
     let userStatus = (event?.target?.checked)?'user_status_online':'user_status_away';
     this._globals.setUserStatus(userStatus);
@@ -97,6 +97,16 @@ export class UserOffcanvasComponent implements OnInit {
         this._router.navigate(['/user/login']);
       },(() => {}));
   } //Function ends
+
+
+  /**
+   * Close the Canvas
+   * 
+   * @param isDismiss 
+   */
+  public fnCloseCanvasAction(isDismiss: boolean=false): void {
+    this.boolClose.emit(true);
+  } //Fundtion ends
 
 
   /**
