@@ -6,6 +6,7 @@ import { IServiceRequestMinimal } from './service-request.interface'
 export interface IEventMinimal {
     id: number;
     subject: string;
+    description: string;
     location: string;
     start_at: Date;
     end_at: Date;

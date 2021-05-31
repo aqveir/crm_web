@@ -6,6 +6,7 @@ import { IServiceRequestMinimal } from './service-request.interface';
 export interface ITaskMinimal {
     id: number;
     subject: string;
+    description: string;
     start_at: Date;
     end_at: Date;
     completed_at: Date|null;
@@ -50,8 +51,8 @@ export interface ITaskRequest {
     sr_hash: string;
     subject: string;
     description: string;
-    start_at: Date;
-    end_at: Date|null;
+    start_at: Date|string;
+    end_at: Date|null|string;
     subtype_key: string;
     priority_key: string;
     status_key: string;

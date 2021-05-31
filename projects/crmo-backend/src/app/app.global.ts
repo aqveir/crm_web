@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 //Propritery Library
 import { IResponseUserLogin, IPrivilege, IUserStatusResponse, ILookupValue,
-    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole,  } from 'crmo-lib';
+    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole, IUserMinimal, UserService } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
@@ -45,6 +45,7 @@ export class Globals {
     public static readonly _SESSION_SETTING_INFO_KEY: string='_SETTING_INFO_KEY';
     public static readonly _SESSION_ORG_ROLES: string='_SESSION_ORG_ROLES_KEY';
     public static readonly _SESSION_ORG_PRIVILEGES: string='_SESSION_ORG_PRIVILEGES_KEY';
+    public static readonly _SESSION_ORG_USERS: string='_SESSION_ORG_USERS_KEY';
     public static readonly _STORAGE_LOOKUP_KEY: string='_LOCAL_STORAGE_LOOKUP_DATA';
 
     //Event Broker constants
@@ -139,6 +140,7 @@ export class Globals {
     private objSettingInfo: SettingInfo = null;
     private listPrivileges: IPrivilege[] = null;
     private listRoles: IRole[] = null;
+    private listUsers: IUserMinimal[] = null;
 
 
     //Default Constructor
@@ -149,6 +151,7 @@ export class Globals {
         private _notificationService: NotificationService,
 
         private _lookupService: LookupService,
+        private _userService: UserService,
         private _userStatusService: UserStatusService
     ) {
     } //Function ends
@@ -340,6 +343,27 @@ export class Globals {
 
 
     /**
+     * Getter and Setters for Organization Users
+     */
+    public getOrgUsers(activeOnly: boolean=false): IUserMinimal[] {
+        if(this.listUsers == null) {
+            let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_ORG_USERS);
+            this.listUsers = strJsonData;
+        } //End if
+
+        if (activeOnly) {
+            return this.listUsers.filter((x) => { return x.is_active == true; });
+        } else {
+            return this.listUsers;
+        } //End if 
+    } //Function ends
+    public setOrgUsers(_listUsers: IUserMinimal[]): void {
+        this._sessionStorageService.setItem(Globals._SESSION_ORG_USERS, _listUsers);
+        this.listUsers = _listUsers;
+    } //Function ends
+
+
+    /**
      * Getter and Setters for Application Privileges
      */
     public getOrgPrivileges(): IPrivilege[] {
@@ -396,6 +420,9 @@ export class Globals {
             //Load lookup data
             this.fnLoadLookupnData();
 
+            //Load Organization Users data
+            this.fnLoadOrgUsers();
+
             /**
              * 
              * TODO: Add more method here that needs to be called on user login.
@@ -412,6 +439,38 @@ export class Globals {
      * Load Lookup Data from Backend Service
      */
     private fnLoadLookupnData(): void {
+        try {
+            this._lookupService.getAll()
+                .subscribe((data: ILookup[]) => {
+                    this.setLookUp(data);
+                },
+                (error) => { console.log(error); });
+        } catch(error) {
+            console.log(error);
+        } //Try-catch ends
+    } //Function ends
+
+
+    /**
+     * Load Organization Users Data from Backend Service
+     */
+    private fnLoadOrgUsers(): void {
+        try {
+            this._userService.getAll()
+                .subscribe((data: IUserMinimal[]) => {
+                    this.setOrgUsers(data);
+                },
+                (error) => { console.log(error); });
+        } catch(error) {
+            console.log(error);
+        } //Try-catch ends
+    } //Function ends
+
+
+    /**
+     * Load Organization Roles Data from Backend Service
+     */
+    private fnLoadOrgRoles(): void {
         try {
             this._lookupService.getAll()
                 .subscribe((data: ILookup[]) => {

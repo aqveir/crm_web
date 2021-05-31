@@ -64,7 +64,8 @@
                                 <label>{{ 'WIDGET.MODAL.TASK.FORM.END_DATE.LABEL' | translate }}</label>
                                 <div class="input-group date">
                                     <input type="text" class="form-control" ngbDatepicker #endAt="ngbDatepicker"
-                                        formControlName="date_picker" [minDate]="startAtForm.controls.date_picker.value"
+                                        formControlName="date_picker" (dateSelect)="fnDateTimeControlUpdated($event)" 
+                                        [minDate]="startAtForm.controls.date_picker.value" 
                                         placeholder="Select date" readonly />
                                     <div class="input-group-append" (click)="endAt.toggle()">
                                         <span class="input-group-text"><i class="flaticon-event-calendar-symbol"></i>
@@ -75,92 +76,102 @@
 
                             <div class="form-group col-6 time-control-with-spinners">
                                 <ngb-timepicker formControlName="time_picker" 
+                                    (ngModelChange)="fnDateTimeControlUpdated($event)"
                                     [meridian]="true" [hourStep]="1" [minuteStep]="15"></ngb-timepicker>
                             </div>
                         </div>
-                        <div>{{ endAtForm.value|json }}</div>
                     </div>
                     <!-- end:enddate -->
                 </div>
 
-                <a class="collapsed" data-toggle="collapse" data-target="#collapseTask" href="#collapseTask" role="button" aria-expanded="false" aria-controls="collapseTask">
-                    <span class="svg-icon svg-icon-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
-                                <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
-                            </g>
-                        </svg>
-                    </span>
-                    <span>{{ 'WIDGET.MODAL.TASK.ADVANCED.LABEL' | translate }}</span>
-                </a>
-                <div id="collapseTask" class="collapse mt-3">
-                    <div class="form-row">
-                        <!-- begin:subtype -->
-                        <div class="form-group col-md-6">
-                            <label>{{ 'WIDGET.MODAL.TASK.FORM.SUBTYPE.LABEL' | translate }}</label>
-                            <ng-select class="form-control" #agreeSelect formControlName="subtype_key"
-                                placeholder="{{ 'WIDGET.MODAL.TASK.FORM.SUBTYPE.PLACEHOLDER' | translate }}"
-                                [items]="listLookUpTaskSubtypeValues" bindLabel="display_value" bindValue="key"
-                                [searchable]="true" autocomplete="off" tabindex="3">
-                            </ng-select>
-                        </div>
-                        <!-- end:subtype -->
+                <div class="accordian">
+                    <a class="collapsed" data-toggle="collapse" data-target="#collapseTask" href="#collapseTask" role="button" aria-expanded="false" aria-controls="collapseTask">
+                        <span class="svg-icon svg-icon-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                                </g>
+                            </svg>
+                        </span>
+                        <span>{{ 'WIDGET.MODAL.TASK.ADVANCED.LABEL' | translate }}</span>
+                    </a>
 
-                        <!-- begin:priority -->
-                        <div class="form-group col-md-6">
-                            <label>{{ 'WIDGET.MODAL.TASK.FORM.PRIORITY.LABEL' | translate }}</label>
-                            <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup name="radioPriority" formControlName="priority_key">
-                                <label ngbButtonLabel class="text-uppercase flex-even" 
-                                    [ngClass]="{'first': first, 'last': last, 
-                                        'btn-primary font-weight-bold': taskForm.controls.priority_key.value==priority?.key,
-                                        'btn-secondary': taskForm.controls.priority_key.value!=priority?.key}"
-                                    *ngFor="let priority of listLookUpPriorityValues;let first = first;let last = last;">
-                                    <input ngbButton type="radio" [value]="priority?.key"> {{ priority?.display_value }}
-                                </label>
+                    <div id="collapseTask" class="collapse mt-3">
+                        <div class="form-row">
+                            <!-- begin:subtype -->
+                            <div class="form-group col-md-6">
+                                <label>{{ 'WIDGET.MODAL.TASK.FORM.SUBTYPE.LABEL' | translate }}</label>
+                                <ng-select class="form-control" #agreeSelect formControlName="subtype_key"
+                                    placeholder="{{ 'WIDGET.MODAL.TASK.FORM.SUBTYPE.PLACEHOLDER' | translate }}"
+                                    [items]="listLookUpTaskSubtypeValues" bindLabel="display_value" bindValue="key"
+                                    [searchable]="true" autocomplete="off" tabindex="3">
+                                </ng-select>
                             </div>
-                        </div>
-                        <!-- end:priority -->
-                    </div>
+                            <!-- end:subtype -->
 
-                    <div class="form-row">
-                        <!-- begin:startdate -->
-                        <div class="form-group col-md-6" [formGroup]="startAtForm">
-                            <div class="flex-row row">
-                                <div class="form-group col-6">
-                                    <label>{{ 'WIDGET.MODAL.TASK.FORM.START_DATE.LABEL' | translate }}</label>
-                                    <div class="input-group date">
-                                        <input type="text" class="form-control" ngbDatepicker #startAt="ngbDatepicker"
-                                            formControlName="date_picker" (dateSelect)="fnDateControlUpdated($event)"
-                                            placeholder="Select date" readonly />
-                                        <div class="input-group-append" (click)="startAt.toggle()">
-                                            <span class="input-group-text"><i class="flaticon-event-calendar-symbol"></i>
-                                            </span>
-                                        </div>
-                                    </div>                                
-                                </div>
-    
-                                <div class="form-group col-6 time-control-with-spinners">
-                                    <ngb-timepicker formControlName="time_picker" 
-                                        [meridian]="true" [hourStep]="1" [minuteStep]="15"></ngb-timepicker>
+                            <!-- begin:priority -->
+                            <div class="form-group col-md-6">
+                                <label>{{ 'WIDGET.MODAL.TASK.FORM.PRIORITY.LABEL' | translate }}</label>
+                                <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup name="radioPriority" formControlName="priority_key">
+                                    <label ngbButtonLabel class="text-uppercase flex-even" 
+                                        [ngClass]="{'first': first, 'last': last, 
+                                            'btn-primary font-weight-bold': taskForm.controls.priority_key.value==priority?.key,
+                                            'btn-secondary': taskForm.controls.priority_key.value!=priority?.key}"
+                                        *ngFor="let priority of listLookUpPriorityValues;let first = first;let last = last;">
+                                        <input ngbButton type="radio" [value]="priority?.key"> {{ priority?.display_value }}
+                                    </label>
                                 </div>
                             </div>
-                            <div>{{ startAtForm.value|json }}</div>
+                            <!-- end:priority -->
                         </div>
-                        <!-- end:startdate -->
 
-                        <!-- begin:status -->
-                        <div class="form-group col-md-6">
-                            <label>{{ 'WIDGET.MODAL.TASK.FORM.STATUS.LABEL' | translate }}</label>
-                            <ng-select class="form-control" #agreeSelect formControlName="status_key"
-                                placeholder="{{ 'WIDGET.MODAL.TASK.FORM.STATUS.PLACEHOLDER' | translate }}"
-                                [items]="listLookUpStatusValues" bindLabel="display_value" bindValue="key"
-                                [searchable]="true" autocomplete="off" tabindex="3">
-                            </ng-select>
+                        <div class="form-row">
+                            <!-- begin:startdate -->
+                            <div class="form-group col-md-6" [formGroup]="startAtForm">
+                                <div class="flex-row row">
+                                    <div class="form-group col-6">
+                                        <label>{{ 'WIDGET.MODAL.TASK.FORM.START_DATE.LABEL' | translate }}</label>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control" ngbDatepicker #startAt="ngbDatepicker"
+                                                formControlName="date_picker" (dateSelect)="fnDateTimeControlUpdated($event, 'startAt')"
+                                                placeholder="Select date" readonly />
+                                            <div class="input-group-append" (click)="startAt.toggle()">
+                                                <span class="input-group-text"><i class="flaticon-event-calendar-symbol"></i>
+                                                </span>
+                                            </div>
+                                        </div>                                
+                                    </div>
+        
+                                    <div class="form-group col-6 time-control-with-spinners">
+                                        <ngb-timepicker formControlName="time_picker"
+                                            (ngModelChange)="fnDateTimeControlUpdated($event, 'startAt')"
+                                            [meridian]="true" [hourStep]="1" [minuteStep]="15"></ngb-timepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end:startdate -->
+
+                            <!-- begin:status -->
+                            <div class="form-group col-md-6">
+                                <label>{{ 'WIDGET.MODAL.TASK.FORM.STATUS.LABEL' | translate }}</label>
+                                <ng-select class="form-control" #agreeSelect formControlName="status_key"
+                                    placeholder="{{ 'WIDGET.MODAL.TASK.FORM.STATUS.PLACEHOLDER' | translate }}"
+                                    [items]="listLookUpStatusValues" bindLabel="display_value" bindValue="key"
+                                    [searchable]="true" autocomplete="off" tabindex="3">
+                                </ng-select>
+                            </div>
+                            <!-- end:status -->                        
                         </div>
-                        <!-- end:status -->                        
-                    </div>
+                    </div>                    
+                </div>
+
+                <div class="accordian">
+                    <a class="collapsed" data-toggle="collapse" data-target="#collapseFormData" href="#collapseFormData" role="button" aria-expanded="false" aria-controls="collapseFormData">
+                        Form Data (TODO: Remove once done)
+                    </a>
+                    <div id="collapseFormData" class="collapse mt-3">{{taskForm.value | json}}</div>
                 </div>
             </div>
 

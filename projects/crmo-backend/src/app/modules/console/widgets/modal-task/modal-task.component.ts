@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Third Party components and libraries
-import { NgbActiveModal, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import moment from 'moment';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { ILookup, ILookupValue, ITaskRequest, IUserMinimal, TaskService } from 'crmo-lib';
+import { ILookup, ILookupValue, ITaskMinimal, ITaskRequest, IUserMinimal, TaskService } from 'crmo-lib';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
   public strEntityType: string = null;
   public intReferenceId: number = 0;
   public srHash: string = null;
-  public objTask: ITaskRequest = null;
+  public objTask: ITaskMinimal = null;
   public taskForm!: FormGroup;
   public startAtForm!: FormGroup;
   public endAtForm!: FormGroup;
@@ -85,14 +86,17 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
       this.listLookUpStatusValues = (listLookUpStatus?.values).filter((x: ILookupValue) => {return ((x?.is_active)?(x.is_active==true):true) });
     } //End if
 
+    //Load OrganizationUsers (Assignee)
+    this.listActiveUsers = this._globals.getOrgUsers(true);
+
     this.fnInitializeForm();
 
     //Load page depending upon task data
-    if (this.objTask) {
+    if (this.objTask==null) {
       this.fnCreateData();
     } else {
       //Load data for existing hash value
-      this.fnLoadData();     
+      this.fnFillData();
     } //End if
   } //Function ends
   
@@ -104,67 +108,59 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
     //Set new flag
     this.boolIsNew = true;
 
+    //Get Current Date
     let currDate: Date = new Date();
 
+    //Set StartAt Form
     this.startAtForm.patchValue({
       date_picker: this._calendar.getToday(),
-      time_picker: {
-        hour: currDate.getHours(),
-        minute: currDate.getMinutes(),
-        second: 0
-      }
+      time_picker: { hour: currDate.getHours(), minute: currDate.getMinutes(), second: 0 }
     });
 
+    //Set EndAt Form
     this.endAtForm.patchValue({
       date_picker: this._calendar.getNext(this.startAtForm.controls['date_picker'].value),
-      time_picker: {
-        hour: currDate.getHours(),
-        minute: currDate.getMinutes(),
-        second: 0
-      }
+      time_picker: { hour: currDate.getHours(), minute: currDate.getMinutes(), second: 0 }
+    });
+
+    //Set Task Form defaults
+    this.taskForm.patchValue({
+      assignee_hash: this._globals.getClaim()?.hash
     });
 
   } //Function ends
 
 
   /**
-   * Get Data
+   * Load form data
    */
-  public fnLoadData(): boolean {
-    try {
-      //Build the params for passing
+  private fnFillData(): void {
+    if (this.objTask && this.taskForm) {     
+      this.taskForm.patchValue({
+        sr_hash: this.objTask.servicerequest?.hash,
+        subject: this.objTask.subject,
+        description: this.objTask.description,
+        subtype_key: this.objTask.subtype?.key,
+        assignee_hash: this._globals.getClaim()?.hash,
+        priority_key: this.objTask.priority?.key,
+        status_key: this.objTask.status?.key
+      });
 
-      //this.boolLoading = true;
-      // this._organizationService.show(this.oHash, params)
-      //   .subscribe((response: IOrganization) => {
-      //     //Stop loader
-      //     this.boolLoading = false;
+      //Calculate and Set StartAt Value
+      let startAtNgbFormat: any = this.fnConvertJsDateToNgbFormatDateTime(this.objTask.start_at);
+      this.startAtForm.patchValue({
+        date_picker: NgbDate.from(startAtNgbFormat.date),
+        time_picker: startAtNgbFormat.time
+      });
 
-      //     //Update Setting Information
-      //     this._globals.updateSettingInfo('selected_oHash', this.oHash);
+      //Calculate and Set EndAt Value
+      let endAtNgbFormat: any = this.fnConvertJsDateToNgbFormatDateTime(this.objTask.end_at);
+      this.endAtForm.patchValue({
+        date_picker: NgbDate.from(endAtNgbFormat.date),
+        time_picker: endAtNgbFormat.time
+      });
 
-      //     //Raise event to show submenu
-      //     this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, true);
-
-      //     //Set param
-      //     this.objOrganization = response;
-
-      //     //Full the form controls with data
-      //     this.fnFillData();
-      //   },(error) => {
-      //     //Stop loader
-      //     this.boolLoading = false;
-
-      //     throw error;
-      //   });
-
-        return true;
-    } catch (error) {
-      //Stop loader
-      this.boolLoading = false;
-
-      throw error;
-    } //Try-catch ends
+    } //End if
   } //Function ends
 
 
@@ -181,7 +177,18 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
+      //Get Date-Time for Transformation
+      let startAt: moment.Moment = moment(this.startAtForm.controls['date_picker'].value).subtract(1, 'month')
+      .add(this.startAtForm.controls['time_picker'].value);
+      let endAt: moment.Moment = moment(this.endAtForm.controls['date_picker'].value).subtract(1, 'month')
+      .add(this.endAtForm.controls['time_picker'].value);
+
       let objFormData: ITaskRequest = this.taskForm.value;
+      objFormData.start_at = startAt.toISOString(true);
+      objFormData.end_at = endAt.toISOString(true);
+
+      console.log(objFormData);
+      return false;
       this.boolLoading = true;
 
       this._taskService.create(objFormData)
@@ -233,28 +240,41 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnDateControlUpdated(event: NgbDate, type: string='endAt'): void {
-    let startAt: NgbDate = NgbDate.from(this.startAtForm.controls['date_picker'].value);
-    let endAt: NgbDate = NgbDate.from(this.endAtForm.controls['date_picker'].value);
+  /**
+   * Date/Time Control Update Event
+   * 
+   * @param event 
+   * @param type 
+   */
+  public fnDateTimeControlUpdated(event: NgbDate, type: string='endAt'): void {
+    //Get Date-Time picker values
+    let startAt: moment.Moment = moment(this.startAtForm.controls['date_picker'].value).subtract(1, 'month')
+      .add(this.startAtForm.controls['time_picker'].value);
+    let endAt: moment.Moment = moment(this.endAtForm.controls['date_picker'].value).subtract(1, 'month')
+      .add(this.endAtForm.controls['time_picker'].value);
 
-    if (!(startAt.before(endAt))) {
+    //Compare StartAt and EndAt
+    if (startAt.isSameOrAfter(endAt)) {
+      //Increase the EndAt Date by 24 hours
+      let endAtNew: moment.Moment = startAt.clone().add(1, 'days');
+
       this.endAtForm.patchValue({
-        date_picker: this._calendar.getNext(startAt)
+        date_picker: NgbDate.from(this.fnConvertMomentToNgbFormatDateTime(endAtNew).date),
+        time_picker: this.fnConvertMomentToNgbFormatDateTime(endAtNew).time
       });
     } //End if
   } //Function ends
 
 
   /**
-   * Initialize Reactive Form
+   * Initialize Reactive FormGroups
    */
   private fnInitializeForm() {
-
     this.startAtForm = this.fnDateFormGroup();
     this.endAtForm = this.fnDateFormGroup();
 
     this.taskForm = this._formBuilder.group({
-      sr_hash: [''],
+      sr_hash: ['', [ Validators.required]],
       subject: ['', [ Validators.required, Validators.maxLength(150)]],
       description: ['', [ Validators.maxLength(1000) ]],
       start_at: this.startAtForm,
@@ -268,11 +288,14 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
+  /**
+   * FormGroup for Ngb Date and Time
+   */
   private fnDateFormGroup(): FormGroup {
     return this._formBuilder.group({
       date_picker: ['', [ Validators.required ]],
       time_picker: [{hour: 13, minute: 30, second: 0}],        
     })
-  }
+  } //Function ends
 
 } //Class ends
