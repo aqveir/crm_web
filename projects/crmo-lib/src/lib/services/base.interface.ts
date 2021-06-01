@@ -11,6 +11,6 @@ export interface IBaseInterface {
     /**
      * Get record by identifier
      */
-    getById(_hash: string, _params:Object): Observable<any>;
+    getByHash(_hash: string, _params:Object): Observable<any>;
 
 }

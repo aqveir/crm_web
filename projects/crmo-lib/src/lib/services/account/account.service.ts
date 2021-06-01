@@ -48,7 +48,7 @@ export class AccountService extends BaseService implements IBaseInterface {
   /**
    * Get List of Accounts
    */
-  public getById(_hash:string,_params: Object=null): Observable<any> {
+  public getByHash(_hash:string,_params: Object=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
