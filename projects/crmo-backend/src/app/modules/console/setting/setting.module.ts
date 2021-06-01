@@ -31,7 +31,7 @@ import { PreferenceDetailComponent } from './preference/preference-detail/prefer
 import {AccountListComponent} from './account/account-list/account-list.component';
 import { AccountDetailComponent } from './account/account-detail/account-detail.component';
 import { AddressComponent } from '../shared/address/address.component';
-//import { AccountDataComponent } from './account/account-detail/account-data.component';
+
 
 @NgModule({
   declarations: [

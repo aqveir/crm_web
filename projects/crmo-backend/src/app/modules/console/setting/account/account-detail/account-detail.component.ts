@@ -9,6 +9,7 @@ import { BaseComponent } from '../../../../base.component';
 import { AccountService,IAccount,IAddress, ILookup, ILookupValue } from 'crmo-lib';
 import { AddressComponent } from '../../../shared/address/address.component';
 import { ThrowStmt } from '@angular/compiler';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 
 @Component({
@@ -66,8 +67,6 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
     
   }
 
-
-
   /**
    * Get Data for the account from service
    */
@@ -103,9 +102,34 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
     } //Try-catch ends
   } //Function ends
 
+  public fnChangeType(event: any):void{
 
+
+  }
+
+  /**
+   * Populate data on Form 
+   */
   private fnPopulateData(){
-    
+    this.accountDetailForm.patchValue({
+      name:this.objAccount.name,
+      description:this.objAccount.description,
+      type:this.objAccount.type,
+      owner:this.objAccount.owner,
+      is_default:this.objAccount.is_default,
+      address:this.objAccount.address,
+      locality:this.objAccount.locality,
+      city:this.objAccount.city,
+      state:this.objAccount.state_id,
+      country:this.objAccount.country,
+      zipcode:this.objAccount.zipcode,
+      website:this.objAccount.website,
+      email:this.objAccount.email,
+      phone:this.objAccount.phone
+
+    });
+
+    console.log(this.objAccount);
   }
 
   /**
@@ -175,6 +199,7 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
 
 private fnLoadLookupValues():void{
 
+  try{
    //Load account type values
    this.objLookup = this._globals.getLookupByKey('account_type');
    this.objCountryList = (this.objLookup.values).filter((x: ILookupValue) => {
@@ -183,7 +208,13 @@ private fnLoadLookupValues():void{
        ((['data_type_string', 'data_type_json'].find((z: string) => {return z==x.key}))==null)
      )
    });
+  }
+  catch (error) {
+    //Stop loader
+    this.boolLoading = false;
 
+    throw error;
+  } //Try-catch ends
 }
 //#endregion
 }
