@@ -44,7 +44,7 @@
                 "VALIDATION_ERROR": "Enter valid Address."
             },
             "AREA": {
-                "LABEL": "AREA",
+                "LABEL": "Area/Locality",
                 "PLACEHOLDER": "Enter Area name",
                 "FINE_TEXT": "",
                 "VALIDATION_ERROR": "Enter valid Area."
@@ -460,6 +460,12 @@
                     "PLACEHOLDER": "Enter the email address",
                     "FINE_TEXT": "Account email used for communication",
                     "VALIDATION_ERROR": "Enter valid email address."
+                },
+                "WEBSITE": {
+                    "LABEL": "Website",
+                    "PLACEHOLDER": "Enter Website",
+                    "FINE_TEXT": "Website of Account",
+                    "VALIDATION_ERROR": "Enter valid website."
                 },
                 "DEFAULT_ACCOUNT": {
                     "LABEL": "Default Account",

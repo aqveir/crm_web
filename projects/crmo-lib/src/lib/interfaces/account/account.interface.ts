@@ -8,12 +8,14 @@ export interface IAccount {
     id?: number;    
     hash: string;    
     name: string;
+    description:string;
     org: IOrganizationMinimal;
     owner:IUser;
     is_default:boolean;
     type:ILookupValue;
     website:string;
     email:string;
+    phone:string;
     address?: string;
     locality?: string;
     city?: string;
