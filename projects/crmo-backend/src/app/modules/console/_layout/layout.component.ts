@@ -80,6 +80,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     _modalConfig.backdrop = 'static';
     _modalConfig.keyboard = false;
     _modalConfig.animation = true;
+    _modalConfig.size = 'md';
   }
 
   ngOnInit(): void {
@@ -188,7 +189,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   private fnLoadBrokerListeners(): void {
     //Broker Lister - Modal Component for Note Amend
     this._broker.listen<any>('show_note_modal', (x: any) => {
-      const modalNoteRef = this._modalService.open(ModalNoteComponent, this._modalConfig);
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'md';
+      const modalNoteRef = this._modalService.open(ModalNoteComponent, customConfig);
       
       let strEntityType: string = x[0];
       let intReferenceId: number = x[1];
@@ -201,8 +204,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     //Broker Lister - Modal Component for Task Amend
     this._broker.listen<any>('show_task_modal', (x: any) => {
-      let customConfig: any = this._modalConfig;
-      customConfig['size']='lg';
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'lg';
       const modalTaskRef = this._modalService.open(ModalTaskComponent, customConfig);
 
       let srHash: string = x[0];
@@ -215,25 +218,37 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     
     //Broker Lister - Modal Component for Initiating Outgoing Call
     this._broker.listen<any>('show_call_modal', (x: any) => {
-      const modalCallContactRef = this._modalService.open(ModalConfirmCallComponent, this._modalConfig);
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'md';
+
+      const modalCallContactRef = this._modalService.open(ModalConfirmCallComponent, customConfig);
       modalCallContactRef.componentInstance.objServiceRequest = x;
     });
 
     //Broker Lister - Modal Component for SMS Send
     this._broker.listen<any>('show_sms_modal', (x: any) => {
-      const modalSendSmsRef = this._modalService.open(ModalSendSmsComponent, this._modalConfig);
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'md';
+
+      const modalSendSmsRef = this._modalService.open(ModalSendSmsComponent, customConfig);
       modalSendSmsRef.componentInstance.objServiceRequest = x;
     });
 
     //Broker Lister - Modal Component for Mail Send
     this._broker.listen<any>('show_mail_modal', (x: any) => {
-      const modalSendSmsRef = this._modalService.open(ModalSendMailComponent, this._modalConfig);
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'md';
+
+      const modalSendSmsRef = this._modalService.open(ModalSendMailComponent, customConfig);
       modalSendSmsRef.componentInstance.objServiceRequest = x;
     });
 
     //Broker Lister - Modal Component for Confirm Delete
     this._broker.listen<any>('modal-confirm-delete', (x: any) => {
-      const modalConfirmDeleteRef = this._modalService.open(ModalConfirmDeleteComponent, this._modalConfig);
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'md';
+
+      const modalConfirmDeleteRef = this._modalService.open(ModalConfirmDeleteComponent, customConfig);
       let strDeleteConfirmText = x[0];
       let callback: any = x[1];
 
