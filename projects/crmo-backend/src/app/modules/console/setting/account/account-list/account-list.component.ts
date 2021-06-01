@@ -139,9 +139,8 @@ export class AccountListComponent extends BaseComponent implements OnInit {
 
 public fnShowAccountDtl(account:IAccountMinimal):void{
   try {
-    let temp:Globals;
-    this.oHash = temp.getSettingInfo().oHash;
-    this._router.navigate(['/secure/setting/organization/'+ this.oHash +'/account',account.id]);
+    
+    this._router.navigate(['/secure/setting/organization/'+ this.oHash +'/account',account.hash]);
   } catch(error) {
     throw error;
   } //Try-catch ends

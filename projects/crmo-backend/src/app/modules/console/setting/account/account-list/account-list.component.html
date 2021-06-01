@@ -29,8 +29,8 @@
                      
                     <tbody>
                         <tr *ngFor="let account of listAccounts" class="cursor-pointer" style="outline: none;"
-                        (click)="fnShowAccountDtl(account)">
-                           {{account.hash}}
+                        [routerLink]="['/secure/setting/organization', oHash, 'account', account.id]">
+                           
                             <td>
                                 <span class="text-dark-75 font-weight-bolder d-block">{{ account.name }}</span>
                             </td>
