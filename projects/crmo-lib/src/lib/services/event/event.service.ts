@@ -4,12 +4,12 @@ import { Observable, Observer } from 'rxjs';
 // Framework files
 import { HttpService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
-import { ITask, ITaskMinimal, ITaskRequest } from '../../interfaces/service-request/task.interface';
+import { IEvent, IEventMinimal, IEventRequest } from '../../interfaces/service-request/event.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService extends BaseService {
+export class EventService extends BaseService {
 
   /**
    * Default constructor
@@ -23,16 +23,16 @@ export class TaskService extends BaseService {
 
   
   /**
-   * Get List of Tasks
+   * Get List of Events
    */
   public getAll(_payload: any=null, _params: Object=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('task/fetch', _payload, false, _params)
+      this._httpService.post('event/fetch', _payload, false, _params)
         .then((response: any) => {
-          let data: ITaskMinimal[] = response.data;
+          let data: IEventMinimal[] = response.data;
 
           observer.next(data);
         })
@@ -43,13 +43,13 @@ export class TaskService extends BaseService {
 
 
   /**
-   * Create Task for Service Request
+   * Create Event for Service Request
    */
-  public create(_payload: ITaskRequest=null, _params: Object=null): Observable<any> {
+  public create(_payload: IEventRequest=null, _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('task', _payload, false, _params)
+      this._httpService.post('event', _payload, false, _params)
         .then((response: any) => {
-          let data: ITask = response.data;
+          let data: IEvent = response.data;
 
           observer.next(data);
         })
@@ -60,13 +60,13 @@ export class TaskService extends BaseService {
 
 
   /**
-   * Update Task for Service Request
+   * Update Event for Service Request
    */
-  public update(id: number, _payload: ITaskRequest=null, _params: Object=null): Observable<any> {
+  public update(id: number, _payload: IEventRequest=null, _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('task/'+id, _payload, _params)
+      this._httpService.put('event/'+id, _payload, _params)
         .then((response: any) => {
-          let data: ITask = response.data;
+          let data: IEvent = response.data;
 
           observer.next(data);
         })

@@ -1,6 +1,8 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidationErrors } from '@angular/forms';
 
+//Third Party components and libraries
+import moment from 'moment';
 
 export abstract class BaseComponent {
 
@@ -9,6 +11,46 @@ export abstract class BaseComponent {
   //Default Constructor
   constructor(
   ) { }
+
+
+  /**
+   * Convert JsDate to NgbFormatDateTime
+   * 
+   * @param dtInput
+   */
+  public fnConvertJsDateToNgbFormatDateTime(dtInput: Date): any {
+    try {
+      let dtInputDate: Date = new Date(dtInput);
+      if (dtInputDate==null) { dtInputDate = new Date(); }
+
+      return {
+        date: {day:dtInputDate.getDate(), month:(dtInputDate.getMonth()+1), year: dtInputDate.getFullYear()},
+        time: {hour: dtInputDate.getHours(), minute: dtInputDate.getMinutes(), second: 0}
+      };
+    } catch(error) {
+      throw error;
+    } //Try-Catch ends
+  } //Function ends
+
+  
+  /**
+   * Convert Moment to NgbFormatDateTime
+   * 
+   * @param dtInput
+   */
+  public fnConvertMomentToNgbFormatDateTime(dtInput: moment.Moment): any {
+    try {
+      let dtInputDate: moment.Moment = dtInput;
+      if (!dtInputDate.isValid()) { dtInputDate = moment(); }
+
+      return {
+        date: {day:dtInputDate.get('date'), month: (dtInputDate.get('month')+1), year: dtInputDate.get('year')},
+        time: {hour: dtInputDate.get('hour'), minute: dtInputDate.get('minute'), second: 0}
+      };
+    } catch(error) {
+      throw error;
+    } //Try-Catch ends
+  } //Function ends
 
 
   /**

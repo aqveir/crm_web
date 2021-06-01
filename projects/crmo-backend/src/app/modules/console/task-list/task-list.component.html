@@ -13,13 +13,13 @@
                     <thead class="thead-dark">
                         <tr class="text-uppercase">
                             <th scope="col" class="pl-5" style="min-width: 95px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_TYPE' | translate }}</th>
-                            <th scope="col" class="d-none d-xl-table-cell">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_TITLE' | translate }}</th>
-                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_ASSIGNEE' | translate }}</th>
-                            <th scope="col" class="d-none d-md-table-cell" style="min-width: 100px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_PRIORITY' | translate }}</th>
-                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_OWNER' | translate }}</th>
+                            <th scope="col" class="">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_TITLE' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 175px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_ASSIGNEE' | translate }}</th>
+                            <th scope="col" class="" style="min-width: 100px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_PRIORITY' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 175px">{{ 'PAGE.TASK_LIST.COLUMNS.TASK_OWNER' | translate }}</th>
 
                             <th scope="col" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
-                                {{ 'PAGE.TASK_LIST.COLUMNS.DUE_DATE' | translate }}
+                                {{ 'PAGE.TASK_LIST.COLUMNS.TASK_DUE_DATE' | translate }}
                                 <span class="ml-2 cursor-pointer">
                                     <i class="la la-sort text-white icon-lg" (click)="fnSortColumn('last_date', 'asc')"></i>
                                     <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'desc')" [ngClass]="{'d-none': true}"></i>
@@ -59,17 +59,17 @@
                                 <span class="text-dark-75 font-weight-bolder ml-2">{{ task.subtype?.display_value }}</span>
                             </td>
 
-                            <td class="d-none d-xl-table-cell w-100">
+                            <td class="w-100">
                                 <span class="text-dark-50">{{ task.subject | shorten:30:'...' }}</span>
                             </td>                            
 
-                            <td>
-                                <span class="text-dark-50">{{ task.assignee?.full_name | shorten:20:'...' }}</span>
+                            <td class="d-none d-xl-table-cell">
+                                <span class="text-dark-50">{{ task.assignee?.participant?.full_name | shorten:20:'...' }}</span>
                             </td>
 
-                            <td>
-                                <span class="label font-weight-bold label-lg label-inline label-inlinetext-dark-50"
-                                    [ngClass]="{'priority_high':'label-light-danger', 'priority_moderate':'label-light-warning', 'priority_low':'label-light-info'}[task.priority?.key]">
+                            <td (click)="fnShowTaskModal($event, task)">
+                                <span class="label font-weight-bold label-lg label-inline label-inlinetext-dark-50" 
+                                    [ngClass]="{'priority_high':'label-light-danger', 'priority_normal':'label-light-warning', 'priority_low':'label-light-info'}[task.priority?.key]">
                                     {{ task.priority?.display_value }}
                                 </span>
                             </td>
@@ -79,16 +79,16 @@
                             </td>                           
 
                             <td class="d-none d-xl-table-cell table-cell-date">
-                                <span class="text-dark-75 d-block ml-2">{{ task.scheduled_at | date }}</span>
-                                <span class="text-muted d-block ml-2">{{ task.scheduled_at | date:'shortTime' }}</span>
+                                <span class="text-dark-75 d-block ml-2">{{ task.end_at | date }}</span>
+                                <span class="text-muted d-block ml-2">{{ task.end_at | date:'shortTime' }}</span>
                             </td>
 
-                            <td class="d-none d-xl-table-cell table-cell-date" *ngIf="task.is_completed">
+                            <td class="d-none d-xl-table-cell table-cell-date" *ngIf="task.completed_at==null">
                                 <span class="text-dark-75 d-block ml-2">{{ task.last_updated_at | date }}</span>
                                 <span class="text-muted d-block ml-2">{{ task.last_updated_at | date:'shortTime' }}</span>
                             </td>
 
-                            <td class="d-none d-xl-table-cell" *ngIf="!task.is_completed">
+                            <td class="d-none d-xl-table-cell" *ngIf="task.completed_at!=null">
                                 <button class="btn btn-clean text-dark-75"
                                     placement="bottom" 
                                     [ngbTooltip]="'COMMON.LABEL.CALL' | translate">MARK COMPLETE</button>

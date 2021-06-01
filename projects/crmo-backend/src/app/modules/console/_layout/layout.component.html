@@ -92,7 +92,7 @@
     </ng-container>
 
     <ng-container *ngIf="extrasUserOffcanvasDisplay">
-      <app-user-offcanvas></app-user-offcanvas>
+      <app-user-offcanvas (close)="fnCloseCanvas($event)"></app-user-offcanvas>
     </ng-container>
 
     <!-- This is the floating toolbar on RH side -->

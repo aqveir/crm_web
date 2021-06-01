@@ -17,10 +17,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log('Footer:ngOnInit');
     this.footerContainerCSSClasses = this.layout.getStringCSSClasses('footer_container');
-    console.log('this.footerContainerCSSClasses');
-    console.log(this.footerContainerCSSClasses);
   }
 
   ngAfterViewInit() {

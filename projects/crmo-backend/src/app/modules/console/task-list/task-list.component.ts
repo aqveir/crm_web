@@ -198,4 +198,12 @@ export class TaskListComponent extends BaseComponent implements OnInit {
     this.scrollId = null;
   } //Function ends
 
+  //TODO: Delete/Replan
+  public fnShowTaskModal(event, task: ITaskMinimal): void {
+    this._broker.emit('show_task_modal', [task?.servicerequest, task, (()=>{
+      
+    })]);
+    event.stopPropagation();
+  }
+
 } //Class ends

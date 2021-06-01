@@ -1,11 +1,10 @@
-/*
- * Public API Surface of crmo-lib
- */
+// Public API Surface of crmo-lib
 export * from './lib/crmo-lib.service';
 export * from './lib/crmo-lib.component';
 export * from './lib/crmo-lib.module';
 
-//Exported Interfaces
+
+// Exported Interfaces
 export * from './lib/interfaces/common/response.interface';
 export * from './lib/interfaces/common/lookup.interface';
 export * from './lib/interfaces/common/country.interface';
@@ -27,7 +26,8 @@ export * from './lib/interfaces/service-request/event.interface';
 export * from './lib/interfaces/service-request/communication.interface';
 export * from './lib/interfaces/common/address.interface';
 
-//Exported Services
+
+// Exported Services
 export * from './lib/services/common/lookup/lookup.service';
 export * from './lib/services/common/role/role.service';
 export * from './lib/services/common/privilege/privilege.service';
@@ -48,16 +48,11 @@ export * from './lib/services/service-request/opportunity.service';
 export * from './lib/services/service-request/support.service';
 export * from './lib/services/service-request/communication.service';
 export * from './lib/services/task/task.service';
-
+export * from './lib/services/event/event.service';
 
 //export * from './lib/services/catalogue/catalogue-category.service';
 //export * from './lib/services/wallet/wallet.service';
 
-//Exported Models
+
+// Exported Models
 export * from './lib/models/common/common.model';
-// export * from './lib/models/user/user.model';
-// export * from './lib/models/user/user-auth.model';
-// export * from './lib/models/contact/contact.model';
-// export * from './lib/models/contact/contact-auth.model';
-//export * from './lib/models/catalogue/category.model';
-//export * from './lib/models/wallet/wallet.model';
