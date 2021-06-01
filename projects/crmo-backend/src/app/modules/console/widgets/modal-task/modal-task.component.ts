@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Third Party components and libraries
 import moment from 'moment';
@@ -93,6 +93,7 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
 
     //Load page depending upon task data
     if (this.objTask==null) {
+      this.boolIsNew = true;
       this.fnCreateData();
     } else {
       //Load data for existing hash value
@@ -186,27 +187,64 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
       let objFormData: ITaskRequest = this.taskForm.value;
       objFormData.start_at = startAt.toISOString(true);
       objFormData.end_at = endAt.toISOString(true);
+      objFormData.assignee = [];
 
-      console.log(objFormData);
-      return false;
+      //Get Assignees
+      let selectedAssignees: any = this.taskForm.controls['assignee_hash'].value;
+      if (selectedAssignees) {
+        //Case of Multiple selection
+        if ((selectedAssignees instanceof Array) && (selectedAssignees.length>0)) {
+          selectedAssignees.forEach((assigneeHash: string) => {
+            objFormData.assignee.push({ 
+              participant_type_key: 'communication_person_type_user',
+              participant_hash: assigneeHash 
+            });
+          });
+        } else {
+          objFormData.assignee.push({ 
+            participant_type_key: 'communication_person_type_user',
+            participant_hash: selectedAssignees 
+          });
+        } //End if
+      } //End if
+
       this.boolLoading = true;
 
-      this._taskService.create(objFormData)
-        .subscribe((response: any) => {
-          //Stop loader
-          this.boolLoading = false;
+      if (this.boolIsNew) {
+        this._taskService.create(objFormData)
+          .subscribe((response: ITaskMinimal) => {
+            //Stop loader
+            this.boolLoading = false;
 
-          //Close the modal window
-          this._modalActive.close({refresh: true});
-        },(error: any) => {
-          //Stop loader
-          this.boolLoading = false;
+            //Close the modal window
+            this._modalActive.close({refresh: true});
+          },(error: any) => {
+            //Stop loader
+            this.boolLoading = false;
 
-          //Show Error
-          this.hasError = true;
+            //Show Error
+            this.hasError = true;
 
-          throw error;
-        });
+            throw error;
+          });
+      } else {
+        this._taskService.update(this.objTask?.id, objFormData)
+          .subscribe((response: ITaskMinimal) => {
+            //Stop loader
+            this.boolLoading = false;
+
+            //Close the modal window
+            this._modalActive.close({refresh: true});
+          },(error: any) => {
+            //Stop loader
+            this.boolLoading = false;
+
+            //Show Error
+            this.hasError = true;
+
+            throw error;
+          });
+      } //End if
 
         return true;
     } catch (error) {
@@ -281,7 +319,7 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
       end_at: this.endAtForm,
       scheduled_at: [],
       subtype_key: ['comm_type_other', [ Validators.required ]],
-      assignee_hash: ['', [ Validators.required ]],
+      assignee_hash: ['', [ Validators.required]],
       priority_key: ['priority_normal', [ Validators.required ]],
       status_key: ['task_status_not_started', [ Validators.required ]]
     });

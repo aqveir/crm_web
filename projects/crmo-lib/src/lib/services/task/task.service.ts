@@ -75,4 +75,21 @@ export class TaskService extends BaseService {
     });
   } //Function ends
 
+
+  /**
+   * Update Task (Mark Complete) for Service Request
+   */
+  public markComplete(id: number, _payload: ITaskRequest=null, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.put('task/'+id+'/complete', _payload, _params)
+        .then((response: any) => {
+          let data: ITask = response.data;
+
+          observer.next(data);
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally()
+    });
+  } //Function ends
+
 } //Class ends

@@ -3,7 +3,6 @@ export * from './lib/crmo-lib.service';
 export * from './lib/crmo-lib.component';
 export * from './lib/crmo-lib.module';
 
-
 // Exported Interfaces
 export * from './lib/interfaces/common/response.interface';
 export * from './lib/interfaces/common/lookup.interface';
@@ -25,7 +24,6 @@ export * from './lib/interfaces/service-request/task.interface';
 export * from './lib/interfaces/service-request/event.interface';
 export * from './lib/interfaces/service-request/communication.interface';
 export * from './lib/interfaces/common/address.interface';
-
 
 // Exported Services
 export * from './lib/services/common/lookup/lookup.service';
@@ -52,7 +50,6 @@ export * from './lib/services/event/event.service';
 
 //export * from './lib/services/catalogue/catalogue-category.service';
 //export * from './lib/services/wallet/wallet.service';
-
 
 // Exported Models
 export * from './lib/models/common/common.model';
