@@ -1,5 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
+//Third-part references
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
+
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { ContactService, IContact } from 'crmo-lib';
@@ -35,6 +39,8 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _contactService: ContactService,
+    private _modalService: NgbModal,
+    private _modalConfig: NgbModalConfig
   ) { super(); }
 
 
@@ -111,6 +117,11 @@ export class ContactListComponent extends BaseComponent implements OnInit {
 
   public fnSortColumn(columnName: string, sortDir: string): void {
 
+  } //Function ends
+
+
+  public fnUploadAction(event, container): void {
+    this._modalService.open(container);
   } //Function ends
 
 

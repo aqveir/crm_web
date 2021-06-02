@@ -5,6 +5,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
+import { EventBrokerService } from 'ellaisys-lib';
 
 @Component({
   selector: 'crmo-backend-widget-subheader',
@@ -29,7 +30,8 @@ export class WidgetSubheaderComponent extends BaseComponent implements OnInit {
    * Default constructor
    */
   constructor(
-    private _globals: Globals
+    private _globals: Globals,
+    private _broker: EventBrokerService
   ) {
     super();
   }
@@ -72,6 +74,14 @@ export class WidgetSubheaderComponent extends BaseComponent implements OnInit {
    */
   public fnBackClick(): void {
     this.btnBack.emit(true);
+  } //Function ends
+
+
+  /**
+   * Filter Button Emitter
+   */
+  public fnFilterClick(event): void {
+    this._broker.emit<any>('show_page_filter', event);
   } //Function ends
 
 } //Class ends

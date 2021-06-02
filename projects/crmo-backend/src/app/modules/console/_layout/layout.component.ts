@@ -22,7 +22,7 @@ import { ModalSendMailComponent } from '../widgets/modal-send-mail/modal-send-ma
 import { ModalConfirmDeleteComponent } from '../widgets/modal-confirm-delete/modal-confirm-delete.component';
 import { ModalConfirmCallComponent } from '../widgets/modal-confirm-call/modal-confirm-call.component';
 import { ModalTaskComponent } from '../widgets/modal-task/modal-task.component';
-
+import { ModalFiltersComponent } from '../widgets/modal-filters/modal-filters.component';
 
 
 @Component({
@@ -187,6 +187,13 @@ export class LayoutComponent implements OnInit, AfterViewInit {
    * This is very useful for applicaton level modals.
    */
   private fnLoadBrokerListeners(): void {
+    //Broker Lister - Modal Component for Filter Screen
+    this._broker.listen<any>('show_page_filter', (x: any) => {
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'md';
+      const modalFilterRef = this._modalService.open(ModalFiltersComponent, customConfig);
+    });
+
     //Broker Lister - Modal Component for Note Amend
     this._broker.listen<any>('show_note_modal', (x: any) => {
       let customConfig: NgbModalConfig = this._modalConfig;

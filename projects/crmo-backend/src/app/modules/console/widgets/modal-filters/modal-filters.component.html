@@ -1,38 +1,149 @@
-<div class="modal-dialog m-0" role="document">
+<div class="modal-dialog modal-lg m-0" role="document">
     <div class="modal-content">
-        <form class="form" id="kt_form_1" novalidate="novalidate"
-            [formGroup]="noteForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
-
-            <div class="modal-header border-0">
-                <h5 class="modal-title" id="exampleModalLabel" *ngIf="objNote==null">{{ 'WIDGET.MODAL.NOTE.TITLE.ADD' | translate }}</h5>
-                <h5 class="modal-title" id="exampleModalLabel" *ngIf="objNote!=null">{{ 'WIDGET.MODAL.NOTE.TITLE.EDIT' | translate }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
-                    <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
+        <!--begin::Quick Actions Panel-->
+        <div id="kt_quick_actions" class="p-10">
+            <!--begin::Header-->
+            <div class="offcanvas-header d-flex align-items-center justify-content-between pb-10">
+                <h3 class="font-weight-bold m-0">
+                Quick Actions
+                <small class="text-muted font-size-sm ml-2">finance & reports</small>
+                </h3>
+                <a
+                href="#"
+                class="btn btn-xs btn-icon btn-light btn-hover-primary"
+                id="kt_quick_actions_close"
+                >
+                <i class="ki ki-close icon-xs text-muted"></i>
+                </a>
             </div>
+            <!--end::Header-->
 
-            <div class="modal-body p-5">
-                <div class="form-group">
-                    <textarea class="form-control border-0" rows="8" formControlName="note"
-                        id="kt_forms_widget_1_input"
-                        placeholder="{{ 'WIDGET.MODAL.NOTE.FORM.TEXT.PLACEHOLDER' | translate }}"
-                        autocomplete="off" tabindex="1" autofocus></textarea>
+            <!--begin::Content-->
+            <div class="offcanvas-content pr-5 mr-n5">
+                <div class="row gutter-b">
+                <!--begin::Item-->
+                <div class="col-6">
+                    <a
+                    href="#"
+                    class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
+                    >
+                    <span
+                        [inlineSVG]="'./assets/media/svg/icons/Shopping/Euro.svg'"
+                        class="svg-icon svg-icon-3x svg-icon-primary m-0"
+                    ></span> <!-- cacheSVG="true" -->
+                    <span class="d-block font-weight-bold font-size-h6 mt-2"
+                        >Accounting</span
+                    >
+                    </a>
+                </div>
+                <!--end::Item-->
 
-                    <span class="form-text text-danger" *ngIf="noteForm.controls.note.dirty && noteForm.controls.note.invalid">
-                        {{ 'WIDGET.MODAL.NOTE.FORM.TEXT.VALIDATION_ERROR' | translate }}
-                    </span>
-                </div>                        
+                <!--begin::Item-->
+                <div class="col-6">
+                    <a
+                    href="#"
+                    class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
+                    >
+                    <span
+                        [inlineSVG]="
+                        './assets/media/svg/icons/Communication/Mail-attachment.svg'
+                        "
+                        class="svg-icon svg-icon-3x svg-icon-primary m-0"
+                    ></span> <!-- cacheSVG="true" -->
+                    <span class="d-block font-weight-bold font-size-h6 mt-2"
+                        >Members</span
+                    >
+                    </a>
+                </div>
+                <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                <!--begin::Item-->
+                <div class="col-6">
+                    <a
+                    href="#"
+                    class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
+                    >
+                    <span
+                        [inlineSVG]="'./assets/media/svg/icons/Shopping/Box2.svg'"
+                        class="svg-icon svg-icon-3x svg-icon-primary m-0"
+                    ></span> <!-- cacheSVG="true" -->
+                    <span class="d-block font-weight-bold font-size-h6 mt-2"
+                        >Projects</span
+                    >
+                    </a>
+                </div>
+                <!--end::Item-->
+
+                <!--begin::Item-->
+                <div class="col-6">
+                    <a
+                    href="#"
+                    class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
+                    >
+                    <span
+                        [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'"
+                        class="svg-icon svg-icon-3x svg-icon-primary m-0"
+                    ></span> <!-- cacheSVG="true" -->
+                    <span class="d-block font-weight-bold font-size-h6 mt-2"
+                        >Customers</span
+                    >
+                    </a>
+                </div>
+                <!--end::Item-->
+                </div>
+                <div class="row gutter-b">
+                <!--begin::Item-->
+                <div class="col-6">
+                    <a
+                    href="#"
+                    class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
+                    >
+                    <span
+                        [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-bar1.svg'"
+                        class="svg-icon svg-icon-3x svg-icon-primary m-0"
+                    ></span> <!-- cacheSVG="true" -->
+                    <span class="d-block font-weight-bold font-size-h6 mt-2">Email</span>
+                    </a>
+                </div>
+                <!--end::Item-->
+
+                <!--begin::Item-->
+                <div class="col-6">
+                    <a
+                    href="#"
+                    class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
+                    >
+                    <span
+                        [inlineSVG]="'./assets/media/svg/icons/Design/Color-profile.svg'"
+                        class="svg-icon svg-icon-3x svg-icon-primary m-0"
+                    ></span> <!-- cacheSVG="true" -->
+                    <span class="d-block font-weight-bold font-size-h6 mt-2"
+                        >Settings</span
+                    >
+                    </a>
+                </div>
+                <!--end::Item-->
+                </div>
+                <div class="row">
+                <!--begin::Item-->
+                <div class="col-6">
+                    <a
+                    href="#"
+                    class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
+                    >
+                    <span
+                        [inlineSVG]="'./assets/media/svg/icons/Shopping/Euro.svg'"
+                        class="svg-icon svg-icon-3x svg-icon-primary m-0"
+                    ></span> <!-- cacheSVG="true" -->
+                    <span class="d-block font-weight-bold font-size-h6 mt-2">Orders</span>
+                    </a>
+                </div>
+                <!--end::Item-->
+                </div>
             </div>
-
-            <div class="modal-footer border-0 pt-0">
-                <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="3" 
-                    (click)="fnCloseModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
-
-                <button type="submit" class="btn btn-primary font-weight-bold ml-2" [disabled]="boolLoading" tabindex="2">
-                    {{ 'COMMON.LABEL.SAVE' | translate }}
-                    <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolLoading"></span>
-                </button>
-            </div>
-        </form>
+            <!--end::Content-->
+        </div>
+        <!--end::Quick Actions Panel-->
     </div>
 </div>
