@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Plugin Modules
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltipModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Application Modules
 import { ContactRoutingModule } from './contact-routing.module';
@@ -41,6 +41,7 @@ import { TabAccessControlComponent } from './contact-detail/tab-access-control/t
 
     //Pluin Modules
     NgbTooltipModule,
+    NgbModalModule,
 
     //EllaiSys Library
     TranslateModule,

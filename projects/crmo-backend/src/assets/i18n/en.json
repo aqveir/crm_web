@@ -491,7 +491,10 @@
                 }
             },            
             "CONTACT_DETAIL": {
-                "TITLE": "Contact",
+                "TITLE": {
+                    "ADD": "Add Contact",
+                    "EDIT": "Edit Contact"
+                },
                 "TAB_DETAILS": {
                     "TITLE": "Personal"
                 },

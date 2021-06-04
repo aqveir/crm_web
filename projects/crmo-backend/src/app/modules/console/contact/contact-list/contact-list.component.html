@@ -1,8 +1,16 @@
 <div class="d-block full-content-page-height">
-    <crmo-backend-widget-subheader 
-        [title]="'PAGE.CONTACT.CONTACT_LIST.TITLE'"
-        [routerLinkAdd]="['/secure/contact', 'new']"
-        ></crmo-backend-widget-subheader>
+
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <crmo-backend-widget-subheader 
+                [title]="'PAGE.CONTACT.CONTACT_LIST.TITLE'"
+                [routerLinkAdd]="['/secure/contact', 'new']"
+                ></crmo-backend-widget-subheader>            
+        </div>
+        <div class="ml-2 py-2 py-lg-4">
+            <button class="btn btn-primary font-weight-bolder font-size-sm" (click)="fnUploadAction($event, modalUplaod)">Upload</button>
+        </div>
+    </div>
 
     <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
 
@@ -79,4 +87,21 @@
         </div>
     </div>
     <!--end::Card-->
+
+    <!--begin::Modal FileUpload-->
+    <ng-template #modalUplaod let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <router-outlet name="popup"></router-outlet>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        </div>
+    </ng-template>
+    <!--end::Modal FileUpload-->
 </div>

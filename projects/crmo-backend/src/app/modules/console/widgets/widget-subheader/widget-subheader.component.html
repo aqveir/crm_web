@@ -43,25 +43,25 @@
             </div>
             <!--begin:Full Search-->
 
-            <!--begin::Button-->
+            <!--begin::Filter Button-->
             <div class="btn-group ml-2" *ngIf="boolShowFilterButton">
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">
+                <button type="button" class="btn btn-primary font-weight-bolder font-size-sm" (click)="fnFilterClick($event)">
                     <span class="navi-icon"><i class="la la-filter icon-md p-0"></i></span>
-                </a>
+                </button>
             </div>
-            <!--end::Button-->         
+            <!--end::Filter Button-->         
 
-            <!--begin::Button-->
+            <!--begin::Add Button-->
             <div class="btn-group ml-2" *ngIf="strRouterLinkAddBtn!=null">
                 <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
                     [routerLink]="strRouterLinkAddBtn">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
             </div>
-            <!--end::Button-->
+            <!--end::Add Button-->
 
-            <!--begin::Button-->
+            <!--begin::Back Button-->
             <button type="button" class="btn btn-default font-weight-bold btn-sm px-3 font-size-base"
                 (click)="fnBackClick()" *ngIf="boolShowBackButton">{{ 'COMMON.LABEL.BACK' | translate }}</button>
-            <!--end::Button-->
+            <!--end::Back Button-->
 
             <!--begin::Dropdown-->
             <div class="btn-group ml-2" *ngIf="boolShowSaveButton || boolShowSaveButtonGroup">
