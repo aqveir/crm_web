@@ -24,6 +24,7 @@ export * from './lib/interfaces/service-request/task.interface';
 export * from './lib/interfaces/service-request/event.interface';
 export * from './lib/interfaces/service-request/communication.interface';
 export * from './lib/interfaces/common/address.interface';
+export * from './lib/interfaces/common/country.interface';
 
 // Exported Services
 export * from './lib/services/common/lookup/lookup.service';
@@ -47,6 +48,7 @@ export * from './lib/services/service-request/support.service';
 export * from './lib/services/service-request/communication.service';
 export * from './lib/services/task/task.service';
 export * from './lib/services/event/event.service';
+export * from './lib/services/common/country/country.service';
 
 //export * from './lib/services/catalogue/catalogue-category.service';
 //export * from './lib/services/wallet/wallet.service';

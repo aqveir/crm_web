@@ -135,7 +135,7 @@
                             <div class="col-9">
                                 <ng-select class="form-control" #selectDataType formControlName="type"
                                     placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.TYPE.PLACEHOLDER' | translate }}"
-                                    [items]="objCountryList" bindLabel="display_value" bindValue="key"
+                                    [items]="objTypeList" bindLabel="display_value" bindValue="key"
                                     (change)="fnChangeType($event)"
                                     [searchable]="false" autocomplete="off" tabindex="3">
                                 </ng-select>

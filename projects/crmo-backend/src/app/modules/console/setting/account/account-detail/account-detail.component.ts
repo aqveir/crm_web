@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
-import { AccountService,IAccount,IAddress, ICountry, ILookup, ILookupValue } from 'crmo-lib';
+import { AccountService,IAccount,IAddress, ICountry, ILookup, ILookupValue,CountryService } from 'crmo-lib';
 import { AddressComponent } from '../../../shared/address/address.component';
 import { ThrowStmt } from '@angular/compiler';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
@@ -30,7 +30,7 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
   
   public objAccount: IAccount;
   public objLookup:ILookup;
-  public objCountryList:ILookupValue[];
+  public objTypeList:ILookupValue[];
   public accountDetailForm!: FormGroup;
 
   //#endregion
@@ -39,7 +39,7 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
 
   private oHash:string;
   private accountHash:string;
-  private acc_country:ICountry;
+  private objCountrylist:ICountry[];
 
   //#endregion
 
@@ -47,14 +47,16 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
     private _router: Router,
     private _route: ActivatedRoute,
     private _formBuilder: FormBuilder,
-    private _accountService: AccountService
+    private _accountService: AccountService,
+    private _countryService: CountryService
   ) { super(); }
 
   ngOnInit(): void {
     
     //Load all lookup values
     this.fnLoadLookupValues();
-
+    this.fnLoadCountries();
+    
     //initialize the form
     this.fnInitializeForm();
 
@@ -203,7 +205,7 @@ private fnLoadLookupValues():void{
   try{
    //Load account type values
    this.objLookup = this._globals.getLookupByKey('account_type');
-   this.objCountryList = (this.objLookup.values).filter((x: ILookupValue) => {
+   this.objTypeList = (this.objLookup.values).filter((x: ILookupValue) => {
      return (
        (x.is_active==true) &&
        ((['data_type_string', 'data_type_json'].find((z: string) => {return z==x.key}))==null)
@@ -220,16 +222,21 @@ private fnLoadLookupValues():void{
 
 private fnLoadCountries():void{
 
-  try{
-   //TODO: API to Load countries from Country table is not yet available once its available 
-  
-  }
-  catch (error) {
+  this._countryService.get()
+  .subscribe((response: ICountry[]) => {
+    //Stop loader
+    this.boolLoading = false;
+
+    this.objCountrylist = response;
+    //Full the form controls with data
+    this.fnShowData();
+
+  },(error) => {
     //Stop loader
     this.boolLoading = false;
 
     throw error;
-  } //Try-catch ends
+  });
 }
 //#endregion
 }
