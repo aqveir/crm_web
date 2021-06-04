@@ -218,6 +218,24 @@
                             </div>
                         </div>
                         <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.LABEL' | translate }}
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="phone"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="2" />
+                                <span class="form-text text-muted">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.FINE_TEXT' | translate }}
+                                </span>
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.email.dirty && accountDetailForm.controls.email.invalid">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
 
                     </div>
                     <div class="col-xl-6 my-2">

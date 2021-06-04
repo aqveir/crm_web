@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
-import { AccountService,IAccount,IAddress, ILookup, ILookupValue } from 'crmo-lib';
+import { AccountService,IAccount,IAddress, ICountry, ILookup, ILookupValue } from 'crmo-lib';
 import { AddressComponent } from '../../../shared/address/address.component';
 import { ThrowStmt } from '@angular/compiler';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
@@ -39,6 +39,8 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
 
   private oHash:string;
   private accountHash:string;
+  private acc_country:ICountry;
+
   //#endregion
 
   constructor(private _globals: Globals,
@@ -84,7 +86,7 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
 
           this.objAccount = response;
           //Full the form controls with data
-          this.fnPopulateData();
+          this.fnShowData();
 
         },(error) => {
           //Stop loader
@@ -110,7 +112,7 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
   /**
    * Populate data on Form 
    */
-  private fnPopulateData(){
+  private fnShowData(){
     this.accountDetailForm.patchValue({
       name:this.objAccount.name,
       description:this.objAccount.description,
@@ -129,7 +131,6 @@ export class AccountDetailComponent extends BaseComponent implements OnInit{
 
     });
 
-    console.log(this.objAccount);
   }
 
   /**
@@ -208,6 +209,20 @@ private fnLoadLookupValues():void{
        ((['data_type_string', 'data_type_json'].find((z: string) => {return z==x.key}))==null)
      )
    });
+  }
+  catch (error) {
+    //Stop loader
+    this.boolLoading = false;
+
+    throw error;
+  } //Try-catch ends
+}
+
+private fnLoadCountries():void{
+
+  try{
+   //TODO: API to Load countries from Country table is not yet available once its available 
+  
   }
   catch (error) {
     //Stop loader
