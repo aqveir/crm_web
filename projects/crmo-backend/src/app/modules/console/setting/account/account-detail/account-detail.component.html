@@ -116,11 +116,11 @@
                                     placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.PLACEHOLDER' | translate }}"
                                     autocomplete="off" tabindex="2"></textarea>
                                 <span class="form-text text-muted" *ngIf="accountDetailForm.controls.description.dirty && accountDetailForm.controls.description.invalid" >
-                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.FINE_TEXT' | translate }}
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.VALIDATION_ERROR' | translate }}
                                 </span>
 
                                 <span class="form-text text-danger">
-                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.VALIDATION_ERROR' | translate }}
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.FINE_TEXT' | translate }}
                                 </span>
                             </div>
                         </div>
@@ -323,9 +323,12 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-9">
-                                <input class="form-control" type="text" formControlName="country"
-                                    placeholder="{{ 'COMMON.ADDRESS.COUNTRY.PLACEHOLDER' | translate }}"
-                                    autocomplete="off" tabindex="1" autofocus />
+                                <ng-select class="form-control" #selectDataType formControlName="country"
+                                placeholder="{{ 'COMMON.ADDRESS.COUNTRY.PLACEHOLDER' | translate }}"
+                                [items]="objCountryList" bindLabel="display_value" bindValue="alpha2_code"
+                                (change)="fnChangeCountry($event)"
+                                [searchable]="false" autocomplete="off" tabindex="3">
+                            </ng-select>
                                 <span class="form-text text-muted">
                                     {{ 'COMMON.ADDRESS.COUNTRY.FINE_TEXT' | translate }}
                                 </span>
