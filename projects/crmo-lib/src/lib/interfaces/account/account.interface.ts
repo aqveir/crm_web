@@ -40,3 +40,26 @@ export interface IAccountMinimal {
     is_default:boolean;
     last_updated_at: Date;
 }
+
+export interface IAccountRequest {
+        
+    hash: string;    
+    name: string;
+    description:string;    
+    owner:string;
+    is_default:boolean;
+    type_id:number;
+    website:string;
+    email:string;
+    phone:string;
+    address?: string;
+    locality?: string;
+    city?: string;
+    state_id: string;
+    country_alpha2_code: number;
+    zipcode?: string;
+    google_place_id?: string;
+    longitude?: number;
+    latitude?: number;
+    timezone?: any;
+}

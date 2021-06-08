@@ -5,7 +5,7 @@ import { Observable, Observer } from 'rxjs';
 // Framework files
 import { HttpService,ContentType } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
-import { IAccountMinimal,IAccount } from '../../interfaces/account/account.interface';
+import { IAccountMinimal,IAccount, IAccountRequest } from '../../interfaces/account/account.interface';
 import { IBaseInterface }  from '../base.interface';
 
 
@@ -20,8 +20,7 @@ export class AccountService extends BaseService implements IBaseInterface {
    constructor(
     private _httpService: HttpService
   ) { 
-    super(); 
-    //super.httpService = _httpService;
+    super();     
   }
   
 
@@ -70,7 +69,7 @@ export class AccountService extends BaseService implements IBaseInterface {
   /**
    * Update Account Details
    */
-  public fnUpdate(_account:IAccount, _params: Object=null):Observable<any>{
+  public fnUpdate(_account:IAccountRequest, _params: Object=null):Observable<any>{
 
     if (_params == null) {
       _params = {};
@@ -94,7 +93,7 @@ export class AccountService extends BaseService implements IBaseInterface {
     /**
    * Create Account 
    */
-     public fnCreate(_account:IAccount, _params: Object=null):Observable<any>{
+     public fnCreate(_account:IAccountRequest, _params: Object=null):Observable<any>{
 
       if (_params == null) {
         _params = {};

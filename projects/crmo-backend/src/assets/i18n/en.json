@@ -63,7 +63,7 @@
             },
             "COUNTRY": {
                 "LABEL": "Country",
-                "PLACEHOLDER": "Enter Country",
+                "PLACEHOLDER": "Select Country",
                 "FINE_TEXT": "",
                 "VALIDATION_ERROR": "Enter valid Country."
             },
@@ -921,6 +921,10 @@
     "NOTIFICATION": {
         "USER_DETAILS": {
             "SUCCESS_MESSAGE": "User information was successfully saved."
+        },
+        "ACCOUNT_DETAILS":{
+            "SUCCESS_MESSAGE": "Account information saved successfully.",
+            "SAVE_ERROR":"Error occured while saving. Check log or Contact Administrator for support."
         }
     },
 
