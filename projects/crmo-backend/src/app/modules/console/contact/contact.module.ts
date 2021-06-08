@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Plugin Modules
 import { NgbTooltipModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { UppyAngularModule } from 'uppy-angular';
 
 //Application Modules
 import { ContactRoutingModule } from './contact-routing.module';
@@ -42,6 +43,7 @@ import { TabAccessControlComponent } from './contact-detail/tab-access-control/t
     //Pluin Modules
     NgbTooltipModule,
     NgbModalModule,
+    UppyAngularModule,
 
     //EllaiSys Library
     TranslateModule,

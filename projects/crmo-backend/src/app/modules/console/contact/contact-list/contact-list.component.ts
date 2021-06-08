@@ -1,13 +1,15 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 //Third-part references
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { ContactService, IContact } from 'crmo-lib';
 import { BaseComponent } from '../../../base.component';
+import { UppyConfig } from 'uppy-angular';
+import { environment } from 'eis/apps/crmomni-web/src/environments/environment';
 
 
 @Component({
@@ -18,10 +20,48 @@ import { BaseComponent } from '../../../base.component';
 export class ContactListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public isLoading: boolean = false;
+  public boolUploading: boolean = false;  //Upload Modal
 
   public listContact: IContact[] = null;
   public pageRecordsLoaded: number = 0;
-  public pageTotalSize: number = 100;  
+  public pageTotalSize: number = 100;
+  public uppySettings: UppyConfig = {
+    uploadAPI: {
+      endpoint: 'api/contact/upload',
+      headers: {
+        Authorization: 'bearer ' + this._globals.getClaim()['token']
+      }
+    },
+    plugins: {
+      Webcam: false,
+      GoogleDrive: true,
+      Instagram: false,
+      Facebook: false,
+      Dropbox: true,
+      ScreenCapture:false
+    },
+    restrictions: {
+      maxFileSize: 1000000,
+      maxNumberOfFiles: 1,
+      minNumberOfFiles: 1,
+      allowedFileTypes: ['.csv', '.xls', '.xlsx']
+    },
+    statusBarOptions: {
+      hideUploadButton: true,
+    },
+    uploaderLook: {
+      note: 'abcd efg kml',
+      proudlyDisplayPoweredByUppy: false
+    },
+    options: {
+      id: 'crmoni', //A site-wide unique ID for the instance.
+      debug: false,
+      browserBackButtonClose: true,
+      autoProceed: false, //Setting this to true will start uploading automatically after the first file is selected without waiting for upload button trigger.
+      allowMultipleUploads: false, //Setting this to true,  users can upload some files, and then add more files and upload those as well
+      meta: {} //Metadata object, used for passing things like public keys, usernames, tags and so on
+    }
+  };
 
   private viewName: string = '*';
   private filterName: string = 'my_all';
@@ -31,6 +71,7 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   private elemPage: any;
   private scrollId: string = 'abcd';
   private payload: any = null;
+  private modalUploadRef: NgbModalRef;
   
 
   /**
@@ -76,10 +117,16 @@ export class ContactListComponent extends BaseComponent implements OnInit {
     this.isLoading = showLoader;
     this.isScrollLoading = true;
 
-    console.log('this.pageFrom.toString()', this.pageFrom.toString());
+    //Build Params
+    let params: Object = {
+      'view': this.viewName,
+      'filter': this.filterName,
+      'page': pageFrom,
+      'size': pageSize,
+    };
 
     //Fetch data from server
-    this._contactService.getAll(this.viewName, this.filterName, pageFrom, pageSize, this.payload)
+    this._contactService.getAll(this.payload, params)
       .subscribe((response: IContact[]) => {
         //Clear leading status
         this.isLoading = false;
@@ -121,8 +168,13 @@ export class ContactListComponent extends BaseComponent implements OnInit {
 
 
   public fnUploadAction(event, container): void {
-    this._modalService.open(container);
+    this.modalUploadRef = this._modalService.open(container, {size: 'lg'});
   } //Function ends
+
+
+  public fnCloseUploadModal(isDismissed: boolean = false): void {
+    this.modalUploadRef.close({dismissed: isDismissed});
+  }
 
 
   /**

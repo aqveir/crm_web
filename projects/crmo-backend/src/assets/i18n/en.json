@@ -488,6 +488,9 @@
                     "ACCOUNT_NAME": "Account",
                     "LAST_MODIFIED": "Last modified",
                     "ACTION_CONTROLS": ""
+                },
+                "MODAL": {
+                    "TITLE": "Import Contact"
                 }
             },            
             "CONTACT_DETAIL": {

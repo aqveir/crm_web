@@ -8,7 +8,7 @@
                 ></crmo-backend-widget-subheader>            
         </div>
         <div class="ml-2 py-2 py-lg-4">
-            <button class="btn btn-primary font-weight-bolder font-size-sm" (click)="fnUploadAction($event, modalUplaod)">Upload</button>
+            <button class="btn btn-primary font-weight-bolder font-size-sm" (click)="fnUploadAction($event, modalUpload)">Upload</button>
         </div>
     </div>
 
@@ -89,18 +89,26 @@
     <!--end::Card-->
 
     <!--begin::Modal FileUpload-->
-    <ng-template #modalUplaod let-c="close" let-d="dismiss">
-        <div class="modal-header">
-          <h4 class="modal-title">Modal title</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <ng-template #modalUpload let-c="close" let-d="dismiss">
+        <div class="modal-header border-0">
+            <h5 class="modal-title">{{ 'PAGE.CONTACT.CONTACT_LIST.MODAL.TITLE' | translate }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseUploadModal(true)">
+                <i aria-hidden="true" class="ki ki-close"></i>
+            </button>
         </div>
-        <div class="modal-body">
-          <router-outlet name="popup"></router-outlet>
+
+        <div class="modal-body pb-3 pt-1">
+            <ng-uppy [config]="uppySettings"></ng-uppy>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+
+        <div class="modal-footer border-0 pt-0">
+            <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="3" 
+                (click)="fnCloseUploadModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
+
+            <button type="submit" class="btn btn-primary font-weight-bold ml-2" [disabled]="boolUploading" tabindex="2">
+                {{ 'COMMON.LABEL.SAVE' | translate }}
+                <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolUploading"></span>
+            </button>
         </div>
     </ng-template>
     <!--end::Modal FileUpload-->

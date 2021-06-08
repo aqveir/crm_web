@@ -97,7 +97,7 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
     this.boolLoading = showLoader;
 
     //Fetch data from server
-    this._contactService.get(this.cHash)
+    this._contactService.show(this.cHash)
       .subscribe((response: IContact) => {
         //Clear leading status
         this.boolLoading = false;

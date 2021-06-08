@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
 //Framework files
-import { HttpService } from 'ellaisys-lib';
+import { ContentType, HttpService } from 'ellaisys-lib';
 
 //Services
 import { BaseService } from '../base.service';
@@ -14,88 +14,134 @@ import { HttpParams } from '@angular/common/http';
 })
 export class ContactService extends BaseService {
 
-    //Default Constructor
-    constructor(
-        private _httpService: HttpService,
-    ) { super(); }
+  //Default Constructor
+  constructor(
+      private _httpService: HttpService,
+  ) { super(); }
 
 
-    /**
-     * Get All Contacts
-     */
-    public getAll(_viewName?: string, _filter?: string, _page: string='1', _size: string='10', _payload: any=null): Observable<any> {
+  /**
+   * Get All Contacts
+   */
+  public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+    //Add Pagination params, if missing
+    _params = super.setDefaultParamsForPagination(_params);
 
-      //Set HTTP Params
-      let params = new HttpParams()
-      .set('view', _viewName)
-      .set('filter', _filter)
-      .set('page', _page)
-      .set('size', _size);
-
-      return new Observable((observer: Observer<any>) => {
-        this._httpService.post('contact/fetch', _payload, false, params)
-          .then((response: any) => {
-            let data: IContact[] = response.data;
-            observer.next(data); 
-          })                          
-          .catch((error: any) =>  { observer.error(error); })
-          .finally();
-      });
-    } //Function ends
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('contact/fetch', _payload, false, _params)
+        .then((response: any) => {
+          let data: IContact[] = response.data;
+          observer.next(data); 
+        })                          
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
 
 
-    /**
-     * Get existing Contact information by Identifier
-     * 
-     * @param cHash string
-     */
-    public get(cHash: string): Observable<any> {
-      return new Observable((observer: Observer<any>) => {
-          this._httpService.get('contact/' + cHash)
-          .then((response: any) => {
-            let data: IContact = response.data;
-            observer.next(data); 
-          })
-          .catch((error: any) =>  { observer.error(error); })
-          .finally();
-      });
-    } //Function ends
+  /**
+   * Get existing Contact information by Identifier
+   * 
+   * @param cHash string
+   * @param _params Object
+   * 
+   */
+  public show(cHash: string, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+        this._httpService.get('contact/' + cHash, _params)
+        .then((response: any) => {
+          let data: IContact = response.data;
+          observer.next(data); 
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
 
 
-    /**
-     * Create Contact
-     * 
-     * @param data IContact
-     */
-    public create(data: IContact): Observable<any> {
-      return new Observable((observer: Observer<any>) => {
-          this._httpService.post('contact', data)
-          .then((response: any) => {
-            let data: IContact = response.data;
-            observer.next(data); 
-          })
-          .catch((error: any) =>  { observer.error(error); })
-          .finally();
-      });
-    } //Function ends
+  /**
+   * Create Contact
+   * 
+   * @param data IContact
+   * @param _params Object
+   * 
+   */
+  public create(data: IContact, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+        this._httpService.post('contact', data, false, _params)
+        .then((response: any) => {
+          let data: IContact = response.data;
+          observer.next(data); 
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
 
 
-    /**
-     * Update existing Contact Information
-     * 
-     * @param cHash string
-     * @param data IContact
-     */
-    public update(cHash: string, data: IContact): Observable<any> {
-      return new Observable((observer: Observer<any>) => {
-          this._httpService.put('contact/' + cHash, data)
-          .then((response: any) => {
-            let data: IContact = response.data;
-            observer.next(data); 
-          })
-          .catch((error: any) =>  { observer.error(error); })
-          .finally();
-      });
-    } //Function ends
+  /**
+   * Update existing Contact Information
+   * 
+   * @param cHash string
+   * @param data IContact
+   * @param _params Object
+   * 
+   */
+  public update(cHash: string, data: IContact, _params: Object=null): Observable<any> {
+
+    // Add PUT method into the params, incase the param is missing
+    if (_params == null) {
+      _params = {};
+    } //End if
+    _params['_method'] = 'PUT';
+
+    return new Observable((observer: Observer<any>) => {
+        this._httpService.post('contact/' + cHash, data, false, _params, ContentType.NOTHING)
+        .then((response: any) => {
+          let data: IContact = response.data;
+          observer.next(data); 
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
+   * Delete/Deactivate existing Contact Information
+   * 
+   * @param cHash string
+   * @param data IContact
+   */
+  public delete(cHash: string,  _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+        this._httpService.delete('contact/' + cHash, _params)
+        .then((response: any) => {
+          let data: IContact = response.data;
+          observer.next(data); 
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
+   * Upload Contacts Information
+   * 
+   * @param data IContact
+   * @param _params Object
+   */
+  public upload(data: IContact, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+        this._httpService.post('contact/upload', data, false, _params, ContentType.NOTHING)
+        .then((response: any) => {
+          let data: IContact = response.data;
+          observer.next(data); 
+        })
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
 
 } //Class ends
