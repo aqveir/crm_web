@@ -1,15 +1,17 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 //Third-part references
-import { NgbActiveModal, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { UppyAngularComponent, UppyConfig } from 'uppy-angular';
 
+//Project References
+import { environment } from '@env-backend/environment';
+import { NotificationService } from 'ellaisys-lib';
+import { ContactService, IContact } from 'crmo-lib';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { ContactService, IContact } from 'crmo-lib';
 import { BaseComponent } from '../../../base.component';
-import { UppyConfig } from 'uppy-angular';
-import { environment } from 'eis/apps/crmomni-web/src/environments/environment';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   public pageTotalSize: number = 100;
   public uppySettings: UppyConfig = {
     uploadAPI: {
-      endpoint: 'api/contact/upload',
+      endpoint: environment.uppy_xhr_configuration.endpoint,
       headers: {
         Authorization: 'bearer ' + this._globals.getClaim()['token']
       }
@@ -81,7 +83,8 @@ export class ContactListComponent extends BaseComponent implements OnInit {
     private _globals: Globals,
     private _contactService: ContactService,
     private _modalService: NgbModal,
-    private _modalConfig: NgbModalConfig
+    private _modalConfig: NgbModalConfig,
+    private _notification: NotificationService
   ) { super(); }
 
 
@@ -167,14 +170,53 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnUploadAction(event, container): void {
+  /**
+   * Upload button on the toolbar to show upload modal
+   * 
+   * @param event 
+   * @param container 
+   */
+  public fnShowUploadModal(event: any, container: any): void {
     this.modalUploadRef = this._modalService.open(container, {size: 'lg'});
   } //Function ends
 
 
+  /**
+   * Close the modal using the dismiss button or close button
+   * 
+   * @param isDismissed 
+   */
   public fnCloseUploadModal(isDismissed: boolean = false): void {
     this.modalUploadRef.close({dismissed: isDismissed});
-  }
+  } //Function ends
+
+
+  /**
+   * Process the upload action
+   * 
+   * @param event 
+   * @param _uppy 
+   */
+  public fnUploadFileModal(event: any, _uppy: UppyAngularComponent): void {
+    _uppy.uppyInstance.upload()
+      .then((result: any) => {
+
+        //Check for upload status (success/failure)
+        if (result.failed?.length > 0) {
+          result.failed.forEach((file: any) => {
+            this._notification.error('Import Failed', file.error);
+          });
+        } else {
+          this._notification.success('Import Successful', 'file processing going on.');
+        } //End if
+
+        //Uppy reset and close
+        _uppy.uppyInstance.reset();
+        _uppy.uppyInstance.close();
+
+        this.modalUploadRef.close({dismissed: false});
+      });
+  } //Function ends
 
 
   /**

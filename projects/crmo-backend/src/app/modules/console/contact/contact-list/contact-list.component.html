@@ -8,7 +8,7 @@
                 ></crmo-backend-widget-subheader>            
         </div>
         <div class="ml-2 py-2 py-lg-4">
-            <button class="btn btn-primary font-weight-bolder font-size-sm" (click)="fnUploadAction($event, modalUpload)">Upload</button>
+            <button class="btn btn-primary font-weight-bolder font-size-sm" (click)="fnShowUploadModal($event, modalUpload)">Upload</button>
         </div>
     </div>
 
@@ -98,15 +98,15 @@
         </div>
 
         <div class="modal-body pb-3 pt-1">
-            <ng-uppy [config]="uppySettings"></ng-uppy>
+            <ng-uppy #uppyCtrl1 [config]="uppySettings"></ng-uppy>
         </div>
 
         <div class="modal-footer border-0 pt-0">
             <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="3" 
                 (click)="fnCloseUploadModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
 
-            <button type="submit" class="btn btn-primary font-weight-bold ml-2" [disabled]="boolUploading" tabindex="2">
-                {{ 'COMMON.LABEL.SAVE' | translate }}
+            <button type="button" class="btn btn-primary font-weight-bold ml-2" [disabled]="boolUploading" tabindex="2"
+                (click)="fnUploadFileModal($event, uppyCtrl1)">{{ 'COMMON.LABEL.IMPORT' | translate }}
                 <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolUploading"></span>
             </button>
         </div>

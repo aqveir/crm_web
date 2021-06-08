@@ -105,6 +105,11 @@ export const environment = {
     }
   },
 
+  // Uppy XHR configuration
+  uppy_xhr_configuration: {
+    endpoint: "api/contact/upload"
+  },
+
   // Facebook share
   facebook:{
     fb_appId:'1658574024410741' //Beta

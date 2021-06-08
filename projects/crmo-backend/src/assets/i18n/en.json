@@ -25,7 +25,12 @@
             "PLEASE_WAIT": "Please wait ...",
 
             "SEARCH": "Search",
-            "SEARCH_AND_ELLIPSIS": "Search ..."
+            "SEARCH_AND_ELLIPSIS": "Search ...",
+
+            "IMPORT": "Import",
+            "EXPORT": "Export",
+            "UPLOAD": "Upload",
+            "DOWNLOAD": "Download"
         },
         "NO_DATA": {
             "TITLE": "No records found.",
