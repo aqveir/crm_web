@@ -30,7 +30,10 @@
             "IMPORT": "Import",
             "EXPORT": "Export",
             "UPLOAD": "Upload",
-            "DOWNLOAD": "Download"
+            "DOWNLOAD": "Download",
+
+            "ACTIVE": "Active",
+            "IN_ACTIVE": "In Active"
         },
         "NO_DATA": {
             "TITLE": "No records found.",

@@ -48,10 +48,17 @@
                                 <span class="label label-lg label-light-primary label-inline">Free</span>
                             </td>
                             <td>
-                                <span class="label label-lg label-light-primary label-inline">Active</span>
+                                <span class="label label-lg label-inline label-light-primary" *ngIf="organization.is_active">
+                                    {{ 'COMMON.LABEL.ACTIVE' | translate }}
+                                </span>
+
+                                <span class="label label-lg label-inline label-light-danger" *ngIf="!organization.is_active">
+                                    {{ 'COMMON.LABEL.IN_ACTIVE' | translate }}
+                                </span>
                             </td>
                             <td>
-                                <span class="label label-lg label-inline">{{ organization.users_count }}</span>
+                                <span class=""><i class="flaticon-users-1 text-dark-25"></i></span>
+                                <span class="label label-lg ml-1 label-light-primary text-dark-50">{{ organization.users_count }}</span>
                             </td>
                             <td>
                                 <span class="text-dark-75 d-block">{{ organization.last_updated_at | date }}</span>
