@@ -6,7 +6,7 @@ import { UppyAngularComponent, UppyConfig } from 'uppy-angular';
 
 //Project References
 import { environment } from '@env-backend/environment';
-import { NotificationService } from 'ellaisys-lib';
+import { NotificationService, TranslateService } from 'ellaisys-lib';
 import { ContactService, IContact } from 'crmo-lib';
 
 //Application files
@@ -29,7 +29,7 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   public pageTotalSize: number = 100;
   public uppySettings: UppyConfig = {
     uploadAPI: {
-      endpoint: environment.uppy_xhr_configuration.endpoint,
+      endpoint: environment.uppy_configuration.contact_upload.xhr_endpoint,
       headers: {
         Authorization: 'bearer ' + this._globals.getClaim()['token']
       }
@@ -43,8 +43,8 @@ export class ContactListComponent extends BaseComponent implements OnInit {
       ScreenCapture:false
     },
     restrictions: {
-      maxFileSize: 1000000,
-      maxNumberOfFiles: 1,
+      maxFileSize: environment.uppy_configuration.contact_upload.file_size_bytes,
+      maxNumberOfFiles: 5,
       minNumberOfFiles: 1,
       allowedFileTypes: ['.csv', '.xls', '.xlsx']
     },
@@ -52,7 +52,6 @@ export class ContactListComponent extends BaseComponent implements OnInit {
       hideUploadButton: true,
     },
     uploaderLook: {
-      note: 'abcd efg kml',
       proudlyDisplayPoweredByUppy: false
     },
     options: {
@@ -84,7 +83,8 @@ export class ContactListComponent extends BaseComponent implements OnInit {
     private _contactService: ContactService,
     private _modalService: NgbModal,
     private _modalConfig: NgbModalConfig,
-    private _notification: NotificationService
+    private _notification: NotificationService,
+    private _translate: TranslateService
   ) { super(); }
 
 
@@ -203,11 +203,15 @@ export class ContactListComponent extends BaseComponent implements OnInit {
 
         //Check for upload status (success/failure)
         if (result.failed?.length > 0) {
-          result.failed.forEach((file: any) => {
-            this._notification.error('Import Failed', file.error);
+          this._translate.get('PAGE.CONTACT.CONTACT_LIST.MODAL.NOTIFICATION.FAILURE').subscribe((result: any) => {
+            result.failed.forEach((file: any) => {
+              this._notification.error(result.TITLE, file.error);
+            });
           });
         } else {
-          this._notification.success('Import Successful', 'file processing going on.');
+          this._translate.get('PAGE.CONTACT.CONTACT_LIST.MODAL.NOTIFICATION.SUCCESS').subscribe((result: any) => {
+            this._notification.success(result.TITLE, result.MESSAGE);
+          });
         } //End if
 
         //Uppy reset and close

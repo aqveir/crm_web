@@ -105,9 +105,12 @@ export const environment = {
     }
   },
 
-  // Uppy XHR configuration
-  uppy_xhr_configuration: {
-    endpoint: "api/contact/upload"
+  // Uppy Configuration
+  uppy_configuration: {
+    contact_upload: {
+      xhr_endpoint: "api/contact/upload",
+      file_size_bytes: 1000000,      
+    }
   },
 
   // Facebook share

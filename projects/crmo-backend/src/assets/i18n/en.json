@@ -495,7 +495,16 @@
                     "ACTION_CONTROLS": ""
                 },
                 "MODAL": {
-                    "TITLE": "Import Contact"
+                    "TITLE": "Import Contact",
+                    "NOTIFICATION": {
+                        "SUCCESS" : {
+                            "TITLE": "Upload Successful",
+                            "MESSAGE": "The uploaded file(s) are being processed. You will be notified about the details shortly."
+                        },
+                        "FAILURE" : {
+                            "TITLE": "Upload Failed"
+                        }
+                    }
                 }
             },            
             "CONTACT_DETAIL": {

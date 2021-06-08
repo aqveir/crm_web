@@ -106,8 +106,11 @@ export const environment = {
   },
 
   // Uppy XHR configuration
-  uppy_xhr_configuration: {
-    endpoint: "http://ellaisys.crmomni.com/api/contact/upload"
+  uppy_configuration: {
+    contact_upload: {
+      xhr_endpoint: "http://ellaisys.crmomni.com/api/contact/upload",
+      file_size_bytes: 1000000,      
+    }
   },
 
   // Facebook share
