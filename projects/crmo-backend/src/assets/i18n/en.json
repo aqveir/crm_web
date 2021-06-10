@@ -819,6 +819,20 @@
                     }
                 }
             },
+            "DOCUMENT": {
+                "TITLE": {
+                    "ADD": "Upload Document",
+                    "EDIT": "Edit Note"
+                },
+                "FORM": {
+                    "TITLE": {
+                        "LABEL": "Title",
+                        "PLACEHOLDER": "Enter document title",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid title for the document."
+                    }
+                }
+            },    
             "TASK": {
                 "TITLE": {
                     "ADD": "Create Task",
@@ -936,12 +950,20 @@
     },
 
     "NOTIFICATION": {
+        "COMMON": {
+            "SUCCESS_TITLE": "Success",
+            "ERROR_TITLE": "Error"
+        },
         "USER_DETAILS": {
             "SUCCESS_MESSAGE": "User information was successfully saved."
         },
         "ACCOUNT_DETAILS":{
             "SUCCESS_MESSAGE": "Account information saved successfully.",
             "SAVE_ERROR":"Error occured while saving. Check log or Contact Administrator for support."
+        },
+        "DOCUMENT_MODAL": {
+            "UPLOAD_SUCCESS_MESSAGE": "The document is successfully uploaded.",
+            "UPLOAD_ERROR_MESSAGE": "An error occured while uploading the documents."
         }
     },
 

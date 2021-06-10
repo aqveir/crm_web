@@ -12,7 +12,7 @@ import KTLayoutContent from '@asset-backend/js/layout/base/content';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 //Application common libraries
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService, NotificationService, TranslateService } from 'ellaisys-lib';
 import { INote } from 'crmo-lib';
 
 //Application Modal Components
@@ -23,6 +23,7 @@ import { ModalConfirmDeleteComponent } from '../widgets/modal-confirm-delete/mod
 import { ModalConfirmCallComponent } from '../widgets/modal-confirm-call/modal-confirm-call.component';
 import { ModalTaskComponent } from '../widgets/modal-task/modal-task.component';
 import { ModalFiltersComponent } from '../widgets/modal-filters/modal-filters.component';
+import { ModalDocumentComponent } from '../widgets/modal-document/modal-document.component';
 
 
 @Component({
@@ -72,7 +73,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     private layout: LayoutService,
     private _broker: EventBrokerService,
     private _modalService: NgbModal,
-    private _modalConfig: NgbModalConfig
+    private _modalConfig: NgbModalConfig,
+    private _translate: TranslateService,
+    private _notification: NotificationService
   ) {
     this.initService.init();
 
@@ -207,6 +210,39 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       modalNoteRef.componentInstance.strEntityType = strEntityType;
       modalNoteRef.componentInstance.intReferenceId = intReferenceId;
       modalNoteRef.componentInstance.objNote = objNote;
+    });
+
+    //Broker Lister - Modal Component for Document Amend
+    this._broker.listen<any>('show_document_modal', (x: any) => {
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'lg';
+      const modalDocumentRef = this._modalService.open(ModalDocumentComponent, customConfig);
+      
+      let strEntityType: string = x[0];
+      let intReferenceId: number = x[1];
+
+      modalDocumentRef.componentInstance.strEntityType = strEntityType;
+      modalDocumentRef.componentInstance.intReferenceId = intReferenceId;
+
+      //Waiting for modal response
+      modalDocumentRef.result
+      .then((result: any) => {
+         this._translate.get('NOTIFICATION').subscribe((translattion: any) => {
+          if (result && result['error']) {
+            this._notification.error(translattion.COMMON.ERROR_TITLE,translattion.DOCUMENT_MODAL.UPLOAD_ERROR_MESSAGE);
+            console.error('Document Upload Error', result['error']);
+          } else {
+            if (result['refresh']==true) {
+              this._notification.success(translattion.COMMON.SUCCESS_TITLE, translattion.DOCUMENT_MODAL.UPLOAD_SUCCESS_MESSAGE);
+            } //End if
+          } //End if
+        });
+      }, (reason: any) => {
+        this._translate.get('NOTIFICATION').subscribe((translattion: any) => {
+          this._notification.error(translattion.COMMON.ERROR_TITLE, translattion.DOCUMENT_MODAL.UPLOAD_ERROR_MESSAGE);
+          console.error('Document Upload Error', reason);
+        });
+      });
     });
 
     //Broker Lister - Modal Component for Task Amend

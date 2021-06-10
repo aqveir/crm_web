@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
         break;
 
       case 'show_document_modal':
-      
+        this._broker.emit(name, ['entity_type_contact', 1]);
         break;
     
       default:

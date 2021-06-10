@@ -22,6 +22,7 @@ import { ModalConfirmDeleteComponent } from './modal-confirm-delete/modal-confir
 import { ModalTaskComponent } from './modal-task/modal-task.component';
 import { ModalEventsComponent } from './modal-events/modal-events.component';
 import { ModalFiltersComponent } from './modal-filters/modal-filters.component';
+import { UppyAngularModule } from 'uppy-angular';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ModalFiltersComponent } from './modal-filters/modal-filters.component';
     NgSelectModule,
     NgbModule,
     CKEditorModule,
+    UppyAngularModule,
 
     //EllaiSys Library
     TranslateModule,

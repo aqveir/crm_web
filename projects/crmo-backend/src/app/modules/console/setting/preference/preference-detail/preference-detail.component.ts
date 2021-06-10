@@ -96,15 +96,19 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   /**
    * Create data
    */
-  private fnCreateData(): IPreferenceRequest {
+  private fnCreateData(): void {
     //Set new flag
     this.boolIsNew = true;
 
-    return <IPreferenceRequest> {
-      name: null,
-      display_value: null,
-      type_key: 'industry_type_vanilla'
-    };
+    if (this.preferencesForm) { 
+      //Enable-Disable some controls
+      this.preferencesForm.controls['is_active'].disable();
+      this.preferencesForm.controls['name'].enable();
+      this.preferencesForm.controls['is_multiple'].disable();
+      this.preferencesForm.controls['is_minimum'].disable();
+      this.preferencesForm.controls['is_maximum'].disable();
+      this.preferencesForm.controls['external_url'].disable();
+    } //End if
   } //Function ends
  
   
@@ -345,6 +349,7 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       case 'data_type_number':
         this.preferencesForm.controls['is_minimum'].enable();
         this.preferencesForm.controls['is_maximum'].enable();
+        this.preferencesForm.controls['is_multiple'].enable();
         break;
 
       case 'data_type_lookup':
@@ -353,13 +358,16 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
           this.preferencesDataForm = this.fnDataForm();
           this.preferencesForm.addControl('data', this.preferencesDataForm);          
         } //End if
+        this.preferencesForm.controls['is_multiple'].enable();
         break;
 
       case 'data_type_external':
         this.preferencesForm.controls['external_url'].enable();
+        this.preferencesForm.controls['is_multiple'].enable();
         break;
     
       default:
+        this.preferencesForm.controls['is_multiple'].disable();
         break;
     } //End switch
   } //Function ends
@@ -414,14 +422,14 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       name: ['', [ Validators.required ]],
       display_value: ['', [ Validators.required ]],
       column_name: [''],
-      type_key: ['', [ Validators.required ]],
+      type_key: ['data_type_boolean', [ Validators.required ]],
       keywords: ['', [ Validators.required ]],
       order: [0, [ Validators.min(0)]],
-      is_active: [{value: true, disable: true}],
-      is_minimum: [{value: false, disable: true}],
-      is_maximum: [{value: false, disable: true}],
-      is_multiple: [{value: false, disable: true}],
-      external_url: [{value: '', disable: true}]
+      is_active: [ true ],
+      is_minimum: [ false ],
+      is_maximum: [ false ],
+      is_multiple: [ false ],
+      external_url: ['']
     });
   } //Function ends
   private fnDataForm(): FormGroup {

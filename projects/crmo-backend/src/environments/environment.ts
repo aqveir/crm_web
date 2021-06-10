@@ -110,6 +110,10 @@ export const environment = {
     contact_upload: {
       xhr_endpoint: "http://ellaisys.crmomni.com/api/contact/upload",
       file_size_bytes: 1000000,      
+    },
+    document_upload: {
+      xhr_endpoint: "http://ellaisys.crmomni.com/api/document",
+      file_size_bytes: 1000000,   
     }
   },
 
