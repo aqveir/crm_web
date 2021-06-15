@@ -24,11 +24,11 @@ export class DashboardComponent implements OnInit {
   public fnShowModal(name: string): void {
     switch (name) {
       case 'show_note_modal':
-        this._broker.emit(name, ['entity_type_contact', 1, null]);
+        this._broker.emit(name, ['entity_type_contact', 5, null]);
         break;
 
       case 'show_document_modal':
-        this._broker.emit(name, ['entity_type_contact', 1]);
+        this._broker.emit(name, ['entity_type_contact', 5]);
         break;
     
       default:

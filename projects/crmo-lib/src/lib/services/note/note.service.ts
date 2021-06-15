@@ -22,6 +22,25 @@ export class NoteService extends BaseService {
 
 
   /**
+   * Get Notes
+   */
+  public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+    //Add Pagination params, if missing
+    _params = super.setDefaultParamsForPagination(_params);
+
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('note', _payload, false, _params)
+        .then((response: any) => {
+          let data: INote[] = response.data;
+          observer.next(data); 
+        })                          
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
    * Create Note
    */
   public create(data: INote): Observable<any> {

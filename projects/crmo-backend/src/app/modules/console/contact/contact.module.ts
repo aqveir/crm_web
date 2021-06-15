@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Plugin Modules
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { UppyAngularModule } from 'uppy-angular';
 
@@ -22,6 +23,12 @@ import { TabSettingComponent } from './contact-detail/tab-setting/tab-setting.co
 import { TabProfileComponent } from './contact-detail/tab-profile/tab-profile.component';
 import { TabAccessControlComponent } from './contact-detail/tab-access-control/tab-access-control.component';
 
+import { ContactNewComponent } from './contact-new/contact-new.component';
+import { TabProfileNewContactComponent } from './contact-new/tab-profile-new-contact/tab-profile-new-contact.component';
+import { TabSettingNewContactComponent } from './contact-new/tab-setting-new-contact/tab-setting-new-contact.component';
+import { TabAddressNewContactComponent } from './contact-new/tab-address-new-contact/tab-address-new-contact.component';
+import { TabSummaryComponent } from './contact-new/tab-summary/tab-summary.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +41,13 @@ import { TabAccessControlComponent } from './contact-detail/tab-access-control/t
     TabSettingComponent,
     TabProfileComponent,
     TabAccessControlComponent,
+
+    //Contact Add Components
+    ContactNewComponent,
+    TabProfileNewContactComponent,   
+    TabSettingNewContactComponent,
+    TabAddressNewContactComponent,
+    TabSummaryComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +55,7 @@ import { TabAccessControlComponent } from './contact-detail/tab-access-control/t
     ReactiveFormsModule,
 
     //Pluin Modules
+    NgSelectModule,
     NgbTooltipModule,
     NgbModalModule,
     UppyAngularModule,

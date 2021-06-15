@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -11,11 +11,11 @@ import { EventBrokerService, NotificationService } from 'ellaisys-lib';
 import { ContactService, IContact } from 'crmo-lib';
 
 @Component({
-  selector: 'crmo-backend-contact-detail',
-  templateUrl: './contact-detail.component.html',
-  styleUrls: ['./contact-detail.component.scss']
+  selector: 'crmo-backend-contact-new',
+  templateUrl: './contact-new.component.html',
+  styleUrls: ['./contact-new.component.scss']
 })
-export class ContactDetailComponent extends BaseComponent implements OnInit {
+export class ContactNewComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
@@ -52,52 +52,25 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnReloadData($event): void {
-    this.fnLoadData(false);
-  } //End if
-
-
   /**
    * Initialize
    */
   private fnInitialize(): void {
-    let cHash: string = this._route.snapshot.paramMap.get('chash');
-    this.cHash = cHash;
-
     //Initialize form
     this.fnInitializeForm();
 
-    //Load data for existing hash value
-    this.fnLoadData();
-
+    this.fnCreateData();
   } //Function ends
-
+  
 
   /**
-   * Load the data from the server
-   * 
-   * @param showLoader 
+   * Create data
    */
-  private fnLoadData(showLoader: boolean = true): void {
-    //Set loading status
-    this.boolLoading = showLoader;
+  private fnCreateData(): void {
+    //Set new flag
+    this.boolIsNew = true;
 
-    //Fetch data from server
-    this._contactService.show(this.cHash)
-      .subscribe((response: IContact) => {
-        //Clear leading status
-        this.boolLoading = false;
-
-        let data: IContact = response;
-        if (data) {
-          this.objContact = data;
-        } //End If
-      }, (error) => {
-        //Stop loader
-        this.boolLoading = false;
-
-        throw error;
-      });
+    //this.contactForm.patchValue()
   } //Function ends
   
 
@@ -198,7 +171,7 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
     this.contactForm.reset();
 
     if (boolNavBack) {
-      this._router.navigate(['secure/setting/contact']);
+      this._router.navigate(['secure/contact']);
     } //End if
   } //Function ends
 
@@ -208,22 +181,17 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
    */
   private fnInitializeForm() {
     this.contactForm = this._formBuilder.group({
-      hash: [{value: null, disabled: true}],
-      avatar: [null],
-      first_name: ['', [ Validators.required ]],
-      middle_name: [''],
-      last_name: ['', [ Validators.required ]],
-
-      subdomain: ['', [ Validators.required ]],
-      industry_key: ['', [ Validators.required ]],
-      website_protocal: ['http://'],
-      website: ['', [ Validators.pattern(Globals._REGEX_PATTERN_UEL) ]],
-      search_tag: [''],
-      phone_form_control: [''],
-      phone: [''],
-      phone_idd: [''],
-      email: ['', [ Validators.email ]],
+      avatar: [ null ],
+      first_name: [ '', [ Validators.required ]],
+      middle_name: [ '' ],
+      last_name: [ '', [ Validators.required ]],
+      phone_form_control: [ '' ],
+      company_id: [ null ],
+      dob_date_picker: [],
+      gender_key: 'contact_gender_others',
+      details: this._formBuilder.array([])
     });
   } //Function ends
 
 } //Class ends
+

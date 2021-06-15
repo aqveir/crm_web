@@ -13,6 +13,7 @@
 
             "ADD": "Add",
             "ADD_NEW": "Add New",
+            "ADD_MORE": "Add More",
             "EDIT": "Edit",
             "DELETE": "Delete",
 
@@ -516,7 +517,55 @@
                     "EDIT": "Edit Contact"
                 },
                 "TAB_DETAILS": {
-                    "TITLE": "Personal"
+                    "TITLE": "Personal",
+                    "AVATAR": {
+                        "LABEL": "Avatar",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },                    
+                    "FIRST_NAME": {
+                        "LABEL": "First Name",
+                        "PLACEHOLDER": "Enter the name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "MIDDLE_NAME": {
+                        "LABEL": "Middle Name",
+                        "PLACEHOLDER": "Enter the middle name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid middle name"
+                    },
+                    "LAST_NAME": {
+                        "LABEL": "Last Name",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid family name"
+                    },
+                    "GENDER": {
+                        "LABEL": "Gender",
+                        "PLACEHOLDER": "Select an appropriate gender",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "DATE_OF_BIRTH": {
+                        "LABEL": "Date Of Birth",
+                        "PLACEHOLDER": "Enter date of birth",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter a valid date of birth"
+                    },
+                    "CONTACT_EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter email address",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email address"
+                    },
+                    "CONTACT_PHONE": {
+                        "LABEL": "Contact Phone",
+                        "PLACEHOLDER": "Enter phone number",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid phone number"
+                    }
                 },
                 "TAB_ADDRESS": {
                     "TITLE": "Address"
@@ -532,6 +581,9 @@
                 },
                 "TAB_SETTINGS": {
                     "TITLE": "Settings"
+                },
+                "TAB_REVIEW": {
+                    "TITLE": "Review & Submit"
                 }
             }
         },

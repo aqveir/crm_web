@@ -317,7 +317,7 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
       hash: [{value: null, disabled: true}],
       logo: [{value: null, disabled: true}],
       subdomain: ['', [ Validators.required ]],
-      industry_key: ['', [ Validators.required ]],
+      industry_key: ['industry_type_vanilla', [ Validators.required ]],
       website_protocal: ['http://'],
       website: ['', [ Validators.pattern(Globals._REGEX_PATTERN_UEL) ]],
       search_tag: [''],
@@ -327,7 +327,7 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
       phone_form_control: [''],
       phone: [''],
       phone_idd: [''],
-      email: ['', [ Validators.email ]],
+      email: ['', [ Validators.required, Validators.email ]],
     });
   } //Function ends
 

@@ -6,8 +6,8 @@ import { ContentType, HttpService } from 'ellaisys-lib';
 
 //Services
 import { BaseService } from '../base.service';
-import { IContact } from '../../interfaces/contact/contact.interface';
-import { HttpParams } from '@angular/common/http';
+import { IContact, IContactMinimal, IContactRequest } from '../../interfaces/contact/contact.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class ContactService extends BaseService {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('contact/fetch', _payload, false, _params)
         .then((response: any) => {
-          let data: IContact[] = response.data;
+          let data: IContactMinimal[] = response.data;
           observer.next(data); 
         })                          
         .catch((error: any) =>  { observer.error(error); })
@@ -42,13 +42,13 @@ export class ContactService extends BaseService {
   /**
    * Get existing Contact information by Identifier
    * 
-   * @param cHash string
+   * @param hash string
    * @param _params Object
    * 
    */
-  public show(cHash: string, _params: Object=null): Observable<any> {
+  public show(hash: string, _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-        this._httpService.get('contact/' + cHash, _params)
+        this._httpService.get('contact/' + hash, _params)
         .then((response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
@@ -62,13 +62,13 @@ export class ContactService extends BaseService {
   /**
    * Create Contact
    * 
-   * @param data IContact
+   * @param data IContactRequest
    * @param _params Object
    * 
    */
-  public create(data: IContact, _params: Object=null): Observable<any> {
+  public create(data: IContactRequest, _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-        this._httpService.post('contact', data, false, _params)
+        this._httpService.post('contact', data, false, _params, ContentType.NOTHING)
         .then((response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
@@ -82,12 +82,12 @@ export class ContactService extends BaseService {
   /**
    * Update existing Contact Information
    * 
-   * @param cHash string
-   * @param data IContact
+   * @param hash string
+   * @param data IContactRequest
    * @param _params Object
    * 
    */
-  public update(cHash: string, data: IContact, _params: Object=null): Observable<any> {
+  public update(hash: string, data: IContactRequest, _params: Object=null): Observable<any> {
 
     // Add PUT method into the params, incase the param is missing
     if (_params == null) {
@@ -96,7 +96,7 @@ export class ContactService extends BaseService {
     _params['_method'] = 'PUT';
 
     return new Observable((observer: Observer<any>) => {
-        this._httpService.post('contact/' + cHash, data, false, _params, ContentType.NOTHING)
+        this._httpService.post('contact/' + hash, data, false, _params, ContentType.NOTHING)
         .then((response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
@@ -110,12 +110,12 @@ export class ContactService extends BaseService {
   /**
    * Delete/Deactivate existing Contact Information
    * 
-   * @param cHash string
+   * @param hash string
    * @param data IContact
    */
-  public delete(cHash: string,  _params: Object=null): Observable<any> {
+  public delete(hash: string,  _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-        this._httpService.delete('contact/' + cHash, _params)
+        this._httpService.delete('contact/' + hash, _params)
         .then((response: any) => {
           let data: IContact = response.data;
           observer.next(data); 

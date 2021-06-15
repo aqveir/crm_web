@@ -71,6 +71,7 @@ export interface IOrganizationRequest {
     is_active: boolean;
 
     first_name: string;
+    middle_name: string;
     last_name: string;
 
     industry_key: string;

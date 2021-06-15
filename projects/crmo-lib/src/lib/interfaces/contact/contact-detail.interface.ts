@@ -11,3 +11,14 @@ export interface IContactDetail {
     is_primary: boolean;
     is_verified: boolean;
 }
+
+export interface IContactDetailRequest {
+    id: number;
+    proxy: string;
+    identifier: string;
+    type_key: string;
+    subtype_key: string;
+    country_idd: string;
+    is_primary: boolean;
+    is_verified: boolean;
+}

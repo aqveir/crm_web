@@ -58,7 +58,7 @@ export class OrganizationService extends BaseService {
    */
   public create(data: IOrganizationRequest, _params: Object=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('organization', data, false, _params)
+      this._httpService.post('organization', data, false, _params, ContentType.NOTHING)
         .then((response: any) => {
           let data: any = response.data;
 

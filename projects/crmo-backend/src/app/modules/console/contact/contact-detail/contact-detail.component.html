@@ -4,7 +4,7 @@
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid py-0 full-content-page-height">
         <crmo-backend-widget-subheader
-            [title]="(boolIsNew)?'PAGE.CONTACT.CONTACT_DETAIL.TITLE.ADD':'PAGE.CONTACT.CONTACT_DETAIL.TITLE.EDIT'" 
+            [title]="'PAGE.CONTACT.CONTACT_DETAIL.TITLE.EDIT'" 
             [page-info]="contactForm.controls['name'].value"
             [save-group]="true" [back]="true" [loading]="boolSaving"
             (back)="fnResetForm(true)"></crmo-backend-widget-subheader>
