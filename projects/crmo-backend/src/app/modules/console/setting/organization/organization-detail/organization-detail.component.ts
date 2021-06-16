@@ -181,7 +181,6 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
       this.organizationForm.updateValueAndValidity();
       if (this.organizationForm.invalid) {  
         let msgError: string = this.fnRaiseErrors(this.organizationForm);
-        this._notification.error('Error', msgError);
         return false;
       } //End if
 
@@ -214,7 +213,7 @@ export class OrganizationDetailComponent extends BaseComponent implements OnInit
         this._organizationService.update(this.oHash, dataUser, params)
         .subscribe((response: any) => {
           //Show notification
-          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+          this._globals.showSuccess('NOTIFICATION.ORGANIZATION_DETAILS.SUCCESS_MESSAGE', true);
 
           //Action based on submitter
           this.fnPostSaveAction(event?.submitter?.id);

@@ -1006,6 +1006,12 @@
             "SUCCESS_TITLE": "Success",
             "ERROR_TITLE": "Error"
         },
+        "ORGANIZATION_DETAILS": {
+            "SUCCESS_MESSAGE": "Organization information was successfully saved."
+        },
+        "CONTACT_DETAILS": {
+            "SUCCESS_MESSAGE": "Contact information was successfully saved."
+        },
         "USER_DETAILS": {
             "SUCCESS_MESSAGE": "User information was successfully saved."
         },

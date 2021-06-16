@@ -108,6 +108,13 @@ export abstract class BaseComponent {
           } //End if
         } else if (control instanceof FormGroup) {
           strReturnValue += this.fnRaiseErrors(control);
+        } else if (control instanceof FormArray) {
+          //Iterate the array
+          control.controls?.forEach((ctrl: any) => {
+            if (ctrl instanceof FormGroup) {
+              strReturnValue += this.fnRaiseErrors(ctrl);
+            } //End if            
+          });
         } //End if
       });
       

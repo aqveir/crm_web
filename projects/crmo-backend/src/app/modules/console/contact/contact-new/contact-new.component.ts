@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
+import KTWizard from '../../../../../assets/js/components/wizard';
+import { KTUtil } from '../../../../../assets/js/components/util';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'ellaisys-lib';
 import { ContactService, IContact } from 'crmo-lib';
+import { OnDestroy } from '@angular/core';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'crmo-backend-contact-new',
   templateUrl: './contact-new.component.html',
   styleUrls: ['./contact-new.component.scss']
 })
-export class ContactNewComponent extends BaseComponent implements OnInit {
+export class ContactNewComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('wizardContactFormNew', { static: true }) wizardRef: ElementRef;
+  
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
@@ -25,8 +31,9 @@ export class ContactNewComponent extends BaseComponent implements OnInit {
   public boolRefresh: boolean = false;
   public boolIsNew: boolean = false;
   public boolSaving: boolean = false;
-  
   public contactForm!: FormGroup;
+
+  private wizard: any;
 
   /**
    * Default constructor
@@ -46,9 +53,20 @@ export class ContactNewComponent extends BaseComponent implements OnInit {
    * Lifecycle Hook's
    */
   ngOnInit(): void {
-
     //Initilaize component
     this.fnInitialize();
+  } //Function ends
+  ngAfterViewInit(): void {
+    //Initialize form wizard
+    this.wizard = new KTWizard(this.wizardRef.nativeElement, { startStep: 1 });
+
+    //Change event
+    this.wizard.on('change', () => {
+      setTimeout(() => { KTUtil.scrollTop(); }, 500);
+    });
+  } //Function ends
+  ngOnDestroy(): void {
+    this.wizard = undefined;
   } //Function ends
 
 
@@ -70,7 +88,22 @@ export class ContactNewComponent extends BaseComponent implements OnInit {
     //Set new flag
     this.boolIsNew = true;
 
-    //this.contactForm.patchValue()
+  } //Function ends
+
+
+  /**
+   * Next Step Action
+   * 
+   * @param event 
+   */
+  public fnNextStep(event: any): void {
+
+    //Validate the form
+    if (!this.fnValidateForm()) {
+
+      //Shotp the wizard's step, as validation fails
+      this.wizard.stop();
+    } //End if
   } //Function ends
   
 
@@ -80,10 +113,7 @@ export class ContactNewComponent extends BaseComponent implements OnInit {
   public fnSaveAction(event: any): boolean {
     try {
       //Check form validity
-      this.contactForm.updateValueAndValidity();
-      if (this.contactForm.invalid) {  
-        let msgError: string = this.fnRaiseErrors(this.contactForm);
-        this._notification.error('Error', msgError);
+      if (!this.fnValidateForm()) {  
         return false;
       } //End if
 
@@ -96,24 +126,7 @@ export class ContactNewComponent extends BaseComponent implements OnInit {
         this._contactService.create(dataUser)
         .subscribe((response: any) => {
           //Show notification
-          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
-
-          //Action based on submitter
-          this.fnPostSaveAction(event?.submitter?.id);
-
-          //Stop loader
-          this.boolSaving = false;
-        },(error) => {
-          //Stop loader
-          this.boolSaving = false;
-          throw error;
-        });
-      } else {
-        //Update Organization
-        this._contactService.update(this.cHash, dataUser)
-        .subscribe((response: any) => {
-          //Show notification
-          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+          this._globals.showSuccess('NOTIFICATION.CONTACT_DETAILS.SUCCESS_MESSAGE', true);
 
           //Action based on submitter
           this.fnPostSaveAction(event?.submitter?.id);
@@ -177,6 +190,30 @@ export class ContactNewComponent extends BaseComponent implements OnInit {
 
 
   /**
+   * Validate Form
+   */
+  private fnValidateForm(): boolean {
+    try {
+      //Check form validity
+      this.contactForm.updateValueAndValidity();
+      if (this.contactForm.invalid) {  
+        let msgError: string = this.fnRaiseErrors(this.contactForm);
+
+        return false;
+      } //End if
+
+      return true;
+    } catch (error) {
+      //Stop loader
+      this.boolSaving = false;
+
+      throw error;
+    } //Try-catch ends
+
+  } //Function ends
+
+
+  /**
    * Initialize Reactive Form
    */
   private fnInitializeForm() {
@@ -188,6 +225,7 @@ export class ContactNewComponent extends BaseComponent implements OnInit {
       phone_form_control: [ '' ],
       company_id: [ null ],
       dob_date_picker: [],
+      date_of_birth_at: [],
       gender_key: 'contact_gender_others',
       details: this._formBuilder.array([])
     });

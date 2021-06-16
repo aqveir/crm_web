@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Plugin Modules
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgbTooltipModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UppyAngularModule } from 'uppy-angular';
 
 //Application Modules
@@ -56,8 +56,7 @@ import { TabSummaryComponent } from './contact-new/tab-summary/tab-summary.compo
 
     //Pluin Modules
     NgSelectModule,
-    NgbTooltipModule,
-    NgbModalModule,
+    NgbModule,
     UppyAngularModule,
 
     //EllaiSys Library

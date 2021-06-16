@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
@@ -15,7 +15,7 @@ import { IOrganization, ILookup, ILookupValue } from 'crmo-lib';
   templateUrl: './organization-data.component.html',
   styleUrls: ['./organization-data.component.scss']
 })
-export class OrganizationDataComponent extends BaseComponent implements OnInit {
+export class OrganizationDataComponent extends BaseComponent implements OnInit, OnChanges {
   @Input('form') organizationDetailForm: FormGroup = null;
   @Input('organization') objOrganization: IOrganization = null;
   @Input('new') boolIsNew: boolean = false;
@@ -27,6 +27,7 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit {
 
   public objLookupIndustry: ILookup;
   public listLookupIndustryValues: ILookupValue[];
+  public imgOrganizationLogo: string = 'assets/media/organizations/logo-sample_200_200.png';
   
 
   /**
@@ -46,6 +47,12 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit {
     //Initilaize component
     this.fnInitialize();
   } //Function ends
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.objOrganization) {
+      let objOrganizationCurr: IOrganization =  changes.objOrganization.currentValue;
+      this.imgOrganizationLogo = objOrganizationCurr?.logo;
+    } //End if
+  } //Function ends
 
 
   /**
@@ -53,16 +60,28 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit {
    * 
    * @param event 
    */
-  public fnFileUploadChangeEvent(event): void {
+  public fnFileUploadChangeEvent(event: any): void {
     try {
       let uploadedFile: File;
 
-      if (event?.target?.files) {
+      if (event?.target?.files && event.target.files[0]) {
         uploadedFile = event?.target?.files[0];
-        this.organizationDetailForm.patchValue({
-          logo: uploadedFile
-        });
-        console.log(uploadedFile);
+
+        //Check if the file object is valid
+        if (uploadedFile) {
+          //Read the file and assign to local variable
+          const reader: FileReader = new FileReader();
+          reader.readAsDataURL(uploadedFile);
+          reader.onload = (evt) => {
+            this.imgOrganizationLogo = evt.target.result as string; 
+          };
+
+          //Assign the value to form control
+          this.organizationDetailForm.patchValue({
+            logo: uploadedFile
+          });
+        } //End if
+
       } //End if
     } catch(error) {
       throw error;

@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
+//Third Party components and libraries
+import moment from 'moment';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
@@ -17,10 +21,9 @@ import { IOrganization, ILookup, ILookupValue } from 'crmo-lib';
 })
 export class TabProfileNewContactComponent extends BaseComponent implements OnInit {
   @Input('form') contactProfileForm: FormGroup = null;
-  @Input('contact') objContact: IOrganization = null;
-  @Input('refresh') boolRefresh: boolean = false;
 
   //Common attributes
+  public boolLoadingPage: boolean = false;
   public boolLoading: boolean = false;
   public boolSaving: boolean = false;
   public hasError: boolean = false;
@@ -29,6 +32,9 @@ export class TabProfileNewContactComponent extends BaseComponent implements OnIn
   public objGender: ILookup;
   public listLookupGender: ILookupValue[];
   public contactDetailsFormArray: FormArray = new FormArray([]);
+
+  public ngbDatepickerConfig: any = {};
+  public imgContactAvatar: string = 'assets/media/users/default.jpg';
   
 
   /**
@@ -39,7 +45,9 @@ export class TabProfileNewContactComponent extends BaseComponent implements OnIn
     private _cd: ChangeDetectorRef,
     private _formBuilder: FormBuilder,
     private _notification : NotificationService,
-  ) { super(); }
+  ) { super(); 
+  
+  }
 
 
   /**
@@ -47,7 +55,7 @@ export class TabProfileNewContactComponent extends BaseComponent implements OnIn
    */
   ngOnInit(): void {
     //Initilaize component
-    this.fnInitialize();    
+    this.fnInitialize();
   } //Function ends
 
 
@@ -56,16 +64,27 @@ export class TabProfileNewContactComponent extends BaseComponent implements OnIn
    * 
    * @param event 
    */
-  public fnFileUploadChangeEvent(event): void {
+  public fnFileUploadChangeEvent(event: any): void {
     try {
       let uploadedFile: File;
 
-      if (event?.target?.files) {
+      if (event?.target?.files && event.target.files[0]) {
         uploadedFile = event?.target?.files[0];
-        this.contactProfileForm.patchValue({
-          logo: uploadedFile
-        });
-        console.log(uploadedFile);
+
+        //Check if the file object is valid
+        if (uploadedFile) {
+          //Read the file and assign to local variable
+          const reader: FileReader = new FileReader();
+          reader.readAsDataURL(uploadedFile);
+          reader.onload = (evt) => {
+            this.imgContactAvatar = evt.target.result as string; 
+          };
+
+          //Assign the value to form control
+          this.contactProfileForm.patchValue({
+            avatar: uploadedFile
+          });
+        } //End if
       } //End if
     } catch(error) {
       throw error;
@@ -77,19 +96,28 @@ export class TabProfileNewContactComponent extends BaseComponent implements OnIn
    * Initialize
    */
   private fnInitialize(): void {
+    //Loading Page
+    this.boolLoadingPage=true;
+
     //Load lookup values
     this.objGender = this._globals.getLookupByKey('contact_gender');
     if (this.objGender) {
       this.listLookupGender = (this.objGender?.values).filter((x: ILookupValue) => {return x.is_active==true});
     } //End if
 
-    this.contactProfileForm.setControl('details', this.contactDetailsFormArray);
-
     //Add primary email
     this.fnAddContactDetailControl('contact_detail_type_email', true);
 
     //Add primary phone
-    this.fnAddContactDetailControl('contact_detail_type_phone', true);
+    this.fnAddContactDetailControl('contact_detail_type_phone', true);    
+    
+    //this._cd.detach();
+    setTimeout(() => {
+      this.contactProfileForm.setControl('details', this.contactDetailsFormArray);
+
+      //Page loaded completely
+      this.boolLoadingPage=false;
+    },0)
   } //Function ends
 
 
@@ -157,6 +185,24 @@ export class TabProfileNewContactComponent extends BaseComponent implements OnIn
         //Change the key state and disable email for validations.
         elemForm.patchValue({ is_primary: false }, {emitEvent: false});        
       } //End if
+    });
+
+    //Added to handle error (NG0100: ExpressionChangedAfterItHasBeenCheckedError)
+    this._cd.detectChanges();
+  } //Function ends
+
+
+  /**
+   * Date/Time Control Update Event
+   * 
+   * @param event
+   */
+  public fnDateTimeControlUpdated(event: NgbDate): void {
+    //Get Date-Time picker values
+    let dobAt: moment.Moment = moment(this.contactProfileForm.controls['dob_date_picker'].value).subtract(1, 'month');
+
+    this.contactProfileForm.patchValue({
+      date_of_birth_at: dobAt.toISOString(true)
     });
   } //Function ends
 

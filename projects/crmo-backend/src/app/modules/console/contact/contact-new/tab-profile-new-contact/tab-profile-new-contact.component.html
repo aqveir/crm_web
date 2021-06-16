@@ -1,15 +1,17 @@
-<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current" [formGroup]="contactProfileForm">
-    <h3 class="mb-10 font-weight-bold text-dark">User's Profile Details:</h3>
-    <div class="row">
-        <div class="col-3 d-none d-md-block">
-            <div class="form-group row">
-                <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
-                <div class="col-lg-9 col-xl-9">
+<div *ngIf="!boolLoadingPage">
+    <h3 class="mb-10 font-weight-bold text-dark">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.TITLE' | translate }}</h3>
+    <div class="row" [formGroup]="contactProfileForm">
+        <div class="col-2 offset-1 d-none d-xl-block">
+            <div class="form-group">
+                <label class="col-6">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.AVATAR.LABEL' | translate }}</label>
+                <div class="col-6">
                     <div class="image-input image-input-outline" id="kt_contact_add_avatar">
-                        <div class="image-input-wrapper" style="background-image: url(assets/media/users/100_2.jpg)"></div>
+                        <div class="image-input-wrapper"
+                            [style.background-image]="'url('+imgContactAvatar+')'"></div>
                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                             <i class="fa fa-pen icon-sm text-muted"></i>
-                            <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                            <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" 
+                                (change)="fnFileUploadChangeEvent($event)"/>
                             <input type="hidden" name="profile_avatar_remove" />
                         </label>
                         <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -20,7 +22,7 @@
             </div>
         </div>
 
-        <div class="col-md-9 col-12">
+        <div class="col-sm-12 col-xl-8">
             <div class="form-group row mb-10">
                 <div class="col-6 col-md-4">
                     <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.LABEL' | translate }}<span class="text-danger">*</span></label>
@@ -46,6 +48,10 @@
                         <span class="form-text text-muted">
                             {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.FINE_TEXT' | translate }}
                         </span>
+
+                        <span class="form-text text-danger" *ngIf="contactProfileForm.controls.middle_name.dirty && contactProfileForm.controls.middle_name.invalid">
+                            {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.VALIDATION_ERROR' | translate }}
+                        </span>
                 </div>
 
                 <div class="col-6 col-md-4">
@@ -53,10 +59,18 @@
                     <input type="text" class="form-control" name="last_name" formControlName="last_name"
                         placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.PLACEHOLDER' | translate }}"
                         autocomplete="none" tabindex="3" />
+
+                        <span class="form-text text-muted">
+                            {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.FINE_TEXT' | translate }}
+                        </span>
+    
+                        <span class="form-text text-danger" *ngIf="contactProfileForm.controls.last_name.dirty && contactProfileForm.controls.last_name.invalid">
+                            {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.VALIDATION_ERROR' | translate }}
+                        </span>
                 </div>
             </div>
 
-            <div class="form-group row mb-10">
+            <div class="form-group row mb-10 d-none d-md-flex">
                 <div class="col-6">
                     <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.GENDER.LABEL' | translate }}</label>
                     <div class="input-group">
@@ -71,10 +85,10 @@
                 <div class="col-6">
                     <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.DATE_OF_BIRTH.LABEL' | translate }}</label>
                     <div class="input-group date">
-                        <input type="text" class="form-control" ngbDatepicker
-                            formControlName="dob_date_picker"
+                        <input type="text" class="form-control" ngbDatepicker #dobAt="ngbDatepicker"
+                            formControlName="dob_date_picker" (dateSelect)="fnDateTimeControlUpdated($event)"
                             placeholder="Select date" readonly />
-                        <div class="input-group-append">
+                        <div class="input-group-append" (click)="dobAt.toggle()">
                             <span class="input-group-text"><i class="flaticon-event-calendar-symbol"></i>
                             </span>
                         </div>
@@ -83,7 +97,7 @@
             </div>            
 
             <div class="form-group row">
-                <div class="col-6">
+                <div class="col-md-6 col-sm-12">
                     <div class="d-flex">
                         <label class="flex-fill">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_EMAIL.LABEL' | translate }}<span class="text-danger">*</span></label>
 
@@ -132,7 +146,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-md-6 col-sm-12">
                     <div class="d-flex">
                         <label class="flex-fill">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_PHONE.LABEL' | translate }}<span class="text-danger">*</span></label>
 
