@@ -89,6 +89,55 @@ export class Globals {
             }
         }
     };
+    public static readonly _LANGUAGES: any[] = [
+        {key:'id', display_value:'Bahasa Indonesia - Indonesian'},
+        {key:'msa', display_value:'Bahasa Melayu - Malay'},
+        {key:'ca', display_value:'Català - Catalan'},
+        {key:'cs', display_value:'Čeština - Czech'},
+        {key:'da', display_value:'Dansk - Danish'},
+        {key:'de', display_value:'Deutsch - German'},
+        {key:'en', display_value:'English US (Default)'},
+        {key:'en-gb', display_value:'English UK - British English'},
+        {key:'es', display_value:'Español - Spanish'},
+        {key:'eu', display_value:'Euskara - Basque (beta)'},
+        {key:'fil', display_value:'Filipino'},
+        {key:'fr', display_value:'Français - French'},
+        {key:'ga', display_value:'Gaeilge - Irish (beta)'},
+        {key:'gl', display_value:'Galego - Galician (beta)'},
+        {key:'hr', display_value:'Hrvatski - Croatian'},
+        {key:'it', display_value:'Italiano - Italian'},
+        {key:'hu', display_value:'Magyar - Hungarian'},
+        {key:'nl', display_value:'Nederlands - Dutch'},
+        {key:'no', display_value:'Norsk - Norwegian'},
+        {key:'pl', display_value:'Polski - Polish'},
+        {key:'pt', display_value:'Português - Portuguese'},
+        {key:'ro', display_value:'Română - Romanian'},
+        {key:'sk', display_value:'Slovenčina - Slovak'},
+        {key:'fi', display_value:'Suomi - Finnish'},
+        {key:'sv', display_value:'Svenska - Swedish'},
+        {key:'vi', display_value:'Tiếng Việt - Vietnamese'},
+        {key:'tr', display_value:'Türkçe - Turkish'},
+        {key:'el', display_value:'Ελληνικά - Greek'},
+        {key:'bg', display_value:'Български език - Bulgarian'},
+        {key:'ru', display_value:'Русский - Russian'},
+        {key:'sr', display_value:'Српски - Serbian'},
+        {key:'uk', display_value:'Українська мова - Ukrainian'},
+        {key:'he', display_value:'עִבְרִית - Hebrew'},
+        {key:'ur', display_value:'اردو - Urdu (beta)'},
+        {key:'ar', display_value:'العربية - Arabic'},
+        {key:'fa', display_value:'فارسی - Persian'},
+        {key:'mr', display_value:'मराठी - Marathi'},
+        {key:'hi', display_value:'हिन्दी - Hindi'},
+        {key:'bn', display_value:'বাংলা - Bangla'},
+        {key:'gu', display_value:'ગુજરાતી - Gujarati'},
+        {key:'ta', display_value:'தமிழ் - Tamil'},
+        {key:'kn', display_value:'ಕನ್ನಡ - Kannada'},
+        {key:'th', display_value:'ภาษาไทย - Thai'},
+        {key:'ko', display_value:'한국어 - Korean'},
+        {key:'ja', display_value:'日本語 - Japanese'},
+        {key:'zh-cn', display_value:'简体中文 - Simplified Chinese'},
+        {key:'zh-tw', display_value:'繁體中文 - Traditional Chinese'},
+    ];
 
     //RegEx Patterns
     public static readonly _REGEX_PATTERN_UEL: RegExp=/^(http[s]?:\/\/){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/;
@@ -240,7 +289,16 @@ export class Globals {
         message = (boolTranslate)?this._translateService.instant(message):message;
 
         this._notificationService.success(
-            this._translateService.instant('NOTIFICATION_COMMON_SUCCESS_TITLE'), 
+            this._translateService.instant('NOTIFICATION.COMMON.SUCCESS_TITLE'), 
+            message, 
+            Globals.NotificationDefaultOptions
+        );
+    } //Function ends
+    public showError(message: string, boolTranslate: boolean=false): void {
+        message = (boolTranslate)?this._translateService.instant(message):message;
+
+        this._notificationService.error(
+            this._translateService.instant('NOTIFICATION.COMMON.ERROR_TITLE'), 
             message, 
             Globals.NotificationDefaultOptions
         );

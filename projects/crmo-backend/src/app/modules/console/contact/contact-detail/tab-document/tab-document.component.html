@@ -1,302 +1,58 @@
 <div class="container">
-    <form class="form">
-        <div class="form-group">
-            <textarea class="form-control form-control-lg form-control-solid" id="exampleTextarea" rows="3" placeholder="Type notes"></textarea>
-        </div>
-        <div class="row">
-            <div class="col">
-                <a href="#" class="btn btn-light-primary font-weight-bold">Add notes</a>
-                <a href="#" class="btn btn-clean font-weight-bold">Cancel</a>
-            </div>
-        </div>
-    </form>
+    <div class="d-flex flex-lg-row-reverse mb-2" *ngIf="(this.objContact) && (this.objContact?.id>0)">
+        <button type="button" class="btn btn-light-primary font-weight-bold" 
+            (click)="fnUploadDocument();">Upload Document</button>
+    </div>
 
-    <div class="separator separator-dashed my-10"></div>
-    <!--begin::Timeline-->
-    <div class="timeline timeline-3">
+    <!--begin::Documents-->
+    <div class="timeline timeline-3" *ngIf="objContact?.documents?.length>0">
         <div class="timeline-items">
-            <div class="timeline-item">
+            <div class="timeline-item" *ngFor="let objDocument of objContact?.documents;">
+                <div class="timeline-label text-primary">
+                    <span class="font-size-sm">{{ objDocument?.last_updated_at | date:'medium' }}</span>
+                    <span class="text-muted pl-2 pr-2">by</span>
+                    <span class="text-dark-50 font-size-sm">{{ objDocument?.owner?.full_name }}</span>
+                </div>
+
+                <div class="timeline-media mt-5">
+                    <i class="text-dark-50 icon-lg far fa-file" 
+                        [ngClass]="{'xlsx': 'far fa-file-excel', 'docx': 'far fa-file-word', 'pdf': 'far fa-file-pdf'}[objDocument?.file_extn]"></i>
+                </div>
+
                 <div class="timeline-content">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <div class="mr-2">
-                            <a href="#" class="text-dark-75 text-hover-primary font-weight-bold">New order has been placed</a>
-                            <span class="text-muted ml-2">Today</span>
-                            <span class="label label-light-success font-weight-bolder label-inline ml-2">new</span>
+                            <span class="font-size-lg text-dark-75 text-hover-primary font-weight-bold">{{ objDocument?.title }}</span>
+                            <p class="p-0 text-justify text-muted">{{ objDocument?.description }}</p>
                         </div>
-                        <div class="dropdown ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
-                            <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-more-hor icon-md"></i>
-                            </a>
-                            <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-                                <!--begin::Navigation-->
-                                <ul class="navi navi-hover">
-                                    <li class="navi-header font-weight-bold py-4">
-                                        <span class="font-size-lg">Choose Label:</span>
-                                        <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
-                                    </li>
-                                    <li class="navi-separator mb-3 opacity-70"></li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-success">Customer</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-danger">Partner</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-warning">Suplier</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-primary">Member</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-dark">Staff</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-separator mt-3 opacity-70"></li>
-                                    <li class="navi-footer py-4">
-                                        <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                        <i class="ki ki-plus icon-sm"></i>Add new</a>
-                                    </li>
-                                </ul>
-                                <!--end::Navigation-->
-                            </div>
+
+                        <div class="dropdown ml-2">
+                            <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-primary border-0 font-weight-bold btn-sm"
+                                placement="top" ngbTooltip="Download" (click)="fnDocumentDownload(objDocument);">
+                                <i class="flaticon2-download-2 icon-md"></i>
+                            </button>
+                            <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-danger border-0 font-weight-bold btn-sm" 
+                                placement="top" ngbTooltip="Delete">
+                                <i class="flaticon-delete icon-md"></i>
+                            </button>
                         </div>
                     </div>
-                    <p class="p-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-media">
-                    <i class="flaticon2-shield text-danger"></i>
-                </div>
-                <div class="timeline-content">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <div class="mr-2">
-                            <a href="#" class="text-dark-75 text-hover-primary font-weight-bold">Member has sent a request.</a>
-                            <span class="text-muted ml-2">8:30PM 20 June</span>
-                            <span class="label label-light-danger font-weight-bolder label-inline ml-2">pending</span>
+
+                    <div class="d-block text-dark-50">
+                        <div class="flex-fill">
+                            <span class="font-weight-bold">Filename: </span>
+                            <span class="text-hover-primary cursor-pointer">{{ objDocument?.file_name }}</span>
                         </div>
-                        <div class="dropdown ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
-                            <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-more-hor icon-md"></i>
-                            </a>
-                            <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-                                <!--begin::Navigation-->
-                                <ul class="navi navi-hover">
-                                    <li class="navi-header font-weight-bold py-4">
-                                        <span class="font-size-lg">Choose Label:</span>
-                                        <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
-                                    </li>
-                                    <li class="navi-separator mb-3 opacity-70"></li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-success">Customer</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-danger">Partner</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-warning">Suplier</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-primary">Member</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-dark">Staff</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-separator mt-3 opacity-70"></li>
-                                    <li class="navi-footer py-4">
-                                        <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                        <i class="ki ki-plus icon-sm"></i>Add new</a>
-                                    </li>
-                                </ul>
-                                <!--end::Navigation-->
-                            </div>
+
+                        <div class="flex-fill">
+                            <span class="font-weight-bold">Size: </span>
+                            <span class="text-hover-primary">{{ objDocument?.file_size_in_kb }} </span>
+                            <span class="font-weight-bold">KB</span>
                         </div>
                     </div>
-                    <p class="p-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-media">
-                    <i class="flaticon2-layers text-warning"></i>
-                </div>
-                <div class="timeline-content">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <div class="mr-2">
-                            <a href="#" class="text-dark-75 text-hover-primary font-weight-bold">System deployment has been completed.</a>
-                            <span class="text-muted ml-2">11:00AM 30 June</span>
-                            <span class="label label-light-warning font-weight-bolder label-inline ml-2">done</span>
-                        </div>
-                        <div class="dropdown ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
-                            <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-more-hor icon-md"></i>
-                            </a>
-                            <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-                                <!--begin::Navigation-->
-                                <ul class="navi navi-hover">
-                                    <li class="navi-header font-weight-bold py-4">
-                                        <span class="font-size-lg">Choose Label:</span>
-                                        <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
-                                    </li>
-                                    <li class="navi-separator mb-3 opacity-70"></li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-success">Customer</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-danger">Partner</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-warning">Suplier</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-primary">Member</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-dark">Staff</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-separator mt-3 opacity-70"></li>
-                                    <li class="navi-footer py-4">
-                                        <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                        <i class="ki ki-plus icon-sm"></i>Add new</a>
-                                    </li>
-                                </ul>
-                                <!--end::Navigation-->
-                            </div>
-                        </div>
-                    </div>
-                    <p class="p-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-media">
-                    <i class="flaticon2-notification fl text-primary"></i>
-                </div>
-                <div class="timeline-content">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <div class="mr-2">
-                            <a href="#" class="text-dark-75 text-hover-primary font-weight-bold">Database backup has been completed.</a>
-                            <span class="text-muted ml-2">2 months ago</span>
-                            <span class="label label-light-primary font-weight-bolder label-inline ml-2">delivered</span>
-                        </div>
-                        <div class="dropdown ml-2" data-toggle="tooltip" title="Quick actions" data-placement="left">
-                            <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ki ki-more-hor icon-md"></i>
-                            </a>
-                            <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-                                <!--begin::Navigation-->
-                                <ul class="navi navi-hover">
-                                    <li class="navi-header font-weight-bold py-4">
-                                        <span class="font-size-lg">Choose Label:</span>
-                                        <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
-                                    </li>
-                                    <li class="navi-separator mb-3 opacity-70"></li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-success">Customer</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-danger">Partner</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-warning">Suplier</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-primary">Member</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-text">
-                                                <span class="label label-xl label-inline label-light-dark">Staff</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-separator mt-3 opacity-70"></li>
-                                    <li class="navi-footer py-4">
-                                        <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                        <i class="ki ki-plus icon-sm"></i>Add new</a>
-                                    </li>
-                                </ul>
-                                <!--end::Navigation-->
-                            </div>
-                        </div>
-                    </div>
-                    <p class="p-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</p>
                 </div>
             </div>
         </div>
     </div>
-    <!--end::Timeline-->
+    <!--end::Documents-->
 </div>

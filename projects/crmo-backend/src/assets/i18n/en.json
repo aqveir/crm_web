@@ -580,7 +580,53 @@
                     "TITLE": "Access Control"
                 },
                 "TAB_SETTINGS": {
-                    "TITLE": "Settings"
+                    "TITLE": "Setting & Preferences",
+                    "SECTIONS": {
+                        "TITLE_1": "Settings",
+                        "TITLE_2": "Preferences"
+                    },                 
+                    "GROUP": {
+                        "LABEL": "Group",
+                        "PLACEHOLDER": "Enter the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "TYPE": {
+                        "LABEL": "Contact Type",
+                        "PLACEHOLDER": "Select contact type",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "STATUS": {
+                        "LABEL": "Status",
+                        "PLACEHOLDER": "Enter the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "COMPANY": {
+                        "LABEL": "Select Company",
+                        "PLACEHOLDER": "Enter the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "ROLE": {
+                        "LABEL": "Enter Designation",
+                        "PLACEHOLDER": "Select the Role/Designation in the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "LANGUAGE": {
+                        "LABEL": "Language",
+                        "PLACEHOLDER": "Select the language preference",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "TIMEZONE": {
+                        "LABEL": "Time Zone",
+                        "PLACEHOLDER": "Select the time zone",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    }
                 },
                 "TAB_REVIEW": {
                     "TITLE": "Review & Submit"
@@ -1022,6 +1068,10 @@
         "DOCUMENT_MODAL": {
             "UPLOAD_SUCCESS_MESSAGE": "The document is successfully uploaded.",
             "UPLOAD_ERROR_MESSAGE": "An error occured while uploading the documents."
+        },
+        "NOTE_MODAL": {
+            "SUCCESS_MESSAGE": "The note is successfully saved.",
+            "ERROR_MESSAGE": "An error occured while saving the note."
         }
     },
 

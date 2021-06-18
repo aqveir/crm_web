@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Third Party components and libraries
 import moment from 'moment';
-import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -45,9 +45,7 @@ export class TabProfileNewContactComponent extends BaseComponent implements OnIn
     private _cd: ChangeDetectorRef,
     private _formBuilder: FormBuilder,
     private _notification : NotificationService,
-  ) { super(); 
-  
-  }
+  ) { super(); }
 
 
   /**

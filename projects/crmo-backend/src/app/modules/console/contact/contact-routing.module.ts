@@ -9,7 +9,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 const routes: Routes = [
   { path: '', component: ContactListComponent },
   { path: 'new', component: ContactNewComponent },
-  { path: ':chash', component: ContactDetailComponent },
+  { path: ':hash', component: ContactDetailComponent },
   { path: '', pathMatch: 'full', redirectTo: 'new' },
 ];
 

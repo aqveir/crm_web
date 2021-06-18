@@ -20,6 +20,7 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
+  public boolIsNew: boolean = false;
 
   public strEntityType: string = null;
   public intReferenceId: number = 0;
@@ -55,6 +56,9 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
    */
   private fnInitialize(): void {
     this.fnInitializeForm();
+
+    //New Note flag
+    this.boolIsNew = (this.objNote && this.objNote.note)?false:true;
   } //Function ends
 
 
@@ -74,24 +78,28 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
       let objFormData: INote = this.noteForm.value;
       this.boolLoading = true;
 
-      this._noteService.create(objFormData)
-        .subscribe((response: any) => {
-          //Stop loader
-          this.boolLoading = false;
+      if (this.boolIsNew) {
+        this._noteService.create(objFormData) //Create
+          .subscribe((response: any) => {
+            //Stop loader
+            this.boolLoading = false;
 
-          //Close the modal window
-          this._modalActive.close({refresh: true});
-        },(error) => {
-          //Stop loader
-          this.boolLoading = false;
+            //Close the modal window
+            this._modalActive.close({refresh: true});
+          },(error) => {
+            //Stop loader
+            this.boolLoading = false;
 
-          //Show Error
-          this.hasError = true;
+            //Show Error
+            this.hasError = true;
 
-          throw error;
-        });
+            throw error;
+          });        
+      } else {
 
-        return true;
+      } //End if
+
+      return true;
     } catch (error) {
       //Stop loader
       this.boolLoading = false;

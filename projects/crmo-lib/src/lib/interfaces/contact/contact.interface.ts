@@ -3,6 +3,7 @@ import { IContactAddress, IContactAddressRequest } from './contact-address.inter
 import { IContactDetail, IContactDetailRequest } from './contact-detail.interface';
 import { INote } from '../note/note.interface';
 import { IDocument } from '../document/document.interface';
+import { IServiceRequestMinimal } from '../service-request/service-request.interface';
 //import { IOrder } from '../order/order.interface';
 
 // Export interfaces used into other services
@@ -34,6 +35,11 @@ export interface IContact {
     addresses: IContactAddress[];
     notes: INote[];
     documents: IDocument[];
+    service_requests: IServiceRequestMinimal[];
+
+    notes_count: number;
+    documents_count: number;
+    service_requests_count: number;
 }
 
 export interface IContactMinimal {

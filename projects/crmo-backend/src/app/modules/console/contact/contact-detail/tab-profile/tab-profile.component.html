@@ -1,72 +1,76 @@
-<form class="form">
-    <div class="row">
-        <div class="col-lg-9 col-xl-6 offset-xl-3">
-            <h3 class="font-size-h6 mb-5">Contact Info:</h3>
+<div class="form p-5" [formGroup]="contactProfileForm">
+
+    <div class="form-group row mb-10">
+        <div class="col-6 col-md-4">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.LABEL' | translate }}<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="first_name" formControlName="first_name" 
+                placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.PLACEHOLDER' | translate }}"
+                autocomplete="none" tabindex="1" autofocus />
+
+            <span class="form-text text-muted">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.FINE_TEXT' | translate }}
+            </span>
+
+            <span class="form-text text-danger" *ngIf="contactProfileForm.controls.first_name.dirty && contactProfileForm.controls.first_name.invalid">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.VALIDATION_ERROR' | translate }}
+            </span>
+        </div>
+
+        <div class="col-4 d-none d-md-block">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.LABEL' | translate }}</label>
+            <input type="text" class="form-control" name="middle_name" formControlName="middle_name" 
+                placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.PLACEHOLDER' | translate }}"
+                autocomplete="none" tabindex="2" />
+
+                <span class="form-text text-muted">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.FINE_TEXT' | translate }}
+                </span>
+
+                <span class="form-text text-danger" *ngIf="contactProfileForm.controls.middle_name.dirty && contactProfileForm.controls.middle_name.invalid">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.VALIDATION_ERROR' | translate }}
+                </span>
+        </div>
+
+        <div class="col-6 col-md-4">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.LABEL' | translate }}<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="last_name" formControlName="last_name"
+                placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.PLACEHOLDER' | translate }}"
+                autocomplete="none" tabindex="3" />
+
+                <span class="form-text text-muted">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.FINE_TEXT' | translate }}
+                </span>
+
+                <span class="form-text text-danger" *ngIf="contactProfileForm.controls.last_name.dirty && contactProfileForm.controls.last_name.invalid">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.VALIDATION_ERROR' | translate }}
+                </span>
         </div>
     </div>
-    <div class="form-group row">
-        <label class="col-xl-3 col-lg-3 col-form-label text-right">Contact Name</label>
-        <div class="col-lg-9 col-xl-6">
-            <input class="form-control form-control-lg form-control-solid" type="text" value="Nick" />
+
+    <div class="form-group row mb-10 d-none d-md-flex">
+        <div class="col-6">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.GENDER.LABEL' | translate }}</label>
+            <div class="input-group">
+                <ng-select class="form-control" #selectGender formControlName="gender_key"
+                    placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.GENDER.PLACEHOLDER' | translate }}"
+                    [items]="listLookupGender" bindLabel="display_value" bindValue="key"
+                    [searchable]="false" autocomplete="off" tabindex="3">
+                </ng-select>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-xl-3 col-lg-3 col-form-label text-right">Contact Owner</label>
-        <div class="col-lg-9 col-xl-6">
-            <input class="form-control form-control-lg form-control-solid" type="text" value="Bold" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-xl-3 col-lg-3 col-form-label text-right">Customer Name</label>
-        <div class="col-lg-9 col-xl-6">
-            <input class="form-control form-control-lg form-control-solid" type="text" value="Loop Inc." />
-            <span class="form-text text-muted">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
-        </div>
-    </div>
-    <div class="separator separator-dashed my-10"></div>
-    <!--begin::Heading-->
-    <div class="row">
-        <div class="col-lg-9 col-xl-6 offset-xl-3">
-            <h3 class="font-size-h6 mb-5">Contact Info:</h3>
-        </div>
-    </div>
-    <!--end::Heading-->
-    <div class="form-group row">
-        <label class="col-xl-3 col-lg-3 col-form-label text-right">Contact Phone</label>
-        <div class="col-lg-9 col-xl-6">
-            <div class="input-group input-group-lg input-group-solid">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="la la-phone"></i>
+
+        <div class="col-6">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.DATE_OF_BIRTH.LABEL' | translate }}</label>
+            <div class="input-group date">
+                <input type="text" class="form-control" ngbDatepicker #dobAt="ngbDatepicker"
+                    formControlName="dob_date_picker" (dateSelect)="fnDateTimeControlUpdated($event)"
+                    placeholder="Select date" readonly />
+                <div class="input-group-append" (click)="dobAt.toggle()">
+                    <span class="input-group-text"><i class="flaticon-event-calendar-symbol"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control form-control-lg form-control-solid" value="+35278953712" placeholder="Phone" />
-            </div>
-            <span class="form-text text-muted">We'll never share your email with anyone else.</span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-xl-3 col-lg-3 col-form-label text-right">Email Address</label>
-        <div class="col-lg-9 col-xl-6">
-            <div class="input-group input-group-lg input-group-solid">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="la la-at"></i>
-                    </span>
-                </div>
-                <input type="text" class="form-control form-control-lg form-control-solid" value="nick.bold@loop.com" placeholder="Email" />
             </div>
         </div>
     </div>
-    <div class="form-group row">
-        <label class="col-xl-3 col-lg-3 col-form-label text-right">Company Site</label>
-        <div class="col-lg-9 col-xl-6">
-            <div class="input-group input-group-lg input-group-solid">
-                <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" value="loop" />
-                <div class="input-group-append">
-                    <span class="input-group-text">.com</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+
+</div>

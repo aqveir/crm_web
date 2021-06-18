@@ -58,7 +58,7 @@ export class ContactNewComponent extends BaseComponent implements OnInit, AfterV
   } //Function ends
   ngAfterViewInit(): void {
     //Initialize form wizard
-    this.wizard = new KTWizard(this.wizardRef.nativeElement, { startStep: 1 });
+    this.wizard = new KTWizard(this.wizardRef.nativeElement, { startStep: 3 });
 
     //Change event
     this.wizard.on('change', () => {
@@ -227,6 +227,8 @@ export class ContactNewComponent extends BaseComponent implements OnInit, AfterV
       dob_date_picker: [],
       date_of_birth_at: [],
       gender_key: 'contact_gender_others',
+      type_key: 'contact_type_default',
+      language_code: 'en',
       details: this._formBuilder.array([])
     });
   } //Function ends

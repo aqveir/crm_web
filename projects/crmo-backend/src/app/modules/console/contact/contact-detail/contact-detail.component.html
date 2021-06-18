@@ -1,11 +1,11 @@
-<form class="form" id="kt_organization_detail_form" novalidate="novalidate"
+<form class="form" id="kt_contact_detail_form" novalidate="novalidate"
     [formGroup]="contactForm" (ngSubmit)="fnSaveAction($event)" autocomplete="off">
 
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid py-0 full-content-page-height">
         <crmo-backend-widget-subheader
             [title]="'PAGE.CONTACT.CONTACT_DETAIL.TITLE.EDIT'" 
-            [page-info]="contactForm.controls['name'].value"
+            [page-info]="contactForm.controls['first_name'].value"
             [save-group]="true" [back]="true" [loading]="boolSaving"
             (back)="fnResetForm(true)"></crmo-backend-widget-subheader>
 
@@ -401,7 +401,7 @@
                                                 <span class="nav-text mr-3">
                                                     <i class="fa fas fa-id-badge icon-md"></i>
                                                 </span>
-                                                <span class="nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.TITLE' | translate }}</span>
+                                                <span class="d-lg-block d-none nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.TITLE' | translate }}</span>
                                             </a>
                                         </li>
 
@@ -410,25 +410,27 @@
                                                 <span class="nav-text mr-3">
                                                     <i class="fa fas fa-location-arrow icon-md"></i>
                                                 </span>
-                                                <span class="nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.TITLE' | translate }}</span>
+                                                <span class="d-lg-block d-none nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.TITLE' | translate }}</span>
                                             </a>
                                         </li>
 
                                         <li class="nav-item mr-3">
+                                            <span class="badge-pill badge-warning badge_crmo_contact text-white">{{objContact?.documents_count}}</span>
                                             <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_documents">
                                                 <span class="nav-text mr-3">
                                                     <i class="fa fas fa-paperclip icon-md"></i>
                                                 </span>
-                                                <span class="nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DOCUMENTS.TITLE' | translate }}</span>
+                                                <span class="d-lg-block d-none nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DOCUMENTS.TITLE' | translate }}</span>
                                             </a>
                                         </li>
 
                                         <li class="nav-item mr-3">
+                                            <span class="badge-pill badge-warning badge_crmo_contact text-white">{{objContact?.notes_count}}</span>
                                             <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_notes">
                                                 <span class="nav-text mr-3">
-                                                    <i class="fa fa-comment-alt icon-md"></i>
+                                                    <i class="fa fa-comment-alt icon-md mr-1"></i>
                                                 </span>
-                                                <span class="nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_NOTES.TITLE' | translate }}</span>
+                                                <span class="d-lg-block d-none nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_NOTES.TITLE' | translate }}</span>
                                             </a>
                                         </li>
 
@@ -437,7 +439,7 @@
                                                 <span class="nav-text mr-3">
                                                     <i class="fas fa-key icon-md"></i>
                                                 </span>
-                                                <span class="nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ACCESS_CONTROLS.TITLE' | translate }}</span>
+                                                <span class="d-lg-block d-none nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ACCESS_CONTROLS.TITLE' | translate }}</span>
                                             </a>
                                         </li>
 
@@ -446,7 +448,7 @@
                                                 <span class="nav-text mr-3">
                                                     <i class="fa fa-cog icon-md"></i>
                                                 </span>
-                                                <span class="nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.TITLE' | translate }}</span>
+                                                <span class="d-lg-block d-none nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.TITLE' | translate }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -456,10 +458,11 @@
 
                             <!--begin::Body-->
                             <div class="card-body px-0">
-                                <div class="tab-content pt-5">
+                                <div class="tab-content" style="min-height: 622px;">
                                     <!--begin::Tab Content (Profile)-->
                                     <div class="tab-pane active" id="kt_apps_contacts_view_tab_profile" role="tabpanel">
-                                        <crmo-backend-tab-profile></crmo-backend-tab-profile>
+                                        <crmo-backend-tab-profile
+                                            [form]="contactForm" [contact]="objContact"></crmo-backend-tab-profile>
                                     </div>
                                     <!--end::Tab Content-->
 
@@ -471,14 +474,15 @@
 
                                     <!--begin::Tab Content (Documents)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_documents" role="tabpanel">
-                                        <crmo-backend-tab-document></crmo-backend-tab-document>
+                                        <crmo-backend-tab-document
+                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crmo-backend-tab-document>
                                     </div>
                                     <!--end::Tab Content-->
 
                                     <!--begin::Tab Content (Notes)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_notes" role="tabpanel">
-                                        <crmo-backend-tab-note [contact]="objContact" 
-                                            (refresh)="fnReloadData($event);"></crmo-backend-tab-note>
+                                        <crmo-backend-tab-note 
+                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crmo-backend-tab-note>
                                     </div>
                                     <!--end::Tab Content-->                                
 

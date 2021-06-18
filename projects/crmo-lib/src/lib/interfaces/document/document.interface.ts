@@ -1,3 +1,6 @@
+import { ILookupValue } from '../common/lookup.interface';
+import { IUser } from '../user/user.interface';
+
 export interface IDocument {
     hash: string;
     title: string;
@@ -6,6 +9,9 @@ export interface IDocument {
     file_extn: string;
     file_size_in_kb: number;
     last_updated_at: Date;
+
+    type?: ILookupValue;
+    owner?: IUser;
 }
 
 export interface IDocumentMinimal {

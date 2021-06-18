@@ -1,1 +1,102 @@
-<p>tab-setting-new-contact works!</p>
+<div class="row" [formGroup]="contactForm">
+    <div class="offset-xl-1 col-xl-5 col-sm-12">
+        <div class="form-group row">
+            <div class="col-lg-9 col-xl-6">
+                <h3 class="mb-10 font-weight-bold text-dark">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.SECTIONS.TITLE_1' | translate }}
+                </h3>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-6">
+                <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.TYPE.LABEL' | translate }}</label>
+                <div class="input-group">
+                    <ng-select class="form-control" #selectContactType formControlName="type_key"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.TYPE.PLACEHOLDER' | translate }}"
+                        [items]="listLookupType" bindLabel="display_value" bindValue="key"
+                        [searchable]="false" autocomplete="off" tabindex="3">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-6">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-6">
+                <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.COMPANY.LABEL' | translate }}</label>
+                <div class="input-group">
+                    <ng-select class="form-control" #selectGender formControlName="company_id"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.COMPANY.PLACEHOLDER' | translate }}"
+                        [items]="listCompany" bindLabel="display_value" bindValue="id" [addTag]="true"
+                        [searchable]="true" autocomplete="off" tabindex="3">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.ROLE.LABEL' | translate }}</label>
+                <div class="input-group">
+                    <ng-select class="form-control" #selectGender formControlName="role"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.ROLE.PLACEHOLDER' | translate }}"
+                        [items]="listCompanyRole" bindLabel="display_value" bindValue="display_value" [addTag]="true"
+                        [searchable]="true" autocomplete="off" tabindex="3" >
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-5 col-sm-12">
+        <div class="form-group row">
+            <div class="col-lg-9 col-xl-6">
+                <h3 class="mb-10 font-weight-bold text-dark">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.SECTIONS.TITLE_2' | translate }}
+                </h3>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-6">
+                <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.LANGUAGE.LABEL' | translate }}</label>
+                <div class="input-group">
+                    <ng-select class="form-control" #selectContactType formControlName="language_code"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.LANGUAGE.PLACEHOLDER' | translate }}"
+                        [items]="listLanguage" bindLabel="display_value" bindValue="key"
+                        [searchable]="true" autocomplete="off" tabindex="3">
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.TIMEZONE.LABEL' | translate }}</label>
+                <div class="input-group">
+                    <ng-select class="form-control" #selectContactType formControlName="language_code"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SETTINGS.TIMEZONE.PLACEHOLDER' | translate }}"
+                        [items]="listLanguage" bindLabel="display_value" bindValue="key"
+                        [searchable]="true" autocomplete="off" tabindex="3">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group align-items-center">
+            <label>Communication</label>
+            <div class="input-group">
+                <div class="checkbox-inline">
+                    <label class="checkbox">
+                    <input name="communication" type="checkbox" />
+                    <span></span>Email</label>
+                    <label class="checkbox">
+                    <input name="communication" type="checkbox" />
+                    <span></span>SMS</label>
+                    <label class="checkbox">
+                    <input name="communication" type="checkbox" />
+                    <span></span>Phone</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

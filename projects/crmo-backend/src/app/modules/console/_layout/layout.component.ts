@@ -24,6 +24,7 @@ import { ModalConfirmCallComponent } from '../widgets/modal-confirm-call/modal-c
 import { ModalTaskComponent } from '../widgets/modal-task/modal-task.component';
 import { ModalFiltersComponent } from '../widgets/modal-filters/modal-filters.component';
 import { ModalDocumentComponent } from '../widgets/modal-document/modal-document.component';
+import { Globals } from '../../../app.global';
 
 
 @Component({
@@ -69,6 +70,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
    * Default constructor
    */
   constructor(
+    private _globals: Globals,
     private initService: LayoutInitService,
     private layout: LayoutService,
     private _broker: EventBrokerService,
@@ -206,10 +208,30 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       let strEntityType: string = x[0];
       let intReferenceId: number = x[1];
       let objNote: INote = x[2];
+      let callback: any = x[3];
 
       modalNoteRef.componentInstance.strEntityType = strEntityType;
       modalNoteRef.componentInstance.intReferenceId = intReferenceId;
       modalNoteRef.componentInstance.objNote = objNote;
+
+      //Waiting for modal response
+      modalNoteRef.result
+      .then((result: any) => {
+        if (result && result['error']) {
+          this._globals.showError('NOTIFICATION.NOTE_MODAL.ERROR_MESSAGE', true);
+          console.error('Note add/edit error', result['error']);
+          callback(false);
+        } else {
+          if (result['refresh']==true) {
+            this._globals.showSuccess('NOTIFICATION.NOTE_MODAL.SUCCESS_MESSAGE', true);
+            callback(true);
+          } //End if
+        } //End if
+      }, (reason: any) => {
+        this._globals.showError('NOTIFICATION.NOTE_MODAL.ERROR_MESSAGE', true);
+        console.error('Note add/edit error', reason);
+        callback(false);
+      });
     });
 
     //Broker Lister - Modal Component for Document Amend
@@ -220,6 +242,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       
       let strEntityType: string = x[0];
       let intReferenceId: number = x[1];
+      let callback: any = x[2];
 
       modalDocumentRef.componentInstance.strEntityType = strEntityType;
       modalDocumentRef.componentInstance.intReferenceId = intReferenceId;
@@ -227,21 +250,20 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       //Waiting for modal response
       modalDocumentRef.result
       .then((result: any) => {
-         this._translate.get('NOTIFICATION').subscribe((translattion: any) => {
-          if (result && result['error']) {
-            this._notification.error(translattion.COMMON.ERROR_TITLE,translattion.DOCUMENT_MODAL.UPLOAD_ERROR_MESSAGE);
-            console.error('Document Upload Error', result['error']);
-          } else {
-            if (result['refresh']==true) {
-              this._notification.success(translattion.COMMON.SUCCESS_TITLE, translattion.DOCUMENT_MODAL.UPLOAD_SUCCESS_MESSAGE);
-            } //End if
+        if (result && result['error']) {
+          this._globals.showError('NOTIFICATION.DOCUMENT_MODAL.UPLOAD_ERROR_MESSAGE', true);
+          console.error('Document Upload Error', result['error']);
+          callback(false);
+        } else {
+          if (result['refresh']==true) {
+            this._globals.showSuccess('NOTIFICATION.DOCUMENT_MODAL.UPLOAD_SUCCESS_MESSAGE', true);
+            callback(true);
           } //End if
-        });
+        } //End if
       }, (reason: any) => {
-        this._translate.get('NOTIFICATION').subscribe((translattion: any) => {
-          this._notification.error(translattion.COMMON.ERROR_TITLE, translattion.DOCUMENT_MODAL.UPLOAD_ERROR_MESSAGE);
-          console.error('Document Upload Error', reason);
-        });
+        this._globals.showError('NOTIFICATION.DOCUMENT_MODAL.UPLOAD_ERROR_MESSAGE', true);
+        console.error('Document Upload Error', reason);
+        callback(false);
       });
     });
 

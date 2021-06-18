@@ -20,10 +20,9 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public cHash: string;
+  public hash: string;
   public objContact: IContact = null;
   public boolRefresh: boolean = false;
-  public boolIsNew: boolean = false;
   public boolSaving: boolean = false;
   
   public contactForm!: FormGroup;
@@ -61,15 +60,14 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
    * Initialize
    */
   private fnInitialize(): void {
-    let cHash: string = this._route.snapshot.paramMap.get('chash');
-    this.cHash = cHash;
+    let hash: string = this._route.snapshot.paramMap.get('hash');
+    this.hash = hash;
 
     //Initialize form
     this.fnInitializeForm();
 
     //Load data for existing hash value
     this.fnLoadData();
-
   } //Function ends
 
 
@@ -83,7 +81,7 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
     this.boolLoading = showLoader;
 
     //Fetch data from server
-    this._contactService.show(this.cHash)
+    this._contactService.show(this.hash)
       .subscribe((response: IContact) => {
         //Clear leading status
         this.boolLoading = false;
@@ -92,6 +90,9 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
         if (data) {
           this.objContact = data;
         } //End If
+
+        //Full the form controls with data
+        this.fnFillData();
       }, (error) => {
         //Stop loader
         this.boolLoading = false;
@@ -118,41 +119,23 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
       let dataUser: any = this.fnTransformReactiveFormGroup2FormData(this.contactForm);
 
       this.boolSaving=true;
-      if (this.boolIsNew) { //Create
-        //New Organization
-        this._contactService.create(dataUser)
-        .subscribe((response: any) => {
-          //Show notification
-          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
 
-          //Action based on submitter
-          this.fnPostSaveAction(event?.submitter?.id);
+      //Update Organization
+      this._contactService.update(this.hash, dataUser)
+      .subscribe((response: any) => {
+        //Show notification
+        this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
 
-          //Stop loader
-          this.boolSaving = false;
-        },(error) => {
-          //Stop loader
-          this.boolSaving = false;
-          throw error;
-        });
-      } else {
-        //Update Organization
-        this._contactService.update(this.cHash, dataUser)
-        .subscribe((response: any) => {
-          //Show notification
-          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+        //Action based on submitter
+        this.fnPostSaveAction(event?.submitter?.id);
 
-          //Action based on submitter
-          this.fnPostSaveAction(event?.submitter?.id);
-
-          //Stop loader
-          this.boolSaving = false;
-        },(error) => {
-          //Stop loader
-          this.boolSaving = false;
-          throw error;
-        });
-      } //End if
+        //Stop loader
+        this.boolSaving = false;
+      },(error) => {
+        //Stop loader
+        this.boolSaving = false;
+        throw error;
+      });
 
       return true;
     } catch (error) {
@@ -192,6 +175,27 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
 
 
   /**
+   * Update form data
+   */
+  private fnFillData() {
+    if (this.objContact && this.contactForm) {
+
+      this.contactForm.patchValue({
+        avatar: [ null ],
+        first_name: this.objContact.first_name?this.objContact.first_name:'',
+        middle_name: this.objContact.middle_name?this.objContact.middle_name:'',
+        last_name: this.objContact.last_name?this.objContact.last_name:'',
+        //phone_form_control: this.objContact.date_of_birth_at?this.objContact.date_of_birth_at:'',
+        //company_id: [ null ],
+        //dob_date_picker: [],
+        date_of_birth_at: this.objContact.date_of_birth_at?this.objContact.date_of_birth_at:''
+      });
+
+    } //End if
+  } //Function ends
+
+
+  /**
    * Reset form
    */
   public fnResetForm(boolNavBack: boolean=false): void {
@@ -208,21 +212,17 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
    */
   private fnInitializeForm() {
     this.contactForm = this._formBuilder.group({
-      hash: [{value: null, disabled: true}],
-      avatar: [null],
-      first_name: ['', [ Validators.required ]],
-      middle_name: [''],
-      last_name: ['', [ Validators.required ]],
-
-      subdomain: ['', [ Validators.required ]],
-      industry_key: ['', [ Validators.required ]],
-      website_protocal: ['http://'],
-      website: ['', [ Validators.pattern(Globals._REGEX_PATTERN_UEL) ]],
-      search_tag: [''],
-      phone_form_control: [''],
-      phone: [''],
-      phone_idd: [''],
-      email: ['', [ Validators.email ]],
+      avatar: [ null ],
+      first_name: [ '', [ Validators.required ]],
+      middle_name: [ '' ],
+      last_name: [ '', [ Validators.required ]],
+      phone_form_control: [ '' ],
+      company_id: [ null ],
+      dob_date_picker: [],
+      date_of_birth_at: [],
+      gender_key: 'contact_gender_others',
+      type_key: 'contact_type_default',
+      language_code: 'en',
     });
   } //Function ends
 
