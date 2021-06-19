@@ -66,9 +66,12 @@ export class TabNoteComponent extends BaseComponent implements OnInit {
    * @param objNote 
    */
   public fnDeleteNote(objNote: INote): void {
-    this._noteService.delete(objNote.id)
+    this._noteService.delete(objNote?.id)
     .subscribe((response: any) => {
       this._globals.showSuccess('Successfully Deleted');
+
+      //Refresh List
+      this.boolRefresh.emit(true);
     },(error) => {
       throw error;
     });
