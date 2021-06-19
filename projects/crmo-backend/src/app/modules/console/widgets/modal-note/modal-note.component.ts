@@ -75,28 +75,15 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
+      //Transform form data into object
       let objFormData: INote = this.noteForm.value;
-      this.boolLoading = true;
 
+      //Action the note based on condition
       if (this.boolIsNew) {
-        this._noteService.create(objFormData) //Create
-          .subscribe((response: any) => {
-            //Stop loader
-            this.boolLoading = false;
-
-            //Close the modal window
-            this._modalActive.close({refresh: true});
-          },(error) => {
-            //Stop loader
-            this.boolLoading = false;
-
-            //Show Error
-            this.hasError = true;
-
-            throw error;
-          });        
+        this.fnCreateNote(objFormData);
       } else {
-
+        let noteId: number = this.objNote?.id;
+        this.fnEditNote(noteId, objFormData);
       } //End if
 
       return true;
@@ -107,6 +94,61 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
+
+
+  /**
+   * Create Note
+   * @param data 
+   */
+  private fnCreateNote(data: INote): void {
+    //Show loading state
+    this.boolLoading = true;
+
+    this._noteService.create(data)
+    .subscribe((response: any) => {
+      //Stop loader
+      this.boolLoading = false;
+
+      //Close the modal window
+      this._modalActive.close({refresh: true});
+    },(error) => {
+      //Stop loader
+      this.boolLoading = false;
+
+      //Show Error
+      this.hasError = true;
+
+      throw error;
+    }); 
+  } //Fuction ends
+
+
+  /**
+   * Amend/Update the Note
+   * 
+   * @param data 
+   */
+  private fnEditNote(id: number, data: INote): void {
+    //Show loading state
+    this.boolLoading = true;
+
+    this._noteService.update(id, data)
+    .subscribe((response: any) => {
+      //Stop loader
+      this.boolLoading = false;
+
+      //Close the modal window
+      this._modalActive.close({refresh: true});
+    },(error) => {
+      //Stop loader
+      this.boolLoading = false;
+
+      //Show Error
+      this.hasError = true;
+
+      throw error;
+    }); 
+  } //Fuction ends
 
 
   /**

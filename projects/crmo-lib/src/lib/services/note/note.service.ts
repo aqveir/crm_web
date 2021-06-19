@@ -63,7 +63,7 @@ export class NoteService extends BaseService {
    */
   public update(id: number, data: INote): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('note/' + id.toString, data)
+      this._httpService.put('note/' + id.toString(), data)
         .then((response: any) => {
           let data: INote = response.data;
 
@@ -81,7 +81,7 @@ export class NoteService extends BaseService {
    */
   public delete(id: number): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.delete('note/' + id.toString)
+      this._httpService.delete('note/' + id.toString())
         .then((response: any) => {
           let data: INote = response.data;
 
