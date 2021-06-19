@@ -435,6 +435,16 @@
                                         </li>
 
                                         <li class="nav-item mr-3">
+                                            <span class="badge-pill badge-warning badge_crmo_contact text-white">{{objContact?.service_requests_count}}</span>
+                                            <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_access_control">
+                                                <span class="nav-text mr-3">
+                                                    <i class="fas fa-key icon-md"></i>
+                                                </span>
+                                                <span class="d-lg-block d-none nav-text">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SERVICE_REQUESTS.TITLE' | translate }}</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item mr-3 d-none">
                                             <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_access_control">
                                                 <span class="nav-text mr-3">
                                                     <i class="fas fa-key icon-md"></i>
@@ -443,7 +453,7 @@
                                             </a>
                                         </li>
 
-                                        <li class="nav-item mr-3">
+                                        <li class="nav-item mr-3 d-none">
                                             <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_settings">
                                                 <span class="nav-text mr-3">
                                                     <i class="fa fa-cog icon-md"></i>

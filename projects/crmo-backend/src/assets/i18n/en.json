@@ -576,6 +576,9 @@
                 "TAB_NOTES" : {
                     "TITLE": "Notes"
                 },
+                "TAB_SERVICE_REQUESTS": {
+                    "TITLE": "Leads/Requests"
+                },
                 "TAB_ACCESS_CONTROLS": {
                     "TITLE": "Access Control"
                 },
