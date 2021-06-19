@@ -93,6 +93,9 @@ export class TabDocumentComponent extends BaseComponent implements OnInit {
     this._documentService.delete(_document?.hash)
     .subscribe((response: any) => {
       this._globals.showSuccess('Successfully Deleted');
+
+      //Refresh List
+      this.boolRefresh.emit(true);
     },(error) => {
       throw error;
     });
