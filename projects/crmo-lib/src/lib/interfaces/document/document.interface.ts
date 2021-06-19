@@ -7,6 +7,7 @@ export interface IDocument {
     description: string;
     file_name: string;
     file_extn: string;
+    file_mime_type: string;
     file_size_in_kb: number;
     last_updated_at: Date;
 

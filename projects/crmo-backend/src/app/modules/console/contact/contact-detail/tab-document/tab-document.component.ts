@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application libraries
 import { EventBrokerService } from 'ellaisys-lib';
-import { IContact, IDocument} from 'crmo-lib';
+import { DocumentService, IContact, IDocument} from 'crmo-lib';
 
 //Application Files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -29,7 +29,8 @@ export class TabDocumentComponent extends BaseComponent implements OnInit {
    */
   constructor(
     private _globals: Globals,
-    private _broker: EventBrokerService
+    private _broker: EventBrokerService,
+    private _documentService: DocumentService
   ) { super(); }
 
 
@@ -65,8 +66,36 @@ export class TabDocumentComponent extends BaseComponent implements OnInit {
    * 
    * @param _document 
    */
-  public fnDocumentDownload(_document?: IDocument): void {
+  public fnDownloadDocument(_document?: IDocument): void {
+    this._documentService.download(_document?.hash)
+    .subscribe((response: Blob) => {
+      //let data: any = new Blob([response]); //, {type: 'application/pdf'});
 
+      let downloadURL = window.URL.createObjectURL(response);
+      let link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = _document?.file_name;
+      link.click();
+
+      this._globals.showSuccess('Successfully Downloaded');
+    },(error) => {
+      throw error;
+    });
+  } //Function ends
+
+
+  /**
+   * Delete Document action
+   * 
+   * @param objNote 
+   */
+  public fnDeleteDocument(_document: IDocument): void {
+    this._documentService.delete(_document?.hash)
+    .subscribe((response: any) => {
+      this._globals.showSuccess('Successfully Deleted');
+    },(error) => {
+      throw error;
+    });
   } //Function ends
 
 } //Class ends

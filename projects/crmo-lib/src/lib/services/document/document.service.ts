@@ -24,9 +24,9 @@ export class DocumentService extends BaseService {
   /**
    * Download Document
    */
-  public download(hash: string): Observable<any> {
-    return new Observable((observer: Observer<any>) => {
-      this._httpService.get('document/'+hash)
+  public download(hash: string): Observable<Blob> {
+    return new Observable((observer: Observer<Blob>) => {
+      this._httpService.get('document/'+hash, null, false, true)
         .then((response: any) => {
           //Set observer state
           observer.next(response);
