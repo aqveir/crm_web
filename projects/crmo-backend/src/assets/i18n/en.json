@@ -1055,6 +1055,13 @@
             "SUCCESS_TITLE": "Success",
             "ERROR_TITLE": "Error"
         },
+        "USER_AUTH": {
+            "LOGOUT": "",
+            "FORGOT_PASSWORD": {
+                "SUCCESS_MESSAGE": "The reset link is sent to your registered email address, In case you do not have access to your email, please contact your organiation administrator.",
+                "ERROR_MESSAGE": "We were unable to process your request. Please contact your organiation administrator."
+            }
+        },
         "ORGANIZATION_DETAILS": {
             "SUCCESS_MESSAGE": "Organization information was successfully saved."
         },
