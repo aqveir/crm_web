@@ -26,6 +26,7 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
   public boolSaving: boolean = false;
   
   public contactForm!: FormGroup;
+  public imgContactAvatar: string = 'assets/media/users/default.jpg';
 
   /**
    * Default constructor
@@ -68,6 +69,39 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
 
     //Load data for existing hash value
     this.fnLoadData();
+  } //Function ends
+  
+
+  /**
+   * File control change event
+   * 
+   * @param event 
+   */
+  public fnFileUploadChangeEvent(event: any): void {
+    try {
+      let uploadedFile: File;
+
+      if (event?.target?.files && event.target.files[0]) {
+        uploadedFile = event?.target?.files[0];
+
+        //Check if the file object is valid
+        if (uploadedFile) {
+          //Read the file and assign to local variable
+          const reader: FileReader = new FileReader();
+          reader.readAsDataURL(uploadedFile);
+          reader.onload = (evt) => {
+            this.imgContactAvatar = evt.target.result as string; 
+          };
+
+          //Assign the value to form control
+          this.contactForm.patchValue({
+            avatar: uploadedFile
+          });
+        } //End if
+      } //End if
+    } catch(error) {
+      throw error;
+    } //Try-catch ends
   } //Function ends
 
 
