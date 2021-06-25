@@ -28,6 +28,7 @@ import { TabProfileNewContactComponent } from './contact-new/tab-profile-new-con
 import { TabSettingNewContactComponent } from './contact-new/tab-setting-new-contact/tab-setting-new-contact.component';
 import { TabAddressNewContactComponent } from './contact-new/tab-address-new-contact/tab-address-new-contact.component';
 import { TabSummaryComponent } from './contact-new/tab-summary/tab-summary.component';
+import { TabServiceRequestComponent } from './contact-detail/tab-service-request/tab-service-request.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { TabSummaryComponent } from './contact-new/tab-summary/tab-summary.compo
     TabSettingNewContactComponent,
     TabAddressNewContactComponent,
     TabSummaryComponent,
+    TabServiceRequestComponent,
   ],
   imports: [
     CommonModule,

@@ -88,6 +88,9 @@
                 "FINE_TEXT": "",
                 "VALIDATION_ERROR": "Enter valid Location."
             }
+        },
+        "VALIDATION_MSG": {
+            "PASSWORD": "Enter valid password.<br/>- include both uppercase &amp; lowercase characters<br/>- include minimum one number &amp; one symbol/special characters<br/>- should be 08 characters or more."
         }
     },
 
@@ -206,20 +209,59 @@
                 "PASSWORD": {
                     "LABEL": "Password",
                     "PLACEHOLDER": "Enter password.",
-                    "FINE_TEXT": ""
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
                 },
                 "SUBMIT_BUTTON": {
                     "LABEL": "Login"
+                },
+                "FORGOT_PASSWORD": {
+                    "LABEL": "Forgot your Password ?"
                 }
             },
             "SIGNUP": {
                 
             },
             "FORGOT_PASSWORD": {
-                
+                "TITLE": "Forgot Password ?",
+                "SUB_TITLE": "Enter your email to reset your password. We will send you the reset link to your registered email address.",
+                "EMAIL" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Enter email address",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid email address."
+                },
+                "SUBMIT_BTN": {
+                    "LABEL": "Send reset link"
+                }
             },
             "RESET_PASSWORD": {
-                
+                "TITLE": "Reset Password",
+                "SUB_TITLE": "Enter a password that you will remember. We will send you the reset link to your registered email address.",
+                "TOKEN" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "This link is invalid and has missing valid token. Please check your email for the correct reset link."
+                },
+                "EMAIL" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Enter email address",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid email address."
+                },
+                "PASSWORD" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Enter a new password",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
+                },
+                "PASSWORD_CONFIRMATION" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Re-type new password",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Both passwords should be similar."
+                }
             }
         },
         "USER": {
@@ -1060,6 +1102,12 @@
             "FORGOT_PASSWORD": {
                 "SUCCESS_MESSAGE": "The reset link is sent to your registered email address, In case you do not have access to your email, please contact your organiation administrator.",
                 "ERROR_MESSAGE": "We were unable to process your request. Please contact your organiation administrator."
+            },
+            "RESET_PASSWORD": {
+                "SUCCESS_MESSAGE": "Your password was changed successfully. Keep the password secure now.",
+                "ERROR_MESSAGE": "We were unable to process your request. Please contact your organiation administrator.",
+                "ERROR_TOKEN_EXPIRED": "The password link has expired. Please raise a new forgot password request.",
+                "ERROR_USER_INVALID": "The email provided does not exist. Please enter correct email address."
             }
         },
         "ORGANIZATION_DETAILS": {

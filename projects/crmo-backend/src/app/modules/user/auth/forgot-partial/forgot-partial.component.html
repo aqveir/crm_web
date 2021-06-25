@@ -1,70 +1,28 @@
 <div class="login-form login-forgot">
     <!--begin::Form-->
     <form class="form fv-plugins-bootstrap fv-plugins-framework" novalidate="novalidate"
-        id="kt_login_forgot_form" [formGroup]="forgotPasswordForm" (ngSubmit)="fnForgotPasswordAction()"
-      > <!--  [ngStyle]="{
-        display: errorState === errorStates.NoError ? 'none' : 'block'
-      }"-->
+        id="kt_login_forgot_form" [formGroup]="forgotPasswordForm" (ngSubmit)="fnOnSubmitAction($event)" >
         <!--begin::Title-->
         <div class="pb-13 pt-lg-0 pt-5">
-            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-                Forgot Password ?
-            </h3>
-            <p class="text-muted font-weight-bold font-size-h4">
-                Enter your email to reset your password. We will send you the reset link to your registered email address.
-            </p>
+          <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ 'PAGE.AUTH.FORGOT_PASSWORD.TITLE' | translate }}</h3>
+          <p class="text-muted font-weight-bold font-size-h4">{{ 'PAGE.AUTH.FORGOT_PASSWORD.SUB_TITLE' | translate }}</p>
         </div>
         <!--end::Title-->
-  
-        <!-- begin::Alert error-->
-        <!-- <ng-container *ngIf="errorState === errorStates.HasError">
-            <div class="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-            <div class="alert-text">The email detail is incorrect</div>
-            </div>
-        </ng-container> -->
-        <!-- end::Alert error-->
   
         <!--begin::Form group-->
         <div class="form-group fv-plugins-icon-container has-danger">
             <input type="email" name="email" formControlName="email"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                 autocomplete="off" tabindex="1" autofocus
-                placeholder="Email"
-                [ngClass]="{'is-invalid': forgotPasswordForm.controls['email'].invalid}"          
+                placeholder="{{ 'PAGE.AUTH.FORGOT_PASSWORD.EMAIL.PLACEHOLDER' | translate }}"
+                [ngClass]="{'is-invalid': (forgotPasswordForm.controls['email'].invalid && forgotPasswordForm.controls['email'].dirty)}"          
             />
-  
-        <!-- <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
-            validation: 'required',
-            message: 'Email is required',
-            control: forgotPasswordForm.controls['email']
-          }"
-        ></ng-container>
-        <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
-            validation: 'email',
-            message: 'Email is invalid',
-            control: forgotPasswordForm.controls['email']
-          }"
-        ></ng-container>
-        <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
-            validation: 'minLength',
-            message: 'Email should have at least 3 symbols',
-            control: forgotPasswordForm.controls['email']
-          }"
-        ></ng-container>
-        <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
-            validation: 'maxLength',
-            message: 'Email should have maximum 360 symbols',
-            control: forgotPasswordForm.controls['email']
-          }"
-        ></ng-container> -->
+
+            <div class="fv-plugins-message-container text-danger" *ngIf="(forgotPasswordForm.controls['email'].invalid && forgotPasswordForm.controls['email'].dirty)">
+                <div class="fv-help-block">
+                    {{ 'PAGE.AUTH.FORGOT_PASSWORD.EMAIL.VALIDATION_ERROR' | translate }}
+                </div>
+            </div>
         </div>
         <!--end::Form group-->
 
@@ -72,68 +30,15 @@
         <div class="form-group d-flex flex-wrap pb-lg-0">
             <button type="submit" id="kt_login_forgot_submit"
                 class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">
-                Submit
+                {{ 'PAGE.AUTH.FORGOT_PASSWORD.SUBMIT_BTN.LABEL' | translate }}
             </button>
         
-            <a [routerLink]="['/user/login']" id="kt_login_forgot_cancel"
-                class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
-            >Cancel</a>
-
-            <!-- <ng-container *ngIf="isLoading$ | async">
-                <span class="spinner spinner-primary ml-5"></span>
-            </ng-container> -->
+            <a id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
+                [routerLink]="['/user/login']" >{{ 'COMMON.LABEL.CANCEL' | translate }}</a>
         </div>
         <!--end::Form group-->
         <div></div>
     </form>
     <!--end::Form-->
-  
-    <!-- <ng-container *ngIf="errorState === errorStates.NoError">
-      <div
-        class="card card-custom bgi-no-repeat gutter-b"
-        style="
-          height: 175px;
-          background-color: #4ab58e;
-          background-position: calc(100% + 1rem) bottom;
-          background-size: 25% auto;
-          background-image: url(assets/media/svg/humans/custom-1.svg);
-        "
-      > -->
-        <!--begin::Body-->
-        <!-- <div class="card-body d-flex align-items-center">
-          <div class="py-2">
-            <h3 class="text-white font-weight-bolder mb-3">Email is correct!</h3>
-            <p class="text-white font-size-lg">
-              Message with 'recovery' instruction<br />
-              has been sent<br />
-            </p>
-            <a
-              routerLink="/auth/login"
-              class="swal2-confirm btn font-weight-bold btn-light-primary"
-            >
-              Ok, got it!
-            </a>
-          </div>
-        </div> -->
-        <!--end::Body-->
-      <!-- </div>
-    </ng-container> -->
 </div>
-  
-  <!-- <ng-template
-    #formError
-    let-control="control"
-    let-message="message"
-    let-validation="validation"
-  >
-    <ng-container
-      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
-    >
-      <div class="fv-plugins-message-container">
-        <div class="fv-help-block">
-          {{ message }}
-        </div>
-      </div>
-    </ng-container>
-  </ng-template> -->
   

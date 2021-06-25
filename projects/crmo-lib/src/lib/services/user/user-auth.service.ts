@@ -8,7 +8,7 @@ import { BaseService } from '../base.service';
 
 // Interfaces
 import { IResponseError } from '../../interfaces/common/response.interface';
-import { IRequestUserForgotPassword, IRequestUserLogin, IResponseUserLogin } from '../../interfaces/user/user-auth.interface';
+import { IRequestUserForgotPassword, IRequestUserLogin, IRequestUserResetPassword, IResponseUserLogin } from '../../interfaces/user/user-auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +87,23 @@ export class UserAuthService extends BaseService {
   public forgot(_data: IRequestUserForgotPassword): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('user/forgot', _data)
+        .then((response: any) => {
+          observer.next(response.data);
+        })
+        .catch((error: IResponseError) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
+   * User Reset Password
+   * 
+   * @param _data IRequestUserResetPassword
+   */
+  public reset(_data: IRequestUserResetPassword): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('user/reset', _data)
         .then((response: any) => {
           observer.next(response.data);
         })

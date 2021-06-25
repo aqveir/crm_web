@@ -70,7 +70,9 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
         return false; 
       } //End if
 
+      //Transform form data into request object
       let objFormData: IRequestUserLogin = this.loginForm.value;
+
       this.isLoading = true;
       this._userAuthService.login(objFormData)
         .subscribe((response: IResponseUserLogin) => {
@@ -102,7 +104,6 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-
   /**
    * Authenticate the User with Social login
    */
@@ -119,7 +120,6 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
    * Reset form
    */
   public fnResetForm(): void {
-    // this._logger.log('Your log message goes here');
     this.loginForm.reset();
   } //Function ends
 
@@ -130,7 +130,12 @@ export class LoginPartialComponent extends BaseComponent implements OnInit {
   private fnInitializeForm() {
     this.loginForm = this._formBuilder.group({
       username: ['admin@ellaisys.com', Validators.required],
-      password: ['password', [Validators.required, Validators.minLength(8), Validators.maxLength(24)]],
+      password: ['password', [
+        Validators.required,
+        Validators.minLength(Globals._PASSWORD_POLICY.MIN_LENGTH), 
+        Validators.maxLength(Globals._PASSWORD_POLICY.MAX_LENGTH), 
+        Validators.pattern(Globals._PASSWORD_POLICY.REGEX_PATTERN)
+      ]],
       remember_me: true,
       device_id: ['xxxx']
     });

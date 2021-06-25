@@ -35,6 +35,7 @@ Ivy Workspace: Yes
 1. Template Provider: [KeenThemes](https://keenthemes.com/metronic/ "KeenThemes")
 2. Template: [Demo 3](https://preview.keenthemes.com/metronic/demo3/index.html "Demo 3")
 3. Rich Text Editor: CKEditor v5.0
+4. Library: [Ng Template](https://github.com/ngx-translate/core) 
 
 ------------
 

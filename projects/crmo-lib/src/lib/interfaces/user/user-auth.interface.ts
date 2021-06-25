@@ -83,3 +83,10 @@ export interface IRequestUserForgotPassword {
 }
 export interface IResponseUserForgotPassword {
 }
+
+export interface IRequestUserResetPassword {
+    token: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+}
