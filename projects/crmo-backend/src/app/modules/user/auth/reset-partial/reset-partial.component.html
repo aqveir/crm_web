@@ -5,7 +5,7 @@
         <!--begin::Title-->
         <div class="pb-13 pt-lg-0 pt-5">
             <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ 'PAGE.AUTH.RESET_PASSWORD.TITLE' | translate }}</h3>
-            <p class="text-muted font-weight-bold font-size-h4">{{ 'PAGE.AUTH.RESET_PASSWORD.SUB_TITLE' | translate }}</p>
+            <p class="text-muted text-justify font-weight-bold font-size-h4">{{ 'PAGE.AUTH.RESET_PASSWORD.SUB_TITLE' | translate }}</p>
         </div>
         <!--end::Title-->
   
@@ -61,7 +61,8 @@
         <!--begin::Form group-->
         <div class="form-group d-flex flex-wrap pb-lg-0">
             <button type="submit" id="kt_login_forgot_submit" tabindex="4"
-                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">
+                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+                [ngClass]="{'spinner spinner-white spinner-right pr-15': boolLoading}">
                 {{ 'COMMON.LABEL.SAVE' | translate }}
             </button>
         

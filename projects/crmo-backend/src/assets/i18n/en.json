@@ -237,7 +237,7 @@
             },
             "RESET_PASSWORD": {
                 "TITLE": "Reset Password",
-                "SUB_TITLE": "Enter a password that you will remember. We will send you the reset link to your registered email address.",
+                "SUB_TITLE": "Enter a password that you will remember. Please make sure you keep is safe and secure.",
                 "TOKEN" : {
                     "LABEL": "",
                     "PLACEHOLDER": "",

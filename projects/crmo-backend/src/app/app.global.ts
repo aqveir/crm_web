@@ -145,7 +145,7 @@ export class Globals {
     //Notification Options
     public static readonly NotificationDefaultOptions: any = {
         position: ["top", "right"],
-        timeOut: 1500,
+        timeOut: 3500,
         lastOnBottom: true,
         showProgressBar: false,
         pauseOnHover: true,
@@ -331,7 +331,6 @@ export class Globals {
     public setLookUp(_lookup: ILookup[]) {
         this.lookup = _lookup;
     } //Function ends
-
 
 
     /**

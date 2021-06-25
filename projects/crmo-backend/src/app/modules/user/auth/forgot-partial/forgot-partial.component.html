@@ -29,7 +29,8 @@
         <!--begin::Form group-->
         <div class="form-group d-flex flex-wrap pb-lg-0">
             <button type="submit" id="kt_login_forgot_submit"
-                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">
+                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+                [ngClass]="{'spinner spinner-white spinner-right pr-15': boolLoading}">
                 {{ 'PAGE.AUTH.FORGOT_PASSWORD.SUBMIT_BTN.LABEL' | translate }}
             </button>
         

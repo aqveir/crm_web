@@ -108,6 +108,9 @@ export class ResetPartialComponent extends BaseComponent implements OnInit {
 
           //Stop loader
           this.boolLoading = false;
+
+          //Redirect tologin page
+          this._router.navigate(['user/login']);
         },(error: any) => {
           let msgErrorCode: string ='NOTIFICATION.USER_AUTH.RESET_PASSWORD.ERROR_MESSAGE';
           if (error?.error?.data && (error.error.data?.length>0)) {

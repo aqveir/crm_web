@@ -81,6 +81,9 @@ export class ForgotPartialComponent extends BaseComponent implements OnInit {
 
           //Stop loader
           this.boolLoading = false;
+
+          //Redirect tologin page
+          this._router.navigate(['user/login']);
         },() => {
           //Show error notifocation msg
           this._globals.showError('NOTIFICATION.USER_AUTH.FORGOT_PASSWORD.ERROR_MESSAGE', true);   
