@@ -31,7 +31,9 @@
             "IMPORT": "Import",
             "EXPORT": "Export",
             "UPLOAD": "Upload",
+            "UPLOAD_DOCUMENT": "Upload Document",
             "DOWNLOAD": "Download",
+            "DOWNLOAD_DOCUMENT": "Document Download",
 
             "ACTIVE": "Active",
             "IN_ACTIVE": "In Active"

@@ -1,6 +1,9 @@
 <div class="container">
     <div class="d-flex flex-lg-row-reverse mb-2">
-        <button type="button" class="btn btn-light-primary font-weight-bold" (click)="fnAddEditNote();">Add Note</button>
+        <button type="button" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
+            (click)="fnAddEditNote();" placement="top" [ngbTooltip]="'COMMON.LABEL.ADD_NEW'|translate">
+            <i class="fas fa-plus-circle"></i>
+        </button>
     </div>
 
     <!--begin::Note List-->
@@ -26,11 +29,11 @@
 
                         <div class="flex-column-auto ml-2">
                             <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-primary border-0 font-weight-bold btn-sm"
-                                placement="top" ngbTooltip="Edit" (click)="fnAddEditNote(objNote);">
+                                placement="top" [ngbTooltip]="'COMMON.LABEL.EDIT'|translate" (click)="fnAddEditNote(objNote);">
                                 <i class="flaticon-edit icon-md"></i>
                             </button>
                             <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-danger border-0 font-weight-bold btn-sm" 
-                                placement="top" ngbTooltip="Delete" (click)="fnDeleteNote(objNote);">
+                                placement="top" [ngbTooltip]="'COMMON.LABEL.DELETE'|translate" (click)="fnDeleteNote(objNote);">
                                 <i class="flaticon-delete icon-md"></i>
                             </button>
                         </div>

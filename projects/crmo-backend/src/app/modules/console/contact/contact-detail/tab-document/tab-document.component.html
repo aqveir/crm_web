@@ -1,7 +1,9 @@
 <div class="container">
     <div class="d-flex flex-lg-row-reverse mb-2" *ngIf="(this.objContact) && (this.objContact?.id>0)">
-        <button type="button" class="btn btn-light-primary font-weight-bold" 
-            (click)="fnUploadDocument();">Upload Document</button>
+        <button type="button" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
+            (click)="fnUploadDocument();" placement="top" [ngbTooltip]="'COMMON.LABEL.UPLOAD_DOCUMENT'|translate">
+            <i class="fas fa-upload"></i>
+        </button>
     </div>
 
     <!--begin::Documents-->
@@ -28,11 +30,11 @@
 
                         <div class="dropdown ml-2">
                             <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-primary border-0 font-weight-bold btn-sm"
-                                placement="top" ngbTooltip="Download" (click)="fnDownloadDocument(objDocument);">
+                                placement="top" [ngbTooltip]="'COMMON.LABEL.DOWNLOAD_DOCUMENT'|translate" (click)="fnDownloadDocument(objDocument);">
                                 <i class="flaticon2-download-2 icon-md"></i>
                             </button>
                             <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-danger border-0 font-weight-bold btn-sm" 
-                                placement="top" ngbTooltip="Delete" (click)="fnDeleteDocument(objDocument);">
+                                placement="top" [ngbTooltip]="'COMMON.LABEL.DELETE'|translate" (click)="fnDeleteDocument(objDocument);">
                                 <i class="flaticon-delete icon-md"></i>
                             </button>
                         </div>
