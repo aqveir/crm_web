@@ -1,5 +1,4 @@
 <div class="form p-5" [formGroup]="contactProfileForm">
-
     <div class="form-group row mb-10">
         <div class="col-6 col-md-4">
             <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.LABEL' | translate }}<span class="text-danger">*</span></label>
@@ -73,4 +72,171 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <div class="col-md-6 col-sm-12">
+            <div class="d-flex">
+                <label class="flex-fill">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_EMAIL.LABEL' | translate }}<span class="text-danger">*</span></label>
+
+                <div class="d-block">
+                    <button type="button" class="btn btn-link p-0" 
+                        (click)="fnAddContactDetailControl('contact_detail_type_email')">
+                        {{ 'COMMON.LABEL.ADD_MORE' | translate }}
+                    </button>                            
+                </div> 
+            </div>
+            
+            <div class="d-block" formArrayName="details" *ngIf="contactDetailsFormArray?.controls">
+                <div *ngFor="let detail of contactDetailsFormArray?.controls; let indexElem=index;">
+                    <div *ngIf="detail.value?.type_key=='contact_detail_type_email'" [formGroupName]="indexElem">
+                        <div class="d-flex mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="la la-at"></i></span>
+                                </div>
+
+                                <input type="email" class="form-control" formControlName="identifier"
+                                    placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_EMAIL.PLACEHOLDER' | translate }}" 
+                                    autocomplete="none" />
+
+                                <div class="input-group-append">
+                                    <span class="input-group-verification mt-3" *ngIf="detail.value.is_verified" placement="top" [ngbTooltip]="'COMMON.LABEL.VERIFIED'|translate">
+                                        <i class="flaticon2-shield"></i>
+                                    </span>
+
+                                    <span class="input-group-text">
+                                        <label class="checkbox checkbox-inline checkbox-primary" placement="top" [ngbTooltip]="(detail.value?.is_primary?'COMMON.LABEL.PRIMARY':'COMMON.LABEL.MAKE_PRIMARY')|translate">
+                                            <input type="radio" formControlName="is_primary" [value]="true" 
+                                                (change)="fnChangeEvent($event, 'contact_detail_type_email', indexElem)" />
+                                            <span></span>
+                                        </label>
+                                    </span>
+
+                                    <button class="input-group-text" (click)="fnRemoveContactDetailControl(indexElem)" [disabled]="detail.value?.is_primary" placement="top" [ngbTooltip]="'COMMON.LABEL.DELETE'|translate">
+                                        <i class="flaticon-circle" [ngClass]="{false:'text-danger text-hover-danger', true:'text-dark-25'}[detail.value?.is_primary]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="form-text text-danger" *ngIf="detail.invalid && detail.dirty">
+                            {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_EMAIL.VALIDATION_ERROR' | translate }}
+                        </span>                                
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <div class="d-flex">
+                <label class="flex-fill">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_PHONE.LABEL' | translate }}<span class="text-danger">*</span></label>
+
+                <div class="d-block">
+                    <button type="button" class="btn btn-link p-0" 
+                        (click)="fnAddContactDetailControl('contact_detail_type_phone')">
+                        {{ 'COMMON.LABEL.ADD_MORE' | translate }}
+                    </button>                            
+                </div> 
+            </div>
+
+            <div class="d-block" formArrayName="details" *ngIf="contactDetailsFormArray?.controls">
+                <div *ngFor="let detail of contactDetailsFormArray?.controls; let indexElem=index;">
+                    <div *ngIf="detail.value?.type_key=='contact_detail_type_phone'" [formGroupName]="indexElem">
+                        <div class="d-flex mb-2">
+                            <div class="d-flex flex-fill contact-phone">
+                                <intl-tel-input [cssClass]="'form-control pl-5'" formControlName="phone_form_control"
+                                    [searchCountryFlag]="true" [enablePlaceholder]="true" [separateDialCode]="false"
+                                    [phoneValidation]="true" [selectedCountryISO]="'in'" class="flex-fill"></intl-tel-input>
+                                    
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <label class="checkbox checkbox-inline checkbox-primary">
+                                            <input type="radio" formControlName="is_primary" [value]="true" 
+                                                (change)="fnChangeEvent($event, 'contact_detail_type_phone', indexElem)" />
+                                            <span></span>
+                                        </label>
+                                    </span>
+
+                                    <button class="input-group-text" (click)="fnRemoveContactDetailControl(indexElem)" [disabled]="detail.value?.is_primary">
+                                        <i class="flaticon-circle" [ngClass]="{false:'text-danger text-hover-danger', true:'text-dark-25'}[detail.value?.is_primary]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="form-text text-danger" *ngIf="detail.invalid && detail.dirty">
+                            {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_PHONE.VALIDATION_ERROR' | translate }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6 col-sm-12">
+            <div class="d-flex">
+                <div class="d-block">
+                    <div class="dropup dropdown-inline">
+                        <button class="btn btn-link p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="flaticon2-add text-decoration-none text-primary"></i>
+                            {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_SOCIAL.LABEL' | translate }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                            <!--begin::Navigation-->
+                            <ul class="navi navi-hover">
+                                <!-- <li class="navi-separator mb-3 opacity-70"></li> -->
+                                <li class="navi-item" *ngFor="let objSubType of fnGetSubtypeFiltered('contact_detail_subtype_socialhandle');">
+                                    <a href="javascript:;" class="navi-link" (click)="fnAddContactDetailControl('contact_detail_type_socialhandle', objSubType.key, false)">
+                                        <span class="navi-text font-size-h6-lg">
+                                            {{objSubType?.display_value}}
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end::Navigation-->
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            
+            <div class="d-block" formArrayName="details" *ngIf="contactDetailsFormArray?.controls">
+                <div *ngFor="let detail of contactDetailsFormArray?.controls; let indexElem=index;">
+                    <div *ngIf="detail.value?.type_key=='contact_detail_type_socialhandle'" [formGroupName]="indexElem">
+                        <div class="d-flex mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="" [ngClass]="{'contact_detail_subtype_socialhandle_twitter':'socicon-twitter', 'contact_detail_subtype_socialhandle_facebook':'socicon-facebook', 'contact_detail_subtype_socialhandle_linkedin':'socicon-linkedin',
+                                        'contact_detail_subtype_socialhandle_instagram':'socicon-instagram',
+                                        'contact_detail_subtype_socialhandle_googleplus':'socicon-googleplus',
+                                        'contact_detail_subtype_socialhandle_pinterest':'socicon-pinterest',
+                                        'contact_detail_subtype_socialhandle_skype':'socicon-skype',
+                                        'contact_detail_subtype_socialhandle_other':'fas fa-link'}[detail.value?.subtype_key]"></i>
+                                    </span>
+                                </div>
+
+                                <input type="text" class="form-control" formControlName="identifier"
+                                    placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_SOCIAL.PLACEHOLDER' | translate }}" 
+                                    autocomplete="none" />
+
+                                <div class="input-group-append">
+                                    <button class="input-group-text" (click)="fnRemoveContactDetailControl(indexElem)" [disabled]="detail.value?.is_primary">
+                                        <i class="flaticon-circle" [ngClass]="{false:'text-danger text-hover-danger', true:'text-dark-25'}[detail.value?.is_primary]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="form-text text-danger" *ngIf="detail.invalid && detail.dirty">
+                            {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.CONTACT_SOCIAL.VALIDATION_ERROR' | translate }}
+                        </span>                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<div class="card mb-5 d-none">{{contactDetailsFormArray.value | json}}</div>
+<div class="d-none">{{contactProfileForm.value | json}}</div>

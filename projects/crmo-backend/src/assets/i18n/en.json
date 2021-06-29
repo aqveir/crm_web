@@ -36,7 +36,10 @@
             "DOWNLOAD_DOCUMENT": "Document Download",
 
             "ACTIVE": "Active",
-            "IN_ACTIVE": "In Active"
+            "IN_ACTIVE": "In Active",
+            "PRIMARY": "Primary",
+            "MAKE_PRIMARY": "Make Primary",
+            "VERIFIED": "Verified"
         },
         "NO_DATA": {
             "TITLE": "No records found.",
@@ -609,6 +612,12 @@
                         "PLACEHOLDER": "Enter phone number",
                         "FINE_TEXT": "",
                         "VALIDATION_ERROR": "Enter valid phone number"
+                    },
+                    "CONTACT_SOCIAL": {
+                        "LABEL": "Add Social Links",
+                        "PLACEHOLDER": "Enter social url/handle/link",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
                     }
                 },
                 "TAB_ADDRESS": {

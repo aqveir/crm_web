@@ -44,19 +44,25 @@
                                         <div class="d-flex align-items-center justify-content-between flex-wrap">
                                             <!--begin::User-->
                                             <div class="mr-3">
-                                                <div class="d-flex align-items-center mr-3">
-                                                    <!--begin::Name-->
+                                                <!--begin::Name-->
+                                                <div class="d-flex flex-row align-items-center mr-3">
                                                     <span class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">
                                                         {{ objContact?.full_name | shorten:20:'...'}}
                                                     </span>
-                                                    <!--end::Name-->
                                                 </div>
-
-                                                <div class="d-flex align-items-center mr-3">
-                                                    <!--begin::Type-->
-                                                    <span class="label label-light-success label-inline font-weight-bolder mr-1">{{ objContact?.type.display_value }}</span>
-                                                    <!--begin::Type-->
+                                                <!--end::Name-->
+                                                
+                                                <!--begin::Type-->
+                                                <div class="d-flex flex-row align-items-center mr-3">
+                                                    <!-- <span class="label label-light-success label-inline font-weight-bolder mr-1">{{ objContact?.type.display_value }}</span> -->
+                                                    
+                                                    <ng-select class="contact-type mr-1 font-size-sm" #selectGender formControlName="type_key"
+                                                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.GENDER.PLACEHOLDER' | translate }}"
+                                                        [items]="listContactType" bindLabel="display_value" bindValue="key"
+                                                        [searchable]="false" autocomplete="off" tabindex="3">
+                                                    </ng-select>
                                                 </div>
+                                                <!--begin::Type-->
 
                                                 <!--begin::Contacts-->
                                                 <div class="d-flex flex-wrap my-2">

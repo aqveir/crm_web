@@ -8,7 +8,7 @@ import { BaseComponent } from '../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'ellaisys-lib';
-import { ContactService, IContact } from 'crmo-lib';
+import { ContactService, IContact, ILookup, ILookupValue } from 'crmo-lib';
 
 @Component({
   selector: 'crmo-backend-contact-detail',
@@ -27,6 +27,8 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
   
   public contactForm!: FormGroup;
   public imgContactAvatar: string = 'assets/media/users/default.jpg';
+
+  public listContactType: ILookupValue[];
 
   /**
    * Default constructor
@@ -63,6 +65,12 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
   private fnInitialize(): void {
     let hash: string = this._route.snapshot.paramMap.get('hash');
     this.hash = hash;
+
+    //Load lookup values (contact type)
+    let objContactType: ILookup = this._globals.getLookupByKey('contact_type');
+    if (objContactType) {
+      this.listContactType = (objContactType?.values).filter((x: ILookupValue) => {return x.is_active==true});
+    } //End if
 
     //Initialize form
     this.fnInitializeForm();
