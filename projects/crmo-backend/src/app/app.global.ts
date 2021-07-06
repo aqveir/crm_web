@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 //Propritery Library
 import { IResponseUserLogin, IPrivilege, IUserStatusResponse, ILookupValue,
-    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole, IUserMinimal, UserService } from 'crmo-lib';
+    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole, IUserMinimal, UserService, RoleService, CountryService, ICountry } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
@@ -47,6 +47,7 @@ export class Globals {
     public static readonly _SESSION_ORG_PRIVILEGES: string='_SESSION_ORG_PRIVILEGES_KEY';
     public static readonly _SESSION_ORG_USERS: string='_SESSION_ORG_USERS_KEY';
     public static readonly _STORAGE_LOOKUP_KEY: string='_LOCAL_STORAGE_LOOKUP_DATA';
+    public static readonly _STORAGE_COUNTRIES: string='_LOCAL_STORAGE_COUNTRIES';
 
     //Event Broker constants
     public static readonly EVENT_SHOW_SUBMENU: string = "show-submenu";
@@ -190,7 +191,7 @@ export class Globals {
     private listPrivileges: IPrivilege[] = null;
     private listRoles: IRole[] = null;
     private listUsers: IUserMinimal[] = null;
-
+    private listCountry: ICountry[] = null;
 
     //Default Constructor
     constructor(
@@ -200,6 +201,8 @@ export class Globals {
         private _notificationService: NotificationService,
 
         private _lookupService: LookupService,
+        private _countryService: CountryService,
+        private _roleService: RoleService,
         private _userService: UserService,
         private _userStatusService: UserStatusService
     ) {
@@ -384,6 +387,22 @@ export class Globals {
 
 
     /**
+     * Getter and Setters for Meta Data - Country List
+     */
+    public getCountries(): ICountry[] {
+        if(this.listCountry == null) {
+            let strJsonData = this._localStorageService.getItem(Globals._STORAGE_COUNTRIES);
+            this.listCountry = strJsonData;
+        } //End if
+        return this.listCountry;
+    } //Function ends
+    public setCountries(_listCountry: ICountry[]): void {
+        this._localStorageService.setItem(Globals._STORAGE_COUNTRIES, _listCountry);
+        this.listCountry = _listCountry;
+    } //Function ends
+
+
+    /**
      * Getter and Setters for Organization Roles
      */
     public getOrgRoles(): IRole[] {
@@ -480,6 +499,12 @@ export class Globals {
             //Load Organization Users data
             this.fnLoadOrgUsers();
 
+            //Load Organization Roles data
+            this.fnLoadOrgRoles();
+
+            //Load Countries Data
+            this.fnLoadCountriesData();
+
             /**
              * 
              * TODO: Add more method here that needs to be called on user login.
@@ -529,9 +554,25 @@ export class Globals {
      */
     private fnLoadOrgRoles(): void {
         try {
-            this._lookupService.getAll()
-                .subscribe((data: ILookup[]) => {
-                    this.setLookUp(data);
+            this._roleService.getAll()
+                .subscribe((data: IRole[]) => {
+                    this.setOrgRoles(data);
+                },
+                (error) => { console.log(error); });
+        } catch(error) {
+            console.log(error);
+        } //Try-catch ends
+    } //Function ends
+
+
+    /**
+     * Load Countries Data (Meta Data) from Backend Service
+     */
+    private fnLoadCountriesData(): void {
+        try {
+            this._countryService.get()
+                .subscribe((data: ICountry[]) => {
+                    this.setCountries(data);
                 },
                 (error) => { console.log(error); });
         } catch(error) {
