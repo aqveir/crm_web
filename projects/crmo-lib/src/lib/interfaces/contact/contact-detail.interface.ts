@@ -4,7 +4,7 @@ import { ILookup } from '../common/lookup.interface';
 export interface IContactDetail {
     id: number;
     proxy: string;
-    identifier_masked: string;
+    identifier: string;
     type: ILookup;
     subtype: ILookup;
     country: ICountry;
