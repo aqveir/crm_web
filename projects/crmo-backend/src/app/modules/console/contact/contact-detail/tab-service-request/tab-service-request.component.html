@@ -1,4 +1,4 @@
-<div class="container">
+<div class="flex">
     <div class="d-flex flex-lg-row-reverse mb-2 dropdown dropdown-inline">
         <a href="#" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  placement="top" [ngbTooltip]="'COMMON.LABEL.ADD_NEW'|translate">
@@ -37,7 +37,7 @@
 
     <div class="d-flex flex-row" *ngIf="objContact?.service_requests?.length>0">
         <table class="table table-hover table-vertical-center">
-            <thead>
+            <thead class="border-bottom border-gray-200 fs-6 text-gray-600 fw-bolder bg-light bg-opacity-75">
                 <tr>
                     <th scope="col" style="min-width: 50px" class="text-right">#</th>
                     <th scope="col">Category</th>

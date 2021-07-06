@@ -89,6 +89,11 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
 
+// New changes from Metronic 8.0
+.bg-opacity-75 {
+    background-color: rgba(245,248,250,.75)!important;
+}
+
 // CRMO NgSelect Customization
 .form-control.ng-select {
     outline: none;
