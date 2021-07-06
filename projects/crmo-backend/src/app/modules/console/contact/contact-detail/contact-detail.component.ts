@@ -244,7 +244,7 @@ export class ContactDetailComponent extends BaseComponent implements OnInit {
     this.contactForm.reset();
 
     if (boolNavBack) {
-      this._router.navigate(['secure/setting/contact']);
+      this._router.navigate(['secure/contact']);
     } //End if
   } //Function ends
 
