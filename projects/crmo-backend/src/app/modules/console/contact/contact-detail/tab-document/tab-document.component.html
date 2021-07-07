@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="d-flex flex-lg-row-reverse mb-2" *ngIf="(this.objContact) && (this.objContact?.id>0)">
+    <div class="d-flex flex-lg-row-reverse mb-2" *ngIf="(this.objContact) && (this.objContact?.id>0) && (objContact?.documents?.length>0)">
         <button type="button" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
             (click)="fnUploadDocument();" placement="top" [ngbTooltip]="'COMMON.LABEL.UPLOAD_DOCUMENT'|translate">
             <i class="fas fa-upload"></i>
@@ -57,4 +57,35 @@
         </div>
     </div>
     <!--end::Documents-->
+
+    <!--begin::Card-->
+    <div class="card" *ngIf="objContact?.documents?.length==0">
+        <!--begin::Card body-->
+        <div class="card-body p-0">
+            <!--begin::Heading-->
+            <div class="card-px text-center py-20 my-10">
+                <!--begin::Title-->
+                <h2 class="fs-2x fw-bolder mb-10">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DOCUMENTS.FIRST_ACTION_CARD.TITLE' | translate }}</h2>
+                <!--end::Title-->
+
+                <!--begin::Description-->
+                <p class="text-gray-400 fs-5 fw-bold mb-13" [innerHTML]="'PAGE.CONTACT.CONTACT_DETAIL.TAB_DOCUMENTS.FIRST_ACTION_CARD.DETAILS' | translate"></p>
+                <!--end::Description-->
+
+                <!--begin::Action-->
+                <button type="button" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project" (click)="fnUploadDocument();">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DOCUMENTS.FIRST_ACTION_CARD.ACTION_BTN_LABEL' | translate }}
+                </button>
+                <!--end::Action-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Illustration-->
+            <div class="text-center px-5">
+                <img src="assets/images/illustrations/upload_document.png" alt="" class="mw-100 mh-300px" />
+            </div>
+            <!--end::Illustration-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->
 </div>

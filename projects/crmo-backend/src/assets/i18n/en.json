@@ -154,6 +154,21 @@
                         "LABEL": "Role"
                     }
                 },
+                "BILLING_MANAGEMENT": {
+                    "LABEL": "Billing",
+                    "SUBSCRIPTIONS": {
+                        "LABEL": "Subscriptions"
+                    },
+                    "INVOICES": {
+                        "LABEL": "Invoices"
+                    },
+                    "CARDS": {
+                        "LABEL": "Cards"
+                    },
+                    "PLANS": {
+                        "LABEL": "Plans"
+                    }
+                },
                 "META_DATA": {
                     "LABEL": "Master Data",
                     "LOOKUP": {
@@ -621,16 +636,73 @@
                     }
                 },
                 "TAB_ADDRESS": {
-                    "TITLE": "Address"
+                    "TITLE": "Address",
+                    "ADDRESS1": {
+                        "LABEL": "Address Line 1",
+                        "PLACEHOLDER": "Enter an address line 1",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter a valid address"
+                    },
+                    "ADDRESS2": {
+                        "LABEL": "Address Line 2",
+                        "PLACEHOLDER": "Enter an address line 2",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter a valid address"
+                    },
+                    "LOCALITY": {
+                        "LABEL": "Locality",
+                        "PLACEHOLDER": "Enter a city",
+                        "FINE_TEXT": "Please enter the locality or community area (i.e. Riverdale, Santa Cruz, Singapore)",
+                        "VALIDATION_ERROR": "Enter a valid locality"
+                    },
+                    "CITY": {
+                        "LABEL": "City",
+                        "PLACEHOLDER": "Enter a city",
+                        "FINE_TEXT": "Please enter the city (i.e. Chicago, Mumbai, Singapore)",
+                        "VALIDATION_ERROR": "Enter a valid state"
+                    },
+                    "STATE": {
+                        "LABEL": "State",
+                        "PLACEHOLDER": "Enter a state/county",
+                        "FINE_TEXT": "Please enter the state (i.e. Illinois, Maharashtra, Singapore)",
+                        "VALIDATION_ERROR": "Enter a valid state"
+                    },
+                    "ZIPCODE": {
+                        "LABEL": "Zip Code",
+                        "PLACEHOLDER": "Enter a zipcode",
+                        "FINE_TEXT": "Please enter the post code i.e (Pin Code, Zip Code)",
+                        "VALIDATION_ERROR": "Enter a valid zip code"
+                    },
+                    "COUNTRY": {
+                        "LABEL": "Country",
+                        "PLACEHOLDER": "Select the country",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    }
                 },
                 "TAB_DOCUMENTS": {
-                    "TITLE": "Documents"
+                    "TITLE": "Documents",
+                    "FIRST_ACTION_CARD": {
+                        "TITLE": "Upload Document",
+                        "DETAILS": "Organize yourself better by storing the right documents.<br/>You can upload your documents with us. We keep it safe and secure.",
+                        "ACTION_BTN_LABEL": "Upload document"
+                    }
                 },
                 "TAB_NOTES" : {
-                    "TITLE": "Notes"
+                    "TITLE": "Notes",
+                    "FIRST_ACTION_CARD": {
+                        "TITLE": "Create Note",
+                        "DETAILS": "Worried about remembering and keeping scribes in some paper?<br/>You can write a note here and we will rememeber it for you in the right context, making you future ready.",
+                        "ACTION_BTN_LABEL": "Write a note"
+                    }
                 },
                 "TAB_SERVICE_REQUESTS": {
-                    "TITLE": "Leads/Requests"
+                    "TITLE": "Leads/Requests",
+                    "FIRST_ACTION_CARD": {
+                        "TITLE": "Create Request",
+                        "DETAILS": "To create new leads, opportunities and support requests,<br/>click the plus sign and select the desired menu from the list.",
+                        "ACTION_BTN_LABEL": ""
+                    }
                 },
                 "TAB_ACCESS_CONTROLS": {
                     "TITLE": "Access Control"
