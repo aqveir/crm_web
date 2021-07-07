@@ -58,7 +58,7 @@ export class ContactNewComponent extends BaseComponent implements OnInit, AfterV
   } //Function ends
   ngAfterViewInit(): void {
     //Initialize form wizard
-    this.wizard = new KTWizard(this.wizardRef.nativeElement, { startStep: 3 });
+    this.wizard = new KTWizard(this.wizardRef.nativeElement, { startStep: 4 });
 
     //Change event
     this.wizard.on('change', () => {
@@ -219,11 +219,12 @@ export class ContactNewComponent extends BaseComponent implements OnInit, AfterV
   private fnInitializeForm() {
     this.contactForm = this._formBuilder.group({
       avatar: [ null ],
-      first_name: [ '', [ Validators.required ]],
-      middle_name: [ '' ],
-      last_name: [ '', [ Validators.required ]],
+      first_name: [ 'Ramkrishna', [ Validators.required ]],
+      middle_name: [ 'Venkatraman' ],
+      last_name: [ 'Subramaniyum', [ Validators.required ]],
       phone_form_control: [ '' ],
       company_id: [ null ],
+      role: [''],
       dob_date_picker: [],
       date_of_birth_at: [],
       gender_key: 'contact_gender_others',

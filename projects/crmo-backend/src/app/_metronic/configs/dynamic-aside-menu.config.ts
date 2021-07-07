@@ -233,6 +233,24 @@ export const DynamicAsideMenuConfig = {
           ]
         },
         {
+          title: 'Subscription & Invoices',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.BILLING_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'subscriptions',
+              page: '/secure/setting/organization/oHash/subscription',
+              translate: 'MENU.SETTING.ORGANIZATION.BILLING_MANAGEMENT.SUBSCRIPTIONS.LABEL',
+            },
+            {
+              title: 'invoices',
+              page: '/secure/setting/organization/oHash/invoice',
+              translate: 'MENU.SETTING.ORGANIZATION.BILLING_MANAGEMENT.INVOICES.LABEL',
+            }
+          ]
+        },
+        {
           title: 'Meta Data',
           icon: 'flaticon2-user-1',
           translate: 'MENU.SETTING.ORGANIZATION.META_DATA.LABEL',
@@ -285,6 +303,24 @@ export const DynamicAsideMenuConfig = {
         },
         {
           title: 'User Management',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'users',
+              page: '/secure/setting/organization/oHash/user',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
+            },
+            {
+              title: 'roles',
+              page: '/secure/setting/organization/oHash/role',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
+            }
+          ]
+        },
+        {
+          title: 'Subscription & Invoices',
           bullet: 'dot',
           icon: 'flaticon2-user-1',
           translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',

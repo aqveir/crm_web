@@ -20,7 +20,7 @@ import { IOrganization, ILookup, ILookupValue } from 'crmo-lib';
   styleUrls: ['./tab-summary.component.scss']
 })
 export class TabSummaryComponent extends BaseComponent implements OnInit {
-  @Input('form') contactProfileForm: FormGroup = null;
+  @Input('form') contactForm: FormGroup = null;
 
   //Common attributes
   public boolLoadingPage: boolean = false;
@@ -81,7 +81,7 @@ export class TabSummaryComponent extends BaseComponent implements OnInit {
     
     //this._cd.detach();
     setTimeout(() => {
-      this.contactProfileForm.setControl('details', this.contactDetailsFormArray);
+      this.contactForm.setControl('details', this.contactDetailsFormArray);
 
       //Page loaded completely
       this.boolLoadingPage=false;
@@ -167,9 +167,9 @@ export class TabSummaryComponent extends BaseComponent implements OnInit {
    */
   public fnDateTimeControlUpdated(event: NgbDate): void {
     //Get Date-Time picker values
-    let dobAt: moment.Moment = moment(this.contactProfileForm.controls['dob_date_picker'].value).subtract(1, 'month');
+    let dobAt: moment.Moment = moment(this.contactForm.controls['dob_date_picker'].value).subtract(1, 'month');
 
-    this.contactProfileForm.patchValue({
+    this.contactForm.patchValue({
       date_of_birth_at: dobAt.toISOString(true)
     });
   } //Function ends

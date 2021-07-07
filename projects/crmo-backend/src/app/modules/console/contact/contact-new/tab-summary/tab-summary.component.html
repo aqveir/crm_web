@@ -1,20 +1,43 @@
 <div class="">
     <h4 class="mb-10 font-weight-bold">Review your Details and Submit</h4>
-    <h6 class="font-weight-bold mb-3">Project Details:</h6>
-    <table class="w-100">
-        <tr>
-            <td class="font-weight-bold text-muted">Name:</td>
-            <td class="font-weight-bold text-right">Loop Inc CRM App</td>
-        </tr>
-        <tr>
-            <td class="font-weight-bold text-muted">Phone:</td>
-            <td class="font-weight-bold text-right">+61412345678</td>
-        </tr>
-        <tr>
-            <td class="font-weight-bold text-muted">Email:</td>
-            <td class="font-weight-bold text-right">johnwick@reeves.com</td>
-        </tr>
-    </table>
+
+    <div class="row">
+        <div class="col-6">
+            <h6 class="font-weight-bold mb-3">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.TITLE' | translate }}</h6>
+
+            <div class="flex-row">
+                <ng-container [ngTemplateOutlet]="textContact" 
+                    [ngTemplateOutletContext]="{ classRow: '', label:'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.LABEL', control:'first_name'}"></ng-container>
+
+                <ng-container [ngTemplateOutlet]="textContact" 
+                    [ngTemplateOutletContext]="{ classRow: '', label:'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.LABEL', control:'middle_name'}"></ng-container>
+
+                <ng-container [ngTemplateOutlet]="textContact" 
+                    [ngTemplateOutletContext]="{ classRow: '', label:'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.LABEL', control:'last_name'}"></ng-container>
+            </div>     
+        </div>
+
+        <div class="col-6">
+            <h6 class="font-weight-bold mb-3">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.TITLE' | translate }}</h6>
+            <table class="w-100">
+                <tr>
+                    <td class="font-weight-bold text-muted">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.FIRST_NAME.LABEL' | translate }}:</td>
+                    <td class="font-weight-bold text-right">{{ contactForm.controls['first_name'].value }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold text-muted">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.MIDDLE_NAME.LABEL' | translate }}:</td>
+                    <td class="font-weight-bold text-right">{{ contactForm.controls['middle_name'].value }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold text-muted">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.LAST_NAME.LABEL' | translate }}:</td>
+                    <td class="font-weight-bold text-right">{{ contactForm.controls['last_name'].value }}</td>
+                </tr>
+            </table>        
+        </div>
+    </div>
+
+
+
     <div class="separator separator-dashed my-5"></div>
     <h6 class="font-weight-bold mb-3">Delivery Info:</h6>
     <table class="w-100">
@@ -35,6 +58,7 @@
             <td class="font-weight-bold text-right">Australia</td>
         </tr>
     </table>
+
     <div class="separator separator-dashed my-5"></div>
     <h6 class="font-weight-bold mb-3">Payment Details:</h6>
     <table class="w-100">
@@ -52,3 +76,11 @@
         </tr>
     </table>
 </div>
+
+<ng-template #textContact let-class="classRow" let-label="label" let-value="value" let-controlName="control">
+    <div class="d-flex" [ngClass]="class">
+        <div class="font-weight-bold text-muted">{{ label | translate }}:</div>
+        <div class="flex-fill font-weight-bold text-right" *ngIf="controlName && !value">{{ contactForm.controls[controlName].value }}</div>
+        <div class="flex-fill font-weight-bold text-right" *ngIf="value">{{ value }}</div>
+    </div>
+</ng-template>
