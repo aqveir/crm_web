@@ -124,7 +124,7 @@ export class TabProfileComponent extends BaseComponent implements OnInit, OnChan
           type_key: objContactDetail?.type?.key,
           subtype_key: objContactDetail?.subtype?.key,
           phone_idd: objContactDetail?.country?.phone_idd_code,
-          identifier: objContactDetail?.identifier_masked,
+          identifier: objContactDetail?.identifier,
           is_primary: objContactDetail?.is_primary,
           is_verified: objContactDetail?.is_verified,
         });
