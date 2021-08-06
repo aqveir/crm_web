@@ -1,9 +1,11 @@
 import { ICountry } from '../common/country.interface';
+import { ILookup } from '../common/lookup.interface';
 import { INote } from '../note/note.interface';
 
 export interface IContactAddress {
     id: number;
     name: string;
+    type: ILookup;
     address1: string;
     address2: string;
     locality: string;
