@@ -7,7 +7,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 import { AccountService, IAccount, IAddress, ICountry, ILookup, ILookupValue, CountryService } from 'crmo-lib';
-import { AddressComponent } from '../../../shared/address/address.component';
+//import { AddressComponent } from '../../../shared/address/address.component';
 import { ThrowStmt } from '@angular/compiler';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 import { IAccountRequest } from 'projects/crmo-lib/src/public-api';

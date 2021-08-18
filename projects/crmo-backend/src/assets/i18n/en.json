@@ -637,6 +637,12 @@
                 },
                 "TAB_ADDRESS": {
                     "TITLE": "Address",
+                    "MODAL": {
+                        "TITLE": {
+                            "ADD": "Add Contact",
+                            "EDIT": "Edit Contact"
+                        }
+                    },
                     "ADDRESS1": {
                         "LABEL": "Address Line 1",
                         "PLACEHOLDER": "Enter an address line 1",
@@ -651,8 +657,8 @@
                     },
                     "LOCALITY": {
                         "LABEL": "Locality",
-                        "PLACEHOLDER": "Enter a city",
-                        "FINE_TEXT": "Please enter the locality or community area (i.e. Riverdale, Santa Cruz, Singapore)",
+                        "PLACEHOLDER": "Enterthe locality or community area",
+                        "FINE_TEXT": "",
                         "VALIDATION_ERROR": "Enter a valid locality"
                     },
                     "CITY": {
@@ -1024,6 +1030,54 @@
                     "PLACEHOLDER": "Select the data type",
                     "FINE_TEXT": "For dropdown/multiselect type, do provide the possible values",
                     "VALIDATION_ERROR": ""
+                }
+            }
+        },
+        "SUBSCRIPTION" : {
+            "LIST": {
+                "TITLE": "Manage Subscriptions",
+                "FINE_TEXT": "List of all the Subscriptions in an Organization.",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "TYPE": "Data Type",
+                    "BILLING": "Billing",
+                    "STATUS": "Status",
+                    "CREATED_AT": "Created Date",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "DETAIL": {
+                "TITLE": "Subscriptions Details"
+            },
+            "ADD": {
+                "TITLE": "New/Renew Subscription",
+                "CARDS": {
+                    "TITLE": "Manage Cards",
+                    "ADD_CARD_ACTION_BUTTON": "Add Card",
+                    "DEFAULT_CARD": "Default",
+                    "COLUMNS": {
+                        "CARD_OWNER_NAME": "Name",
+                        "CARD_OWNER_PHONE": "Phone",
+                        "CARD_OWNER_EMAIL": "Email",
+                        "BILLING_ADDRESS": "Billing Address",
+                        "CARD_TYPE": "Type",
+                        "CARD_NUMBER": "Number",
+                        "CARD_EXPIRY_DT": "Expires",
+                        "CARD_CVC_CHECK": "CVC Check",
+                        
+                        "ERROR_DATA": {
+                            "CARD_OWNER_PHONE_NA" : "Not provided",
+                            "CARD_OWNER_EMAIL_NA" : "Not provided"
+                        }
+                    },
+                    "NO_DATA": {
+                        "TITLE": "No records found.",
+                        "GET_STARTED": {
+                            "TITLE": "Yet to add cards ?",
+                            "MESSAGE": "You seem to have still not configured this feature </br>for your organization. Enjoy a seamless experience </br>of easy subscriptions, renewals and explore it to </br>its potential.",
+                            "BUTTON": "Start Now !!"
+                        }
+                    }
                 }
             }
         }

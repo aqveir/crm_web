@@ -1,4 +1,4 @@
-<div class="container">
+<div class="flex-row p-5">
     <div class="d-flex flex-lg-row-reverse mb-2" *ngIf="(this.objContact) && (this.objContact?.id>0) && (objContact?.documents?.length>0)">
         <button type="button" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
             (click)="fnUploadDocument();" placement="top" [ngbTooltip]="'COMMON.LABEL.UPLOAD_DOCUMENT'|translate">

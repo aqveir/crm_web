@@ -23,6 +23,9 @@ import { ModalTaskComponent } from './modal-task/modal-task.component';
 import { ModalEventsComponent } from './modal-events/modal-events.component';
 import { ModalFiltersComponent } from './modal-filters/modal-filters.component';
 import { UppyAngularModule } from 'uppy-angular';
+import { ModalAddPaymentmethodComponent } from './modal-add-paymentmethod/modal-add-paymentmethod.component';
+
+import { WidgetAddressBlockComponent } from './widget-address-block/widget-address-block.component';
 
 
 @NgModule({
@@ -38,6 +41,9 @@ import { UppyAngularModule } from 'uppy-angular';
     ModalTaskComponent,
     ModalEventsComponent,
     ModalFiltersComponent,
+    ModalAddPaymentmethodComponent,
+
+    WidgetAddressBlockComponent,
   ],
   imports: [
     CommonModule,
@@ -63,12 +69,15 @@ import { UppyAngularModule } from 'uppy-angular';
   ],
   exports: [
     ModalNoteComponent, 
-    ModalDocumentComponent, 
-    WidgetSubheaderComponent,
+    ModalDocumentComponent,
     ModalSendMailComponent,
     ModalSendSmsComponent,
     ModalConfirmCallComponent,
     ModalConfirmDeleteComponent,
+    ModalAddPaymentmethodComponent,
+
+    WidgetSubheaderComponent,
+    WidgetAddressBlockComponent
   ]
 })
 export class WidgetsModule { }

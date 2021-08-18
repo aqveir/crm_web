@@ -21,16 +21,35 @@ export class PaymentMethodService extends BaseService {
 
 
   /**
-   * Get Payment Method for the Organization
+   * Get Payment Methods for the Organization
    */
-   public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+   public getAll(_params: Object=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('organization/paymentmethods/fetch', _payload, false, _params)
+      this._httpService.get('organization/paymentmethod/fetch', _params)
         .then((response: any) => {
           let data: IPaymentMethod[] = response.data;
+          observer.next(data); 
+        })                          
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
+   * Delete Payment Method for the Organization
+   */
+   public delete(_cardUuid: string, _params: Object=null): Observable<any> {
+    //Add Pagination params, if missing
+    _params = super.setDefaultParamsForPagination(_params);
+
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.delete('organization/paymentmethod/'+_cardUuid, _params)
+        .then((response: any) => {
+          let data: IPaymentMethod = response.data;
           observer.next(data); 
         })                          
         .catch((error: any) =>  { observer.error(error); })

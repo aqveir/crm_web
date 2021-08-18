@@ -173,6 +173,6 @@ table.table {
 }
 
 //Page full hight
-.full-content-page-height > .card {
+.full-content-page-height > .card.card-stretch {
     min-height: calc(100vh - 145px);
 }

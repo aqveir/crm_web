@@ -65,16 +65,21 @@ export class TabNoteComponent extends BaseComponent implements OnInit {
    * 
    * @param objNote 
    */
-  public fnDeleteNote(objNote: INote): void {
-    this._noteService.delete(objNote?.id)
-    .subscribe((response: any) => {
-      this._globals.showSuccess('Successfully Deleted');
+  public fnDeleteAction(objNote: INote): void {
+    //Show a confirmation modal
+    this._broker.emit('modal-confirm-delete', [null, ((status: boolean)=>{
+      if (status == true) {
+        this._noteService.delete(objNote?.id)
+        .subscribe((response: any) => {
+          this._globals.showSuccess('Successfully Deleted');
 
-      //Refresh List
-      this.boolRefresh.emit(true);
-    },(error) => {
-      throw error;
-    });
+          //Refresh List
+          this.boolRefresh.emit(true);
+        },(error) => {
+          throw error;
+        });
+      } //End if
+    })]);
   } //Function ends
 
 } //Class ends

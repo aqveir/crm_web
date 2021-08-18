@@ -56,10 +56,10 @@
                                                 <div class="d-flex flex-row align-items-center mr-3">
                                                     <!-- <span class="label label-light-success label-inline font-weight-bolder mr-1">{{ objContact?.type.display_value }}</span> -->
                                                     
-                                                    <ng-select class="contact-type mr-1 font-size-sm" #selectGender formControlName="type_key"
+                                                    <ng-select class="flex-fill contact-type mr-1 font-size-sm" #selectGender formControlName="type_key"
                                                         placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_DETAILS.GENDER.PLACEHOLDER' | translate }}"
                                                         [items]="listContactType" bindLabel="display_value" bindValue="key"
-                                                        [searchable]="false" autocomplete="off" tabindex="3">
+                                                        [searchable]="false" [clearable]="false" autocomplete="off" [tabIndex]="3">
                                                     </ng-select>
                                                 </div>
                                                 <!--begin::Type-->
@@ -388,7 +388,7 @@
                             <!--end::Header-->
 
                             <!--begin::Body-->
-                            <div class="card-body px-0">
+                            <div class="card-body p-0">
                                 <div class="tab-content" style="min-height: 622px;">
                                     <!--begin::Tab Content (Profile)-->
                                     <div class="tab-pane active" id="kt_apps_contacts_view_tab_profile" role="tabpanel">
@@ -399,7 +399,8 @@
 
                                     <!--begin::Tab Content (Addresses)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_addresses" role="tabpanel">
-                                        <crmo-backend-tab-address></crmo-backend-tab-address>
+                                        <crmo-backend-tab-address 
+                                            [form]="contactForm" [contact]="objContact"></crmo-backend-tab-address>
                                     </div>
                                     <!--end::Tab Content-->
 

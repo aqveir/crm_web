@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Application Modules
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'ellaisys-lib';
 import { SettingRoutingModule } from './setting-routing.module';
@@ -30,7 +31,10 @@ import { PreferenceListComponent } from './preference/preference-list/preference
 import { PreferenceDetailComponent } from './preference/preference-detail/preference-detail.component';
 import {AccountListComponent} from './account/account-list/account-list.component';
 import { AccountDetailComponent } from './account/account-detail/account-detail.component';
-import { AddressComponent } from '../shared/address/address.component';
+import { SubscriptionListComponent } from './subscription/subscription-list/subscription-list.component';
+import { SubscriptionDetailComponent } from './subscription/subscription-detail/subscription-detail.component';
+import { SubscriptionAddComponent } from './subscription/subscription-add/subscription-add.component';
+
 
 
 @NgModule({
@@ -58,7 +62,9 @@ import { AddressComponent } from '../shared/address/address.component';
     AccountDetailComponent,
     //AccountDataComponent,
     
-    AddressComponent
+    SubscriptionListComponent,
+    SubscriptionDetailComponent,
+    SubscriptionAddComponent
   ],
   imports: [
     CommonModule,
@@ -66,6 +72,7 @@ import { AddressComponent } from '../shared/address/address.component';
     ReactiveFormsModule,
 
     //Imported Modules
+    NgbModule,
     NgSelectModule,
 
     //EllaiSys Library

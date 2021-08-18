@@ -13,6 +13,9 @@ import { PreferenceListComponent } from './preference/preference-list/preference
 import { PreferenceDetailComponent } from './preference/preference-detail/preference-detail.component';
 import { AccountListComponent } from './account/account-list/account-list.component';
 import { AccountDetailComponent } from './account/account-detail/account-detail.component';
+import { SubscriptionListComponent } from './subscription/subscription-list/subscription-list.component';
+import { SubscriptionDetailComponent } from './subscription/subscription-detail/subscription-detail.component';
+import { SubscriptionAddComponent } from './subscription/subscription-add/subscription-add.component';
 
 const routes: Routes = [
   { path: 'organization', component: OrganizationListComponent },
@@ -26,6 +29,9 @@ const routes: Routes = [
   { path: 'organization/:ohash/preference/:id', component: PreferenceDetailComponent },
   { path: 'organization/:ohash/account', component: AccountListComponent },
   { path: 'organization/:ohash/account/:key', component: AccountDetailComponent},
+  { path: 'organization/:ohash/subscription', component: SubscriptionListComponent },
+  { path: 'organization/:ohash/subscription/new', component: SubscriptionAddComponent },
+  { path: 'organization/:ohash/subscription/:uuid', component: SubscriptionDetailComponent },
   { path: '', pathMatch: 'full', redirectTo: 'organizations' },
 ];
 

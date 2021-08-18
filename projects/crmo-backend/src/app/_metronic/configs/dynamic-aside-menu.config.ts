@@ -233,7 +233,7 @@ export const DynamicAsideMenuConfig = {
           ]
         },
         {
-          title: 'Subscription & Invoices',
+          title: 'Subscription',
           bullet: 'dot',
           icon: 'flaticon2-user-1',
           translate: 'MENU.SETTING.ORGANIZATION.BILLING_MANAGEMENT.LABEL',

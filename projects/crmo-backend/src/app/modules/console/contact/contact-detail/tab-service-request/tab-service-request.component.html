@@ -1,4 +1,4 @@
-<div class="flex">
+<div class="flex-row">
     <div class="d-flex flex-lg-row-reverse mb-2 dropdown dropdown-inline" *ngIf="objContact?.service_requests?.length>0">
         <a href="#" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  placement="top" [ngbTooltip]="'COMMON.LABEL.ADD_NEW'|translate">
@@ -58,7 +58,7 @@
                             {{ objServiceRequest?.status?.display_value }}
                         </span>
                     </td>
-                    <td clas="d-none d-xl-table-cell table-cell-date">
+                    <td class="d-none d-xl-table-cell table-cell-date">
                         <span class="text-dark-75 d-block ml-5">{{ objServiceRequest.last_updated_at | date }}</span>
                         <span class="text-muted d-block ml-5">{{ objServiceRequest.last_updated_at | date:'shortTime' }}</span>
                     </td>
@@ -69,7 +69,7 @@
     <!--end::Service Request-->
 
     <!--begin::Card-->
-    <div class="container">
+    <div class="p-5">
         <div class="card" *ngIf="objContact?.service_requests?.length==0">
             <!--begin::Card body-->
             <div class="card-body p-0">
@@ -130,7 +130,7 @@
                 <!--end::Illustration-->
             </div>
             <!--end::Card body-->
-        </div>        
+        </div>            
     </div>
     <!--end::Card-->
 </div>

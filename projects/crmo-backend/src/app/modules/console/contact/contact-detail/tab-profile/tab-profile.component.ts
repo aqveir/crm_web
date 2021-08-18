@@ -64,9 +64,7 @@ export class TabProfileComponent extends BaseComponent implements OnInit, OnChan
 
         if (objContact) {
           //Load contact details array
-          this.fnLoadContactDetailArray(objContact?.details);
-
-          console.log('this.contactDetailsFormArray', this.contactDetailsFormArray);         
+          this.fnLoadContactDetailArray(objContact?.details);      
         } //End if
       } //End if
     } //End if
@@ -97,8 +95,6 @@ export class TabProfileComponent extends BaseComponent implements OnInit, OnChan
     let objContactDetailSubType: ILookup = this._globals.getLookupByKey('contact_detail_subtype');
     if (objContactDetailSubType) {
       this.listLookupContactDetailsSubType = (objContactDetailSubType?.values).filter((x: ILookupValue) => {return x.is_active==true});
-
-      console.log('this.listLookupContactDetailsSubType', this.listLookupContactDetailsSubType);
     } //End if
   } //Function ends
 
