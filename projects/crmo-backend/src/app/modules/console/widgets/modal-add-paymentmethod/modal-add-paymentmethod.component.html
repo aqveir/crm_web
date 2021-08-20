@@ -1,1 +1,46 @@
-<p>modal-add-paymentmethod works!</p>
+<div class="modal-dialog m-0" role="document">
+    <div class="modal-content">
+        <form class="form" id="kt_form_note" novalidate="novalidate"
+            [formGroup]="cardForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <span>{{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.TITLE' | translate }}</span>
+                </h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+
+            <div class="modal-body p-5">
+                <div class="form-group">
+                    <input class="form-control" formControlName="card_owner"
+                        placeholder="{{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.FORM.CARD_OWNER_NAME.PLACEHOLDER' | translate }}"
+                        autocomplete="off" tabindex="1" autofocus />
+
+                    <span class="form-text text-danger" *ngIf="cardForm.controls.card_owner.dirty && cardForm.controls.card_owner.invalid">
+                        {{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.FORM.CARD_OWNER_NAME.VALIDATION_ERROR' | translate }}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <div #cardElement id="card-element" class="w-100 form-control"></div>
+                    <p class="text-danger mt-1">{{ cardErrors }}</p>
+                </div>
+            </div>
+
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-light-dark font-weight-bold" data-dismiss="modal" 
+                    tabindex="1" autofocus (click)="fnCloseModal()">
+                    {{ 'COMMON.LABEL.CLOSE' | translate }}
+                </button>
+
+                <button type="submit" class="btn btn-primary font-weight-bold" tabindex="2">
+                    {{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.BTN.ADD_CARD.LABEL' | translate }}
+                    <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolLoading"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

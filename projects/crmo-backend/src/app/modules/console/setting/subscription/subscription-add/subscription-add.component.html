@@ -19,7 +19,7 @@
 
             <!--begin::Card toolbar-->
             <div class="card-toolbar">
-                <a href="#" class="btn btn-light-primary">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.ADD_CARD_ACTION_BUTTON' | translate }}</a>
+                <a href="javascript:;" class="btn btn-light-primary" (click)="fnAddPaymentMethod($event, 'card')">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.ADD_CARD_ACTION_BUTTON' | translate }}</a>
             </div>
             <!--end::Card toolbar-->
         </div>
@@ -97,7 +97,7 @@
                                     <!--end::Radio-->
 
                                     <button class="btn btn-icon btn-sm btn-hover-light-danger mr-3" 
-                                        (click)="fnDeleteRecord($event, paymentmethod.id)">
+                                        (click)="fnDeletePaymentMethod($event, paymentmethod.id)">
                                         <i class="flaticon-delete"></i>
                                     </button>
                                 </div>

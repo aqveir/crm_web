@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+//Third Party referenced libraries
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
@@ -9,6 +12,7 @@ import { BaseComponent } from '../../../../base.component';
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'ellaisys-lib';
 import { IPaymentMethod, PaymentMethodService } from 'crmo-lib';
+import { ModalAddPaymentmethodComponent } from '../../../widgets/modal-add-paymentmethod/modal-add-paymentmethod.component';
 
 @Component({
   selector: 'crmo-backend-subscription-add',
@@ -38,6 +42,8 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
     private _globals: Globals,
     private _router: Router,
     private _route: ActivatedRoute,
+    private _modalService: NgbModal,
+    private _modalConfig: NgbModalConfig,
     private _paymentmethodService: PaymentMethodService,
     private _notification : NotificationService,
     private _broker: EventBrokerService
@@ -180,10 +186,42 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
   /**
    * Open Modal for Delete Confirmation
    * 
-   * @param event 
-   * @param cardUuid
+   * @param event
+   * @param type
    */
-   public fnDeleteRecord(event: any, cardUuid: string): void {
+  public fnAddPaymentMethod(event: any, type: string): void {
+    try {
+
+      let customConfig: NgbModalConfig = this._modalConfig;
+      customConfig.size = 'md';
+      const modalAddPaymentMethodRef = this._modalService.open(ModalAddPaymentmethodComponent, customConfig);
+      modalAddPaymentMethodRef.componentInstance.oHash = this.oHash;
+      modalAddPaymentMethodRef.result
+        .then((result: any) => {
+          if (result && result['refresh']) {
+            this.fnLoadPaymentMethodsData();     
+          } //End if
+        }, (reason: any) => {
+          throw reason;
+        });
+      
+      event.stopPropagation();
+    } catch (error) {
+      //Stop loader
+      this.boolLoading = false;
+
+      throw error;
+    } //Try-catch ends
+  } //Function ends 
+
+
+  /**
+   * Open Modal for Delete Confirmation
+   * 
+   * @param event 
+   * @param paymentMethodUuid
+   */
+   public fnDeletePaymentMethod(event: any, paymentMethodUuid: string): void {
     try {
 
       this._broker.emit('modal-confirm-delete', [null, (boolResponse: boolean)=>{
@@ -192,7 +230,7 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
           let params: Object = {'key': this.oHash};
 
           this.boolLoading = false;
-          this._paymentmethodService.delete(cardUuid, params)
+          this._paymentmethodService.delete(paymentMethodUuid, params)
             .subscribe((response: any) => {
               //Stop loader
               this.boolLoading = false;
@@ -223,10 +261,10 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
   /**
    * Check if the given card data is the default card for current organization.
    * 
-   * @param cardUuid
+   * @param paymentMethodUuid
    * @returns boolean
    */
-  public fnIsDefaultCard(cardUuid: string): boolean {
+  public fnIsDefaultCard(paymentMethodUuid: string): boolean {
     try {
       return true;
     } catch (error) {
