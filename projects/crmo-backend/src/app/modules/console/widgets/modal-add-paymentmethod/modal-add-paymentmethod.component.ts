@@ -29,7 +29,8 @@ export class ModalAddPaymentmethodComponent extends BaseComponent implements OnI
   public cardForm!: FormGroup;
   public cardElements: StripeElements;
   public cardElement: StripeCardElement;
-  public cardErrors: any;
+  public cardErrors: any = null;
+  public isCardVerified: boolean = false;
   
   private stripeSetupIntent: SetupIntent = null;
   private stripe: Stripe = null;
@@ -157,8 +158,10 @@ export class ModalAddPaymentmethodComponent extends BaseComponent implements OnI
         //Show error
         if (response.error) {
           this._globals.showError(response.error?.message, false);
+          this.isCardVerified = true;
         } else {
-          this.fnAddcardAsPaymentMethod(response);
+          this.isCardVerified = true;
+          this.fnAddcardAsPaymentMethod(response.setupIntent, objFormData);
         } //End if
       })
       .catch((error: any) => { 
@@ -181,13 +184,16 @@ export class ModalAddPaymentmethodComponent extends BaseComponent implements OnI
    * @param event
    * @param type
    */
-   private fnAddcardAsPaymentMethod(payload: SetupIntentResult): void {
+   private fnAddcardAsPaymentMethod(payload: any, objFormData: any): void {
     try {
       //Build the params for passing
       let params: Object = {'key': this.oHash};
 
+      //Add some form params
+      payload['is_default'] = objFormData['is_default'];
+
       this.boolLoading = true;
-      this._paymentmethodService.create(payload?.setupIntent, params)
+      this._paymentmethodService.create(payload, params)
         .subscribe((response: any) => {
           this.boolLoading = false;
           this._modalActive.close({confirm: true, refresh: true});
@@ -224,7 +230,8 @@ export class ModalAddPaymentmethodComponent extends BaseComponent implements OnI
    */
   private fnInitializeForm() {
     this.cardForm = this._formBuilder.group({
-      card_owner: ['', Validators.required]
+      card_owner: ['', Validators.required],
+      is_default: [false]
     });
   } //Function ends
 

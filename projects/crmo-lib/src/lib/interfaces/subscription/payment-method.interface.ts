@@ -6,6 +6,7 @@ export interface IPaymentMethod {
     billing_details: IBillingDetails;
     card?: ICard;
     metadata: [];
+    is_default: boolean;
 }
 
 export interface IBillingDetails {

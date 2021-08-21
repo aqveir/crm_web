@@ -77,7 +77,7 @@
                                                 **** {{ paymentmethod?.card?.last4 }}
                                             </span>
                                             
-                                            <div class="label label-lg label-inline label-light-primary mx-2" *ngIf="fnIsDefaultCard(paymentmethod.id)">
+                                            <div class="label label-lg label-inline label-light-primary mx-2" *ngIf="paymentmethod.is_default">
                                                 {{ 'PAGE.SUBSCRIPTION.ADD.CARDS.DEFAULT_CARD' | translate }}
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                                 <div class="d-flex my-3">
                                     <!--begin::Radio-->
                                     <label class="radio radio-lg mr-3">
-                                        <input type="radio" name="payment_method" checked="checked" value="paymentmethod.id" />
+                                        <input type="radio" name="payment_method" [checked]="(paymentmethod.is_default)?'checked':''" value="paymentmethod.id" />
                                         <span></span>
                                     </label>
                                     <!--end::Radio-->

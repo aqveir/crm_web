@@ -26,7 +26,20 @@
 
                 <div class="form-group">
                     <div #cardElement id="card-element" class="w-100 form-control"></div>
-                    <p class="text-danger mt-1">{{ cardErrors }}</p>
+                    <p class="text-danger mt-1" *ngIf="cardErrors">{{ cardErrors }}</p>
+                    <p class="text-success mt-1" *ngIf="isCardVerified"><i class="flaticon2-shield mr-1 text-success"></i>{{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.FORM.CARD.VERIFIED_LABEL' | translate }}</p>
+                </div>
+
+                <div class="form-group d-flex">
+                    <div class="">
+                        <span class="switch">
+                            <label>
+                                <input type="checkbox" name="is_default" formControlName="is_default" />
+                                <span></span>
+                            </label>
+                        </span>
+                    </div>
+                    <label class="col-form-label">{{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.FORM.IS_DEFAULT.LABEL' | translate }}</label>
                 </div>
             </div>
 

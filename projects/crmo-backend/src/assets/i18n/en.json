@@ -1239,6 +1239,12 @@
                         "PLACEHOLDER": "Enter the name of the card holder",
                         "FINE_TEXT": "",
                         "VALIDATION_ERROR": "Enter valid cardholder name, as given on the card."
+                    },
+                    "CARD": {
+                        "VERIFIED_LABEL": "Verified" 
+                    },
+                    "IS_DEFAULT": {
+                        "LABEL": "Make Default"
                     }
                 }
             }

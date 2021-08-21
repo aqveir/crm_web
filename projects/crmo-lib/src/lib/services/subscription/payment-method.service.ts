@@ -43,11 +43,24 @@ export class PaymentMethodService extends BaseService {
    * Create Payment Method for the Organization
    */
    public create(_data: any, _params: Object=null): Observable<any> {
-    //Add Pagination params, if missing
-    _params = super.setDefaultParamsForPagination(_params);
-
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('organization/paymentmethod', _data, false, _params)
+        .then((response: any) => {
+          let data: IPaymentMethod = response.data;
+          observer.next(data); 
+        })                          
+        .catch((error: any) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
+   * Update Payment Method for the Organization
+   */
+   public update(_uuid: string, _data: any, _params: Object=null): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.put('organization/paymentmethod/'+_uuid, _data, _params)
         .then((response: any) => {
           let data: IPaymentMethod = response.data;
           observer.next(data); 
@@ -62,9 +75,6 @@ export class PaymentMethodService extends BaseService {
    * Delete Payment Method for the Organization
    */
    public delete(_cardUuid: string, _params: Object=null): Observable<any> {
-    //Add Pagination params, if missing
-    _params = super.setDefaultParamsForPagination(_params);
-
     return new Observable((observer: Observer<any>) => {
       this._httpService.delete('organization/paymentmethod/'+_cardUuid, _params)
         .then((response: any) => {
@@ -81,9 +91,6 @@ export class PaymentMethodService extends BaseService {
    * Get Setup Intent for the Organization
    */
    public getSetupIntent(_params: Object=null): Observable<any> {
-    //Add Pagination params, if missing
-    _params = super.setDefaultParamsForPagination(_params);
-
     return new Observable((observer: Observer<any>) => {
       this._httpService.get('organization/paymentmethod/intent', _params)
         .then((response: any) => {

@@ -30,10 +30,9 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
   public objRole: any;
   public boolRefresh: boolean = false;
   public boolIsNew: boolean = false;
-
   public listPaymentMethods: IPaymentMethod[];
-
   public roleForm!: FormGroup;
+
 
   /**
    * Default constructor
@@ -119,14 +118,14 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
   /**
    * Get Payment Methods Data
    */
-   private fnLoadPaymentMethodsData(): boolean {
+  private fnLoadPaymentMethodsData(): boolean {
     try {
       //Build the params for passing
       let params: Object = {'key': this.oHash};
 
       this.boolLoading = true;
       this._paymentmethodService.getAll(params)
-        .subscribe((response: IPaymentMethod[]) => {
+        .subscribe((response: any) => {
           //Stop loader
           this.boolLoading = false;
 
@@ -159,18 +158,6 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
       this._router.navigate(['secure/setting/organization', this.oHash, 'subscription']);
     } //End if
   } //Function ends
-
-
-  // public fnUpdateData(_objUser: IUser): boolean {
-  //   try {
-  //     this.boolRefresh = false;
-  //     this.objRole = _objUser;
-  //     this.boolRefresh = true;
-  //     return true;
-  //   } catch (error) {
-  //     throw error;
-  //   } //Try-catch ends 
-  // }
 
 
   public fnSaveData(event): boolean {
@@ -221,7 +208,7 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
    * @param event 
    * @param paymentMethodUuid
    */
-   public fnDeletePaymentMethod(event: any, paymentMethodUuid: string): void {
+  public fnDeletePaymentMethod(event: any, paymentMethodUuid: string): void {
     try {
 
       this._broker.emit('modal-confirm-delete', [null, (boolResponse: boolean)=>{
@@ -261,25 +248,10 @@ export class SubscriptionAddComponent extends BaseComponent implements OnInit {
   /**
    * Check if the given card data is the default card for current organization.
    * 
-   * @param paymentMethodUuid
-   * @returns boolean
-   */
-  public fnIsDefaultCard(paymentMethodUuid: string): boolean {
-    try {
-      return true;
-    } catch (error) {
-      throw error;
-    } //Try-catch ends 
-  } //Function ends
-
-
-  /**
-   * Check if the given card data is the default card for current organization.
-   * 
    * @param month
    * @returns string
    */
-   public fnGetMonthName(month: number): string {
+  public fnGetMonthName(month: number): string {
     try {
       let monthName: string[] = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
       return monthName[month-1];
