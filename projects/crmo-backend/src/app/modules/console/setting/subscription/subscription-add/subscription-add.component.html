@@ -216,8 +216,8 @@
                     <div class="flex-grow-1 p-20 pb-40 card-rounded flex-grow-1 bgi-no-repeat" style="background-position: calc(100% + 4rem) bottom; background-size: 50% auto; background-image: url(assets/media/illustrations/credit-card-vpn.jpg)">
                         <h2 class="text-dark pb-5 font-weight-bolder">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.NO_DATA.GET_STARTED.TITLE' | translate }}</h2>
                         <p class="text-dark-50 pb-5 font-size-h5" innerHTML="{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.NO_DATA.GET_STARTED.MESSAGE' | translate }}"></p>
-                        <a href="#" class="btn btn-primary font-weight-bold font-size-h6 px-10 py-4 mr-2"
-                            [routerLink]="['/secure/setting/organization/', oHash, 'subscription', 'new']">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.NO_DATA.GET_STARTED.BUTTON' | translate }}</a>
+                        <a href="javascript:;" class="btn btn-primary font-weight-bold font-size-h6 px-10 py-4 mr-2"
+                            (click)="fnAddPaymentMethod($event, 'card')">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.NO_DATA.GET_STARTED.BUTTON' | translate }}</a>
                     </div>
                 </div>
             </div>
