@@ -19,7 +19,7 @@ export const environment = {
     api_server: {
       force_env: false, //Force this configuration
       
-      server: 'http://ellaisys.crmomni.com/',
+      server: 'https://ellaisys.aqveir.com/',
       apiUrl: 'api/',
       title: '',
       headers: {

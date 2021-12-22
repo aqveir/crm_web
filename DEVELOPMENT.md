@@ -45,30 +45,30 @@ To build the project for multiple formats, use the below CLI commands
 
 ##### Build All Projects for Production
 ```sh
-	npm run build:crmo-build-all-prod
+	npm run build:aqveir-build-all-prod
 ```
 
 ##### Build All Projects (Libraries ONLY) for Production
 ```sh
-	npm run build:crmo-build-libs-prod
+	npm run build:aqveir-build-libs-prod
 ```
 
 ##### Build All Projects for Production (with Development Environemnt File)
 ```sh
-	npm run build:crmo-build-all-devenv
+	npm run build:aqveir-build-all-devenv
 ```
 
 ##### Build All Projects in Debug Mode + Serve
 ```sh
-	npm run build:crmo-build-all-serve-backend
+	npm run build:aqveir-build-all-serve-backend
 ```
 
 ------------
 
 ## Development Support
 The application uses Angular **workSpace development strategy**. We have below application or libraries in the project.
-1. crmo-backend: This is the **ng application** intended for use by the CRM Subscribers.
-2. crmo-lib: As the name suggests, this is the ng library for the CRM Omni application. All Interfaces, Models and Services (Business) are managed by this library. 
+1. crmo-backend: This is the **ng application** intended for use by the aQveir CRM Subscribers.
+2. crmo-lib: As the name suggests, this is the ng library for the aQveir CRM application. All Interfaces, Models and Services (Business) are managed by this library. 
 >This library need to be built prior to building the crmo-backend application.
 3. ellaisys-lib: This is the ng library that holds all the core services. e.g. 
 - Translate Service

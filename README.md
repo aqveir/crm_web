@@ -15,22 +15,22 @@ To build the project for multiple formats, use the below CLI commands
 
 ##### Build All Projects for Production
 ```sh
-	npm run build:crmo-build-all-prod
+	npm run build:aqveir-build-all-prod
 ```
 
 ##### Build All Projects (Libraries ONLY) for Production
 ```sh
-	npm run build:crmo-build-libs-prod
+	npm run build:aqveir-build-libs-prod
 ```
 
 ##### Build All Projects for Production (with Development Environemnt File)
 ```sh
-	npm run build:crmo-build-all-devenv
+	npm run build:aqveir-build-all-devenv
 ```
 
 ##### Build All Projects in Debug Mode + Serve
 ```sh
-	npm run build:crmo-build-all-serve-backend
+	npm run build:aqveir-build-all-serve-backend
 ```
 
 ## Running unit tests
