@@ -107,6 +107,15 @@
             "404": "We are sorry, the page you've requested is not available.",
             "422": "The data provided incorrect.",
             "500": "We are sorry, we have encountered some error.If the issue persists, please contact the support team."
+        },
+        "GLOBAL": {
+            "CODE": {
+                "400": {
+                    "TITLE": "Bad Request",
+                    "SUBTITLE": "The requested URL does not exist or it may be restricted<br />as per company policy. Please enter a correct URL.",
+                    "ACTION_BTN_TITLE": "Goto Homepage !!"
+                }
+            }
         }
     },
 

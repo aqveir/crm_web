@@ -120,6 +120,11 @@ export const environment = {
   // Facebook share
   facebook:{
     fb_appId:'1658574024410741' //Beta
+  },
+
+  //Stripe integration
+  stripe: {
+    publishable_key: 'pk_test_51ITl4lFoTpVJV8LygXIMZ2ox1phnpLm04OdEFbUBIxwFz8akusvtMuWewWJrTD50Ja7jKRebhlSwZBffzadiwfbn0079AOXjub'
   }
 };
 
