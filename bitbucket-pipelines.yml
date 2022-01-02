@@ -16,7 +16,6 @@ definitions:
           - submodule
         script:
           - git submodule update --init --recursive
-          - git submodule set-branch --branch ng10.x
 
     - step: &install-angular
         name: Install Anugular & Project Dependencies

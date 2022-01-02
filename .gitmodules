@@ -1,3 +1,4 @@
 [submodule "ellaisys-lib"]
 	path = projects/ellaisys-lib
 	url = git@bitbucket.org:ellaisys/eis_ngx_library.git
+	branch = ng10.x
