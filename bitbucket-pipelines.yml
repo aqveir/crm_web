@@ -15,7 +15,7 @@ definitions:
         caches:
           - submodule
         script:
-          - git submodule update --init --recursive --branch ng10.x
+          - git submodule update --init --recursive
           - git submodule set-branch --branch ng10.x
 
     - step: &install-angular
