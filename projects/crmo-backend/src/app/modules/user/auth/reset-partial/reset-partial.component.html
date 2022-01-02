@@ -1,0 +1,89 @@
+<div class="login-form login-forgot">
+    <!--begin::Form-->
+    <form class="form fv-plugins-bootstrap fv-plugins-framework" novalidate="novalidate"
+        id="kt_reset_password_form" [formGroup]="resetPasswordForm" (ngSubmit)="fnOnSubmitAction($event)">
+        <!--begin::Title-->
+        <div class="pb-13 pt-lg-0 pt-5">
+            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ 'PAGE.AUTH.RESET_PASSWORD.TITLE' | translate }}</h3>
+            <p class="text-muted text-justify font-weight-bold font-size-h4">{{ 'PAGE.AUTH.RESET_PASSWORD.SUB_TITLE' | translate }}</p>
+        </div>
+        <!--end::Title-->
+  
+        <!-- begin::Alert error-->
+        <input type="hidden" name="token" formControlName="token"/>
+        <ng-container *ngIf="(resetPasswordForm.controls['token'].invalid)">
+            <div class="mb-10 alert alert-custom alert-light-danger alert-dismissible">
+                <div class="alert-text">{{ 'PAGE.AUTH.RESET_PASSWORD.TOKEN.VALIDATION_ERROR' | translate }}</div>
+            </div>
+        </ng-container>
+        <!-- end::Alert error-->
+
+        <!--begin::Form group-->
+        <div class="form-group fv-plugins-icon-container has-danger" 
+            [ngClass]="{'d-none': (resetPasswordForm.controls['email'].valid)}">
+            <input type="email" name="email" formControlName="email"
+                class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" autocomplete="off" tabindex="1" autofocus
+                placeholder="{{ 'PAGE.AUTH.RESET_PASSWORD.EMAIL.PLACEHOLDER' | translate }}"
+                [ngClass]="{'is-invalid': (resetPasswordForm.controls['email'].invalid && resetPasswordForm.controls['email'].dirty)}" />
+
+            <ng-container [ngTemplateOutlet]="formError" 
+                [ngTemplateOutletContext]= "{ control: resetPasswordForm.controls['email'], 
+                message: 'AGE.AUTH.RESET_PASSWORD.EMAIL.VALIDATION_ERROR', validation: 'required' }"></ng-container>
+        </div>
+        <!--end::Form group-->
+  
+        <!--begin::Form group-->
+        <div class="form-group fv-plugins-icon-container has-danger">
+            <input type="password" name="password" formControlName="password"
+                class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" autocomplete="off" tabindex="2" autofocus
+                placeholder="{{ 'PAGE.AUTH.RESET_PASSWORD.PASSWORD.PLACEHOLDER' | translate }}"
+                [ngClass]="{'is-invalid': (resetPasswordForm.controls['password'].invalid && resetPasswordForm.controls['password'].dirty)}" />
+
+            <ng-container [ngTemplateOutlet]="formError" 
+                [ngTemplateOutletContext]= "{ control: resetPasswordForm.controls['password'], 
+                message: 'COMMON.VALIDATION_MSG.PASSWORD', validation: 'required' }"></ng-container>
+        </div>
+        <!--end::Form group-->
+
+        <!--begin::Form group-->
+        <div class="form-group fv-plugins-icon-container has-danger">
+            <input type="password" name="password_confirmation" formControlName="password_confirmation"
+                class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" autocomplete="off" tabindex="3"
+                placeholder="{{ 'PAGE.AUTH.RESET_PASSWORD.PASSWORD_CONFIRMATION.PLACEHOLDER' | translate }}"
+                [ngClass]="{'is-invalid': (resetPasswordForm.controls['password_confirmation'].invalid && resetPasswordForm.controls['password_confirmation'].dirty)}" />
+
+            <ng-container [ngTemplateOutlet]="formError" 
+                [ngTemplateOutletContext]= "{ control: resetPasswordForm.controls['password_confirmation'], 
+                message: 'PAGE.AUTH.RESET_PASSWORD.PASSWORD_CONFIRMATION.VALIDATION_ERROR', validation: 'required' }"></ng-container>
+        </div>
+        <!--end::Form group-->
+
+        <!--begin::Form group-->
+        <div class="form-group d-flex flex-wrap pb-lg-0">
+            <button type="submit" id="kt_login_forgot_submit" tabindex="4"
+                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+                [ngClass]="{'spinner spinner-white spinner-right pr-15': boolLoading}">
+                {{ 'COMMON.LABEL.SAVE' | translate }}
+            </button>
+        
+            <a id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
+               tabindex="5" [routerLink]="['/user/login']">{{ 'COMMON.LABEL.CANCEL' | translate }}</a>
+        </div>
+
+        <!--end::Form group-->
+        <div></div>
+    </form>
+    <!--end::Form-->
+</div>
+
+
+<!--start::NG Template for Error Msgs -->
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <div *ngIf="(control.invalid && control.dirty)">
+        <div class="fv-plugins-message-container text-danger">
+            <div class="fv-help-block" [innerHTML]="message|translate"></div>
+        </div>
+    </div>
+</ng-template>
+<!--end::NG Template for Error Msgs -->
+  

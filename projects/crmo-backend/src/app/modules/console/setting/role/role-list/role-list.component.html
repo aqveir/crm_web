@@ -1,48 +1,21 @@
-<div class="full-content-page-height">
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.ROLE.LIST.TITLE'" [search]="objRawData?.length>0" (search)="fnFilterRecords($event)"
+        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'role', 'new']"></crmo-backend-widget-subheader>
+
+    <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
+
     <!--begin::Card-->
     <div class="card card-custom card-stretch gutter-b">
-        <div class="card-header border-0 py-5">
-            <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">
-                    {{ 'PAGE.ROLE.LIST.TITLE' | translate }}
-                </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">
-                    {{ 'PAGE.ROLE.LIST.FINE_TEXT' | translate }}
-                </span>
-            </h3>
-            <div class="card-toolbar">
-                <div class="form-group mr-2 mt-8">
-                    <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control" placeholder="Search..."/>
-                        <span><i class="flaticon2-search-1 icon-md"></i></span>
-                    </div>  
-                </div>
-                
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
-                [routerLink]="['/secure/setting/organization/', oHash, 'role', '0']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
-            </div>
-        </div>
-
-        <div class="card-body py-0">
-            <div class="table-responsive" *ngIf="listRoles?.length>0">
+        <div class="card-body">
+            <div class="table-responsive" *ngIf="objRawData?.length>0">
                 <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr class="text-uppercase">
-                            <th class="pl-0" style="min-width: 150px">{{ 'PAGE.ROLE.LIST.COLUMNS.NAME' | translate }}</th>
-                            <th style="min-width: 130px">{{ 'PAGE.ROLE.LIST.COLUMNS.STATUS' | translate }}</th>
-                            <th style="min-width: 150px">
-                                <span class="text-primary">{{ 'PAGE.ROLE.LIST.COLUMNS.LAST_MODIFIED' | translate }}</span>
-                                <span class="svg-icon svg-icon-sm svg-icon-primary">
-                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Down-2.svg-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                            <rect fill="#000000" opacity="0.3" x="11" y="4" width="2" height="10" rx="1" />
-                                            <path d="M6.70710678,19.7071068 C6.31658249,20.0976311 5.68341751,20.0976311 5.29289322,19.7071068 C4.90236893,19.3165825 4.90236893,18.6834175 5.29289322,18.2928932 L11.2928932,12.2928932 C11.6714722,11.9143143 12.2810586,11.9010687 12.6757246,12.2628459 L18.6757246,17.7628459 C19.0828436,18.1360383 19.1103465,18.7686056 18.7371541,19.1757246 C18.3639617,19.5828436 17.7313944,19.6103465 17.3242754,19.2371541 L12.0300757,14.3841378 L6.70710678,19.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 15.999999) scale(1, -1) translate(-12.000003, -15.999999)" />
-                                        </g>
-                                    </svg>
-                                    <!--end::Svg Icon-->
-                                </span>
+                            <th class="pl-5" style="width:100%;">{{ 'PAGE.ROLE.LIST.COLUMNS.NAME' | translate }}</th>
+                            <th style="min-width: 110px">{{ 'PAGE.ROLE.LIST.COLUMNS.STATUS' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
+                                {{ 'PAGE.ROLE.LIST.COLUMNS.LAST_MODIFIED' | translate }}
                             </th>
                         </tr>
                     </thead>
@@ -50,7 +23,7 @@
                     <tbody>
                         <tr *ngFor="let role of listRoles" class="cursor-pointer" style="outline: none;"
                             [routerLink]="['/secure/setting/organization', oHash, 'role', role.key]">
-                            <td>
+                            <td class="">
                                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ role.display_value }}</span>
                                 <span class="text-muted">{{ role.key }}</span>
                             </td>
@@ -67,9 +40,16 @@
                 </table>
             </div>
 
-            <div class="table-responsive d-flex no-records" *ngIf="listRoles?.length<1">
-                <div class="title">{{ 'COMMON.NO_DATA.TITLE' | translate }}</div>
-            </div>            
+            <div class="d-flex no-records align-items-center justify-content-center py-lg-20 py-sm-10" *ngIf="objRawData?.length<1">
+                <div class="col-md-9 col-sm-12">
+                    <div class="flex-grow-1 p-20 pb-40 card-rounded flex-grow-1 bgi-no-repeat" style="background-position: calc(100% + 0.5rem) bottom; background-size: 50% auto; background-image: url(assets/media/svg/humans/custom-10.svg)">
+                        <h2 class="text-dark pb-5 font-weight-bolder">{{ 'COMMON.NO_DATA.GET_STARTED.TITLE' | translate }}</h2>
+                        <p class="text-dark-50 pb-5 font-size-h5" innerHTML="{{ 'COMMON.NO_DATA.GET_STARTED.MESSAGE' | translate }}"></p>
+                        <a href="#" class="btn btn-primary font-weight-bold font-size-h6 px-10 py-4 mr-2"
+                            [routerLink]="['/secure/setting/organization/', oHash, 'role', 'new']">{{ 'COMMON.NO_DATA.GET_STARTED.BUTTON' | translate }}</a>
+                    </div>
+                </div>
+            </div> 
         </div>
     </div>
     <!--end::Card-->

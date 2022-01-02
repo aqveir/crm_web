@@ -1,33 +1,22 @@
-<div>
+<div class="d-block full-content-page-height">
+
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <crmo-backend-widget-subheader 
+                [title]="'PAGE.CONTACT.CONTACT_LIST.TITLE'"
+                [routerLinkAdd]="['/secure/contact', 'new']"
+                ></crmo-backend-widget-subheader>            
+        </div>
+        <div class="ml-2 py-2 py-lg-4">
+            <button class="btn btn-primary font-weight-bolder font-size-sm" (click)="fnShowUploadModal($event, modalUpload)">Upload</button>
+        </div>
+    </div>
+
     <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
 
     <!--begin::Card-->
     <div class="card card-custom gutter-b card-screen-height">
-        <div class="card-header border-0 py-2">
-            <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">
-                    {{ 'PAGE.CONTACT.CONTACT_LIST.TITLE' | translate }}
-                </span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">{{ pageRecordsLoaded }} records of {{ pageTotalSize }} loaded.</span>
-            </h3>
-            <div class="card-toolbar align-items-baseline">
-                <div class="form-group mr-2" *ngIf="listContact?.length>0">
-                    <div class="input-icon input-icon-right">
-                        <input type="text" class="form-control" placeholder="Search..."/>
-                        <span><i class="flaticon2-search-1 icon-md"></i></span>
-                    </div>  
-                </div>
-
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm mr-2" *ngIf="listContact?.length>0">
-                    <span class="navi-icon"><i class="la la-filter icon-md p-0"></i></span>
-                </a>
-                
-                <a href="#" class="btn btn-primary font-weight-bolder font-size-sm"
-                [routerLink]="['/secure/contact', 'new']">{{ 'COMMON.LABEL.ADD_NEW' | translate }}</a>
-            </div>
-        </div>
-
-        <div class="card-body py-0">
+        <div class="card-body">
             <div class="table-responsive" *ngIf="listContact?.length>0">
                 <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
                     <thead class="thead-dark">
@@ -98,4 +87,29 @@
         </div>
     </div>
     <!--end::Card-->
+
+    <!--begin::Modal FileUpload-->
+    <ng-template #modalUpload let-c="close" let-d="dismiss">
+        <div class="modal-header border-0">
+            <h5 class="modal-title">{{ 'PAGE.CONTACT.CONTACT_LIST.MODAL.TITLE' | translate }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseUploadModal(true)">
+                <i aria-hidden="true" class="ki ki-close"></i>
+            </button>
+        </div>
+
+        <div class="modal-body pb-3 pt-1">
+            <ng-uppy #uppyCtrl1 [config]="uppySettings"></ng-uppy>
+        </div>
+
+        <div class="modal-footer border-0 pt-0">
+            <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="3" 
+                (click)="fnCloseUploadModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
+
+            <button type="button" class="btn btn-primary font-weight-bold ml-2" [disabled]="boolUploading" tabindex="2"
+                (click)="fnUploadFileModal($event, uppyCtrl1)">{{ 'COMMON.LABEL.UPLOAD' | translate }}
+                <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolUploading"></span>
+            </button>
+        </div>
+    </ng-template>
+    <!--end::Modal FileUpload-->
 </div>

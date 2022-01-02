@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -17,12 +18,16 @@ import { IRole, RoleService } from 'crmo-lib';
 export class RoleDetailComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
+  public boolSaving: boolean = false;
+  public hasError: boolean = false;
 
   public oHash: string;
   public uuid: string;
   public objRole: any;
   public boolRefresh: boolean = false;
+  public boolIsNew: boolean = false;
 
+  public roleForm!: FormGroup;
 
   /**
    * Default constructor
@@ -120,6 +125,18 @@ export class RoleDetailComponent extends BaseComponent implements OnInit {
 
       throw error;
     } //Try-catch ends
+  } //Function ends
+
+
+  /**
+   * Reset form
+   */
+  public fnResetForm(boolNavBack: boolean=false): void {
+    //this.organizationForm.reset();
+
+    if (boolNavBack) {
+      this._router.navigate(['secure/setting/organization', this.oHash, 'role']);
+    } //End if
   } //Function ends
 
 

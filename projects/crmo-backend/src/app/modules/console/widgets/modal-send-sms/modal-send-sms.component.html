@@ -1,0 +1,36 @@
+<div class="modal-dialog m-0" role="document">
+    <div class="modal-content">
+        <form class="form" id="kt_modal_send_sms" novalidate="novalidate"
+            [formGroup]="smsForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="exampleModalLabel">{{ 'WIDGET.MODAL.SMS_SEND.TITLE' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+
+            <div class="modal-body p-5">
+                <div class="form-group">
+                    <textarea class="form-control" formControlName="sms_message" name="sms_message"
+                        rows="10" placeholder="{{ 'WIDGET.MODAL.SMS_SEND.FORM.MESSAGE.PLACEHOLDER' | translate }}"
+                        tabindex="1" autofocus autocomplete="off"></textarea>
+                </div>
+
+                <span class="form-text text-danger" *ngIf="smsForm.controls.sms_message.dirty && smsForm.controls.sms_message.invalid">
+                    {{ 'WIDGET.MODAL.SMS_SEND.FORM.MESSAGE.VALIDATION_ERROR' | translate }}
+                </span>
+            </div>
+
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="3" 
+                    (click)="fnCloseModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
+
+                <button type="submit" class="btn btn-primary font-weight-bold ml-2" [disabled]="boolLoading" tabindex="2">
+                    {{ 'COMMON.LABEL.SAVE' | translate }}
+                    <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolLoading"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

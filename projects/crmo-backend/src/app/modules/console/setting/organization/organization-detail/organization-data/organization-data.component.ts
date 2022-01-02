@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
@@ -8,7 +7,7 @@ import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.compon
 
 //Application Libraries
 import { NotificationService } from 'ellaisys-lib';
-import { OrganizationService, IOrganization, ILookup, ILookupValue } from 'crmo-lib';
+import { IOrganization, ILookup, ILookupValue } from 'crmo-lib';
 
 
 @Component({
@@ -17,15 +16,18 @@ import { OrganizationService, IOrganization, ILookup, ILookupValue } from 'crmo-
   styleUrls: ['./organization-data.component.scss']
 })
 export class OrganizationDataComponent extends BaseComponent implements OnInit, OnChanges {
+  @Input('form') organizationDetailForm: FormGroup = null;
   @Input('organization') objOrganization: IOrganization = null;
+  @Input('new') boolIsNew: boolean = false;
+  @Input('refresh') boolRefresh: boolean = false;
 
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public organizationDetailForm!: FormGroup;
   public objLookupIndustry: ILookup;
   public listLookupIndustryValues: ILookupValue[];
+  public imgOrganizationLogo: string = 'assets/media/organizations/logo-sample_200_200.png';
   
 
   /**
@@ -33,10 +35,6 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
    */
   constructor(
     private _globals: Globals,
-    private _router: Router,
-    private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder,
-    private _organizationService: OrganizationService,
     private _notification : NotificationService
   ) { super(); }
 
@@ -51,132 +49,55 @@ export class OrganizationDataComponent extends BaseComponent implements OnInit, 
   } //Function ends
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.objOrganization) {
-      //Update data on form
-      this.fnUpdateData();
+      let objOrganizationCurr: IOrganization =  changes.objOrganization.currentValue;
+      this.imgOrganizationLogo = objOrganizationCurr?.logo;
     } //End if
   } //Function ends
 
-  /**
-   * Initialize
-   */
-  private fnInitialize(): void {
-    //Load form
-    this.fnInitializeForm();
-
-    //Load lookup values
-    this.objLookupIndustry = this._globals.getLookupByKey('industry_type');
-    this.listLookupIndustryValues = (this.objLookupIndustry.values).filter((x: ILookupValue) => {return x.is_active==true});
-  } //Function ends
-
 
   /**
-   * Save Data
+   * File control change event
+   * 
+   * @param event 
    */
-  public fnSaveAction(): boolean {
+  public fnFileUploadChangeEvent(event: any): void {
     try {
-      //Check form validity
-      this.organizationDetailForm.updateValueAndValidity();
-      if (this.organizationDetailForm.invalid) { 
-        this.fnRaiseErrors(this.organizationDetailForm); 
+      let uploadedFile: File;
 
-        return false; 
+      if (event?.target?.files && event.target.files[0]) {
+        uploadedFile = event?.target?.files[0];
+
+        //Check if the file object is valid
+        if (uploadedFile) {
+          //Read the file and assign to local variable
+          const reader: FileReader = new FileReader();
+          reader.readAsDataURL(uploadedFile);
+          reader.onload = (evt) => {
+            this.imgOrganizationLogo = evt.target.result as string; 
+          };
+
+          //Assign the value to form control
+          this.organizationDetailForm.patchValue({
+            logo: uploadedFile
+          });
+        } //End if
+
       } //End if
-
-      // let objFormData: RequestUserLogin = this.organizationDetailForm.value;
-      // this.boolLoading = true;
-      // // this._logger.log('Your log message goes here');
-      // this._organizationService.update(objFormData)
-      //   .subscribe((response: ResponseUserLogin) => {
-      //     //Save the data into globals
-      //     this._globals.setClaim(response);
-
-      //     //Stop loader
-      //     this.boolLoading = false;
-
-      //     //Navidate to my account page
-      //     this._router.navigate(['/secure']);
-      //   },(error) => {
-      //     //Stop loader
-      //     this.boolLoading = false;
-
-      //     //Show Error
-      //     //this.hasError = true;
-
-      //     throw error;
-      //   });
-        // .then ((response) => {
-        //   // this._logger.log('Your log message goes here');
-        //   // this._logger.debug("Your Debug message goes here");
-        //   // this._logger.warn("Your Warning message goes here");
-
-        //   // this._router.navigate(['home']);
-        // })
-        // .catch()
-        // .finally();
-
-        return true;
-    } catch (error) {
-      //Stop loader
-      this.boolLoading = false;
-
+    } catch(error) {
       throw error;
     } //Try-catch ends
   } //Function ends
 
 
   /**
-   * Update form data
+   * Initialize
    */
-  private fnUpdateData() {
-    if (this.objOrganization) {
-      //website protocal
-      let strWebsiteProtocal: string = ((this.objOrganization.website?.indexOf('https'))<0)?'http://':'https://';
-      let strWebsiteURL: string = (this.objOrganization.website)?this.objOrganization.website?.replace(strWebsiteProtocal, ''):'';
-
-      this.organizationDetailForm.patchValue({
-        name: this.objOrganization.name?this.objOrganization.name:'',
-        hash: this.objOrganization.hash?this.objOrganization.hash:'',
-        logo: this.objOrganization.logo?this.objOrganization.logo:'',
-        subdomain: this.objOrganization.subdomain?this.objOrganization.subdomain:'',
-        industry_id:this.objOrganization.industry?(this.objOrganization.industry?.id):'',
-        website_protocal: strWebsiteProtocal,
-        website: strWebsiteURL,
-        search_tag: this.objOrganization.search_tag?this.objOrganization.search_tag:'',
-
-        contact_person_name: this.objOrganization.contact_person_name?this.objOrganization.contact_person_name:'',
-        phone: this.objOrganization.phone?this.objOrganization.phone:'',
-        email: this.objOrganization.email?this.objOrganization.email:'',
-      });
+  private fnInitialize(): void {
+    //Load lookup values
+    this.objLookupIndustry = this._globals.getLookupByKey('industry_type');
+    if (this.objLookupIndustry) {
+      this.listLookupIndustryValues = (this.objLookupIndustry?.values).filter((x: ILookupValue) => {return x.is_active==true});
     } //End if
-  }  //Function ends
-
-
-  /**
-   * Reset form
-   */
-  public fnResetForm(): void {
-    // this._logger.log('Your log message goes here');
-    this.organizationDetailForm.reset();
-  } //Function ends
-
-
-  /**
-   * Initialize Reactive Form
-   */
-  private fnInitializeForm() {
-    this.organizationDetailForm = this._formBuilder.group({
-      name: ['', [ Validators.required ]],
-      hash: [{value: null, disabled: true}],
-      logo: [''],
-      subdomain: ['', [ Validators.required ]],
-      industry_id: [''],
-      website_protocal: ['http://'],
-      website: ['', [Validators.pattern(Globals._REGEX_PATTERN_UEL)]],
-      search_tag: [''],
-      contact_person_name: [''],
-      phone: [''],
-      email: ['', [ Validators.email ]],
-    });
   } //Function ends
 
 } //Class ends

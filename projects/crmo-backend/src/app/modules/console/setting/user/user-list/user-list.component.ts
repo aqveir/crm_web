@@ -21,6 +21,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
   public oHash: string;
   public listUsers: IUser[];
 
+  private objRawData: IUser[];
 
   /**
    * Default constructor
@@ -62,14 +63,17 @@ export class UserListComponent extends BaseComponent implements OnInit {
    */
   public fnLoadData(): boolean {
     try {
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
+
       this.boolLoading = true;
-      this._userService.getUsers(this.oHash)
+      this._userService.getAll(params)
         .subscribe((response: IUser[]) => {
           //Stop loader
           this.boolLoading = false;
 
           //Fill Data into variable
-          this.listUsers = response;
+          this.objRawData = this.listUsers = response;
         },(error) => {
           //Stop loader
           this.boolLoading = false;
@@ -86,4 +90,13 @@ export class UserListComponent extends BaseComponent implements OnInit {
     } //Try-catch ends
   } //Function ends
 
+
+  /**
+   * Filter data from the Search Bar
+   * 
+   * @param strSearch 
+   */
+  public fnFilterRecords(strSearch: string): void {
+    this.listUsers = this.fnFilterData(this.objRawData, strSearch);
+  } //Function ends
 } //Class ends

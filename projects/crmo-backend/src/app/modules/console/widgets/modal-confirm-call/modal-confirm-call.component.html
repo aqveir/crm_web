@@ -1,0 +1,30 @@
+<div class="modal-dialog m-0" role="document">
+    <div class="modal-content">
+        <div class="modal-header border-0">
+            <h5 class="modal-title" id="exampleModalLabel">
+                <i class="fas fa-phone-alt icon-md mr-2"></i>
+                <span>{{ 'WIDGET.MODAL.CONFIRM_CALL.TITLE' | translate }}</span>
+            </h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
+                <i aria-hidden="true" class="ki ki-close"></i>
+            </button>
+        </div>
+
+        <div class="modal-body p-5">
+            <p class="text-justify mb-5 font-size-lg text-dark-50"
+                [innerHTML]="'WIDGET.MODAL.CONFIRM_CALL.MESSAGE.LABEL' | translate "></p>
+        </div>
+
+        <div class="modal-footer border-0 pt-0">
+            <button type="button" class="btn btn-light-dark font-weight-bold" data-dismiss="modal" 
+                tabindex="1" autofocus (click)="fnCloseModal()">
+                {{ 'WIDGET.MODAL.CONFIRM_CALL.BTN.REJECT.LABEL' | translate }}
+            </button>
+
+            <button type="button" class="btn btn-primary font-weight-bold" tabindex="2" (click)="fnCallConfirmModal()">
+                {{ 'WIDGET.MODAL.CONFIRM_CALL.BTN.CALL.LABEL' | translate }}
+            </button>
+        </div>
+    </div>
+</div>

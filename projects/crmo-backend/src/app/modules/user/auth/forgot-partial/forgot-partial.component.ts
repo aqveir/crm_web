@@ -2,29 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+//Application libraries
+import { IRequestUserForgotPassword, UserAuthService } from 'crmo-lib';
+
+//Application global files
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { BaseComponent } from '../../../base.component';
+
 @Component({
   selector: 'crmo-backend-forgot-partial',
   templateUrl: './forgot-partial.component.html',
   styleUrls: ['./forgot-partial.component.scss']
 })
-export class ForgotPartialComponent implements OnInit {
+export class ForgotPartialComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
 
   public forgotPasswordForm!: FormGroup;
   public hasError: boolean=false;
-  public pageAction: string = 'login-signin-on';
 
 
   /**
    * Default constructor
    */
   constructor(
-    //private _globals: Globals,
+    private _globals: Globals,
     private _router: Router,
     private _formBuilder: FormBuilder,
-    //private _custauthService: CustomerAuthService
-  ) { }
+    private _userService: UserAuthService
+  ) { super(); }
 
 
   /**
@@ -46,45 +52,48 @@ export class ForgotPartialComponent implements OnInit {
 
   } //Function ends
 
+  
   /**
-   * Authenticate the Customer
+   * On Submit Action
    */
-  public fnForgotPasswordAction() {
+  public fnOnSubmitAction(event: any) {
     try {
       //Check form validity
       this.forgotPasswordForm.updateValueAndValidity();
-      if (this.forgotPasswordForm.invalid) { /*this.fnRaiseErrors(this.forgotPasswordForm);*/ return false; }
+      if (this.forgotPasswordForm.invalid) { 
+        this.fnRaiseErrors(this.forgotPasswordForm);
+        return false; 
+      } //End if
 
-      // let objforgotPasswordForm: RequestCustomerLogin = this.forgotPasswordForm.value;
-      // this.boolLoading = true;
-      // // this._logger.log('Your log message goes here');
-      // this._custauthService.login(objforgotPasswordForm)
-      //   .subscribe((response: ResponseCustomerLogin) => {
-      //     //Save the data into globals
-      //     this._globals.setClaim(response);
+      let objforgotPasswordForm: IRequestUserForgotPassword = this.forgotPasswordForm.value;
+      this.boolLoading = true;
 
-      //     //Stop loader
-      //     this.boolLoading = false;
+      this._userService.forgot(objforgotPasswordForm)
+        .subscribe((response: any) => {
 
-      //     //Navidate to my account page
-      //     this._router.navigate(['/user/my-account']);
-      //   },() => {});
-        // .then ((response) => {
-        //   // this._logger.log('Your log message goes here');
-        //   // this._logger.debug("Your Debug message goes here");
-        //   // this._logger.warn("Your Warning message goes here");
+          if (response && response==true) {
+            //Show success notifocation msg
+            this._globals.showSuccess('NOTIFICATION.USER_AUTH.FORGOT_PASSWORD.SUCCESS_MESSAGE', true);
+          } else {
+            //Show error notifocation msg
+            this._globals.showError('NOTIFICATION.USER_AUTH.FORGOT_PASSWORD.ERROR_MESSAGE', true);
+          } //End if
 
-        //   // this._router.navigate(['home']);
-        // })
-        // .catch()
-        // .finally();
+          //Stop loader
+          this.boolLoading = false;
+
+          //Redirect tologin page
+          this._router.navigate(['user/login']);
+        },() => {
+          //Show error notifocation msg
+          this._globals.showError('NOTIFICATION.USER_AUTH.FORGOT_PASSWORD.ERROR_MESSAGE', true);   
+        });
         return true;
     } catch (error) {
       //Stop loader
       this.boolLoading = false;
-      return false;
 
-      // this._objError = this._error.handleError(error);
+      throw error;
     } //Try-catch ends
   } //Function ends
 
@@ -103,7 +112,7 @@ export class ForgotPartialComponent implements OnInit {
    */
   private fnforgotPasswordForm() {
     this.forgotPasswordForm = this._formBuilder.group({
-      email: ['amit.dhongde@gmail.com', Validators.required]
+      email: ['', [ Validators.required, Validators.email ]]
     });
   } //Function ends
 

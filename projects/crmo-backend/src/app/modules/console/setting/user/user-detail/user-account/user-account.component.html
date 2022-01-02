@@ -1,6 +1,4 @@
-<form class="form" id="kt_user_account_form" novalidate="novalidate"
-    [formGroup]="userAccountForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
-
+<div [formGroup]="userAccountForm">
     <!--begin::Row-->
     <div class="row">
         <div class="col-xl-2"></div>
@@ -21,16 +19,49 @@
                 <div class="form-group row">
                     <label class="col-form-label col-3 text-lg-right text-left">
                         {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.USERNAME.LABEL' | translate }}
+                        <span class="text-danger" *ngIf="boolIsNew">*</span>
                     </label>
                     <div class="col-9">
-                        <div class="spinner-success spinner-input" [ngClass]="{'spinner spinner-sm spinner-right': boolIsNewUser }">
+                        <div class="spinner-darker-primary spinner-input" [ngClass]="{'spinner spinner-sm spinner-right': boolValidatingUsername }">
                             <input class="form-control" type="text" formControlName="username"
                                 placeholder="{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.USERNAME.PLACEHOLDER' | translate }}"
-                                autocomplete="off" tabindex="1" autofocus />
+                                autocomplete="off" tabindex="1" (keyup)="fnValidateUsername($event)"/>
                             <span class="form-text text-muted">
                                 {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.USERNAME.FINE_TEXT' | translate }}
                             </span>
+
+                            <span class="form-text text-danger" 
+                                *ngIf="userAccountForm.controls.username.dirty && userAccountForm.controls.username.invalid">
+                                {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.USERNAME.VALIDATION_ERROR' | translate }}
+                            </span>
                         </div>
+                    </div>
+                </div>
+                <!--end::Group-->
+
+                <!--begin::Group-->
+                <div class="form-group row" *ngIf="boolIsNew">
+                    <label class="col-form-label col-3 text-lg-right text-left">
+                        {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.LABEL' | translate }}
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-7">
+                        <div class="spinner-darker-primary spinner-input">
+                            <input class="form-control" type="text" formControlName="password" #passwordUser
+                                placeholder="{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.PLACEHOLDER' | translate }}"
+                                autocomplete="off" tabindex="2"/>
+                            <span class="form-text text-muted">
+                                {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.FINE_TEXT' | translate }}
+                            </span>
+
+                            <span class="form-text text-danger" 
+                                *ngIf="userAccountForm.controls.password.dirty && userAccountForm.controls.password.invalid">
+                                {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.PASSWORD.VALIDATION_ERROR' | translate }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-2" style="margin-left: -20px;">
+                        <button type="button" class="btn btn-primary" (click)="fnGeneratePassword(passwordUser)">Generate</button>
                     </div>
                 </div>
                 <!--end::Group-->
@@ -208,29 +239,6 @@
                     </div>
                 </div>
                 <!--end::Group-->
-
-                <!--begin::Group-->
-                <div class="form-group row align-items-center">
-                    <label class="col-form-label col-3 text-lg-right text-left">
-                        {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.CUSTOMIZE.LABEL' | translate }}
-                    </label>
-                    <div class="col-9">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                            <input type="checkbox" formControlName="is_remote_access_only" />
-                            <span></span>{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.CUSTOMIZE.REMOTE_ONLY.LABEL' | translate }}</label>
-
-                            <!-- <label class="checkbox">
-                            <input type="checkbox" checked="checked" />
-                            <span></span>SMS</label>
-
-                            <label class="checkbox">
-                            <input type="checkbox" />
-                            <span></span>Phone</label> -->
-                        </div>
-                    </div>
-                </div>
-                <!--end::Group-->
             </div>
         </div>
     </div>
@@ -250,35 +258,49 @@
                 </div>
             </div>
             <!--end::Row-->
+
             <!--begin::Group-->
             <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">Login verification</label>
-                <div class="col-9">
-                    <button type="button" class="btn btn-light-primary font-weight-bold btn-sm">Setup login verification</button>
-                    <div class="form-text text-muted mt-3">After you log in, you will be asked for additional information to confirm your identity and protect your account from being compromised.
-                    <a href="#">Learn more</a>.</div>
-                </div>
-            </div>
-            <!--end::Group-->
-            <!--begin::Group-->
-            <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">Password reset verification</label>
+                <label class="col-form-label col-3 text-lg-right text-left">{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.REMOTE_ONLY.LABEL' | translate }}</label>
                 <div class="col-9">
                     <div class="checkbox-inline">
                         <label class="checkbox mb-2">
-                        <input type="checkbox" />
-                        <span></span>Require personal information to reset your password.</label>
+                            <input type="checkbox" formControlName="is_remote_access_only" />
+                            <span></span>{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.REMOTE_ONLY.PLACEHOLDER' | translate }}</label>
                     </div>
-                    <div class="form-text text-muted">For extra security, this requires you to confirm your email or phone number when you reset your password.
-                    <a href="#" class="font-weight-bold">Learn more</a>.</div>
+                    <div class="form-text text-muted" innerHTML="{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.REMOTE_ONLY.FINE_TEXT' | translate }}"></div>
                 </div>
             </div>
             <!--end::Group-->
+
             <!--begin::Group-->
-            <div class="form-group row mt-10">
+            <div class="form-group row mt-10" *ngIf="!boolIsNew">
                 <label class="col-3"></label>
                 <div class="col-9">
-                    <button type="button" class="btn btn-light-danger font-weight-bold btn-sm">Deactivate your account ?</button>
+                    <input type="checkbox" class="d-none" formControlName="is_active" />
+
+                    <div *ngIf="userAccountForm.controls.is_active.value==true">
+                        <button type="button" class="btn btn-light-danger font-weight-bold btn-sm" 
+                            (click)="fnToggleActiveAction()">
+                            {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.DEACTIVATE_ACCOUNT.LABEL' | translate }}
+                        </button>
+
+                        <span class="form-text text-muted" 
+                            innerHTML="{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.DEACTIVATE_ACCOUNT.FINE_TEXT' | translate }}">
+                        </span>                        
+                    </div>
+
+                    <div *ngIf="userAccountForm.controls.is_active.value==false">
+                        <button type="button" class="btn btn-light-primary font-weight-bold btn-sm"
+                            (click)="fnToggleActiveAction()">
+                            {{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.ACTIVATE_ACCOUNT.LABEL' | translate }}
+                        </button>
+
+                        <span class="form-text text-muted" 
+                            innerHTML="{{ 'PAGE.USER.DETAIL.TAB_ACCOUNT.ACTIVATE_ACCOUNT.FINE_TEXT' | translate }}">
+                        </span>
+                    </div>
+
                 </div>
             </div>
             <!--end::Group-->
@@ -286,4 +308,4 @@
         <div class="col-xl-2"></div>
     </div>
     <!--end::Row-->
-</form>
+</div>

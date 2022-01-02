@@ -2,11 +2,19 @@ import { Injectable } from "@angular/core";
 
 //Propritery Library
 import { IResponseUserLogin, IPrivilege, IUserStatusResponse, ILookupValue,
-    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole,  } from 'crmo-lib';
+    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole, IUserMinimal, UserService, RoleService, CountryService, ICountry } from 'crmo-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
 
 //Project References
 import { environment } from '@env-backend/environment';
+
+//Language Interface
+export interface IPasswordPolicy {
+    MIN_LENGTH: number;
+    MAX_LENGTH: number;
+    REGEX_PATTERN: RegExp;
+    RULES: any;
+} //Interface ends
 
 //Language Interface
 export interface ILanguage {
@@ -37,7 +45,9 @@ export class Globals {
     public static readonly _SESSION_SETTING_INFO_KEY: string='_SETTING_INFO_KEY';
     public static readonly _SESSION_ORG_ROLES: string='_SESSION_ORG_ROLES_KEY';
     public static readonly _SESSION_ORG_PRIVILEGES: string='_SESSION_ORG_PRIVILEGES_KEY';
+    public static readonly _SESSION_ORG_USERS: string='_SESSION_ORG_USERS_KEY';
     public static readonly _STORAGE_LOOKUP_KEY: string='_LOCAL_STORAGE_LOOKUP_DATA';
+    public static readonly _STORAGE_COUNTRIES: string='_LOCAL_STORAGE_COUNTRIES';
 
     //Event Broker constants
     public static readonly EVENT_SHOW_SUBMENU: string = "show-submenu";
@@ -49,14 +59,94 @@ export class Globals {
 
     //Application constants
     public static readonly _SCROLL_RELOAD_FACTOR: number = 0.9;
+    public static readonly _PASSWORD_POLICY: IPasswordPolicy = {
+        MIN_LENGTH: 8,
+        MAX_LENGTH: 99,
+        REGEX_PATTERN: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\^$*.\[\]{}\(\)?\-“!@#%&\/,><\’:;|_~`])\S{8,99}$/,
+        RULES: {
+            LOWERCASE: {
+                "id": "lowercase",
+                "label": "a-z",
+                "library": "abcdefghijklmnopqrstuvwxyz",
+                "checked": true
+            }, 
+            UPPERCASE: {
+                "id": "uppercase",
+                "label": "A-Z",
+                "library": "ABCDEFGHIJKLMNOPWRSTUVWXYZ",
+                "checked": true
+            }, 
+            NUMBERS: {
+                "id": "numbers",
+                "label": "0-9",
+                "library": "0123456789",
+                "checked": true
+            }, 
+            SYMBOLS: {
+                "id": "symbols",
+                "label": "!-?",
+                "library": "+-^$*[]{}()?!@#%&><:|_~",
+                "checked": true
+            }
+        }
+    };
+    public static readonly _LANGUAGES: any[] = [
+        {key:'id', display_value:'Bahasa Indonesia - Indonesian'},
+        {key:'msa', display_value:'Bahasa Melayu - Malay'},
+        {key:'ca', display_value:'Català - Catalan'},
+        {key:'cs', display_value:'Čeština - Czech'},
+        {key:'da', display_value:'Dansk - Danish'},
+        {key:'de', display_value:'Deutsch - German'},
+        {key:'en', display_value:'English US (Default)'},
+        {key:'en-gb', display_value:'English UK - British English'},
+        {key:'es', display_value:'Español - Spanish'},
+        {key:'eu', display_value:'Euskara - Basque (beta)'},
+        {key:'fil', display_value:'Filipino'},
+        {key:'fr', display_value:'Français - French'},
+        {key:'ga', display_value:'Gaeilge - Irish (beta)'},
+        {key:'gl', display_value:'Galego - Galician (beta)'},
+        {key:'hr', display_value:'Hrvatski - Croatian'},
+        {key:'it', display_value:'Italiano - Italian'},
+        {key:'hu', display_value:'Magyar - Hungarian'},
+        {key:'nl', display_value:'Nederlands - Dutch'},
+        {key:'no', display_value:'Norsk - Norwegian'},
+        {key:'pl', display_value:'Polski - Polish'},
+        {key:'pt', display_value:'Português - Portuguese'},
+        {key:'ro', display_value:'Română - Romanian'},
+        {key:'sk', display_value:'Slovenčina - Slovak'},
+        {key:'fi', display_value:'Suomi - Finnish'},
+        {key:'sv', display_value:'Svenska - Swedish'},
+        {key:'vi', display_value:'Tiếng Việt - Vietnamese'},
+        {key:'tr', display_value:'Türkçe - Turkish'},
+        {key:'el', display_value:'Ελληνικά - Greek'},
+        {key:'bg', display_value:'Български език - Bulgarian'},
+        {key:'ru', display_value:'Русский - Russian'},
+        {key:'sr', display_value:'Српски - Serbian'},
+        {key:'uk', display_value:'Українська мова - Ukrainian'},
+        {key:'he', display_value:'עִבְרִית - Hebrew'},
+        {key:'ur', display_value:'اردو - Urdu (beta)'},
+        {key:'ar', display_value:'العربية - Arabic'},
+        {key:'fa', display_value:'فارسی - Persian'},
+        {key:'mr', display_value:'मराठी - Marathi'},
+        {key:'hi', display_value:'हिन्दी - Hindi'},
+        {key:'bn', display_value:'বাংলা - Bangla'},
+        {key:'gu', display_value:'ગુજરાતી - Gujarati'},
+        {key:'ta', display_value:'தமிழ் - Tamil'},
+        {key:'kn', display_value:'ಕನ್ನಡ - Kannada'},
+        {key:'th', display_value:'ภาษาไทย - Thai'},
+        {key:'ko', display_value:'한국어 - Korean'},
+        {key:'ja', display_value:'日本語 - Japanese'},
+        {key:'zh-cn', display_value:'简体中文 - Simplified Chinese'},
+        {key:'zh-tw', display_value:'繁體中文 - Traditional Chinese'},
+    ];
 
     //RegEx Patterns
-    public static readonly _REGEX_PATTERN_UEL: string="/^(http[s]?://){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/";
+    public static readonly _REGEX_PATTERN_UEL: RegExp=/^(http[s]?:\/\/){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/;
 
     //Notification Options
     public static readonly NotificationDefaultOptions: any = {
         position: ["top", "right"],
-        timeOut: 1500,
+        timeOut: 3500,
         lastOnBottom: true,
         showProgressBar: false,
         pauseOnHover: true,
@@ -100,7 +190,8 @@ export class Globals {
     private objSettingInfo: SettingInfo = null;
     private listPrivileges: IPrivilege[] = null;
     private listRoles: IRole[] = null;
-
+    private listUsers: IUserMinimal[] = null;
+    private listCountry: ICountry[] = null;
 
     //Default Constructor
     constructor(
@@ -110,6 +201,9 @@ export class Globals {
         private _notificationService: NotificationService,
 
         private _lookupService: LookupService,
+        private _countryService: CountryService,
+        private _roleService: RoleService,
+        private _userService: UserService,
         private _userStatusService: UserStatusService
     ) {
     } //Function ends
@@ -193,6 +287,26 @@ export class Globals {
         this.claimUser = _claim;
     } //Function ends
 
+    //Show notification
+    public showSuccess(message: string, boolTranslate: boolean=false): void {
+        message = (boolTranslate)?this._translateService.instant(message):message;
+
+        this._notificationService.success(
+            this._translateService.instant('NOTIFICATION.COMMON.SUCCESS_TITLE'), 
+            message, 
+            Globals.NotificationDefaultOptions
+        );
+    } //Function ends
+    public showError(message: string, boolTranslate: boolean=false): void {
+        message = (boolTranslate)?this._translateService.instant(message):message;
+
+        this._notificationService.error(
+            this._translateService.instant('NOTIFICATION.COMMON.ERROR_TITLE'), 
+            message, 
+            Globals.NotificationDefaultOptions
+        );
+    } //Function ends
+
 
     /**
      * Getter and Setters for LookUp
@@ -220,7 +334,6 @@ export class Globals {
     public setLookUp(_lookup: ILookup[]) {
         this.lookup = _lookup;
     } //Function ends
-
 
 
     /**
@@ -274,6 +387,22 @@ export class Globals {
 
 
     /**
+     * Getter and Setters for Meta Data - Country List
+     */
+    public getCountries(): ICountry[] {
+        if(this.listCountry == null) {
+            let strJsonData = this._localStorageService.getItem(Globals._STORAGE_COUNTRIES);
+            this.listCountry = strJsonData;
+        } //End if
+        return this.listCountry;
+    } //Function ends
+    public setCountries(_listCountry: ICountry[]): void {
+        this._localStorageService.setItem(Globals._STORAGE_COUNTRIES, _listCountry);
+        this.listCountry = _listCountry;
+    } //Function ends
+
+
+    /**
      * Getter and Setters for Organization Roles
      */
     public getOrgRoles(): IRole[] {
@@ -286,6 +415,27 @@ export class Globals {
     public setOrgRoles(_listRoles: IRole[]): void {
         this._sessionStorageService.setItem(Globals._SESSION_ORG_ROLES, _listRoles);
         this.listRoles = _listRoles;
+    } //Function ends
+
+
+    /**
+     * Getter and Setters for Organization Users
+     */
+    public getOrgUsers(activeOnly: boolean=false): IUserMinimal[] {
+        if(this.listUsers == null) {
+            let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_ORG_USERS);
+            this.listUsers = strJsonData;
+        } //End if
+
+        if (activeOnly) {
+            return this.listUsers.filter((x) => { return x.is_active == true; });
+        } else {
+            return this.listUsers;
+        } //End if 
+    } //Function ends
+    public setOrgUsers(_listUsers: IUserMinimal[]): void {
+        this._sessionStorageService.setItem(Globals._SESSION_ORG_USERS, _listUsers);
+        this.listUsers = _listUsers;
     } //Function ends
 
 
@@ -346,6 +496,15 @@ export class Globals {
             //Load lookup data
             this.fnLoadLookupnData();
 
+            //Load Organization Users data
+            this.fnLoadOrgUsers();
+
+            //Load Organization Roles data
+            this.fnLoadOrgRoles();
+
+            //Load Countries Data
+            this.fnLoadCountriesData();
+
             /**
              * 
              * TODO: Add more method here that needs to be called on user login.
@@ -366,6 +525,54 @@ export class Globals {
             this._lookupService.getAll()
                 .subscribe((data: ILookup[]) => {
                     this.setLookUp(data);
+                },
+                (error) => { console.log(error); });
+        } catch(error) {
+            console.log(error);
+        } //Try-catch ends
+    } //Function ends
+
+
+    /**
+     * Load Organization Users Data from Backend Service
+     */
+    private fnLoadOrgUsers(): void {
+        try {
+            this._userService.getAll()
+                .subscribe((data: IUserMinimal[]) => {
+                    this.setOrgUsers(data);
+                },
+                (error) => { console.log(error); });
+        } catch(error) {
+            console.log(error);
+        } //Try-catch ends
+    } //Function ends
+
+
+    /**
+     * Load Organization Roles Data from Backend Service
+     */
+    private fnLoadOrgRoles(): void {
+        try {
+            this._roleService.getAll()
+                .subscribe((data: IRole[]) => {
+                    this.setOrgRoles(data);
+                },
+                (error) => { console.log(error); });
+        } catch(error) {
+            console.log(error);
+        } //Try-catch ends
+    } //Function ends
+
+
+    /**
+     * Load Countries Data (Meta Data) from Backend Service
+     */
+    private fnLoadCountriesData(): void {
+        try {
+            this._countryService.get()
+                .subscribe((data: ICountry[]) => {
+                    this.setCountries(data);
                 },
                 (error) => { console.log(error); });
         } catch(error) {

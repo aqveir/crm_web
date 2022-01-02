@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "projects": {
+    "crmomni-web": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "apps/crmomni-web",
+      "sourceRoot": "apps/crmomni-web/src",
+      "prefix": "eis",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/crmomni-web",
+            "index": "apps/crmomni-web/src/index.html",
+            "main": "apps/crmomni-web/src/main.ts",
+            "polyfills": "apps/crmomni-web/src/polyfills.ts",
+            "tsConfig": "apps/crmomni-web/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/crmomni-web/src/favicon.ico",
+              "apps/crmomni-web/src/assets"
+            ],
+            "styles": ["apps/crmomni-web/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/crmomni-web/src/environments/environment.ts",
+                  "with": "apps/crmomni-web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "crmomni-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "crmomni-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "crmomni-web:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/crmomni-web/tsconfig.app.json",
+              "apps/crmomni-web/tsconfig.spec.json",
+              "apps/crmomni-web/tsconfig.editor.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/crmomni-web/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/crmomni-web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "crmomni-web-e2e": {
+      "root": "apps/crmomni-web-e2e",
+      "sourceRoot": "apps/crmomni-web-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/crmomni-web-e2e/cypress.json",
+            "tsConfig": "apps/crmomni-web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "crmomni-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "crmomni-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/crmomni-web-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/crmomni-web-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "core": {
+      "projectType": "library",
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "prefix": "eis",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/tsconfig.lib.json",
+              "libs/core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/core/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "crmomni-web"
+}

@@ -26,6 +26,9 @@
 //Import NgSelect Default Theme
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+//Import Uppy Theme
+@import "./assets/plugins/uppy/uppy.css";
+
 // For RTL, check this documentation https://keenthemes.com/metronic/?page=docs&section=angular-rtl
 // @import "./assets/sass/style.angular.rtl.css";
 
@@ -75,12 +78,21 @@
   display: none !important;
 }
 
+.dropdown-menu {
+    box-shadow: 0px 0px 50px 0px rgb(52 46 76 / 30%);
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
+
+// New changes from Metronic 8.0
+.bg-opacity-75 {
+    background-color: rgba(245,248,250,.75)!important;
+}
 
 // CRMO NgSelect Customization
 .form-control.ng-select {
@@ -97,9 +109,13 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; }
 .card.card-screen-height {
     min-height: calc(100vh - 150px);
 }
+.subheader .form-control.search-control {
+    width: 25vw;
+    min-width: 250px;
+}
 
 // CRMO Table style for listing
-$TABLE-CELL-WIDTH-DATE: 130px;
+$TABLE-CELL-WIDTH-DATE: 150px;
 table.table {
     thead {
         &.thead-dark {
@@ -157,6 +173,6 @@ table.table {
 }
 
 //Page full hight
-.full-content-page-height > .card {
+.full-content-page-height > .card.card-stretch {
     min-height: calc(100vh - 145px);
 }

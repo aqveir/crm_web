@@ -20,6 +20,7 @@ export class RoleListComponent extends BaseComponent implements OnInit {
 
   public oHash: string;
   public listRoles: IRole[];
+  public objRawData: IRole[];
 
 
   /**
@@ -73,7 +74,7 @@ export class RoleListComponent extends BaseComponent implements OnInit {
           this.boolLoading = false;
 
           //Fill Data into variable
-          this.listRoles = response;
+          this.objRawData = this.listRoles = response;
 
           //Raise event to show submenu
           this._broker.emit<boolean>(Globals.EVENT_SHOW_SUBMENU, true);
@@ -91,6 +92,16 @@ export class RoleListComponent extends BaseComponent implements OnInit {
 
       throw error;
     } //Try-catch ends
+  } //Function ends
+
+
+  /**
+   * Filter data from the Search Bar
+   * 
+   * @param strSearch 
+   */
+  public fnFilterRecords(strSearch: string): void {
+    this.listRoles = this.fnFilterData(this.objRawData, strSearch);
   } //Function ends
 
 } //Class ends

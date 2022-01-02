@@ -1,8 +1,16 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
+//Third-part references
+import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { UppyAngularComponent, UppyConfig } from 'uppy-angular';
+
+//Project References
+import { environment } from '@env-backend/environment';
+import { NotificationService, TranslateService } from 'ellaisys-lib';
+import { ContactService, IContact } from 'crmo-lib';
+
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { ContactService, IContact } from 'crmo-lib';
 import { BaseComponent } from '../../../base.component';
 
 
@@ -14,10 +22,47 @@ import { BaseComponent } from '../../../base.component';
 export class ContactListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public isLoading: boolean = false;
+  public boolUploading: boolean = false;  //Upload Modal
 
   public listContact: IContact[] = null;
   public pageRecordsLoaded: number = 0;
-  public pageTotalSize: number = 100;  
+  public pageTotalSize: number = 100;
+  public uppySettings: UppyConfig = {
+    uploadAPI: {
+      endpoint: environment.uppy_configuration.contact_upload.xhr_endpoint,
+      headers: {
+        Authorization: 'bearer ' + this._globals.getClaim()['token']
+      }
+    },
+    plugins: {
+      Webcam: false,
+      GoogleDrive: true,
+      Instagram: false,
+      Facebook: false,
+      Dropbox: true,
+      ScreenCapture:false
+    },
+    restrictions: {
+      maxFileSize: environment.uppy_configuration.contact_upload.file_size_bytes,
+      maxNumberOfFiles: 5,
+      minNumberOfFiles: 1,
+      allowedFileTypes: ['.csv', '.xls', '.xlsx']
+    },
+    statusBarOptions: {
+      hideUploadButton: true,
+    },
+    uploaderLook: {
+      proudlyDisplayPoweredByUppy: false
+    },
+    options: {
+      id: 'crmoni', //A site-wide unique ID for the instance.
+      debug: false,
+      browserBackButtonClose: true,
+      autoProceed: false, //Setting this to true will start uploading automatically after the first file is selected without waiting for upload button trigger.
+      allowMultipleUploads: false, //Setting this to true,  users can upload some files, and then add more files and upload those as well
+      meta: {} //Metadata object, used for passing things like public keys, usernames, tags and so on
+    }
+  };
 
   private viewName: string = '*';
   private filterName: string = 'my_all';
@@ -27,6 +72,7 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   private elemPage: any;
   private scrollId: string = 'abcd';
   private payload: any = null;
+  private modalUploadRef: NgbModalRef;
   
 
   /**
@@ -35,6 +81,10 @@ export class ContactListComponent extends BaseComponent implements OnInit {
   constructor(
     private _globals: Globals,
     private _contactService: ContactService,
+    private _modalService: NgbModal,
+    private _modalConfig: NgbModalConfig,
+    private _notification: NotificationService,
+    private _translate: TranslateService
   ) { super(); }
 
 
@@ -70,10 +120,16 @@ export class ContactListComponent extends BaseComponent implements OnInit {
     this.isLoading = showLoader;
     this.isScrollLoading = true;
 
-    console.log('this.pageFrom.toString()', this.pageFrom.toString());
+    //Build Params
+    let params: Object = {
+      'view': this.viewName,
+      'filter': this.filterName,
+      'page': pageFrom,
+      'size': pageSize,
+    };
 
     //Fetch data from server
-    this._contactService.getAll(this.viewName, this.filterName, pageFrom, pageSize, this.payload)
+    this._contactService.getAll(this.payload, params)
       .subscribe((response: IContact[]) => {
         //Clear leading status
         this.isLoading = false;
@@ -111,6 +167,59 @@ export class ContactListComponent extends BaseComponent implements OnInit {
 
   public fnSortColumn(columnName: string, sortDir: string): void {
 
+  } //Function ends
+
+
+  /**
+   * Upload button on the toolbar to show upload modal
+   * 
+   * @param event 
+   * @param container 
+   */
+  public fnShowUploadModal(event: any, container: any): void {
+    this.modalUploadRef = this._modalService.open(container, {size: 'lg'});
+  } //Function ends
+
+
+  /**
+   * Close the modal using the dismiss button or close button
+   * 
+   * @param isDismissed 
+   */
+  public fnCloseUploadModal(isDismissed: boolean = false): void {
+    this.modalUploadRef.close({dismissed: isDismissed});
+  } //Function ends
+
+
+  /**
+   * Process the upload action
+   * 
+   * @param event 
+   * @param _uppy 
+   */
+  public fnUploadFileModal(event: any, _uppy: UppyAngularComponent): void {
+    _uppy.uppyInstance.upload()
+      .then((result: any) => {
+
+        //Check for upload status (success/failure)
+        if (result.failed?.length > 0) {
+          this._translate.get('PAGE.CONTACT.CONTACT_LIST.MODAL.NOTIFICATION.FAILURE').subscribe((result: any) => {
+            result.failed.forEach((file: any) => {
+              this._notification.error(result.TITLE, file.error);
+            });
+          });
+        } else {
+          this._translate.get('PAGE.CONTACT.CONTACT_LIST.MODAL.NOTIFICATION.SUCCESS').subscribe((result: any) => {
+            this._notification.success(result.TITLE, result.MESSAGE);
+          });
+        } //End if
+
+        //Uppy reset and close
+        _uppy.uppyInstance.reset();
+        _uppy.uppyInstance.close();
+
+        this.modalUploadRef.close({dismissed: false});
+      });
   } //Function ends
 
 

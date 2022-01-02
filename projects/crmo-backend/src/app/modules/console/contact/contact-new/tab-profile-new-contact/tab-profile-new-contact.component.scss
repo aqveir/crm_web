@@ -1,0 +1,32 @@
+.mr--40 {
+    margin-right: -40px;
+}
+.mr--30 {
+    margin-right: -30px;
+}
+.mr--20 {
+    margin-right: -20px;
+}
+.mr--10 {
+    margin-right: -10px;
+}
+
+.contact-phone {
+    .input-group-append {
+        > .input-group-text {
+            padding: 0.5rem 1rem !important;
+
+            &:first-child {
+                border-radius: 0px !important;
+            }
+            &:last-child {
+                border-radius: 0px 5px 5px 0px !important;
+            }
+        }
+
+    }
+
+    input[type=tel].form-control {
+        border-radius: 0px !important;
+    }
+}

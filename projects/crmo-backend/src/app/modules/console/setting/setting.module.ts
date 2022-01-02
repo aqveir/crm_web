@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Application Modules
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { SettingRoutingModule } from './setting-routing.module';
 import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'ellaisys-lib';
+import { SettingRoutingModule } from './setting-routing.module';
+import { WidgetsModule } from '../widgets/widgets.module';
+import { LayoutModule } from '../_layout/layout.module';
 
 // Application Components
 import { RoleListComponent } from './role/role-list/role-list.component';
@@ -26,6 +29,12 @@ import { OrganizationConfigurationDataComponent } from './organization/organizat
 import { OrganizationMailTemplateListComponent } from './organization/organization-detail/organization-mail-template-list/organization-mail-template-list.component';
 import { PreferenceListComponent } from './preference/preference-list/preference-list.component';
 import { PreferenceDetailComponent } from './preference/preference-detail/preference-detail.component';
+import {AccountListComponent} from './account/account-list/account-list.component';
+import { AccountDetailComponent } from './account/account-detail/account-detail.component';
+import { SubscriptionListComponent } from './subscription/subscription-list/subscription-list.component';
+import { SubscriptionDetailComponent } from './subscription/subscription-detail/subscription-detail.component';
+import { SubscriptionAddComponent } from './subscription/subscription-add/subscription-add.component';
+
 
 
 @NgModule({
@@ -48,6 +57,14 @@ import { PreferenceDetailComponent } from './preference/preference-detail/prefer
     OrganizationConfigurationListComponent,
     PreferenceListComponent,
     PreferenceDetailComponent,
+
+    AccountListComponent,
+    AccountDetailComponent,
+    //AccountDataComponent,
+    
+    SubscriptionListComponent,
+    SubscriptionDetailComponent,
+    SubscriptionAddComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +72,7 @@ import { PreferenceDetailComponent } from './preference/preference-detail/prefer
     ReactiveFormsModule,
 
     //Imported Modules
+    NgbModule,
     NgSelectModule,
 
     //EllaiSys Library
@@ -66,6 +84,8 @@ import { PreferenceDetailComponent } from './preference/preference-detail/prefer
     IntlTelInputModule,
 
     //Application Modules
+    WidgetsModule,
+    LayoutModule,
     SettingRoutingModule
   ]
 })

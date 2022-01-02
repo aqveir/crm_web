@@ -1,7 +1,7 @@
 <!--begin::PrimaryAside-->
 <div class="aside-primary d-flex flex-column align-items-center flex-row-auto">
   <!--begin::PrimaryAside Logo-->
-  <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-12"
+  <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-6"
     id="kt_brand" [ngClass]="brandClasses">
     <a routerLink="/" class="brand-logo">
       <img alt="Logo" src="./assets/media/logos/logo-letter-2.png" class="max-h-30px" />
@@ -28,7 +28,7 @@
 
 <!-- begin::PrimanyAside TabMenu -->
 <ng-template #menuTabSectionTemplate let-tab="tab">
-  <li class="nav-item mb-2" placement="right" container="body" 
+  <li class="nav-item mb-1" placement="right" container="body" 
     [ngbTooltip]="tab.translate | translate" *ngIf="fnValidateUserPrivileges(tab)">
     <!-- start: without submenu-->
     <a class="nav-link btn btn-icon btn-clean btn-lg" id="kt_aside_menu" 

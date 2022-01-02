@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
@@ -8,26 +8,26 @@ import { BaseComponent } from '../../../../../base.component';
 
 //Application Libraries
 import { NotificationService } from 'ellaisys-lib';
-import { IUser, IResponse, UserService, ILookup, ILookupValue } from 'crmo-lib';
+import { IUser, UserService } from 'crmo-lib';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'crmo-backend-user-account',
   templateUrl: './user-account.component.html',
   styleUrls: ['./user-account.component.scss']
 })
-export class UserAccountComponent  extends BaseComponent implements OnInit, OnChanges {
+export class UserAccountComponent  extends BaseComponent implements OnInit {
+  @Input('form') userAccountForm: FormGroup = null;
   @Input('user') objUser: IUser = null;
+  @Input('new') boolIsNew: boolean = false;
   @Input('refresh') boolRefresh: boolean = false;
-  @Output('user') user: EventEmitter<IUser> = new EventEmitter<IUser>();
-  @Output('save') saveEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public userAccountForm!: FormGroup;
-  public boolIsNewUser: boolean = false;
   public listLanguages: any;
+  public boolValidatingUsername: boolean = false;
   
 
   /**
@@ -37,7 +37,6 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
     private _globals: Globals,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder,
     private _userService: UserService,
     private _notification: NotificationService,
   ) { super(); }
@@ -51,13 +50,6 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
     //Initilaize component
     this.fnInitialize();
   } //Function ends
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes && (changes.objUser || changes.boolRefresh)) {
-
-      //Load data on form
-      this.fnLoadData();
-    } //End if
-  } //Function ends
 
   
   /**
@@ -67,85 +59,81 @@ export class UserAccountComponent  extends BaseComponent implements OnInit, OnCh
     //Load languages supported
     let listLanguages: [] = Globals.APPLICATION_CONSTANT.LANGUAGES;
     this.listLanguages = listLanguages.filter((x: any) => { return x.is_active==true });
-
-    //Load form
-    this.fnInitializeForm();
   } //Function ends
 
-  
+
   /**
-   * Save Data
+   * Toggle the User (active/deactive status)
    */
-  public fnSaveAction(): boolean {
-    try {
-      //Check form validity
-      this.userAccountForm.updateValueAndValidity();
-      if (this.userAccountForm.invalid) { 
-        this.fnRaiseErrors(this.userAccountForm); 
+  public fnToggleActiveAction(): void {
+    let boolCurrActiveState: boolean = (this.userAccountForm.contains('is_active'))?(this.userAccountForm.controls['is_active'].value):false;
+    
+    this.userAccountForm.patchValue({
+      is_active: !boolCurrActiveState
+    });
+  } //Function ends
 
-        return false; 
-      } //End if
 
-      //Set values
-      let objUser: IUser = this.objUser;
-      let listControls: any = this.userAccountForm.controls;
-      Object.keys(listControls).forEach((key: string) => {
-        objUser[key] = (listControls[key].dirty)?listControls[key].value:objUser[key];
+  /**
+   * Validate Username for Duplicate
+   * @param event 
+   */
+  public fnValidateUsername(event: any): void {
+    let username: string = event?.target?.value;
 
-        //Update username for new user (without hash value)
-        if (key=='email' && objUser['hash']==null) {
-          objUser['username'] = objUser['email'];
+    if (username.length>=3) {
+      this.boolValidatingUsername=true;
+
+      //Create object
+      let param: Object = { 'username': username };
+
+      this._userService.exists(param)
+      .subscribe((response: any) => {
+        let boolExists: boolean = response.data;
+
+        if (boolExists) {
+          this.userAccountForm.controls['username'].setErrors({'exists': boolExists});
         } //End if
+
+        //Stop animation
+        this.boolValidatingUsername = false;
+      },(error) => {
+        //Stop animation
+        this.boolValidatingUsername = false;
+
+        throw error;
       });
+    } //End if    
+  } //Function ends
 
-      //Emit data to update save
-      this.user.emit(objUser);
 
-      return true;
-    } catch (error) {
-      //Stop loader
-      this.boolLoading = false;
+  /**
+   * Generate Ramdom Password for User
+   * 
+   * @param elem 
+   */
+  public fnGeneratePassword(elem): void {
+    try {
+      let dictionary = [].concat(
+        Globals._PASSWORD_POLICY.RULES.LOWERCASE.library.split(""),
+        Globals._PASSWORD_POLICY.RULES.UPPERCASE.library.split(""),
+        Globals._PASSWORD_POLICY.RULES.NUMBERS.library.split(""),
+        Globals._PASSWORD_POLICY.RULES.SYMBOLS.library.split("")
+      );
 
+      // Generate random password from array
+      let lenPassword: number = (Math.random() * 20) + Globals._PASSWORD_POLICY.MIN_LENGTH;
+
+      let generatedPassword: string = "";
+      for (let i: number = 0; i < lenPassword; i++) {
+        generatedPassword += dictionary[Math.floor(Math.random() * dictionary.length)];
+      } //Loop ends
+
+      //Set Generated password into the field
+      elem.value=generatedPassword;
+    } catch(error) {
       throw error;
     } //Try-catch ends
-  } //Function ends
-
-
-  /**
-   * Load form data
-   */
-  private fnLoadData(): void {
-    if (this.objUser && this.userAccountForm) {
-      //check the new user status
-      this.boolIsNewUser = (this.objUser?.hash==null)?true:false;
-
-      this.userAccountForm.patchValue({
-        username: this.objUser.username?this.objUser.username:'',
-        language: this.objUser.language?this.objUser.language:'en',
-        is_remote_access_only: this.objUser.is_remote_access_only?this.objUser.is_remote_access_only:false,
-      });
-    } //End if
-  } //Function ends
-
-
-  /**
-   * Reset form
-   */
-  public fnResetForm(): void {
-    this.userAccountForm.reset();
-  } //Function ends
-
-
-  /**
-   * Initialize Reactive Form
-   */
-  private fnInitializeForm(): void {
-    this.userAccountForm = this._formBuilder.group({
-      username: ['', [ Validators.required ]],
-      timezone_id: ['', [ Validators.required ]],
-      language: ['en'],
-      is_remote_access_only: [false],
-    });
   } //Function ends
 
 } //Class ends

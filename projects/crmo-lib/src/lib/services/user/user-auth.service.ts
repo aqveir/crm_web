@@ -3,12 +3,12 @@ import { Observable, Observer } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
 // Framework files
-import { HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
+import { ContentType, HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 
 // Interfaces
 import { IResponseError } from '../../interfaces/common/response.interface';
-import { IRequestUserLogin, IResponseUserLogin } from '../../interfaces/user/user-auth.interface';
+import { IRequestUserForgotPassword, IRequestUserLogin, IRequestUserResetPassword, IResponseUserLogin } from '../../interfaces/user/user-auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,8 @@ export class UserAuthService extends BaseService {
 
 
   /**
-   * user Authentication/Sign In
-   * 
    * Authenticate the user using the backend service.
+   * 
    * @param _data IRequestUserLogin
    */
   public login(_data: IRequestUserLogin): Observable<any> {
@@ -37,7 +36,7 @@ export class UserAuthService extends BaseService {
       .set('device_id', _data.device_id);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user/login', params, true, false)
+      this._httpService.post('user/login', params, false, null, ContentType.ENCODED_FORM_DATA)
         .then((response: any) => {
           let claim: IResponseUserLogin = response.data;
 
@@ -63,7 +62,7 @@ export class UserAuthService extends BaseService {
    * Logout the user using the backend service.
    */
   public logout(): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this._httpService.put('user/logout', null)
         .then((response: any) => {
 
@@ -73,6 +72,40 @@ export class UserAuthService extends BaseService {
           } //End if          
 
           observer.next(response);
+        })
+        .catch((error: IResponseError) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
+   * User Forgot Password
+   * 
+   * @param _data IRequestUserForgotPassword
+   */
+  public forgot(_data: IRequestUserForgotPassword): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('user/forgot', _data)
+        .then((response: any) => {
+          observer.next(response.data);
+        })
+        .catch((error: IResponseError) =>  { observer.error(error); })
+        .finally();
+    });
+  } //Function ends
+
+
+  /**
+   * User Reset Password
+   * 
+   * @param _data IRequestUserResetPassword
+   */
+  public reset(_data: IRequestUserResetPassword): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('user/reset', _data)
+        .then((response: any) => {
+          observer.next(response.data);
         })
         .catch((error: IResponseError) =>  { observer.error(error); })
         .finally();

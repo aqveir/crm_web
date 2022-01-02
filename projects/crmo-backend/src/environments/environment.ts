@@ -19,7 +19,7 @@ export const environment = {
     api_server: {
       force_env: true, //Force this configuration
       
-      server: 'http://ellaisys.crmomni.com/',
+      server: 'https://ellaisys.aqveir.com/',
       apiUrl: 'api/',
       title: '',
       headers: {
@@ -105,9 +105,26 @@ export const environment = {
     }
   },
 
+  // Uppy XHR configuration
+  uppy_configuration: {
+    contact_upload: {
+      xhr_endpoint: "http://ellaisys.crmomni.com/api/contact/upload",
+      file_size_bytes: 1000000,      
+    },
+    document_upload: {
+      xhr_endpoint: "http://ellaisys.crmomni.com/api/document",
+      file_size_bytes: 1000000,   
+    }
+  },
+
   // Facebook share
   facebook:{
     fb_appId:'1658574024410741' //Beta
+  },
+
+  //Stripe integration
+  stripe: {
+    publishable_key: 'pk_test_51ITl4lFoTpVJV8LygXIMZ2ox1phnpLm04OdEFbUBIxwFz8akusvtMuWewWJrTD50Ja7jKRebhlSwZBffzadiwfbn0079AOXjub'
   }
 };
 

@@ -1,148 +1,117 @@
-<form class="form" id="kt_user_profile_form" novalidate="novalidate"
-    [formGroup]="userProfileForm" (ngSubmit)="fnSaveAction()" autocomplete="off">
-    <!--begin::Row-->
-    <div class="row" style="min-height: calc(100vh - 330px);">    
-        <div class="col-xl-4">
-            <!--begin::Group-->
-            <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">
-                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.AVATAR.LABEL' | translate }}
-                </label>
-                <div class="col-9">
-                    <div class="image-input image-input-empty image-input-outline" 
-                        id="kt_user_edit_avatar" 
-                        [style.background-image]="(objUser?.avatar)?'url('+objUser.avatar+')':'url(assets/media/users/blank.png)'">
-                        <div class="image-input-wrapper"></div>
-                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                            <i class="fa fa-pen icon-sm text-muted"></i>
-                            <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
-                            <input type="hidden" name="profile_avatar_remove" />
-                        </label>
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                        </span>
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                        </span>
-                    </div>
+<!--begin::Row-->
+<div class="row" [formGroup]="userProfileForm" style="min-height: calc(100vh - 330px);">    
+    <div class="col-xl-4">
+        <!--begin::Group-->
+        <div class="form-group row">
+            <label class="col-form-label col-3 text-lg-right text-left">
+                {{ 'PAGE.USER.DETAIL.TAB_PROFILE.AVATAR.LABEL' | translate }}
+            </label>
+            <div class="col-9">
+                <div class="image-input image-input-empty image-input-outline" 
+                    id="kt_user_edit_avatar" 
+                    [style.background-image]="(strUserAvatar)?'url('+strUserAvatar+')':'url(assets/media/users/blank.png)'">
+                    <div class="image-input-wrapper"></div>
+                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                        <i class="fa fa-pen icon-sm text-muted"></i>
+                        <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="profile_avatar_remove" />
+                    </label>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                    </span>
+                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                        <i class="ki ki-bold-close icon-xs text-muted"></i>
+                    </span>
                 </div>
             </div>
-            <!--end::Group-->            
         </div>
+        <!--end::Group-->            
+    </div>
 
-        <div class="col-xl-7 my-2">
-            <!--begin::Row-->
-            <!-- <div class="row">
-                <label class="col-3"></label>
-                <div class="col-9">
-                    <h6 class="text-dark font-weight-bold mb-10">Customer Info:</h6>
-                </div>
-            </div> -->
-            <!--end::Row-->
+    <div class="col-xl-7 my-2">
+        <!--begin::Group-->
+        <div class="form-group row">
+            <label class="col-form-label col-3 text-lg-right text-left">
+                {{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.LABEL' | translate }}
+                <span class="text-danger">*</span>
+            </label>
+            <div class="col-9">
+                <input class="form-control" type="text" formControlName="first_name"
+                placeholder="{{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.PLACEHOLDER' | translate }}"
+                autocomplete="off" tabindex="1" autofocus />
+                <span class="form-text text-muted">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.FINE_TEXT' | translate }}
+                </span>
 
-            <!--begin::Group-->
-            <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">
-                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.LABEL' | translate }}
-                    <span class="text-danger">*</span>
-                </label>
-                <div class="col-9">
-                    <input class="form-control" type="text" formControlName="first_name"
-                    placeholder="{{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.PLACEHOLDER' | translate }}"
-                    autocomplete="off" tabindex="1" autofocus />
-                    <span class="form-text text-muted">
-                        {{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.FINE_TEXT' | translate }}
-                    </span>
-                </div>
+                <span class="form-text text-danger" *ngIf="userProfileForm.controls.first_name.dirty && userProfileForm.controls.first_name.invalid">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.VALIDATION_ERROR' | translate }}
+                </span>
             </div>
-            <!--end::Group-->
-
-            <!--begin::Group-->
-            <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">
-                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.LAST_NAME.LABEL' | translate }}
-                </label>
-                <div class="col-9">
-                    <input class="form-control" type="text" formControlName="last_name"
-                    placeholder="{{ 'PAGE.USER.DETAIL.TAB_PROFILE.LAST_NAME.PLACEHOLDER' | translate }}"
-                    autocomplete="off" tabindex="2" />
-                    <span class="form-text text-muted">
-                        {{ 'PAGE.USER.DETAIL.TAB_PROFILE.LAST_NAME.FINE_TEXT' | translate }}
-                    </span>
-                </div>
-            </div>
-            <!--end::Group-->
-
-            <!--begin::Group-->
-            <!-- <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">Company Name</label>
-                <div class="col-9">
-                    <input class="form-control form-control-lg form-control-solid" type="text" value="Loop Inc." />
-                    <span class="form-text text-muted">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
-                </div>
-            </div> -->
-            <!--end::Group-->
-
-            <!--begin::Group-->
-            <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">Contact Phone</label>
-                <div class="col-9">
-                    <div class="input-group input-group-lg input-group-solid">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="la la-phone"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control form-control-lg form-control-solid" value="+45678967456" placeholder="Phone" />
-                    </div>
-                    <span class="form-text text-muted">We'll never share your email with anyone else.</span>
-                </div>
-            </div>
-            <!--end::Group-->
-            
-            <!--begin::Group-->
-            <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">
-                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.LABEL' | translate }}
-                    <span class="text-danger">*</span>
-                </label>
-                <div class="col-9">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="la la-at"></i>
-                            </span>
-                        </div>
-                        <input class="form-control" type="email" formControlName="email"
-                            placeholder="{{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.PLACEHOLDER' | translate }}"
-                            autocomplete="off" tabindex="4" />
-                    </div>
-                    <span class="form-text text-muted">
-                        {{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.FINE_TEXT' | translate }}
-                    </span>
-                </div>
-            </div>
-            <!--end::Group-->
-
-            <!--begin::Group-->
-            <!-- <div class="form-group row">
-                <label class="col-form-label col-3 text-lg-right text-left">Company Site</label>
-                <div class="col-9">
-                    <div class="input-group input-group-lg input-group-solid">
-                        <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" value="loop" />
-                        <div class="input-group-append">
-                            <span class="input-group-text">.com</span>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!--end::Group-->
         </div>
-    </div>
-    <!--end::Row-->
+        <!--end::Group-->
 
-    <div class="card-footer pb-0">
-        <button type="submit" class="btn btn-primary mr-2" tabindex="8">{{ 'COMMON.LABEL.SAVE' | translate }}</button>
-        <button type="reset" class="btn btn-secondary" tabindex="9">{{ 'COMMON.LABEL.CANCEL' | translate }}</button>
+        <!--begin::Group-->
+        <div class="form-group row">
+            <label class="col-form-label col-3 text-lg-right text-left">
+                {{ 'PAGE.USER.DETAIL.TAB_PROFILE.LAST_NAME.LABEL' | translate }}
+            </label>
+            <div class="col-9">
+                <input class="form-control" type="text" formControlName="last_name"
+                placeholder="{{ 'PAGE.USER.DETAIL.TAB_PROFILE.LAST_NAME.PLACEHOLDER' | translate }}"
+                autocomplete="off" tabindex="2" />
+                <span class="form-text text-muted">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.LAST_NAME.FINE_TEXT' | translate }}
+                </span>
+            </div>
+        </div>
+        <!--end::Group-->
+
+        <!--begin::Group-->
+        <div class="form-group row">
+            <label class="col-form-label col-3 text-lg-right text-left">
+                {{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.LABEL' | translate }}
+            </label>
+            <div class="col-9">
+                <intl-tel-input [cssClass]="'form-control pl-5'" formControlName="phone_form_control"
+                    [searchCountryFlag]="true" [enablePlaceholder]="true" [separateDialCode]="false"
+                    [phoneValidation]="true" [selectedCountryISO]="(objUser?.country)?(objUser?.country?.alpha2_code):'in'"></intl-tel-input>
+                <span class="form-text text-muted">{{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.FINE_TEXT' | translate }}</span>
+
+                <span class="form-text text-danger" *ngIf="userProfileForm.controls.phone_form_control.dirty && userProfileForm.controls.phone_form_control.invalid">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.VALIDATION_ERROR' | translate }}
+                </span>
+            </div>
+        </div>
+        <!--end::Group-->
+        
+        <!--begin::Group-->
+        <div class="form-group row">
+            <label class="col-form-label col-3 text-lg-right text-left">
+                {{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.LABEL' | translate }}
+                <span class="text-danger">*</span>
+            </label>
+            <div class="col-9">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="la la-at"></i>
+                        </span>
+                    </div>
+                    <input class="form-control" type="email" formControlName="email"
+                        placeholder="{{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.PLACEHOLDER' | translate }}"
+                        (keyup)="fnUpdateEmailAddress($event)"
+                        autocomplete="off" tabindex="4" />
+                </div>
+                <span class="form-text text-muted">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.FINE_TEXT' | translate }}
+                </span>
+
+                <span class="form-text text-danger" *ngIf="userProfileForm.controls.email.dirty && userProfileForm.controls.email.invalid">
+                    {{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.VALIDATION_ERROR' | translate }}
+                </span>
+            </div>
+        </div>
+        <!--end::Group-->
     </div>
-</form>
+</div>
+<!--end::Row-->

@@ -1,13 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-//Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { IContact, INote} from 'crmo-lib';
+//Application libraries
+import { EventBrokerService } from 'ellaisys-lib';
+import { IContact, INote, NoteService} from 'crmo-lib';
 
 //Application Files
+import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ModalNoteComponent } from '../../../widgets/modal-note/modal-note.component';
 
 @Component({
   selector: 'crmo-backend-tab-note',
@@ -15,20 +14,18 @@ import { ModalNoteComponent } from '../../../widgets/modal-note/modal-note.compo
   styleUrls: ['./tab-note.component.scss']
 })
 export class TabNoteComponent extends BaseComponent implements OnInit {
-  @Input('contact') objContact: IContact;
+  @Input('contact') objContact: IContact = null;
   @Output('refresh') boolRefresh: EventEmitter<boolean> = new EventEmitter<boolean>();
-  //@ViewChild('modalNoteAmend') content: TemplateRef<any>;
 
   public objNote: INote = null;
-
 
   /**
    * Default constructor
    */
   constructor(
     private _globals: Globals,
-    private _modalConfig: NgbModalConfig,
-    private _modalService: NgbModal
+    private _broker: EventBrokerService,
+    private _noteService: NoteService
   ) { super(); }
 
 
@@ -51,21 +48,38 @@ export class TabNoteComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnAddEditNote(_note?: INote): void {
-    const modalNoteRef = this._modalService.open(ModalNoteComponent, {
-      centered: true, backdrop: 'static', backdropClass: ''
-    });
-    modalNoteRef.componentInstance.strEntityType = 'entity_type_contact';
-    modalNoteRef.componentInstance.intReferenceId = 5;
-    modalNoteRef.componentInstance.objNote = _note;
-    modalNoteRef.result.then(
-      result => { this.boolRefresh.emit(result.refresh); }
-    );
+  /**
+   * Save Note (Add/Edit) action
+   * 
+   * @param objNote 
+   */
+  public fnAddEditNote(objNote?: INote): void {
+    this._broker.emit('show_note_modal', ['entity_type_contact', this.objContact?.id, objNote, ((status: boolean)=>{
+      this.boolRefresh.emit(status);
+    })]);
   } //Function ends
-  
 
-  public fnNoteSaved($event): void {
-    this.boolRefresh.emit(true);
+
+  /**
+   * Delete Note action
+   * 
+   * @param objNote 
+   */
+  public fnDeleteAction(objNote: INote): void {
+    //Show a confirmation modal
+    this._broker.emit('modal-confirm-delete', [null, ((status: boolean)=>{
+      if (status == true) {
+        this._noteService.delete(objNote?.id)
+        .subscribe((response: any) => {
+          this._globals.showSuccess('Successfully Deleted');
+
+          //Refresh List
+          this.boolRefresh.emit(true);
+        },(error) => {
+          throw error;
+        });
+      } //End if
+    })]);
   } //Function ends
 
 } //Class ends

@@ -3,7 +3,7 @@ import { Observable, Observer } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
 //Framework files
-import { HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
+import { ContentType, HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 
 //Interfaces
@@ -36,11 +36,11 @@ export class ContactAuthService extends BaseService {
     let params = new HttpParams()
       .set('username', _data.username)
       .set('password', _data.password)
-      .set('country_idd', _data.country_idd)
+      .set('phone_idd', _data.phone_idd)
       .set('device_id', _data.device_id);
 
     return Observable.create((observer: Observer<any>) => {
-      this._httpService.post('contact/login', params, true, false)
+      this._httpService.post('contact/login', params, false, null, ContentType.ENCODED_FORM_DATA)
         .then((response: any) => {
           let claim: IResponseContactLogin = response.data;
 

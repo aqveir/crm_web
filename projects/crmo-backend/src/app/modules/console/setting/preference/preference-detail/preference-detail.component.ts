@@ -22,7 +22,9 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   public oHash: string;
   public uuid: string;
   public objPreference: IPreference;
+
   public boolRefresh: boolean = false;
+  public boolIsNew: boolean = false;
   
   public preferencesForm!: FormGroup;
   public preferencesDataForm!: FormGroup;
@@ -74,7 +76,12 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
 
     //Load lookup values
     this.objLookup = this._globals.getLookupByKey('data_type');
-    this.listDataTypes = (this.objLookup.values).filter((x: ILookupValue) => {return x.is_active==true});
+    this.listDataTypes = (this.objLookup.values).filter((x: ILookupValue) => {
+      return (
+        (x.is_active==true) &&
+        ((['data_type_string', 'data_type_json'].find((z: string) => {return z==x.key}))==null)
+      )
+    });
 
     //Create User Object
     if (uuid=='new') {
@@ -83,21 +90,25 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       //Load form
       this.fnLoadData();      
     } //End if
-
   } //Function ends
 
   
   /**
    * Create data
    */
-  private fnCreateData(): IPreferenceRequest {
-    let objPreference: IPreferenceRequest;
+  private fnCreateData(): void {
+    //Set new flag
+    this.boolIsNew = true;
 
-    return objPreference = {
-      name: null,
-      display_value: null,
-      type_key: 'industry_type_vanilla'
-    };
+    if (this.preferencesForm) { 
+      //Enable-Disable some controls
+      this.preferencesForm.controls['is_active'].disable();
+      this.preferencesForm.controls['name'].enable();
+      this.preferencesForm.controls['is_multiple'].disable();
+      this.preferencesForm.controls['is_minimum'].disable();
+      this.preferencesForm.controls['is_maximum'].disable();
+      this.preferencesForm.controls['external_url'].disable();
+    } //End if
   } //Function ends
  
   
@@ -133,42 +144,60 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
-
-
-  // public fnUpdateData(_objUser: IUser): boolean {
-  //   try {
-  //     this.boolRefresh = false;
-  //     this.objPreference = _objUser;
-  //     this.boolRefresh = true;
-  //     return true;
-  //   } catch (error) {
-  //     throw error;
-  //   } //Try-catch ends 
-  // }
-
-
-  // public fnSaveData(event): boolean {
-  //   try {
-  //     this.boolRefresh = true;
-  //     return true;
-  //   } catch (error) {
-  //     throw error;
-  //   } //Try-catch ends 
-  // }
-
   
   
   /**
    * Save Data
    */
-  public fnSaveAction(): boolean {
+  public fnSaveAction(event: any): boolean {
     try {
       //Check form validity
       this.preferencesForm.updateValueAndValidity();
       if (this.preferencesForm.invalid) { 
-        this.fnRaiseErrors(this.preferencesForm); 
-
+        let msgError: string = this.fnRaiseErrors(this.preferencesForm); 
+        this._notification.error('Error', msgError);
         return false; 
+      } //End if
+
+      //Build the params for passing
+      let params: Object = {'key': this.oHash};
+
+      //Set form value to request object
+      let dataPreference: IPreferenceRequest = this.preferencesForm.value;
+
+      this.boolLoading = true;
+      if (this.boolIsNew) {
+        this._preferenceService.create(dataPreference, params)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
+
+          //Stop loader
+          this.boolLoading = false;
+        },(error) => {
+          //Stop loader
+          this.boolLoading = false;
+          throw error;
+        });
+      } else {
+        this._preferenceService.update(parseInt(this.uuid), dataPreference, params)
+        .subscribe((response: any) => {
+          //Show notification
+          this._globals.showSuccess('NOTIFICATION.USER_DETAILS.SUCCESS_MESSAGE', true);
+
+          //Action based on submitter
+          this.fnPostSaveAction(event?.submitter?.id);
+
+          //Stop loader
+          this.boolLoading = false;
+        },(error) => {
+          //Stop loader
+          this.boolLoading = false;
+          throw error;
+        });
       } //End if
 
       return true;
@@ -179,6 +208,33 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       throw error;
     } //Try-catch ends
   } //Function ends
+
+
+  /**
+   * Post Save Action
+   * 
+   * @param submitterId
+   */
+  private fnPostSaveAction(submitterId: string): void {
+    //Action based on submitter
+    switch (submitterId) {
+      case 'save_and_new':
+        this._router.navigate(['secure/setting/organization', this.oHash, 'preference', 'new'])
+          .then(() => {
+            window.location.reload();
+          });
+        break;
+
+      case 'save_and_exit':
+        this._router.navigate(['secure/setting/organization', this.oHash, 'preference']);
+        break;
+    
+      case 'save_and_continue':
+      default:
+        //Do nothing
+        break;
+    } //End switch
+  } //function ends
 
 
   /**
@@ -196,16 +252,19 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
         is_active: this.objPreference.is_active?this.objPreference.is_active:true,
         is_minimum: this.objPreference.is_minimum?this.objPreference.is_minimum:false,
         is_maximum: this.objPreference.is_maximum?this.objPreference.is_maximum:false,
-        is_multiple: this.objPreference.is_multiple?this.objPreference.is_multiple:false
+        is_multiple: this.objPreference.is_multiple?this.objPreference.is_multiple:false,
+        external_url:this.objPreference.external_url?this.objPreference.external_url:'',
       });
 
       //Set Data Type
       this.strDataType = this.objPreference.type?.key;
 
       //Enable-Disable some controls
+      this.preferencesForm.controls['is_active'].enable();
       this.preferencesForm.controls['name'].disable();
       this.preferencesForm.controls['is_minimum'].disable();
       this.preferencesForm.controls['is_maximum'].disable();
+      this.preferencesForm.controls['external_url'].disable();
 
       switch (this.strDataType) {
         case 'data_type_number':
@@ -214,8 +273,8 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
           break;
   
         case 'data_type_lookup':
+          //Create data form and set values
           this.preferencesDataForm = this.fnDataForm();
-          //this.preferencesDataForm.addControl()
           this.preferencesForm.addControl('data', this.preferencesDataForm);
           this.preferencesForm.controls['data'].patchValue({
             id: (this.objPreference?.data)?(this.objPreference?.data.id):null,
@@ -243,6 +302,10 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
           } //Loop ends
           break;
       
+        case 'data_type_external':
+          this.preferencesForm.controls['external_url'].enable();
+          break;
+
         default:
           break;
       } //End switch
@@ -253,8 +316,13 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   /**
    * Reset form
    */
-  public fnResetForm(): void {
+  public fnResetForm(boolNavBack: boolean=false): void {
     this.preferencesForm.reset();
+
+ 
+    if (boolNavBack) {
+      this._router.navigate(['secure/setting/organization', this.oHash, 'preference' ]);
+    } //End if
   } //Function ends
 
 
@@ -269,19 +337,37 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
     this.preferencesForm.controls['is_minimum'].disable();
     this.preferencesForm.controls['is_maximum'].setValue(false);
     this.preferencesForm.controls['is_maximum'].disable();
+    this.preferencesForm.controls['external_url'].setValue('');
+    this.preferencesForm.controls['external_url'].disable();
     this.strDataType = event?.key;
+
+    if (this.preferencesForm.contains('data')) {
+      this.preferencesForm.removeControl('data');        
+    } //End if  
 
     switch (event?.key) {
       case 'data_type_number':
         this.preferencesForm.controls['is_minimum'].enable();
         this.preferencesForm.controls['is_maximum'].enable();
+        this.preferencesForm.controls['is_multiple'].enable();
         break;
 
       case 'data_type_lookup':
-        this.preferencesForm.addControl('data', this.fnDataForm());
+        //Create data form and set values
+        if (!this.preferencesForm.contains('data')) {
+          this.preferencesDataForm = this.fnDataForm();
+          this.preferencesForm.addControl('data', this.preferencesDataForm);          
+        } //End if
+        this.preferencesForm.controls['is_multiple'].enable();
+        break;
+
+      case 'data_type_external':
+        this.preferencesForm.controls['external_url'].enable();
+        this.preferencesForm.controls['is_multiple'].enable();
         break;
     
       default:
+        this.preferencesForm.controls['is_multiple'].disable();
         break;
     } //End switch
   } //Function ends
@@ -295,28 +381,33 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
     return preferencesDataValues.controls as FormGroup[];
   } //Function ends
 
-  public fnAddPreferenceDataValue(): boolean {
+
+  /**
+   * Add Value Form to the Preferences Form
+   */
+  public fnAddPreferenceDataValue(): void {
     try {
-      this.boolRefresh = true;
-
+      //Add new data value form to the form array
       let preferenceDataValues = this.preferencesDataForm.controls.values as FormArray;
-      preferenceDataValues.controls.push(this.fnDataForm());
+      preferenceDataValues.controls.push(this.fnDataValueForm());
 
-      return true;
+      //Assign the value back
+      this.preferencesDataForm.controls.values = preferenceDataValues;
     } catch (error) {
       throw error;
     } //Try-catch ends 
-  }
+  } //FUnction ends
 
 
-  public fnRemovePreferenceDataValue(index): boolean {
+  /**
+   * Remove the Data Value by Position Index
+   * 
+   * @param index 
+   */
+  public fnRemovePreferenceDataValue(index): void {
     try {
-      this.boolRefresh = true;
-
       let preferenceDataValues = this.preferencesDataForm.controls.values as FormArray;
       preferenceDataValues.removeAt(index);
-
-      return true;
     } catch (error) {
       throw error;
     } //Try-catch ends 
@@ -331,13 +422,14 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
       name: ['', [ Validators.required ]],
       display_value: ['', [ Validators.required ]],
       column_name: [''],
-      type_key: ['', [ Validators.required ]],
-      keywords: [''],
+      type_key: ['data_type_boolean', [ Validators.required ]],
+      keywords: ['', [ Validators.required ]],
       order: [0, [ Validators.min(0)]],
-      is_active: [true],
-      is_minimum: [false],
-      is_maximum: [false],
-      is_multiple: [false]
+      is_active: [ true ],
+      is_minimum: [ false ],
+      is_maximum: [ false ],
+      is_multiple: [ false ],
+      external_url: ['']
     });
   } //Function ends
   private fnDataForm(): FormGroup {
@@ -352,7 +444,7 @@ export class PreferenceDetailComponent extends BaseComponent implements OnInit {
   private fnDataValueForm(): FormGroup {
     return this._formBuilder.group({
       id: [0],
-      value: [''],
+      value: ['', [ Validators.required ]],
       display_value: ['', [ Validators.required ]],
       description: [''],
       is_active: [true]

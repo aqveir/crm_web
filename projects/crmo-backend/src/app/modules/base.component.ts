@@ -1,6 +1,8 @@
 import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidationErrors } from '@angular/forms';
 
+//Third Party components and libraries
+import moment from 'moment';
 
 export abstract class BaseComponent {
 
@@ -12,20 +14,114 @@ export abstract class BaseComponent {
 
 
   /**
+   * Convert JsDate to NgbFormatDateTime
+   * 
+   * @param dtInput
+   */
+  public fnConvertJsDateToNgbFormatDateTime(dtInput: Date): any {
+    try {
+      let dtInputDate: Date = new Date(dtInput);
+      if (dtInputDate==null) { dtInputDate = new Date(); }
+
+      return {
+        date: {day:dtInputDate.getDate(), month:(dtInputDate.getMonth()+1), year: dtInputDate.getFullYear()},
+        time: {hour: dtInputDate.getHours(), minute: dtInputDate.getMinutes(), second: 0}
+      };
+    } catch(error) {
+      throw error;
+    } //Try-Catch ends
+  } //Function ends
+
+  
+  /**
+   * Convert Moment to NgbFormatDateTime
+   * 
+   * @param dtInput
+   */
+  public fnConvertMomentToNgbFormatDateTime(dtInput: moment.Moment): any {
+    try {
+      let dtInputDate: moment.Moment = dtInput;
+      if (!dtInputDate.isValid()) { dtInputDate = moment(); }
+
+      return {
+        date: {day:dtInputDate.get('date'), month: (dtInputDate.get('month')+1), year: dtInputDate.get('year')},
+        time: {hour: dtInputDate.get('hour'), minute: dtInputDate.get('minute'), second: 0}
+      };
+    } catch(error) {
+      throw error;
+    } //Try-Catch ends
+  } //Function ends
+
+
+  /**
+   * Filter Data from the given collection using search string
+   * 
+   * @param collection 
+   * @param strSearch 
+   */
+  public fnFilterData(collection: any, strSearch: string): any {
+    try {
+      if (strSearch && strSearch.length > 0) {
+        return collection.filter((data: any) => JSON.stringify(data).toLowerCase().includes(strSearch.toLowerCase()));
+      } else {
+        return collection;
+      } //End if
+    } catch(error) {
+      throw error;
+    } //Try-Catch ends
+  } //Function ends
+
+
+  /**
+   * Transform Reactive Form Group into HttpFormData
+   * 
+   * @param dataForm FormGroup
+   */
+  public fnTransformReactiveFormGroup2FormData(dataForm: FormGroup): any {
+    let formData: FormData = new FormData();
+
+    Object.keys(dataForm.controls).forEach((name: string) => {
+      let value: any = dataForm.controls[name].value;
+      formData.append(name, value); 
+    });
+    return formData;
+  } //Function ends
+
+
+  /**
    * Raise Errors as Appropriate
    * 
    * @param formGroup 
    */
-  public fnRaiseErrors(_formGroup : FormGroup) {
-    Object.keys(_formGroup.controls).forEach(field => {
-      const control = _formGroup.get(field);
+  public fnRaiseErrors(_formGroup : FormGroup): string {
+    let strReturnValue: string = '';
+    try {
+      Object.keys(_formGroup.controls).forEach(field => {
+        const control = _formGroup.get(field);
 
-      if (control instanceof FormControl) {
-        control.markAsDirty({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.fnRaiseErrors(control);
-      } //End if
-    });
+        //Set all controls dirty to trigger validation
+        if (control instanceof FormControl) {
+          control.markAsDirty({ onlySelf: true });
+
+          if (control.invalid) {
+            strReturnValue += field + ': ' + JSON.stringify(control.errors);
+          } //End if
+        } else if (control instanceof FormGroup) {
+          strReturnValue += this.fnRaiseErrors(control);
+        } else if (control instanceof FormArray) {
+          //Iterate the array
+          control.controls?.forEach((ctrl: any) => {
+            if (ctrl instanceof FormGroup) {
+              strReturnValue += this.fnRaiseErrors(ctrl);
+            } //End if            
+          });
+        } //End if
+      });
+      
+      return strReturnValue;
+    } catch(error) {
+      throw error;
+    } //Try-catch ends
   } //Function ends
 
 

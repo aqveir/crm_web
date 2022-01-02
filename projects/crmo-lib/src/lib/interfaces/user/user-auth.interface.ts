@@ -39,7 +39,7 @@ export interface IResponseUserLogout {
     email: string;
     phone: string;
     password: string;
-	country_idd: string;
+	phone_idd: string;
 }
 
 
@@ -57,7 +57,7 @@ export interface IRequestUserRegister {
     email: string;
     phone: string;
     password: string;
-	country_idd: string;
+	phone_idd: string;
 }
 export interface IResponseUserRegister {
 	first_name: string;
@@ -65,7 +65,7 @@ export interface IResponseUserRegister {
     email: string;
     phone: string;
     password: string;
-	country_idd: string;
+	phone_idd: string;
 }
 
 
@@ -82,4 +82,11 @@ export interface IRequestUserForgotPassword {
     email: string;
 }
 export interface IResponseUserForgotPassword {
+}
+
+export interface IRequestUserResetPassword {
+    token: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
 }

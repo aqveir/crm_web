@@ -1,0 +1,230 @@
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+		[title]="'PAGE.SUBSCRIPTION.ADD.TITLE'" 
+		[page-info]="roleForm?.controls['name'].value"
+		[save-group]="true" [back]="true" [loading]="boolSaving"
+		(back)="fnResetForm(true)"></crmo-backend-widget-subheader>
+
+    <!--begin::Payment method-->
+    <div class="card card-custom gutter-b">
+        <!--begin::Card header-->
+        <div class="card-header d-flex">
+            <!--begin::Card title-->
+            <div class="card-title flex-fill">
+                <div class="flex-row">
+                    <span class="font-weight-bolder"><h5>{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.TITLE' | translate }}</h5></span>                       
+                </div>
+            </div>
+            <!--end::Card title-->
+
+            <!--begin::Card toolbar-->
+            <div class="card-toolbar">
+                <a href="javascript:;" class="btn btn-light-primary" (click)="fnAddPaymentMethod($event, 'card')">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.ADD_CARD_ACTION_BUTTON' | translate }}</a>
+            </div>
+            <!--end::Card toolbar-->
+        </div>
+        <!--end::Card header-->
+
+        <!--begin::Card body-->
+        <div class="card-body p-5">
+            <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
+
+            <!--begin::Options-->
+            <div id="kt_create_new_payment_method" *ngIf="!boolLoading && listPaymentMethods?.length>0">
+                <ngb-accordion #accPaymentMethods="ngbAccordion" [closeOthers]="true">
+                    <ngb-panel *ngFor="let paymentmethod of listPaymentMethods" [id]="paymentmethod.id" cardClass="">
+                        <!--begin::Option-->
+                        <ng-template ngbPanelHeader let-opened="opened">
+                            <!--begin::Header-->
+                            <div class="py-3 d-flex flex-stack flex-wrap bg-white border-light-white">
+                                <!--begin::Toggle-->
+                                <div class="d-flex flex-fill align-items-center collapsible toggle" data-bs-toggle="collapse" data-bs-target="#kt_create_new_payment_method_1">
+                                    <!--begin::Arrow-->
+                                    <div class="btn btn-sm btn-icon btn-active-color-primary ms-n3 ml-2">
+                                        <!--begin::Svg Icon | path: icons/duotone/Interface/Minus-Square.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-2x" *ngIf="opened" (click)="accPaymentMethods.toggle(paymentmethod.id)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.25" d="M6.54184 2.36899C4.34504 2.65912 2.65912 4.34504 2.36899 6.54184C2.16953 8.05208 2 9.94127 2 12C2 14.0587 2.16953 15.9479 2.36899 17.4582C2.65912 19.655 4.34504 21.3409 6.54184 21.631C8.05208 21.8305 9.94127 22 12 22C14.0587 22 15.9479 21.8305 17.4582 21.631C19.655 21.3409 21.3409 19.655 21.631 17.4582C21.8305 15.9479 22 14.0587 22 12C22 9.94127 21.8305 8.05208 21.631 6.54184C21.3409 4.34504 19.655 2.65912 17.4582 2.36899C15.9479 2.16953 14.0587 2 12 2C9.94127 2 8.05208 2.16953 6.54184 2.36899Z" fill="#000000" />
+                                                <path d="M8 13C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11H16C16.5523 11 17 11.4477 17 12C17 12.5523 16.5523 13 16 13H8Z" fill="#ffffff" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        
+                                        <!--begin::Svg Icon | path: icons/duotone/Interface/Plus-Square.svg-->
+                                        <span class="svg-icon svg-icon-danger svg-icon-2x toggle-off" *ngIf="!opened" (click)="accPaymentMethods.toggle(paymentmethod.id)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.25" fill-rule="evenodd" clip-rule="evenodd" d="M6.54184 2.36899C4.34504 2.65912 2.65912 4.34504 2.36899 6.54184C2.16953 8.05208 2 9.94127 2 12C2 14.0587 2.16953 15.9479 2.36899 17.4582C2.65912 19.655 4.34504 21.3409 6.54184 21.631C8.05208 21.8305 9.94127 22 12 22C14.0587 22 15.9479 21.8305 17.4582 21.631C19.655 21.3409 21.3409 19.655 21.631 17.4582C21.8305 15.9479 22 14.0587 22 12C22 9.94127 21.8305 8.05208 21.631 6.54184C21.3409 4.34504 19.655 2.65912 17.4582 2.36899C15.9479 2.16953 14.0587 2 12 2C9.94127 2 8.05208 2.16953 6.54184 2.36899Z" fill="#000000" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 17C12.5523 17 13 16.5523 13 16V13H16C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11H13V8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8V11H8C7.44772 11 7 11.4477 7 12C7 12.5523 7.44771 13 8 13H11V16C11 16.5523 11.4477 17 12 17Z" fill="#ffffff" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Arrow-->
+
+                                    <!--begin::Icon-->
+                                    <div class="symbol symbol-40px ml-3">
+                                        <div class="symbol-label bg-light">
+                                            <img [src]="'assets/media/svg/card-logos/'+paymentmethod?.card?.brand+'.svg'" class="w-35px" alt="" />
+                                        </div>
+                                    </div>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Summary-->
+                                    <div class="ml-3">
+                                        <div class="d-flex align-items-center" >
+                                            <span class="font-weight-boldest font-size-h6" (click)="accPaymentMethods.toggle(paymentmethod.id)">
+                                                {{ paymentmethod?.card?.brand | titlecase }}
+                                                **** {{ paymentmethod?.card?.last4 }}
+                                            </span>
+                                            
+                                            <div class="label label-lg label-inline label-light-primary mx-2" *ngIf="paymentmethod.is_default">
+                                                {{ 'PAGE.SUBSCRIPTION.ADD.CARDS.DEFAULT_CARD' | translate }}
+                                            </div>
+                                        </div>
+                                        <div class="text-muted">Expires: {{ fnGetMonthName(paymentmethod?.card?.exp_month) | slice:0:3 | uppercase }} {{ paymentmethod?.card?.exp_year }}</div>
+                                    </div>
+                                    <!--end::Summary-->
+                                </div>
+                                <!--end::Toggle-->
+
+                                <!--begin::Input-->
+                                <div class="d-flex my-3">
+                                    <!--begin::Radio-->
+                                    <label class="radio radio-lg mr-3">
+                                        <input type="radio" name="payment_method" [checked]="(paymentmethod.is_default)?'checked':''" value="paymentmethod.id" />
+                                        <span></span>
+                                    </label>
+                                    <!--end::Radio-->
+
+                                    <button class="btn btn-icon btn-sm btn-hover-light-danger mr-3" 
+                                        (click)="fnDeletePaymentMethod($event, paymentmethod.id)">
+                                        <i class="flaticon-delete"></i>
+                                    </button>
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Header-->
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <!--begin::Body-->
+                            <div id="kt_create_new_payment_method_1" class="collapse show fs-6 ps-10">
+                                <!--begin::Details-->
+                                <div class="d-flex flex-wrap py-5">
+                                    <!--begin::Col-->
+                                    <div class="flex-equal me-5">
+                                        <table class="table table-flush fw-bold gy-1">
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.CARD_OWNER_NAME' | translate }}</td>
+                                                <td class="text-dark-50">{{ paymentmethod?.billing_details?.name | titlecase }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.BILLING_ADDRESS' | translate }}</td>
+                                                <td class="text-dark-50">{{ paymentmethod?.billing_details?.address?.country | uppercase }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.CARD_OWNER_PHONE' | translate }}</td>
+                                                <td class="text-dark-50" *ngIf="paymentmethod?.billing_details?.phone!=null">{{ paymentmethod?.billing_details?.phone }}</td>
+                                                <td class="text-muted" *ngIf="paymentmethod?.billing_details?.phone==null">
+                                                    {{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.ERROR_DATA.CARD_OWNER_PHONE_NA' | translate }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.CARD_OWNER_EMAIL' | translate }}</td>
+                                                <td class="text-dark-50" *ngIf="paymentmethod?.billing_details?.email!=null">
+                                                    <a href="#" class="text-hover-primary">{{ paymentmethod?.billing_details?.email }}</a>
+                                                </td>
+                                                <td class="text-muted" *ngIf="paymentmethod?.billing_details?.email==null">
+                                                    {{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.ERROR_DATA.CARD_OWNER_EMAIL_NA' | translate }}
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td class="text-dark min-w-125px w-125px">Origin</td>
+                                                <td class="text-dark-50">Australia
+                                                <div class="symbol symbol-20px symbol-circle ms-2">
+                                                    <img src="assets/media/flags/australia.svg" />
+                                                </div></td>
+                                            </tr> -->
+                                        </table>
+                                    </div>
+                                    <!--end::Col-->
+
+                                    <!--begin::Col-->
+                                    <div class="flex-equal">
+                                        <table class="table table-flush fw-bold gy-1" *ngIf="paymentmethod?.card!=null">
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.CARD_TYPE' | translate }}</td>
+                                                <td class="text-dark-50">{{ paymentmethod?.card?.brand | uppercase }} - {{ paymentmethod?.card?.funding | uppercase }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.CARD_NUMBER' | translate }}</td>
+                                                <td class="text-dark-50" >
+                                                    <span *ngIf="paymentmethod?.card?.brand=='visa'">**** **** ****</span>
+                                                    <span *ngIf="paymentmethod?.card?.brand=='mastercard'">**** **** ****</span>
+                                                    <span *ngIf="paymentmethod?.card?.brand=='amex'">**** ****** *</span>
+                                                    {{ paymentmethod?.card?.last4 }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.CARD_EXPIRY_DT' | translate }}</td>
+                                                <td class="text-dark-50">{{ paymentmethod?.card?.exp_month | leftpad:2:'0' }}/{{ paymentmethod?.card?.exp_year }}</td>
+                                            </tr>                                    
+                                            <tr>
+                                                <td class="text-dark min-w-125px w-125px">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.COLUMNS.CARD_CVC_CHECK' | translate }}</td>
+                                                <td class="text-dark-50">Passed
+                                                <!--begin::Svg Icon | path: icons/duotone/Navigation/Double-check.svg-->
+                                                <span class="svg-icon svg-icon-2 svg-icon-success">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                                            <path d="M9.26193932,16.6476484 C8.90425297,17.0684559 8.27315905,17.1196257 7.85235158,16.7619393 C7.43154411,16.404253 7.38037434,15.773159 7.73806068,15.3523516 L16.2380607,5.35235158 C16.6013618,4.92493855 17.2451015,4.87991302 17.6643638,5.25259068 L22.1643638,9.25259068 C22.5771466,9.6195087 22.6143273,10.2515811 22.2474093,10.6643638 C21.8804913,11.0771466 21.2484189,11.1143273 20.8356362,10.7474093 L17.0997854,7.42665306 L9.26193932,16.6476484 Z" fill="#000000" fill-rule="nonzero" opacity="0.5" transform="translate(14.999995, 11.000002) rotate(-180.000000) translate(-14.999995, -11.000002)" />
+                                                            <path d="M4.26193932,17.6476484 C3.90425297,18.0684559 3.27315905,18.1196257 2.85235158,17.7619393 C2.43154411,17.404253 2.38037434,16.773159 2.73806068,16.3523516 L11.2380607,6.35235158 C11.6013618,5.92493855 12.2451015,5.87991302 12.6643638,6.25259068 L17.1643638,10.2525907 C17.5771466,10.6195087 17.6143273,11.2515811 17.2474093,11.6643638 C16.8804913,12.0771466 16.2484189,12.1143273 15.8356362,11.7474093 L12.0997854,8.42665306 L4.26193932,17.6476484 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.999995, 12.000002) rotate(-180.000000) translate(-9.999995, -12.000002)" />
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon--></td>
+                                            </tr>
+
+                                            <!-- <tr>
+                                                <td class="text-gray-400 min-w-125px w-125px">Issuer</td>
+                                                <td class="text-dark-50">{{ paymentmethod?.billing_details?.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-400 min-w-125px w-125px">ID</td>
+                                                <td class="text-dark-50">id_4325df90sdf8</td>
+                                            </tr> -->
+                                        </table>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Details-->
+                            </div>
+                            <!--end::Body-->
+                        </ng-template>
+                        <!--end::Option-->
+                    </ngb-panel>
+
+                    <div class="separator separator-dashed"></div>
+                    <!--begin::Option-->
+                </ngb-accordion>                
+            </div>
+            <!--end::Options-->
+
+            <!--begin::No Data-->
+            <div class="d-flex no-records align-items-center justify-content-center py-lg-20 py-sm-10" *ngIf="!boolLoading && listPaymentMethods?.length<1">
+                <div class="col-md-9 col-sm-12">
+                    <div class="flex-grow-1 p-20 pb-40 card-rounded flex-grow-1 bgi-no-repeat" style="background-position: calc(100% + 4rem) bottom; background-size: 50% auto; background-image: url(assets/media/illustrations/credit-card-vpn.jpg)">
+                        <h2 class="text-dark pb-5 font-weight-bolder">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.NO_DATA.GET_STARTED.TITLE' | translate }}</h2>
+                        <p class="text-dark-50 pb-5 font-size-h5" innerHTML="{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.NO_DATA.GET_STARTED.MESSAGE' | translate }}"></p>
+                        <a href="javascript:;" class="btn btn-primary font-weight-bold font-size-h6 px-10 py-4 mr-2"
+                            (click)="fnAddPaymentMethod($event, 'card')">{{ 'PAGE.SUBSCRIPTION.ADD.CARDS.NO_DATA.GET_STARTED.BUTTON' | translate }}</a>
+                    </div>
+                </div>
+            </div>
+            <!--end::No Data-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Payment method-->
+</div>
+<!--end::Card-->

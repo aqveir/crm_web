@@ -25,7 +25,8 @@
             "allowedCommonJsDependencies": [
               "object-path",
               "clipboard.js",
-              "highlight.js"
+              "highlight.js",
+              "uppy-angular"
             ],
             "index": "projects/crmo-backend/src/index.html",
             "main": "projects/crmo-backend/src/main.ts",
@@ -68,13 +69,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "12mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "8kb",
+                  "maximumError": "12kb"
                 }
               ]
             }

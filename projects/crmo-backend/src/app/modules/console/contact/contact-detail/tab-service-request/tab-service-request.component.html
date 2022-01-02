@@ -1,0 +1,137 @@
+<div class="flex-row">
+    <div class="d-flex flex-lg-row-reverse mb-2 dropdown dropdown-inline" *ngIf="objContact?.service_requests?.length>0">
+        <a href="#" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  placement="top" [ngbTooltip]="'COMMON.LABEL.ADD_NEW'|translate">
+            <i class="fas fa-plus-circle"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+            <!--begin::Navigation-->
+            <ul class="navi navi-hover">
+                <li class="navi-item">
+                    <a href="#" class="navi-link" [routerLink]="['/secure/lead', 'new']">
+                        <span class="navi-text font-size-h6-lg">
+                            New Lead
+                        </span>
+                    </a>
+                </li>
+
+                <li class="navi-item">
+                    <a href="#" class="navi-link" [routerLink]="['/secure/opportunity', 'new']">
+                        <span class="navi-text font-size-h6-lg">
+                            New Opportunity
+                        </span>
+                    </a>
+                </li>
+
+                <li class="navi-item">
+                    <a href="#" class="navi-link" [routerLink]="['/secure/support', 'new']">
+                        <span class="navi-text font-size-h6-lg">
+                            New Support Request
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <!--end::Navigation-->
+        </div>
+    </div>
+
+    <!--begin::Service Request-->
+    <div class="d-flex flex-row" *ngIf="objContact?.service_requests?.length>0">
+        <table class="table table-hover table-vertical-center">
+            <thead class="border-bottom border-gray-200 fs-6 text-gray-600 fw-bolder bg-light bg-opacity-75">
+                <tr>
+                    <th scope="col" style="min-width: 50px" class="text-right">#</th>
+                    <th scope="col">Category</th>
+                    <th scope="col" style="min-width: 150px">Status</th>
+                    <th scope="col" class="d-none d-xl-table-cell table-cell-date">Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let objServiceRequest of objContact?.service_requests; let idx = index"
+                    class="cursor-pointer" style="outline: none;"
+                    (click)="fnRedirectToPage(objServiceRequest);">
+                    <th scope="row" class="text-right pl-3">{{ idx }}</th>
+                    <td class="w-100">{{ objServiceRequest?.category?.display_value }}</td>
+                    <td>
+                        <span class="text-dark-75" 
+                            [ngClass]="{'service_request_status_active':'label label-inline label-light-primary'}[objServiceRequest?.status?.key]">
+                            {{ objServiceRequest?.status?.display_value }}
+                        </span>
+                    </td>
+                    <td class="d-none d-xl-table-cell table-cell-date">
+                        <span class="text-dark-75 d-block ml-5">{{ objServiceRequest.last_updated_at | date }}</span>
+                        <span class="text-muted d-block ml-5">{{ objServiceRequest.last_updated_at | date:'shortTime' }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>         
+    </div>
+    <!--end::Service Request-->
+
+    <!--begin::Card-->
+    <div class="p-5">
+        <div class="card" *ngIf="objContact?.service_requests?.length==0">
+            <!--begin::Card body-->
+            <div class="card-body p-0">
+                <!--begin::Heading-->
+                <div class="card-px text-center py-20 my-10">
+                    <!--begin::Title-->
+                    <h2 class="fs-2x fw-bolder mb-10">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_SERVICE_REQUESTS.FIRST_ACTION_CARD.TITLE' | translate }}</h2>
+                    <!--end::Title-->
+
+                    <!--begin::Description-->
+                    <p class="text-gray-400 fs-5 fw-bold mb-13" [innerHTML]="'PAGE.CONTACT.CONTACT_DETAIL.TAB_SERVICE_REQUESTS.FIRST_ACTION_CARD.DETAILS' | translate"></p>
+                    <!--end::Description-->
+
+                    <!--begin::Action-->
+                    <div class="er fs-6 px-8 py-4 dropdown dropdown-inline">
+                        <a href="#" class="btn btn-icon icon-2x btn-primary" 
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  
+                            placement="top" [ngbTooltip]="'COMMON.LABEL.ADD_NEW'|translate">
+                            <i class="fas fa-plus-circle"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                            <!--begin::Navigation-->
+                            <ul class="navi navi-hover">
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" [routerLink]="['/secure/lead', 'new']">
+                                        <span class="navi-text font-size-h6-lg">
+                                            New Lead
+                                        </span>
+                                    </a>
+                                </li>
+                
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" [routerLink]="['/secure/opportunity', 'new']">
+                                        <span class="navi-text font-size-h6-lg">
+                                            New Opportunity
+                                        </span>
+                                    </a>
+                                </li>
+                
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" [routerLink]="['/secure/support', 'new']">
+                                        <span class="navi-text font-size-h6-lg">
+                                            New Support Request
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end::Navigation-->
+                        </div>
+                    </div>
+                    <!--end::Action-->
+                </div>
+                <!--end::Heading-->
+                <!--begin::Illustration-->
+                <div class="text-center px-5">
+                    <img src="assets/images/illustrations/upload_document.png" alt="" class="mw-100 mh-300px" />
+                </div>
+                <!--end::Illustration-->
+            </div>
+            <!--end::Card body-->
+        </div>            
+    </div>
+    <!--end::Card-->
+</div>
+
