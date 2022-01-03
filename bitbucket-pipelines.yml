@@ -1,5 +1,5 @@
 #  CRMO Web NodeJS build
-image: node:10.15.3
+image: node:12.20
 
 definitions: 
   caches:
@@ -16,7 +16,7 @@ definitions:
     - step: &install-angular
         name: Install Anugular & Project Dependencies
         script:
-          - npm install -g @angular/cli@11.0.7
+          - npm install -g @angular/cli@11.1.4
           - echo "Angular Installed"
           - npm install
           - echo "Project Dependencies installed"
