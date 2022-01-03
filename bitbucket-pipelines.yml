@@ -7,7 +7,7 @@ clone:
 
 definitions: 
   caches:
-    submodule: ./projects/ellaisys-lib
+    submodule: projects/ellaisys-lib
 
   steps:
     - step: &load-submodules
