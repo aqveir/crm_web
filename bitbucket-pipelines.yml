@@ -61,6 +61,8 @@ pipelines:
           <<: *install-angular
           name: Build and Test
           script:
+            - npm install -g @angular/cli@11.1.4
+            - npm link @angular/cli
             - ng -v
             - echo "Angular Installed"
             - npm install
