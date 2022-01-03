@@ -15,8 +15,12 @@ definitions:
 
     - step: &install-angular
         name: Install Anugular & Project Dependencies
+        caches:
+          - node
         script:
           - npm install -g @angular/cli@11.1.4
+          - npm link @angular/cli
+          - ng -v
           - echo "Angular Installed"
           - npm install
           - echo "Project Dependencies installed"
@@ -55,19 +59,12 @@ pipelines:
       - step: 
           <<: *load-submodules
 
-      #- step: 
-      #    <<: *install-angular
-      #    caches:
-      #      - node
+      - step: 
+         <<: *install-angular
 
       - step:
-          <<: *install-angular
           name: Build and Test
-          caches:
-            - node
           script:
-            - npm link @angular/cli
-            - ng -v
             - echo "Starting CRM Omni Dev Build"
             - npm run build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
