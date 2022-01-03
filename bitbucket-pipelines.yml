@@ -57,12 +57,8 @@ pipelines:
           caches:
             - submodule
 
-      - step: 
-          <<: *install-angular
-          caches:
-            - node
-
       - step:
+          <<: *install-angular
           name: Build and Test
           script:
             - echo "Starting CRM Omni Dev Build"
@@ -74,6 +70,8 @@ pipelines:
             - echo "Ng Build Complete"
             - cp .htaccess.dev dist/.htaccess
             - echo "HTACCESS Copied"
+          caches:
+            - node
           artifacts:
             - dist/**
 
