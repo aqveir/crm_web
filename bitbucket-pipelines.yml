@@ -19,7 +19,7 @@ definitions:
           - node
         script:
           - cd /
-          - npm install @angular/cli@11.0.7
+          - npm install -g @angular/cli@11.0.7
           - echo "Angular Installed"
           - npm install
           - echo "Project Dependencies installed"
@@ -65,7 +65,10 @@ pipelines:
       - step: 
           <<: *load-submodules
 
-      - step: *install-angular
+      - step: 
+          <<: *install-angular
+          caches:
+            - node
 
       - step:
           name: Build and Test
