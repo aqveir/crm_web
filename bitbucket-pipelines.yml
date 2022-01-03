@@ -15,8 +15,6 @@ definitions:
 
     - step: &install-angular
         name: Install Anugular & Project Dependencies
-        caches:
-          - node
         script:
           - npm install -g @angular/cli@11.0.7
           - echo "Angular Installed"
@@ -25,8 +23,6 @@ definitions:
 
     - step: &code-linting
         name: Code linting
-        caches:
-          - node
         script:
           - npm install eslint
 
@@ -46,19 +42,14 @@ pipelines:
             name: Build and Test
             script:
               - echo "Starting CRM Omni PROD Build"
-              - npm run build:crmo-build-all
-              - echo "Ng Build Complete"
-              - cp .htaccess dist
               - echo "HTACCESS Copied"
             artifacts:
-              - dist/**
+              - # dist/**
         - step:
             name: Code linting
             script:
-              - npm install eslint
-              - npx eslint .
-            caches:
-              - node  
+              - # npm install eslint
+              - # npx eslint 
     
     phase1.0:
       - step: 
