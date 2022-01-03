@@ -66,6 +66,8 @@ pipelines:
           caches:
             - node
           script:
+            - npm link @angular/cli
+            - ng -v
             - echo "Starting CRM Omni Dev Build"
             - npm run build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
