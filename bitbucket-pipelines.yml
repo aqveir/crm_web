@@ -8,15 +8,11 @@ definitions:
   steps:
     - step: &load-submodules
         name: Load GIT Submodules
-        caches:
-          - submodule
         script:
           - git submodule update --init --recursive
 
     - step: &install-angular
         name: Install Anugular & Project Dependencies
-        caches:
-          - node
         script:
           - npm install -g @angular/cli@11.1.4
           - npm link @angular/cli
@@ -58,9 +54,13 @@ pipelines:
     phase1.0:
       - step: 
           <<: *load-submodules
+          caches:
+            - submodule
 
       - step: 
-         <<: *install-angular
+          <<: *install-angular
+          caches:
+            - node
 
       - step:
           name: Build and Test
