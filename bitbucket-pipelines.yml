@@ -16,7 +16,7 @@ definitions:
     - step: &install-angular
         name: Install Anugular & Project Dependencies
         script:
-          - npm install -g @angular/cli@11.1.4
+          - npm install -g @angular/cli@11.0.7
           - echo "Angular Installed"
           - npm install
           - echo "Project Dependencies installed"
