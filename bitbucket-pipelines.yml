@@ -23,12 +23,10 @@ definitions:
           - node
         script:
           - cd /
-          - npm install -g @angular/cli@11.0.7
+          - npm install @angular/cli@11.0.7
           - echo "Angular Installed"
           - npm install
           - echo "Project Dependencies installed"
-        artifacts:
-          - node_modules/** # Save modules for next steps
 
     - step: &code-linting
         name: Code linting
