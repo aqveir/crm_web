@@ -8,14 +8,21 @@ definitions:
   steps:
     - step: &load-submodules
         name: Load GIT Submodules
+        caches:
+          - submodule
         script:
+          - cd $BITBUCKET_CLONE_DIR
+          - echo $BITBUCKET_CLONE_DIR
           - git submodule update --init --recursive
 
     - step: &install-angular
         name: Install Anugular & Project Dependencies
+        caches:
+          - node
         script:
+          - cd $BITBUCKET_CLONE_DIR
+          - echo $BITBUCKET_CLONE_DIR
           - npm install -g @angular/cli@11.1.4
-          - npm link @angular/cli
           - ng -v
           - echo "Angular Installed"
           - npm install
@@ -54,18 +61,15 @@ pipelines:
     phase1.0:
       - step: 
           <<: *load-submodules
-          caches:
-            - submodule
 
       - step:
           <<: *install-angular
+
+      - step:
           name: Build and Test
           script:
-            - npm install -g @angular/cli@11.1.4
-            - npm link @angular/cli
-            - ng -v
-            - echo "Angular Installed"
-            - npm install
+            - cd $BITBUCKET_CLONE_DIR
+            - echo $BITBUCKET_CLONE_DIR
             - echo "Starting CRM Omni Dev Build"
             - npm run build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
