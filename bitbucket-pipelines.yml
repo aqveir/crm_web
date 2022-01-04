@@ -59,8 +59,8 @@ pipelines:
               - # npx eslint 
     
     phase1.0:
-      - step: 
-          <<: *load-submodules
+      # - step: 
+      #     <<: *load-submodules
 
       - step:
           <<: *install-angular
@@ -70,6 +70,7 @@ pipelines:
           script:
             - cd $BITBUCKET_CLONE_DIR
             - echo $BITBUCKET_CLONE_DIR
+            - git submodule update --init --recursive
             - echo "Starting CRM Omni Dev Build"
             - npm run build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
@@ -79,8 +80,6 @@ pipelines:
             - echo "Ng Build Complete"
             - cp .htaccess.dev dist/.htaccess
             - echo "HTACCESS Copied"
-          caches:
-            - node
           artifacts:
             - dist/**
 
