@@ -36,8 +36,8 @@ definitions:
         name: Deploy to AWS S3
         image: atlassian/pipelines-awscli
         script:
-          - cd dist/
-          - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/dev
+          - cd dist/crmo-backend/
+          - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/$BITBUCKET_BUILD_NUMBER
           - echo "Uploaded to AWS S3 WEB"
 
 pipelines:          
