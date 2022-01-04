@@ -77,7 +77,7 @@ pipelines:
             - echo "EllaiSys Library Build Complete"
             - npm run build -prod crmo-lib
             - echo "CRMO Library Build Complete"
-            - npm run build -prod --base-href=/$NG_BACKEND_BASE_HREF/ crmo-backend
+            - npm run build -prod --base-href=$NG_BACKEND_BASE_HREF crmo-backend
             - echo "Ng App Build Complete"
             - cp .htaccess.dev dist/crmo-backend/.htaccess
             - echo "HTACCESS Copied"
