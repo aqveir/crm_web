@@ -9,9 +9,8 @@ definitions:
     - step: &load-submodules
         name: Load GIT Submodules
         script:
-          - cd $BITBUCKET_CLONE_DIR
-          - echo $BITBUCKET_CLONE_DIR
           - git submodule update --init --recursive
+          - echo "Loaded GIT Submodules"
         artifacts:
           - projects/ellaisys-lib/**
 
@@ -26,6 +25,8 @@ definitions:
           - npm -v
           - ng version
           - echo "Angular Installed"
+          - npm install
+          - echo "Project Dependencies installed"
 
     - step: &code-linting
         name: Code linting
@@ -67,12 +68,7 @@ pipelines:
       - step:
           name: Build and Test
           script:
-            #- cd $BITBUCKET_CLONE_DIR
-            # - git submodule update --init --recursive
-            - echo "Loaded GIT Submodules"
-            - npm install
-            - echo "Project Dependencies installed"
-            - echo "--- Starting CRM Omni Dev Build ---"
+            - echo "Start CRM Omni Dev Build"
             - npm run build -prod ellaisys-lib
             - echo "EllaiSys Library Build Complete"
             - npm run build -prod crmo-lib
