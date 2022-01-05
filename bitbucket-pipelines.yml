@@ -3,17 +3,17 @@ image: node:12.20
 
 definitions: 
   caches:
-    submodule: $BITBUCKET_CLONE_DIR/projects/ellaisys-lib
+    submodule: projects/ellaisys-lib
 
   steps:
     - step: &load-submodules
         name: Load GIT Submodules
-        caches:
-          - submodule
         script:
           - cd $BITBUCKET_CLONE_DIR
           - echo $BITBUCKET_CLONE_DIR
           - git submodule update --init --recursive
+        artifacts:
+          - projects/ellaisys-lib/**
 
     - step: &install-angular
         name: Install Anugular & Project Dependencies
@@ -69,7 +69,7 @@ pipelines:
           script:
             #- cd $BITBUCKET_CLONE_DIR
             # - git submodule update --init --recursive
-            # - echo "Loaded GIT Submodules"
+            - echo "Loaded GIT Submodules"
             - npm install
             - echo "Project Dependencies installed"
             - echo "--- Starting CRM Omni Dev Build ---"
