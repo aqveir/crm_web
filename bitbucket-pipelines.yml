@@ -3,7 +3,7 @@ image: node:12.20
 
 definitions: 
   caches:
-    submodule: ellaisys-lib
+    submodule: projects/ellaisys-lib
 
   steps:
     - step: &load-submodules
@@ -23,8 +23,8 @@ definitions:
           - cd $BITBUCKET_CLONE_DIR
           - echo $BITBUCKET_CLONE_DIR
           - npm install -g @angular/cli@11.1.4
-          - node -v
           - npm -v
+          - ng version
           - echo "Angular Installed"
 
     - step: &code-linting
@@ -58,8 +58,8 @@ pipelines:
               - # npx eslint 
     
     phase1.0:
-      # - step: 
-      #     <<: *load-submodules
+      - step: 
+          <<: *load-submodules
 
       - step:
           <<: *install-angular
@@ -68,8 +68,8 @@ pipelines:
           name: Build and Test
           script:
             #- cd $BITBUCKET_CLONE_DIR
-            - git submodule update --init --recursive
-            - echo "Loaded GIT Submodules"
+            # - git submodule update --init --recursive
+            # - echo "Loaded GIT Submodules"
             - npm install
             - echo "Project Dependencies installed"
             - echo "--- Starting CRM Omni Dev Build ---"
