@@ -3,7 +3,7 @@ image: node:12.20
 
 definitions: 
   caches:
-    submodule: projects/ellaisys-lib
+    submodule: $BITBUCKET_CLONE_DIR/projects/ellaisys-lib
 
   steps:
     - step: &load-submodules
