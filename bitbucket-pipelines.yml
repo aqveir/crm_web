@@ -19,8 +19,6 @@ definitions:
         caches:
           - node
         script:
-          - cd $BITBUCKET_CLONE_DIR
-          - echo $BITBUCKET_CLONE_DIR
           - npm install -g @angular/cli@11.1.4
           - npm -v
           - ng version
