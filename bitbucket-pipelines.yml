@@ -27,6 +27,8 @@ definitions:
           - echo "Angular Installed"
           - npm install
           - echo "Project Dependencies installed"
+        artifacts:
+          - node_modules/**
 
     - step: &code-linting
         name: Code linting
