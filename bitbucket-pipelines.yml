@@ -45,13 +45,25 @@ pipelines:
   branches:
     master:
       - parallel:
+        - step: 
+            <<: *load-submodules
+
+        - step:
+            <<: *install-angular
+
         - step:
             name: Build and Test
             script:
-              - echo "Starting CRM Omni PROD Build"
+              - echo "Build Started - Production"
+              - npm run build:aqveir-build-all-prod
+              - echo "Build Complete "
+              - cp .htaccess.dev dist/crmo-backend/.htaccess
               - echo "HTACCESS Copied"
+              - cp dist/crmo-backend/index.html dist/crmo-backend/index.php
+              - echo "HTML renamed as PHP"
             artifacts:
-              - # dist/**
+              - dist/crmo-backend/**
+
         - step:
             name: Code linting
             script:
@@ -68,13 +80,9 @@ pipelines:
       - step:
           name: Build and Test
           script:
-            - echo "Start CRM Omni Dev Build"
-            - npm run build -prod ellaisys-lib
-            - echo "EllaiSys Library Build Complete"
-            - npm run build -prod crmo-lib
-            - echo "CRMO Library Build Complete"
-            - npm run build -prod --base-href=/web/ crmo-backend
-            - echo "Ng App Build Complete"
+            - echo "Build Started - Production"
+            - npm run build:aqveir-build-all-prod
+            - echo "Build Complete "
             - cp .htaccess.dev dist/crmo-backend/.htaccess
             - echo "HTACCESS Copied"
             - cp dist/crmo-backend/index.html dist/crmo-backend/index.php
@@ -82,6 +90,6 @@ pipelines:
           artifacts:
             - dist/crmo-backend/**
 
-      - step: *code-linting
+      #- step: *code-linting
 
       - step: *deploy
