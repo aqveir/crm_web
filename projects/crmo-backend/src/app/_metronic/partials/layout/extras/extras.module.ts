@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+
+//Application Module
+import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
+
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { SearchDropdownInnerComponent } from './dropdown-inner/search-dropdown-inner/search-dropdown-inner.component';
@@ -41,12 +45,22 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ScrollTopComponent,
     ToolbarComponent,
   ],
-  imports: [CommonModule, InlineSVGModule, PerfectScrollbarModule, CoreModule],
+  imports: [
+    CommonModule, 
+    InlineSVGModule, 
+    PerfectScrollbarModule, 
+    
+    CoreModule,
+
+    //EllaiSys Library
+    TranslateModule,
+    NotificationModule,
+    ValidatorModule,
+    PipeModule,
+    LoggerModule,
+  ],
   providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG, },
   ],
   exports: [
     SearchDropdownInnerComponent,

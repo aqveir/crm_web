@@ -1,0 +1,65 @@
+<div>
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.ORGANIZATION.ACCOUNT_LIST.TITLE'" 
+        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'account', 'new']"></crmo-backend-widget-subheader>
+        
+    <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
+
+    <!--begin::Card-->
+    <div class="card card-custom gutter-b card-screen-height">       
+        <div class="card-body">
+            <div class="table-responsive" *ngIf="listAccounts?.length>0">
+                <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
+                    <thead class="thead-dark">
+                        <tr class="text-uppercase">
+                            <th scope="col" class="pl-5" colspan="2">{{ 'PAGE.ORGANIZATION.ACCOUNT_LIST.COLUMNS.NAME' | translate }}</th>
+                            <!-- <th scope="col" style="min-width: 150px">{{ 'PAGE.ORGANIZATION.ACCOUNT_LIST.COLUMNS.ACTION_CONTROLS' | translate }}</th> -->
+                            <th scope="col" style="min-width: 150px">{{ 'PAGE.ORGANIZATION.ACCOUNT_LIST.COLUMNS.TYPE' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell" style="min-width: 150px">{{ 'PAGE.ORGANIZATION.ACCOUNT_LIST.COLUMNS.OWNER' | translate }}</th>
+                            <th scope="col" class="d-none d-md-table-cell" style="min-width: 150px">{{ 'PAGE.ORGANIZATION.ACCOUNT_LIST.COLUMNS.LOCATION' | translate }}</th>
+                            <th scope="col" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_LIST.COLUMNS.LAST_MODIFIED' | translate }}
+                                <span class="ml-2 cursor-pointer">
+                                    <!-- <i class="la la-sort text-white icon-lg" (click)="fnSortColumn('last_date', 'asc')"></i>
+                                    <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'desc')" [ngClass]="{'d-none': true}"></i>
+                                    <i class="la la-sort text-primary icon-lg" (click)="fnSortColumn('last_date', 'asc')" [ngClass]="{'d-none': true}"></i> -->
+                                </span>
+                            </th>
+                    </thead>
+                     
+                    <tbody>
+                        <tr *ngFor="let account of listAccounts" class="cursor-pointer" style="outline: none;"
+                        [routerLink]="['/secure/setting/organization', oHash, 'account', account.hash]">
+                           
+                            <td>
+                                <span class="text-dark-75 font-weight-bolder d-block">{{ account.name }}</span>
+                            </td>
+                            <td>
+                               <!--  <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.CALL' | translate"><i class="la la-phone icon-xl"></i></button>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.SMS' | translate"><i class="la la-sms icon-xl"></i></button>
+                                <button class="btn btn-icon btn-clean" placement="bottom" [ngbTooltip]="'COMMON.LABEL.EMAIL' | translate"><i class="la la-envelope icon-xl"></i></button>
+                               </td>-->
+
+                            <td>
+                                <span class="text-dark-75 font-weight-bolder d-block">{{ account.type.display_value }}</span>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell">
+                                <span class="text-dark-75 font-weight-bolder d-block">{{ account.owner }}</span>
+                            </td>
+
+                            <td class="d-none d-xl-table-cell">
+                                <span class="text-dark-75 font-weight-bolder d-block">{{ account.city }}</span>
+                            </td>
+                            <td class="d-none d-xl-table-cell table-cell-date">
+                                <span class="text-dark-75 d-block ml-5">{{ account.last_updated_at | date }}</span>
+                                <span class="text-muted d-block ml-5">{{ account.last_updated_at | date:'shortTime' }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--end::Card-->
+</div>

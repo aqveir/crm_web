@@ -25,7 +25,8 @@
             "allowedCommonJsDependencies": [
               "object-path",
               "clipboard.js",
-              "highlight.js"
+              "highlight.js",
+              "uppy-angular"
             ],
             "index": "projects/crmo-backend/src/index.html",
             "main": "projects/crmo-backend/src/main.ts",
@@ -37,9 +38,18 @@
               "projects/crmo-backend/src/assets"
             ],
             "styles": [
+              "node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "projects/crmo-backend/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/@fortawesome/fontawesome-free/js/all.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -52,7 +62,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -60,13 +69,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "12mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "8kb",
+                  "maximumError": "12kb"
                 }
               ]
             }
@@ -101,6 +110,8 @@
               "projects/crmo-backend/src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap4/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "projects/crmo-backend/src/styles.scss"
             ],
             "scripts": []
@@ -217,5 +228,5 @@
   "cli": {
     "analytics": false
   },
-  "defaultProject": "CRMOBackend"
+  "defaultProject": "crmo-backend"
 }

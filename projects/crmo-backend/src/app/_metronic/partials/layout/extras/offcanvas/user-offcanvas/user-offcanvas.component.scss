@@ -1,0 +1,16 @@
+.switch {
+    background-color: inherit !important;
+}
+
+.switch.user_status_online input:checked ~ span:after {
+    background-color: #1BC5BD;
+}
+
+.switch.user_status_busy input:checked ~ span:after {
+    background-color: #F64E60;
+}
+
+.symbol-badge {
+    height: 18px !important;
+    width: 18px !important;
+}

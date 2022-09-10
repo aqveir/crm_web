@@ -1,0 +1,376 @@
+<form class="form" id="account_detail_form" novalidate="novalidate" [formGroup]="accountDetailForm"
+    (ngSubmit)="fnSave($event)" autocomplete="off">
+
+    <div class="d-block full-content-page-height">
+        <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+            
+            <div class="d-flex flex-grow-1 flex-wrap flex-sm-nowrap">
+                <!--begin::Details-->
+                <div class="d-flex align-items-center flex-wrap flex-grow-1">
+                    <!--begin::Title-->
+                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5" *ngIf="boolIsNew">
+                        {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.TITLE.ADD' | translate }}
+                    </h5>
+                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5" *ngIf="!boolIsNew">
+                        {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.TITLE.EDIT' | translate }}
+                    </h5>
+                    <!--end::Title-->
+
+                    <!--begin::Separator-->
+                    <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
+                    <!--end::Separator-->
+
+                    <!--begin::Label-->
+                    <div class="d-flex align-items-center" id="kt_subheader_search">
+                        <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">
+                            <!-- {{ accountDetailForm.controls['display_value'].value }} -->
+                        </span>
+                    </div>
+                    <!--end::Label-->
+                </div>
+                <!--end::Details-->
+
+                <!--begin::Toolbar-->
+                <div class="d-flex align-items-center">
+                    <!--begin::Button-->
+                    <button type="button" (click)="fnReset(true)"
+                        class="btn btn-default font-weight-bold btn-sm px-3 font-size-base">
+                        {{ 'COMMON.LABEL.BACK' | translate }}</button>
+                    <!--end::Button-->
+
+                    <!--begin::Dropdown-->
+                    <div class="btn-group ml-2">
+                        <button type="submit" id="save_and_continue"
+                            class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base"
+                            [ngClass]="{'spinner spinner-white spinner-right pr-15': boolLoading}">{{
+                            'COMMON.LABEL.SAVE_N_CONTINUE' | translate }}</button>
+
+                        <button type="button"
+                            class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base dropdown-toggle dropdown-toggle-split"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                class="flaticon2-down icon-xs"></i></button>
+                        <div class="dropdown-menu dropdown-menu-sm p-0 m-0 dropdown-menu-right">
+                            <ul class="navi py-5">
+                                <li class="navi-item">
+                                    <button type="submit" id="save_and_new" class="btn btn-bg-white d-block navi-link">
+                                        <span class="navi-icon">
+                                            <i class="flaticon2-medical-records"></i>
+                                        </span>
+                                        <span class="navi-text pl-2">{{ 'COMMON.LABEL.SAVE_N_ADDNEW' | translate
+                                            }}</span>
+                                    </button>
+                                </li>
+                                <li class="navi-item">
+                                    <button type="submit" id="save_and_exit" class="btn btn-bg-white d-block navi-link">
+                                        <span class="navi-icon">
+                                            <i class="flaticon2-download-2"></i>
+                                        </span>
+                                        <span class="navi-text pl-2">{{ 'COMMON.LABEL.SAVE_N_EXIT' | translate }}</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end::Dropdown-->
+                </div>
+                <!--end::Toolbar-->
+            </div>
+        </div>
+
+        <!--begin::Card-->
+        <div class="card card-custom mb-5">
+            <!--begin::Card body-->
+            <div class="card-body">
+                <!--begin::Row-->
+                <div class="row">
+                    <div class="col-xl-6 my-2">
+                        <!--begin::Group-->
+                        <div class="form-group row">                           
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{'PAGE.ORGANIZATION.ACCOUNT_DETAIL.NAME.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="name"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.NAME.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="1" autofocus />
+                                <span class="form-text text-muted">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.NAME.FINE_TEXT' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.name.dirty && accountDetailForm.controls.name.invalid" >
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.NAME.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <textarea class="form-control" formControlName="description" rows="4"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="2"></textarea>
+                                <span class="form-text text-muted" *ngIf="accountDetailForm.controls.description.dirty && accountDetailForm.controls.description.invalid" >
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.VALIDATION_ERROR' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DESCRIPTION.FINE_TEXT' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.TYPE.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <ng-select class="form-control" #selectDataType formControlName="type"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.TYPE.PLACEHOLDER' | translate }}"
+                                    [items]="objTypeList" bindLabel="display_value" bindValue="key"
+                                    (change)="fnChangeType($event)"
+                                    [searchable]="false" autocomplete="off" tabindex="3">
+                                </ng-select>
+                                <span class="form-text text-muted">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.TYPE.FINE_TEXT' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.type.dirty && accountDetailForm.controls.type.invalid">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.TYPE.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.OWNER.LABEL' | translate }}
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="owner"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.OWNER.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="2" />
+                                <span class="form-text text-muted">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.OWNER.FINE_TEXT' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row align-items-center">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.DEFAULT_ACCOUNT.LABEL' | translate }}
+                            </label>
+                            <div class="col-9 col-form-label">
+                                <div class="checkbox-list">
+                                    <label class="checkbox">
+                                        <input type="checkbox" formControlName="is_default" />
+                                        <span></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.WEBSITE.LABEL' | translate }}
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="website"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.WEBSITE.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="2" />
+                                <span class="form-text text-muted">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.WEBSITE.FINE_TEXT' | translate }}
+                                </span>
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.website.dirty && accountDetailForm.controls.website.invalid">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.WEBSITE.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.EMAIL.LABEL' | translate }}
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="email"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.EMAIL.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="2" />
+                                <span class="form-text text-muted">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.EMAIL.FINE_TEXT' | translate }}
+                                </span>
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.email.dirty && accountDetailForm.controls.email.invalid">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.EMAIL.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.LABEL' | translate }}
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="phone"
+                                    placeholder="{{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="2" />
+                                <span class="form-text text-muted">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.FINE_TEXT' | translate }}
+                                </span>
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.email.dirty && accountDetailForm.controls.email.invalid">
+                                    {{ 'PAGE.ORGANIZATION.ACCOUNT_DETAIL.PHONE.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                    </div>
+                    <div class="col-xl-6 my-2">
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{ 'COMMON.ADDRESS.ADDRESS.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <textarea class="form-control" formControlName="description" rows="4"
+                                    placeholder="{{ 'COMMON.ADDRESS.ADDRESS.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="2"></textarea>
+                                <span class="form-text text-muted" *ngIf="accountDetailForm.controls.description.dirty && accountDetailForm.controls.description.invalid" >
+                                    {{ 'COMMON.ADDRESS.ADDRESS.FINE_TEXT' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger">
+                                    {{ 'COMMON.ADDRESS.ADDRESS.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{'COMMON.ADDRESS.AREA.LABEL' | translate }}                                
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="locality"
+                                    placeholder="{{ 'COMMON.ADDRESS.AREA.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="1" autofocus />
+                                <span class="form-text text-muted">
+                                    {{ 'COMMON.ADDRESS.AREA.FINE_TEXT' | translate }}
+                                </span>                                
+                            </div>
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{'COMMON.ADDRESS.CITY.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="city"
+                                    placeholder="{{ 'COMMON.ADDRESS.CITY.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="1" autofocus />
+                                <span class="form-text text-muted">
+                                    {{ 'COMMON.ADDRESS.CITY.FINE_TEXT' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.city.dirty && accountDetailForm.controls.city.invalid">
+                                    {{ 'COMMON.ADDRESS.CITY.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{'COMMON.ADDRESS.STATE.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="state"
+                                    placeholder="{{ 'COMMON.ADDRESS.STATE.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="1" autofocus />
+                                <span class="form-text text-muted">
+                                    {{ 'COMMON.ADDRESS.STATE.FINE_TEXT' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.state.dirty && accountDetailForm.controls.state.invalid">
+                                    {{ 'COMMON.ADDRESS.STATE.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{'COMMON.ADDRESS.COUNTRY.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <ng-select class="form-control" #selectDataType formControlName="country"
+                                placeholder="{{ 'COMMON.ADDRESS.COUNTRY.PLACEHOLDER' | translate }}"
+                                [items]="objCountryList" bindLabel="display_value" bindValue="alpha2_code"
+                                (change)="fnChangeCountry($event)"
+                                [searchable]="false" autocomplete="off" tabindex="3">
+                            </ng-select>
+                                <span class="form-text text-muted">
+                                    {{ 'COMMON.ADDRESS.COUNTRY.FINE_TEXT' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.country.dirty && accountDetailForm.controls.country.invalid">
+                                    {{ 'COMMON.ADDRESS.COUNTRY.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+                        <!--begin::Group-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-3 text-lg-right text-left">
+                                {{'COMMON.ADDRESS.ZIPCODE.LABEL' | translate }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" formControlName="zipcode"
+                                    placeholder="{{ 'COMMON.ADDRESS.ZIPCODE.PLACEHOLDER' | translate }}"
+                                    autocomplete="off" tabindex="1" autofocus />
+                                <span class="form-text text-muted">
+                                    {{ 'COMMON.ADDRESS.ZIPCODE.FINE_TEXT' | translate }}
+                                </span>
+
+                                <span class="form-text text-danger" *ngIf="accountDetailForm.controls.zipcode.dirty && accountDetailForm.controls.zipcode.invalid">
+                                    {{ 'COMMON.ADDRESS.ZIPCODE.VALIDATION_ERROR' | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!--end::Group-->
+                    </div>
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--begin::Card body-->
+
+           
+        </div>
+        <!--end::Card-->
+    </div>
+    <div class="card-footer">
+        <div class="row">{{ objAccount|json }}</div>
+    </div>
+    
+</form>

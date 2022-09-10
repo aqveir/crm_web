@@ -1,0 +1,67 @@
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.USER.LIST.TITLE'" [search]="true" (search)="fnFilterRecords($event)"
+        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'user', 'new']"></crmo-backend-widget-subheader>
+
+    <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
+
+    <!--begin::Card-->
+    <div class="card card-custom gutter-b">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
+                    <thead class="thead-dark">
+                        <tr class="text-uppercase">
+                            <th class="pl-5">{{ 'PAGE.ORGANIZATION.USER_LIST.COLUMNS.FULL_NAME' | translate }}</th>
+                            <th style="min-width: 120px"></th>
+                            <th style="min-width: 150px">{{ 'PAGE.ORGANIZATION.USER_LIST.COLUMNS.CONTACT' | translate }}</th>
+                            <th style="min-width: 130px">{{ 'PAGE.ORGANIZATION.USER_LIST.COLUMNS.STATUS' | translate }}</th>
+                            <th style="min-width: 150px">{{ 'PAGE.ORGANIZATION.USER_LIST.COLUMNS.LAST_LOGIN' | translate }}</th>
+                            <th style="min-width: 150px" class="d-none d-xl-table-cell table-cell-date table-cell-sortable">
+                                {{ 'PAGE.ORGANIZATION.USER_LIST.COLUMNS.LAST_MODIFIED' | translate }}
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let user of listUsers" class="cursor-pointer" style="outline: none;"
+                            [routerLink]="['/secure/setting/organization', oHash, 'user', user.hash]">
+                            <td class="">
+                                <div class="symbol symbol-50 symbol-light mt-1">
+                                    <span class="symbol-label" *ngIf="user.avatar">
+                                        <img [src]="user.avatar" class="h-75 align-self-end" alt="Avatar" />
+                                    </span>
+
+                                    <span class="symbol-label font-size-h4 font-weight-bold" *ngIf="!user.avatar">{{ user.name_initials }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ user.full_name }}</span>
+                                <span class="text-muted">{{ user.email }}</span>
+                            </td>
+                            <td>
+                                <span class="text-dark-75 d-block font-size-lg">{{ user.phone }}</span>
+                            </td>
+                            <td>
+                                <span class="label label-lg label-inline label-light-primary" *ngIf="user.is_active">Active</span>
+                                <span class="label label-lg label-inline label-light-danger" *ngIf="!user.is_active">Inactive</span>
+                                <span class="label label-lg label-inline ml-2 rounded-pill"
+                                    [class]="user.availability?.status?.key"
+                                    [title]="user.availability?.status?.display_value">&nbsp;</span>
+                            </td>
+                            <td class="pl-2">
+                                <span class="text-dark-75 d-block">{{ user.last_login_at | date }}</span>
+                                <span class="text-muted">{{ user.last_login_at | date:'shortTime' }}</span>
+                            </td>
+                            <td class="pl-2">
+                                <span class="text-dark-75 d-block">{{ user.last_updated_at | date }}</span>
+                                <span class="text-muted">{{ user.last_updated_at | date:'shortTime' }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--end::Card-->
+</div>

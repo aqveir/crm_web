@@ -1,0 +1,15 @@
+.address-cards {
+    .card {
+        .card-header {
+            min-height: 30px !important;
+
+            .card-title {
+                font-size: 1em !important;
+            }
+        }
+
+        .card-body {
+            height: 120px;
+        }
+    }
+}

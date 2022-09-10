@@ -9,16 +9,15 @@ import { SubheaderService } from '../_services/subheader.service';
   templateUrl: './subheader6.component.html',
 })
 export class Subheader6Component implements OnInit {
-  public cacheSVG: boolean = false;
-  
-  subheaderCSSClasses = '';
-  subheaderContainerCSSClasses = '';
-  subheaderMobileToggle = false;
-  subheaderDisplayDesc = false;
-  subheaderDisplayDaterangepicker = false;
-  title$: Observable<string>;
-  breadcrumbs$: Observable<BreadcrumbItemModel[]>;
-  description$: Observable<string>;
+  public subheaderCSSClasses = '';
+  public subheaderContainerCSSClasses = '';
+  public subheaderMobileToggle = false;
+  public subheaderDisplayDesc = false;
+  public subheaderDisplayDaterangepicker = false;
+
+  public title$: Observable<string>;
+  public breadcrumbs$: Observable<BreadcrumbItemModel[]>;
+  public description$: Observable<string>;
 
   constructor(
     private layout: LayoutService,
@@ -31,13 +30,9 @@ export class Subheader6Component implements OnInit {
 
   ngOnInit() {
     this.subheaderCSSClasses = this.layout.getStringCSSClasses('subheader');
-    this.subheaderContainerCSSClasses = this.layout.getStringCSSClasses(
-      'subheader_container'
-    );
+    this.subheaderContainerCSSClasses = this.layout.getStringCSSClasses('subheader_container');
     this.subheaderMobileToggle = this.layout.getProp('subheader.mobileToggle');
     this.subheaderDisplayDesc = this.layout.getProp('subheader.displayDesc');
-    this.subheaderDisplayDaterangepicker = this.layout.getProp(
-      'subheader.displayDaterangepicker'
-    );
+    this.subheaderDisplayDaterangepicker = this.layout.getProp('subheader.displayDaterangepicker');
   }
 }

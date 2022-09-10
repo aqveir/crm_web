@@ -1,0 +1,77 @@
+<div class="flex-row p-5">
+    <div class="d-flex flex-lg-row-reverse mb-2" *ngIf="objContact?.notes?.length>0">
+        <button type="button" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
+            (click)="fnAddEditNote();" placement="top" [ngbTooltip]="'COMMON.LABEL.ADD_NEW'|translate">
+            <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+
+    <!--begin::Note List-->
+    <div class="timeline timeline-justified timeline-4" *ngIf="objContact?.notes?.length>0">
+        <div class="timeline-bar"></div>
+        <div class="timeline-items">
+            <div class="timeline-item" *ngFor="let objNote of objContact?.notes;">
+                <div class="timeline-badge">
+                    <div class="bg-primary"></div>
+                </div>
+
+                <div class="timeline-label text-primary p-0 mb-0">
+                    <span class="font-size-sm">{{ objNote?.last_updated_at | date:'medium' }}</span>
+                    <span class="text-muted pl-2 pr-2">by</span>
+                    <span class="text-dark-50 font-size-sm">{{ objNote?.owner?.full_name }}</span>
+                </div>
+
+                <div class="timeline-content">
+                    <div class="d-flex mb-3">
+                        <div class="flex-fill mr-2">
+                            <p class="p-0 text-justify">{{ objNote.note }}</p>
+                        </div>
+
+                        <div class="flex-column-auto ml-2">
+                            <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-primary border-0 font-weight-bold btn-sm"
+                                placement="top" [ngbTooltip]="'COMMON.LABEL.EDIT'|translate" (click)="fnAddEditNote(objNote);">
+                                <i class="flaticon-edit icon-md"></i>
+                            </button>
+                            <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-danger border-0 font-weight-bold btn-sm" 
+                                placement="top" [ngbTooltip]="'COMMON.LABEL.DELETE'|translate" (click)="fnDeleteAction(objNote);">
+                                <i class="flaticon-delete icon-md"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Note List-->
+
+    <!--begin::Card-->
+    <div class="card" *ngIf="objContact?.notes?.length==0">
+        <!--begin::Card body-->
+        <div class="card-body p-0">
+            <!--begin::Heading-->
+            <div class="card-px text-center py-20 my-10">
+                <!--begin::Title-->
+                <h2 class="fs-2x fw-bolder mb-10">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_NOTES.FIRST_ACTION_CARD.TITLE' | translate }}</h2>
+                <!--end::Title-->
+
+                <!--begin::Description-->
+                <p class="text-gray-400 fs-5 fw-bold mb-13" [innerHTML]="'PAGE.CONTACT.CONTACT_DETAIL.TAB_NOTES.FIRST_ACTION_CARD.DETAILS' | translate"></p>
+                <!--end::Description-->
+
+                <!--begin::Action-->
+                <button type="button" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project" (click)="fnAddEditNote();">
+                    {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_NOTES.FIRST_ACTION_CARD.ACTION_BTN_LABEL' | translate }}
+                </button>
+                <!--end::Action-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Illustration-->
+            <div class="text-center px-5">
+                <img src="assets/images/illustrations/new_note.png" alt="" class="mw-100 mh-300px" />
+            </div>
+            <!--end::Illustration-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+</div>

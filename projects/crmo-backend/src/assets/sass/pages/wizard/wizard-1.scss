@@ -50,6 +50,7 @@
 					}
 				}
 
+				&.wizard-current,
 				&[data-wizard-state="done"],
 				&[data-wizard-state="current"] {
 					.wizard-label {

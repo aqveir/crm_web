@@ -1,25 +1,16 @@
 <!-- begin::User Panel-->
-<div
-  id="kt_quick_user"
-  class="offcanvas p-10"
-  [ngClass]="extrasUserOffcanvasDirection"
->
-  <ng-container> <!-- *ngIf="user$ | async as _user" -->
+<div id="kt_quick_user" class="offcanvas p-10" [ngClass]="extrasUserOffcanvasDirection"> {{extrasUserOffcanvasDirection}}
+  <ng-container *ngIf="objUser">
     <!--begin::Header-->
-    <div
-      class="offcanvas-header d-flex align-items-center justify-content-between pb-5"
-    >
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
       <h3 class="font-weight-bold m-0">
         User Profile
-        <small class="text-muted font-size-sm ml-2">12 messages</small>
+        <!-- <small class="text-muted font-size-sm ml-2">12 messages</small> -->
       </h3>
-      <a
-        href="#"
-        class="btn btn-xs btn-icon btn-light btn-hover-primary"
-        id="kt_quick_user_close"
-      >
+      <button class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close" 
+        data-dismiss="modal" aria-label="Close" (click)="fnCloseCanvasAction(true)">
         <i class="ki ki-close icon-xs text-muted"></i>
-      </a>
+      </button>
     </div>
     <!--end::Header-->
 
@@ -28,44 +19,52 @@
       <!--begin::Header-->
       <div class="d-flex align-items-center mt-5">
         <div class="symbol symbol-100 mr-5">
-          <div
-            class="symbol-label"
-            style="background-image: url('./assets/media/users/300_21.jpg');"
-          ></div>
-          <i class="symbol-badge bg-success"></i>
+          <div class="symbol-label" style="background-image: url('./assets/media/users/default.jpg');"></div>
+          <i class="symbol-badge" title="{{ langKeyUserStatus | translate }}" 
+            [ngClass]="keyUserStatus"></i>
         </div>
+
         <div class="d-flex flex-column">
-          <a
-            href="#"
-            class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
-          >
-             _user?.fullname
+          <a href="javascript:;" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary" >
+            {{ objUser.full_name | shorten:20 }}
           </a>
-          <div class="text-muted mt-1">
-            Application Developer
-          </div>
+          <!-- <div class="text-muted mt-1">
+            {{ objUser.username }}
+          </div> -->
           <div class="navi mt-2">
-            <a href="#" class="navi-item">
+            <a href="javascript:;" class="navi-item">
               <span class="navi-link p-0 pb-2">
                 <span class="navi-icon mr-1">
-                  <span
-                    [inlineSVG]="
-                      './assets/media/svg/icons/Communication/Mail-notification.svg'
-                    "
-                    class="svg-icon svg-icon-lg svg-icon-primary"
-                  ></span> <!-- cacheSVG="true" -->
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Mail-notification.svg'"
+                    class="svg-icon svg-icon-lg svg-icon-primary"></span>
                 </span>
                 <span class="navi-text text-muted text-hover-primary">
-                  _user?.email
+                  {{ objUser.username }}
                 </span>
               </span>
             </a>
 
-            <a
-              class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 cursor-pointer"
-              (click)="logout()"
-              >Sign Out</a
-            >
+            <div class="d-flex mt-3">
+              <div class="navi mr-3">
+                <a class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 cursor-pointer"
+                  (click)="fnUserLogoutAction()">
+                  {{ 'MENU.AUTH_USER.LOGOUT_USER.TITLE' | translate }}
+                </a>                
+              </div>
+
+              <div class="d-flex ml-auto">
+                <span class="switch switch-brand" [ngClass]="keyUserStatus" (click)="$event.stopPropagation();">
+                  <label>
+                    <input #userStatus type="checkbox" name="user_status" 
+                      [checked]="keyUserStatus=='user_status_online' || keyUserStatus=='user_status_busy'"
+                      (change)="fnUserStatusChangeAction($event);"/>
+                    <span></span>
+      
+                    <div class="text-muted font-size-sm text-center">{{ langKeyUserStatus | translate }}</div>
+                  </label>
+                </span>
+              </div>              
+            </div>
           </div>
         </div>
       </div>
@@ -77,46 +76,55 @@
 
       <!--begin::Nav-->
       <div class="navi navi-spacer-x-0 p-0">
-        <!--begin::Item-->
+        <!--begin::Item My Profile -->
         <a class="navi-item cursor-pointer">
           <div class="navi-link">
             <div class="symbol symbol-40 bg-light mr-3">
               <div class="symbol-label">
-                <span
-                  [inlineSVG]="
-                    './assets/media/svg/icons/General/Notification2.svg'
-                  "
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Notification2.svg'"
                   class="svg-icon svg-icon-md svg-icon-success"
                 ></span> <!-- cacheSVG="true" -->
               </div>
             </div>
             <div class="navi-text">
-              <div class="font-weight-bold">
-                My Profile
-              </div>
+              <div class="font-weight-bold">{{ 'MENU.AUTH_USER.USER_PROFILE.TITLE' | translate }}</div>
               <div class="text-muted">
-                Account settings and more
-                <span
-                  class="label label-light-danger label-inline font-weight-bold"
-                  >update</span
-                >
+                {{ 'MENU.AUTH_USER.USER_PROFILE.SUBTITLE' | translate }}
+                <!-- <span class="label label-light-danger label-inline font-weight-bold">update</span> -->
               </div>
             </div>
           </div>
         </a>
-        <!--end:Item-->
+        <!--end:Item My Profile -->
+
+        <!--begin::Item Change Password -->
+        <a class="navi-item cursor-pointer" (click)="fnUserChangePasswordAction()">
+          <div class="navi-link">
+            <div class="symbol symbol-40 bg-light mr-3">
+              <div class="symbol-label">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Notification2.svg'"
+                  class="svg-icon svg-icon-md svg-icon-success"></span>
+              </div>
+            </div>
+            <div class="navi-text">
+              <div class="font-weight-bold">
+                {{ 'MENU.AUTH_USER.CHANGE_PASSWORD.TITLE' | translate }}
+              </div>
+              <div class="text-muted">
+                {{ 'MENU.AUTH_USER.CHANGE_PASSWORD.SUBTITLE' | translate }}
+              </div>
+            </div>
+          </div>
+        </a>
+        <!--end:Item My Profile -->
 
         <!--begin::Item-->
         <a class="navi-item cursor-pointer">
           <div class="navi-link">
             <div class="symbol symbol-40 bg-light mr-3">
               <div class="symbol-label">
-                <span
-                  [inlineSVG]="
-                    './assets/media/svg/icons/Shopping/Chart-bar1.svg'
-                  "
-                  class="svg-icon svg-icon-md svg-icon-warning"
-                ></span> <!-- cacheSVG="true" -->
+                <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Chart-bar1.svg'"
+                  class="svg-icon svg-icon-md svg-icon-warning"></span>
               </div>
             </div>
             <div class="navi-text">

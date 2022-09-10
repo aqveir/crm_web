@@ -1,21 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { CommonModule, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { NgModule, ErrorHandler, Injector } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 //Application Environment
 import { environment } from '@env-backend/environment';
 
-//Application Modules
+//Third Party Application Modules
 import { InlineSVGModule } from 'ng-inline-svg';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
+
+//Application Modules
 import { 
   EllaisysLibModule, NotificationModule, ValidatorModule, PipeModule, 
   TranslateModule, TranslateLoader, TranslateHttpLoader, HttpLoaderFactory,
   LoggerModule, LoggerLevel
 } from 'ellaisys-lib';
+import { CrmoLibModule } from 'crmo-lib';
 
 import { UserModule } from './modules/user/user.module';
 import { ConsoleModule } from './modules/console/console.module';
@@ -27,7 +32,6 @@ import { GlobalErrorHandler } from './handlers/global-error-handler.handler';
 //Application Components
 import { AppComponent } from './app.component';
 
-
 /**
  * Translate Module Factory Loader
  * 
@@ -35,6 +39,10 @@ import { AppComponent } from './app.component';
  */
 export function HttpTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
+}
+
+export function GetApplicationLocation(_location: Location) {
+  return _location;
 }
 
 
@@ -50,12 +58,17 @@ export function HttpTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+
+    //Third Party Referenced Modules
     InlineSVGModule.forRoot(),
+    NgSelectModule,
+    NgbModule,
 
     //EllaiSys Library
-    EllaisysLibModule.forRoot({
-      'env': environment
-    }),
+    EllaisysLibModule.forRoot(
+      {'env': environment}, 
+      {'win_location': window.location}
+    ),
     ValidatorModule,
     PipeModule,
     
@@ -82,14 +95,30 @@ export function HttpTranslateLoader(http: HttpClient) {
     //Notification Module
     NotificationModule.forRoot(),
 
+    //CRMO Library Module
+    CrmoLibModule,
+
     //CRMO Modules
     UserModule,
-    ConsoleModule
+    ConsoleModule,
   ],
   providers: [
     Globals,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    Location, {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  /**
+   * Default Constructor
+   * Create global Service Injector
+   * 
+   * @param _injector 
+   */
+  constructor(
+    private _injector: Injector
+  ) {
+  }
+}

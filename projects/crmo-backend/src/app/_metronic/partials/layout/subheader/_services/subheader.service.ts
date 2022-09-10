@@ -10,16 +10,11 @@ import { SubheaderModel } from '../_models/subheader.model';
   providedIn: 'root',
 })
 export class SubheaderService implements OnDestroy {
-  titleSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
-    'Dashboard'
-  );
+  titleSubject: BehaviorSubject<string> = new BehaviorSubject<string>('Dashboard');
   descriptionSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  breadCrumbsSubject: BehaviorSubject<
-    BreadcrumbItemModel[]
-  > = new BehaviorSubject<BreadcrumbItemModel[]>([]);
-  subheaderVersionSubject: BehaviorSubject<string> = new BehaviorSubject<
-    string
-  >('v1'); // [1-6]
+  breadCrumbsSubject: BehaviorSubject<BreadcrumbItemModel[]> = new BehaviorSubject<BreadcrumbItemModel[]>([]);
+  subheaderVersionSubject: BehaviorSubject<string> = new BehaviorSubject<string>('v1'); // [1-6]
+  
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 

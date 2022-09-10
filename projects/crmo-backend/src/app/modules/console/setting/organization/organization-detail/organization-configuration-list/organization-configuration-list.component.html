@@ -1,0 +1,66 @@
+<div class="d-block gutter-b" *ngIf="!boolShowConfigDetail" style="margin-top: -25px;">
+    <div class="d-flex justify-content-end">
+        <a href="#" class="btn btn-icon font-weight-bolder font-size-sm"
+        [routerLink]="['/secure/setting/organization/', '0']"><i class="flaticon2-add icon-lg-2x"></i></a>
+    </div>    
+
+    <div class="d-flex">
+        <div class="table-responsive">
+            <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
+                <thead>
+                    <tr class="text-uppercase">
+                        <th class="pl-0" style="max-width: 150px;">
+                            {{ 'PAGE.ORGANIZATION.DETAIL.TAB_CONFIGURATION.TABLE_NAMES.KEY_TITLE' | translate }}
+                        </th>
+                        <th style="max-width: 150px;">
+                            {{ 'PAGE.ORGANIZATION.DETAIL.TAB_CONFIGURATION.TABLE_NAMES.TYPE_TITLE' | translate }}
+                        </th>
+                        <th style="max-width: 100px;">
+                            {{ 'PAGE.ORGANIZATION.DETAIL.TAB_CONFIGURATION.TABLE_NAMES.VALUE_TITLE' | translate }}
+                        </th>
+                        
+                        <th class="pr-0 text-right" style="min-width: 50px">
+                            {{ 'PAGE.ORGANIZATION.DETAIL.TAB_CONFIGURATION.TABLE_NAMES.ACTION_TITLE' | translate }}
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let configuration of objConfigurations" class="cursor-pointer" style="outline: none;"
+                        (click)="fnEditData(configuration)">
+                        <td title="{{ configuration?.display_value }}">
+                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                {{ configuration?.display_value | shorten:50 }}
+                            </span>
+                            <span class="text-muted">{{ configuration?.key | shorten:50 }}</span>
+                        </td>
+
+                        <td>
+                            <span class="label label-lg label-light-primary label-inline">
+                                {{ configuration?.type?.display_value }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="text-dark-75 text-wrap">
+                                {{ configuration?.pivot?.value | shorten:50 }}
+                            </span>
+                        </td>
+
+                        <td class="text-right">
+                            <button class="btn btn-icon btn-sm btn-hover-light-danger" 
+                                (click)="fnDeleteRecord($event, configuration)">
+                                <i class="flaticon-delete"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<crmo-backend-organization-configuration-data *ngIf="boolShowConfigDetail"
+    [configuration]="objSelectedConfiguration" 
+    (cancelled)="boolShowConfigDetail=false;"
+    (saved)="fnRefreshData()"></crmo-backend-organization-configuration-data>

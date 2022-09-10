@@ -1,0 +1,19 @@
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+		[title]="(boolIsNew)?'PAGE.ROLE.DETAIL.TITLE.ADD':'PAGE.ROLE.DETAIL.TITLE.EDIT'" 
+		[page-info]="roleForm?.controls['name'].value"
+		[save-group]="true" [back]="true" [loading]="boolSaving"
+		(back)="fnResetForm(true)"></crmo-backend-widget-subheader>
+		
+	<!--begin::Card header-->
+	<div class="card-header">
+	</div>
+	<!--end::Card header-->
+
+	<!--begin::Card body-->
+	<div class="card-body">
+		<div class="row">{{ objRole|json }}</div>
+	</div>
+	<!--begin::Card body-->
+</div>
+<!--end::Card-->

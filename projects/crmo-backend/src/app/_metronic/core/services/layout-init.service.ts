@@ -12,7 +12,6 @@ export class LayoutInitService {
     this.layout.initConfig();
 
     this.preInitLayout();
-    
     // init base layout
     this.initLayout();
     this.initLoader();
@@ -36,22 +35,24 @@ export class LayoutInitService {
   private preInitLayout() {
     const config = this.layout.getConfig();
     const updatedConfig = Object.assign({}, config);
-console.log(updatedConfig);
-
     const subheaderFixed = this.layout.getProp('subheader.fixed');
     const headerSelfFixedDesktop = this.layout.getProp('header.self.fixed.desktop');
     if (subheaderFixed && headerSelfFixedDesktop) {
       updatedConfig.subheader.style = 'solid';
     } else {
       updatedConfig.subheader.fixed = false;
-    }
+    } //End if
+    
+    const subheaderStyle = this.layout.getProp('subheader.style');
+    if (subheaderFixed && subheaderStyle === 'solid') {
+      updatedConfig.subheader.fixed = false;
+    } //End if
 
     this.layout.setConfigWithoutLocalStorageChanges(updatedConfig);
   }
 
   private initLayout() {
     const selfBodyBackgroundImage = this.layout.getProp('self.body.background-image');
-    console.log(selfBodyBackgroundImage);
     if (selfBodyBackgroundImage) {
       document.body.style.backgroundImage = `url("${selfBodyBackgroundImage}")`;
     }
@@ -79,29 +80,6 @@ console.log(updatedConfig);
     const headerSelfFixedMobile = this.layout.getProp('header.self.fixed.mobile');
     if (headerSelfFixedMobile) {
       document.body.classList.add('header-mobile-fixed');
-      this.layout.setCSSClass('header_mobile', 'header-mobile-fixed');
-    } //End if
-
-    // Menu
-    const headerMenuSelfDisplay = this.layout.getProp(
-      'header.menu.self.display'
-    );
-    const headerMenuSelfLayout = this.layout.getProp('header.menu.self.layout');
-    if (headerMenuSelfDisplay) {
-      this.layout.setCSSClass(
-        'header_menu',
-        `header-menu-layout-${headerMenuSelfLayout}`
-      );
-
-      if (this.layout.getProp('header.menu.self.rootArrow')) {
-        this.layout.setCSSClass('header_menu', 'header-menu-root-arrow');
-      }
-    }
-
-    if (this.layout.getProp('header.self.width') === 'fluid') {
-      this.layout.setCSSClass('header_container', 'container-fluid');
-    } else {
-      this.layout.setCSSClass('header_container', 'container');
     }
   }
 
@@ -115,14 +93,15 @@ console.log(updatedConfig);
 
     // Fixed content head
     const subheaderFixed = this.layout.getProp('subheader.fixed');
-    const headerSelfFixedDesktop = this.layout.getProp(
-      'header.self.fixed.desktop'
-    );
+    const headerSelfFixedDesktop = this.layout.getProp('header.self.fixed.desktop');
     if (subheaderFixed && headerSelfFixedDesktop) {
       document.body.classList.add('subheader-fixed');
     }
-
+    
     const subheaderStyle = this.layout.getProp('subheader.style');
+    if (subheaderFixed && subheaderStyle === 'solid') {
+      document.body.classList.add('subheader-fixed');
+    }
     if (subheaderStyle) {
       this.layout.setCSSClass('subheader', `subheader-${subheaderStyle}`);
     }
@@ -164,12 +143,31 @@ console.log(updatedConfig);
     // Enable Aside
     document.body.classList.add('aside-enabled');
 
+    // Aside Theme
+    switch (this.layout.getProp('aside.self.theme')) {
+      case 'light':
+        this.layout.setCSSClass('aside', 'aside-light');
+        break;
+
+      case 'dask':
+      default:
+        this.layout.setCSSClass('aside', 'aside-dark');
+        break;
+    } //End switch
+
     // Fixed Aside
     if (this.layout.getProp('aside.self.fixed')) {
       document.body.classList.add('aside-fixed');
       this.layout.setCSSClass('aside', 'aside-fixed');
     } else {
       document.body.classList.add('aside-static');
+    }
+
+    // Aside Secondary
+    if (this.layout.getProp('aside.secondary.display')) {
+      document.body.classList.add('aside-secondary-enabled');
+    } else {
+      document.body.classList.add('aside-secondary-disabled');
     }
 
     // Check Aside
@@ -204,6 +202,7 @@ console.log(updatedConfig);
     const asideMenuSubmenuDropdownHoverTimout = this.layout.getProp(
       'aside.menu.submenu.dropdown.hoverTimeout'
     );
+
     if (asideMenuSubmenuDropdownHoverTimout) {
       this.layout.setHTMLAttribute(
         'aside_menu',
@@ -218,6 +217,7 @@ console.log(updatedConfig);
     // Fixed header
     if (this.layout.getProp('footer.fixed') === true) {
       document.body.classList.add('footer-fixed');
+      this.layout.setCSSClass('footer', 'bg-white');
     }
 
     if (this.layout.getProp('footer.width') === 'fluid') {
@@ -231,13 +231,5 @@ console.log(updatedConfig);
    * Set the body class name based on page skin options
    */
   private initSkins() {
-    const headerSelfTheme = this.layout.getProp('header.self.theme') || '';
-    const brandSelfTheme = this.layout.getProp('brand.self.theme') || '';
-    const asideSelfDisplay = this.layout.getProp('aside.self.display');
-    if (asideSelfDisplay === false) {
-      document.body.classList.add(`brand-${headerSelfTheme}`);
-    } else {
-      document.body.classList.add(`brand-${brandSelfTheme}`);
-    }
   }
 }

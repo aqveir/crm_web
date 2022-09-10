@@ -3,7 +3,7 @@ import { IResponse } from '../common/response.interface';
 export interface IRequestContactLogin {
     username: string;  
     password: string
-    country_idd: string;
+    phone_idd: string;
     device_id: string;
     remember_me: boolean;
 }
@@ -28,7 +28,7 @@ export interface IResponseContactLogout {
     email: string;
     phone: string;
     password: string;
-	country_idd: string;
+	phone_idd: string;
 }
 
 
@@ -46,7 +46,7 @@ export interface IRequestContactRegister {
     email: string;
     phone: string;
     password: string;
-	country_idd: string;
+	phone_idd: string;
 }
 export interface IResponseContactRegister {
 	first_name: string;
@@ -54,7 +54,7 @@ export interface IResponseContactRegister {
     email: string;
     phone: string;
     password: string;
-	country_idd: string;
+	phone_idd: string;
 }
 
 

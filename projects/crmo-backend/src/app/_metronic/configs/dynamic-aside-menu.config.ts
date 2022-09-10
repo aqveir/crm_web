@@ -6,7 +6,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-architecture-and-city',
       svg: './assets/media/svg/icons/Design/Layers.svg',
       page: '/secure/dashboard',
-      translate: 'MENU.DASHBOARD',
+      translate: 'MENU.DASHBOARD.LABEL',
       bullet: 'dot',
     },
     {
@@ -23,368 +23,383 @@ export const DynamicAsideMenuConfig = {
       page: '/secure/contact',
       svg: './assets/media/svg/icons/Layout/Layout-left-panel-2.svg'
     },
-    // { section: 'Components' },
-    // {
-    //   title: 'Google Material',
-    //   root: true,
-    //   bullet: 'dot',
-    //   page: '/material',
-    //   icon: 'flaticon2-browser-2',
-    //   svg: './assets/media/svg/icons/Design/Cap-2.svg',
-    //   submenu: [
-    //     {
-    //       title: 'Form Controls',
-    //       bullet: 'dot',
-    //       page: '/material/form-controls',
-    //       submenu: [
-    //         {
-    //           title: 'Auto Complete',
-    //           page: '/material/form-controls/autocomplete',
-    //           permission: 'accessToECommerceModule'
-    //         },
-    //         {
-    //           title: 'Checkbox',
-    //           page: '/material/form-controls/checkbox'
-    //         },
-    //         {
-    //           title: 'Radio Button',
-    //           page: '/material/form-controls/radiobutton'
-    //         },
-    //         {
-    //           title: 'Datepicker',
-    //           page: '/material/form-controls/datepicker'
-    //         },
-    //         {
-    //           title: 'Form Field',
-    //           page: '/material/form-controls/formfield'
-    //         },
-    //         {
-    //           title: 'Input',
-    //           page: '/material/form-controls/input'
-    //         },
-    //         {
-    //           title: 'Select',
-    //           page: '/material/form-controls/select'
-    //         },
-    //         {
-    //           title: 'Slider',
-    //           page: '/material/form-controls/slider'
-    //         },
-    //         {
-    //           title: 'Slider Toggle',
-    //           page: '/material/form-controls/slidertoggle'
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       title: 'Navigation',
-    //       bullet: 'dot',
-    //       page: '/material/navigation',
-    //       submenu: [
-    //         {
-    //           title: 'Menu',
-    //           page: '/material/navigation/menu'
-    //         },
-    //         {
-    //           title: 'Sidenav',
-    //           page: '/material/navigation/sidenav'
-    //         },
-    //         {
-    //           title: 'Toolbar',
-    //           page: '/material/navigation/toolbar'
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       title: 'Layout',
-    //       bullet: 'dot',
-    //       page: '/material/layout',
-    //       submenu: [
-    //         {
-    //           title: 'Card',
-    //           page: '/material/layout/card'
-    //         },
-    //         {
-    //           title: 'Divider',
-    //           page: '/material/layout/divider'
-    //         },
-    //         {
-    //           title: 'Expansion panel',
-    //           page: '/material/layout/expansion-panel'
-    //         },
-    //         {
-    //           title: 'Grid list',
-    //           page: '/material/layout/grid-list'
-    //         },
-    //         {
-    //           title: 'List',
-    //           page: '/material/layout/list'
-    //         },
-    //         {
-    //           title: 'Tabs',
-    //           page: '/material/layout/tabs'
-    //         },
-    //         {
-    //           title: 'Stepper',
-    //           page: '/material/layout/stepper'
-    //         },
-    //         {
-    //           title: 'Tree',
-    //           page: '/material/layout/tree'
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       title: 'Buttons & Indicators',
-    //       bullet: 'dot',
-    //       page: '/material/buttons-and-indicators',
-    //       submenu: [
-    //         {
-    //           title: 'Button',
-    //           page: '/material/buttons-and-indicators/button'
-    //         },
-    //         {
-    //           title: 'Button toggle',
-    //           page: '/material/buttons-and-indicators/button-toggle'
-    //         },
-    //         {
-    //           title: 'Chips',
-    //           page: '/material/buttons-and-indicators/chips'
-    //         },
-    //         {
-    //           title: 'Icon',
-    //           page: '/material/buttons-and-indicators/icon'
-    //         },
-    //         {
-    //           title: 'Progress bar',
-    //           page: '/material/buttons-and-indicators/progress-bar'
-    //         },
-    //         {
-    //           title: 'Progress spinner',
-    //           page: '/material/buttons-and-indicators/progress-spinner'
-    //         },
-    //         {
-    //           title: 'Ripples',
-    //           page: '/material/buttons-and-indicators/ripples'
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       title: 'Popups & Modals',
-    //       bullet: 'dot',
-    //       page: '/material/popups-and-modals',
-    //       submenu: [
-    //         {
-    //           title: 'Bottom sheet',
-    //           page: '/material/popups-and-modals/bottom-sheet'
-    //         },
-    //         {
-    //           title: 'Dialog',
-    //           page: '/material/popups-and-modals/dialog'
-    //         },
-    //         {
-    //           title: 'Snackbar',
-    //           page: '/material/popups-and-modals/snackbar'
-    //         },
-    //         {
-    //           title: 'Tooltip',
-    //           page: '/material/popups-and-modals/tooltip'
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       title: 'Data table',
-    //       bullet: 'dot',
-    //       page: '/material/data-table',
-    //       submenu: [
-    //         {
-    //           title: 'Paginator',
-    //           page: '/material/data-table/paginator'
-    //         },
-    //         {
-    //           title: 'Sort header',
-    //           page: '/material/data-table/sort-header'
-    //         },
-    //         {
-    //           title: 'Table',
-    //           page: '/material/data-table/table'
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // },
-    // {
-    //   title: 'Ng-Bootstrap',
-    //   root: true,
-    //   bullet: 'dot',
-    //   page: '/ngbootstrap',
-    //   icon: 'flaticon2-digital-marketing',
-    //   svg: './assets/media/svg/icons/Shopping/Bitcoin.svg',
-    //   submenu: [
-    //     {
-    //       title: 'Accordion',
-    //       page: '/ngbootstrap/accordion'
-    //     },
-    //     {
-    //       title: 'Alert',
-    //       page: '/ngbootstrap/alert'
-    //     },
-    //     {
-    //       title: 'Buttons',
-    //       page: '/ngbootstrap/buttons'
-    //     },
-    //     {
-    //       title: 'Carousel',
-    //       page: '/ngbootstrap/carousel'
-    //     },
-    //     {
-    //       title: 'Collapse',
-    //       page: '/ngbootstrap/collapse'
-    //     },
-    //     {
-    //       title: 'Datepicker',
-    //       page: '/ngbootstrap/datepicker'
-    //     },
-    //     {
-    //       title: 'Dropdown',
-    //       page: '/ngbootstrap/dropdown'
-    //     },
-    //     {
-    //       title: 'Modal',
-    //       page: '/ngbootstrap/modal'
-    //     },
-    //     {
-    //       title: 'Pagination',
-    //       page: '/ngbootstrap/pagination'
-    //     },
-    //     {
-    //       title: 'Popover',
-    //       page: '/ngbootstrap/popover'
-    //     },
-    //     {
-    //       title: 'Progressbar',
-    //       page: '/ngbootstrap/progressbar'
-    //     },
-    //     {
-    //       title: 'Rating',
-    //       page: '/ngbootstrap/rating'
-    //     },
-    //     {
-    //       title: 'Tabs',
-    //       page: '/ngbootstrap/tabs'
-    //     },
-    //     {
-    //       title: 'Timepicker',
-    //       page: '/ngbootstrap/timepicker'
-    //     },
-    //     {
-    //       title: 'Tooltips',
-    //       page: '/ngbootstrap/tooltip'
-    //     },
-    //     {
-    //       title: 'Typehead',
-    //       page: '/ngbootstrap/typehead'
-    //     }
-    //   ]
-    // },
-    // { section: 'Applications' },
-    // {
-    //   title: 'eCommerce',
-    //   bullet: 'dot',
-    //   icon: 'flaticon2-list-2',
-    //   svg: './assets/media/svg/icons/Shopping/Cart3.svg',
-    //   root: true,
-    //   permission: 'accessToECommerceModule',
-    //   page: '/ecommerce',
-    //   submenu: [
-    //     {
-    //       title: 'Customers',
-    //       page: '/ecommerce/customers'
-    //     },
-    //     {
-    //       title: 'Products',
-    //       page: '/ecommerce/products'
-    //     },
-    //   ]
-    // },
-    // {
-    //   title: 'User Management',
-    //   root: true,
-    //   bullet: 'dot',
-    //   icon: 'flaticon2-user-outline-symbol',
-    //   svg: './assets/media/svg/icons/General/User.svg',
-    //   page: '/user-management',
-    //   submenu: [
-    //     {
-    //       title: 'Users',
-    //       page: '/user-management/users'
-    //     },
-    //     {
-    //       title: 'Roles',
-    //       page: '/user-management/roles'
-    //     }
-    //   ]
-    // },
-    // { section: 'Custom' },
-    // {
-    //   title: 'Wizards',
-    //   root: true,
-    //   bullet: 'dot',
-    //   icon: 'flaticon2-mail-1',
-    //   svg: './assets/media/svg/icons/Shopping/Box1.svg',
-    //   page: '/wizards',
-    //   submenu: [
-    //     {
-    //       title: 'Wizard 1',
-    //       page: '/wizards/wizard-1'
-    //     },
-    //     {
-    //       title: 'Wizard 2',
-    //       page: '/wizards/wizard-2'
-    //     },
-    //     {
-    //       title: 'Wizard 3',
-    //       page: '/wizards/wizard-3'
-    //     },
-    //     {
-    //       title: 'Wizard 4',
-    //       page: '/wizards/wizard-4'
-    //     },
-    //   ]
-    // },
-    // {
-    //   title: 'Error Pages',
-    //   root: true,
-    //   bullet: 'dot',
-    //   icon: 'flaticon2-list-2',
-    //   svg: './assets/media/svg/icons/Code/Warning-2.svg',
-    //   page: '/error',
-    //   submenu: [
-    //     {
-    //       title: 'Error 1',
-    //       page: '/error/error-1'
-    //     },
-    //     {
-    //       title: 'Error 2',
-    //       page: '/error/error-2'
-    //     },
-    //     {
-    //       title: 'Error 3',
-    //       page: '/error/error-3'
-    //     },
-    //     {
-    //       title: 'Error 4',
-    //       page: '/error/error-4'
-    //     },
-    //     {
-    //       title: 'Error 5',
-    //       page: '/error/error-5'
-    //     },
-    //     {
-    //       title: 'Error 6',
-    //       page: '/error/error-6'
-    //     },
-    //   ]
-    // },
-  ]
+    {
+      title: 'setting',
+      root: true,
+      icon: 'flaticon2-expand',
+      svg: 'assets/media/svg/icons/Code/Settings4.svg',
+      alignment: 'left',
+      toggle: 'click',
+      page: '',
+      translate: 'MENU.SETTING.LABEL',
+      submenu: [
+        {
+          title: 'organization',
+          bullet: 'dot',
+          icon: 'flaticon2-shelterflaticon-business',
+          permission: 'accessToECommerceModule',
+          page: '/secure/setting/organization',
+          translate: 'MENU.SETTING.ORGANIZATION.LABEL',
+        },
+        {
+          title: 'User Management',
+          bullet: 'dot',
+          icon: 'flaticon-user',
+          page: '',
+          translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'users',
+              page: 'organization/:ohash/user',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
+            },
+            {
+              title: 'roles',
+              page: '/user-management/roles',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
+            },
+            
+          ]
+        },
+        {
+          title: 'Error Pages',
+          bullet: 'dot',
+          icon: 'flaticon2-list-2',
+          page: '/error',
+          submenu: [
+            {
+              title: 'Error 1',
+              page: '/error/error-1'
+            },
+            {
+              title: 'Error 2',
+              page: '/error/error-2'
+            },
+            {
+              title: 'Error 3',
+              page: '/error/error-3'
+            },
+            {
+              title: 'Error 4',
+              page: '/error/error-4'
+            },
+            {
+              title: 'Error 5',
+              page: '/error/error-5'
+            },
+            {
+              title: 'Error 6',
+              page: '/error/error-6'
+            },
+          ]
+        },
+        {
+          title: 'Wizards',
+          bullet: 'dot',
+          icon: 'flaticon2-mail-1',
+          page: '/wizards',
+          submenu: [
+            {
+              title: 'Wizard 1',
+              page: '/wizards/wizard-1'
+            },
+            {
+              title: 'Wizard 2',
+              page: '/wizards/wizard-2'
+            },
+            {
+              title: 'Wizard 3',
+              page: '/wizards/wizard-3'
+            },
+            {
+              title: 'Wizard 4',
+              page: '/wizards/wizard-4'
+            },
+          ]
+        }
+      ]
+    }
+  ],
+  tabs:[
+    {
+      name: 'aside_tab_dashboard',
+      title: 'Dashboard',
+      root: true,
+      type: 'link', //link/pop/dropdown/
+      icon: 'flaticon2-layers',
+      page: '/secure/dashboard',
+      translate: 'MENU.DASHBOARD.LABEL',
+      bullet: 'dot',
+    },
+    {
+      name: 'aside_tab_queue',
+      title: 'work_queue',
+      root: true,
+      type: 'link',
+      icon: 'flaticon2-menu-4',
+      page: '/secure/queue',
+      translate: 'MENU.WORK_QUEUE.LABEL'
+    },    
+    {
+      name: 'aside_tab_contact_list',
+      title: 'contacts',
+      root: true,
+      type: 'link',
+      icon: 'flaticon2-avatar',
+      page: '/secure/contact',
+      permissions: ['list_all_contacts'],
+      translate: 'MENU.CONTACT_LIST.LABEL'
+    },
+    {
+      name: 'aside_tab_lead_list',
+      title: 'request-leads',
+      root: true,
+      type: 'link',
+      icon: 'flaticon-envelope',
+      page: '/secure/lead',
+      translate: 'MENU.LEAD_LIST.LABEL'
+    },
+    {
+      name: 'aside_tab_opportunity_list',
+      title: 'request-opportunities',
+      root: true,
+      type: 'link',
+      icon: 'flaticon-add-label-button',
+      page: '/secure/opportunity',
+      translate: 'MENU.OPPORTUNITY_LIST.LABEL'
+    },
+    {
+      name: 'aside_tab_support_list',
+      title: 'request-support',
+      root: true,
+      type: 'link',
+      icon: 'flaticon-businesswoman',
+      page: '/secure/support',
+      translate: 'MENU.SUPPORT_LIST.LABEL'
+    },
+    {
+      name: 'aside_tab_task_list',
+      title: 'Tasks',
+      root: true,
+      type: 'link',
+      icon: 'flaticon2-shield',
+      page: '/secure/tasks',
+      translate: 'MENU.TASK_LIST.LABEL',
+    },
+    {
+      name: 'aside_tab_event_list',
+      title: 'Events',
+      root: true,
+      type: 'link',
+      icon: 'flaticon2-calendar-1',
+      page: '/secure/events',
+      translate: 'MENU.EVENT_LIST.LABEL',
+    },
+    {
+      name: 'aside_tab_setting_organization_list',
+      title: 'Setting',
+      root: true,
+      type: 'link',
+      icon: 'flaticon2-settings',
+      alignment: 'center',
+      page: '/secure/setting/organization',
+      permission: ['list_all_organizations'],
+      translate: 'MENU.SETTING.ORGANIZATION.LABEL',
+      submenu: [
+        {
+          title: 'organization detail',
+          bullet: 'dot',
+          icon: 'flaticon2-shelter',
+          permission: 'accessToECommerceModule',
+          page: '/secure/setting/organization/oHash',
+          translate: 'MENU.SETTING.ORGANIZATION.DETAIL.LABEL',
+        },
+        {
+          title: 'User Management',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'users',
+              page: '/secure/setting/organization/oHash/user',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
+            },
+            {
+              title: 'roles',
+              page: '/secure/setting/organization/oHash/role',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
+            }
+          ]
+        },
+        {
+          title: 'Subscription',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.BILLING_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'subscriptions',
+              page: '/secure/setting/organization/oHash/subscription',
+              translate: 'MENU.SETTING.ORGANIZATION.BILLING_MANAGEMENT.SUBSCRIPTIONS.LABEL',
+            },
+            {
+              title: 'invoices',
+              page: '/secure/setting/organization/oHash/invoice',
+              translate: 'MENU.SETTING.ORGANIZATION.BILLING_MANAGEMENT.INVOICES.LABEL',
+            }
+          ]
+        },
+        {
+          title: 'Meta Data',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.META_DATA.LABEL',
+          submenu: [
+            {
+              title: 'lists',
+              page: '/secure/setting/organization/oHash/lists',
+              translate: 'MENU.SETTING.ORGANIZATION.META_DATA.LOOKUP.LABEL',
+            },
+            {
+              title: 'preferences',
+              page: '/secure/setting/organization/oHash/preference',
+              translate: 'MENU.SETTING.ORGANIZATION.META_DATA.PREFERENCES.LABEL',
+            }
+          ]
+        },
+        {
+          title: 'Account Management',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.ACCOUNT_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'accounts',
+              page: '/secure/setting/organization/oHash/account',
+              translate: 'MENU.SETTING.ORGANIZATION.ACCOUNT_MANAGEMENT.ACCOUNT.LABEL',
+            }
+          ]
+        },
+      ]
+    },
+    {
+      name: 'aside_tab_setting_list',
+      title: 'Setting',
+      root: false,
+      type: 'link',
+      icon: 'flaticon2-settings',
+      alignment: 'left',
+      page: '/secure/setting/organization',
+      permission: ['edit_organization_data', '!list_all_organizations'],
+      translate: 'MENU.SETTING.LABEL',
+      submenu: [
+        {
+          title: 'organization detail',
+          bullet: 'dot',
+          icon: 'flaticon2-shelter',
+          permission: 'accessToECommerceModule',
+          page: '/secure/setting/organization/oHash',
+          translate: 'MENU.SETTING.ORGANIZATION.DETAIL.LABEL',
+        },
+        {
+          title: 'User Management',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'users',
+              page: '/secure/setting/organization/oHash/user',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
+            },
+            {
+              title: 'roles',
+              page: '/secure/setting/organization/oHash/role',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
+            }
+          ]
+        },
+        {
+          title: 'Subscription & Invoices',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.LABEL',
+          submenu: [
+            {
+              title: 'users',
+              page: '/secure/setting/organization/oHash/user',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.USER.LABEL',
+            },
+            {
+              title: 'roles',
+              page: '/secure/setting/organization/oHash/role',
+              translate: 'MENU.SETTING.ORGANIZATION.USER_MANAGEMENT.ROLE.LABEL',
+            }
+          ]
+        },
+        {
+          title: 'Manage Preferences',
+          bullet: 'dot',
+          icon: 'flaticon2-user-1',
+          translate: 'MENU.SETTING.ORGANIZATION.PREFERENCES.LABEL',
+        },
+        {
+          title: 'Error Pages',
+          bullet: 'dot',
+          icon: 'flaticon2-list-2',
+          page: '/error',
+          submenu: [
+            {
+              title: 'Error 1',
+              page: '/error/error-1'
+            },
+            {
+              title: 'Error 2',
+              page: '/error/error-2'
+            },
+            {
+              title: 'Error 3',
+              page: '/error/error-3'
+            },
+            {
+              title: 'Error 4',
+              page: '/error/error-4'
+            },
+            {
+              title: 'Error 5',
+              page: '/error/error-5'
+            },
+            {
+              title: 'Error 6',
+              page: '/error/error-6'
+            },
+          ]
+        },
+        {
+          title: 'Wizards',
+          bullet: 'dot',
+          icon: 'flaticon2-mail-1',
+          page: '/wizards',
+          submenu: [
+            {
+              title: 'Wizard 1',
+              page: '/wizards/wizard-1'
+            },
+            {
+              title: 'Wizard 2',
+              page: '/wizards/wizard-2'
+            },
+            {
+              title: 'Wizard 3',
+              page: '/wizards/wizard-3'
+            },
+            {
+              title: 'Wizard 4',
+              page: '/wizards/wizard-4'
+            },
+          ]
+        }
+      ]
+    }
+  ],
 };

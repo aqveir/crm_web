@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+
 import { LayoutService, DynamicHeaderMenuService } from '../../../../../../_metronic/core';
 
 @Component({
@@ -22,16 +23,15 @@ export class HeaderMenuDynamicComponent implements OnInit, OnDestroy {
     private layout: LayoutService,
     private router: Router,
     private menu: DynamicHeaderMenuService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     this.ulCSSClasses = this.layout.getStringCSSClasses('header_menu_nav');
     this.rootArrowEnabled = this.layout.getProp('header.menu.self.rootArrow');
-    this.headerMenuDesktopToggle = this.layout.getProp(
-      'header.menu.desktop.toggle'
-    );
+    this.headerMenuDesktopToggle = this.layout.getProp('header.menu.desktop.toggle');
 
-    // router subscription
+    // Router subscription
     this.currentUrl = this.router.url.split(/[?#]/)[0];
     
     const routerSubscr = this.router.events.pipe(
@@ -42,7 +42,7 @@ export class HeaderMenuDynamicComponent implements OnInit, OnDestroy {
     });
     this.subscriptions.push(routerSubscr);
 
-    // menu load
+    // Menu load
     const menuSubscr = this.menu.menuConfig$.subscribe(res => {
       this.menuConfig = res;
       this.cdr.detectChanges();

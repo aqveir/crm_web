@@ -1,0 +1,131 @@
+<div class="flex-fill">
+    <h3 class="mb-10 font-weight-bold text-dark">Setup Your Current Location</h3>
+
+    <div class="col-sm-12 col-xl-8 offset-xl-2" [formGroup]="contactAddressForm">
+        <div class="form-group">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS1.LABEL' | translate }}</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <ng-select class="form-control" #selectAddressType formControlName="type_key"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.TYPE.PLACEHOLDER' | translate }}"
+                        [items]="listLookupAddressType" bindLabel="display_value" bindValue="key"
+                        [searchable]="true" autocomplete="on" tabindex="0" (change)="fnOnControlModify($event)">
+                    </ng-select>
+                </div>
+
+                <input type="text" class="form-control" name="address1" formControlName="address1"
+                    placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS1.PLACEHOLDER' | translate }}" 
+                    autocomplete="none" tabindex="1" autofocus (change)="fnOnControlModify($event)" />                   
+            </div>
+
+
+            <span class="form-text text-muted">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS1.FINE_TEXT' | translate }}
+            </span>
+
+            <span class="form-text text-danger" *ngIf="contactAddressForm.controls.address1.dirty && contactAddressForm.controls.address1.invalid">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS1.VALIDATION_ERROR' | translate }}
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS2.LABEL' | translate }}</label>
+            <input type="text" class="form-control" name="address2" formControlName="address2"
+                placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS2.PLACEHOLDER' | translate }}" 
+                autocomplete="none" tabindex="2" (change)="fnOnControlModify($event)" />
+
+            <span class="form-text text-muted">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS2.FINE_TEXT' | translate }}
+            </span>
+
+            <span class="form-text text-danger" *ngIf="contactAddressForm.controls.address2.dirty && contactAddressForm.controls.address2.invalid">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS2.VALIDATION_ERROR' | translate }}
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.LOCALITY.LABEL' | translate }}</label>
+            <input type="text" class="form-control" name="address2" formControlName="locality"
+                placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.LOCALITY.PLACEHOLDER' | translate }}" 
+                autocomplete="none" tabindex="3" (change)="fnOnControlModify($event)" />
+
+            <span class="form-text text-muted">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.LOCALITY.FINE_TEXT' | translate }}
+            </span>
+
+            <span class="form-text text-danger" *ngIf="contactAddressForm.controls.locality.dirty && contactAddressForm.controls.locality.invalid">
+                {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.LOCALITY.VALIDATION_ERROR' | translate }}
+            </span>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="form-group">
+                    <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ZIPCODE.LABEL' | translate }}</label>
+                    <input type="text" class="form-control" name="postcode" formControlName="zipcode"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ZIPCODE.PLACEHOLDER' | translate }}" 
+                        autocomplete="none" tabindex="4" (change)="fnOnControlModify($event)"/>
+
+                    <span class="form-text text-muted">
+                        {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ZIPCODE.FINE_TEXT' | translate }}
+                    </span>
+
+                    <span class="form-text text-danger" *ngIf="contactAddressForm.controls.zipcode.dirty && contactAddressForm.controls.zipcode.invalid">
+                        {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ZIPCODE.VALIDATION_ERROR' | translate }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-xl-6">
+                <div class="form-group">
+                    <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.CITY.LABEL' | translate }}</label>
+                    <input type="text" class="form-control" name="city" formControlName="city"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.CITY.PLACEHOLDER' | translate }}" 
+                        autocomplete="none" tabindex="5" (change)="fnOnControlModify($event)" />
+
+                    <span class="form-text text-muted">
+                        {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.CITY.FINE_TEXT' | translate }}
+                    </span>
+
+                    <span class="form-text text-danger" *ngIf="contactAddressForm.controls.city.dirty && contactAddressForm.controls.city.invalid">
+                        {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.CITY.VALIDATION_ERROR' | translate }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="form-group">
+                    <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.STATE.LABEL' | translate }}</label>
+                    <input type="text" class="form-control" name="state" formControlName="state"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.STATE.PLACEHOLDER' | translate }}" 
+                        autocomplete="none" tabindex="6" (change)="fnOnControlModify($event)"/>
+
+                    <span class="form-text text-muted">
+                        {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.STATE.FINE_TEXT' | translate }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-xl-6">
+                <div class="form-group">
+                    <label>{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.COUNTRY.LABEL' | translate }}</label>
+                    <ng-select class="form-control" #selectCountry formControlName="country_code"
+                        placeholder="{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.COUNTRY.PLACEHOLDER' | translate }}"
+                        [searchable]="true" autocomplete="on" tabindex="7" (change)="fnOnControlModify($event)">
+                        <ng-option *ngFor="let objCountry of listCountries" [value]="objCountry?.alpha2_code">{{objCountry?.display_value}}</ng-option>
+                    </ng-select>
+
+                    <span class="form-text text-muted">
+                        {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.COUNTRY.FINE_TEXT' | translate }}
+                    </span>
+
+                    <span class="form-text text-danger" *ngIf="contactAddressForm.controls.country_code.dirty && contactAddressForm.controls.country_code.invalid">
+                        {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.COUNTRY.VALIDATION_ERROR' | translate }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

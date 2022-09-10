@@ -1,0 +1,95 @@
+#  CRMO Web NodeJS build
+image: node:12.20
+
+definitions: 
+  caches:
+    submodule: projects/ellaisys-lib
+
+  steps:
+    - step: &load-submodules
+        name: Load GIT Submodules
+        script:
+          - git submodule update --init --recursive
+          - echo "Loaded GIT Submodules"
+        artifacts:
+          - projects/ellaisys-lib/**
+
+    - step: &install-angular
+        name: Install Anugular & Project Dependencies
+        caches:
+          - node
+        script:
+          - npm install -g @angular/cli@11.1.4
+          - npm -v
+          - ng version
+          - echo "Angular Installed"
+          - npm install
+          - echo "Project Dependencies installed"
+        artifacts:
+          - node_modules/**
+
+    - step: &code-linting
+        name: Code linting
+        script:
+          - npm install eslint
+
+    - step: &deploy
+        name: Deploy to AWS S3
+        image: atlassian/pipelines-awscli
+        script:
+          - cd dist/crmo-backend/
+          - aws s3 sync --delete . s3://$AWS_S3_BUCKET/$AWS_S3_TARGET_FOLDER/$BITBUCKET_BUILD_NUMBER
+          - echo "Uploaded to AWS S3 WEB"
+
+pipelines:          
+  branches:
+    master:
+      - parallel:
+        - step: 
+            <<: *load-submodules
+
+        - step:
+            <<: *install-angular
+
+        - step:
+            name: Build and Test
+            script:
+              - echo "Build Started - Production"
+              - npm run build:aqveir-build-all-prod
+              - echo "Build Complete "
+              - cp .htaccess.dev dist/crmo-backend/.htaccess
+              - echo "HTACCESS Copied"
+              - cp dist/crmo-backend/index.html dist/crmo-backend/index.php
+              - echo "HTML renamed as PHP"
+            artifacts:
+              - dist/crmo-backend/**
+
+        - step:
+            name: Code linting
+            script:
+              - # npm install eslint
+              - # npx eslint 
+    
+    phase1.0:
+      - step: 
+          <<: *load-submodules
+
+      - step:
+          <<: *install-angular
+
+      - step:
+          name: Build and Test
+          script:
+            - echo "Build Started - Production"
+            - npm run build:aqveir-build-all-prod
+            - echo "Build Complete "
+            - cp .htaccess.dev dist/crmo-backend/.htaccess
+            - echo "HTACCESS Copied"
+            - cp dist/crmo-backend/index.html dist/crmo-backend/index.php
+            - echo "HTML renamed as PHP"
+          artifacts:
+            - dist/crmo-backend/**
+
+      #- step: *code-linting
+
+      - step: *deploy

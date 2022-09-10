@@ -10,14 +10,16 @@ export const environment = {
   logs:true,
 
   //Customer Key
-  organization_key: 'o2020061593290773356', //This key and the http_config > api_server > request > params > key['key'] is same
+  organization_key: 'o202102ac746f64402fe866f88df092f41bd6a0', //This key and the http_config > api_server > request > params > key['key'] is same
 
   //Http Settings
   http_config: {
 
     //API Configuration
     api_server: {
-      server: 'http://dev.ellaisys.com/',
+      force_env: true, //Force this configuration
+      
+      server: 'https://ellaisys.aqveir.com/',
       apiUrl: 'api/',
       title: '',
       headers: {
@@ -31,7 +33,6 @@ export const environment = {
         time_out: 2*60*1000, // 2 minutes
 
         params: [
-          { key:'key', value:'o2020061593290773356' },
           { key:'lang', value:'en_US' },
           { key:'source', value:'website' },
         ],
@@ -50,9 +51,9 @@ export const environment = {
   //Storage Settings
   storage_config: {
     storage_keys: {
-      app_key: 'EIS_OMNI_WIDGET',
-      auth_claim_key: '_SESSION_AUTH_CLAIM_KEY', //Key to store the authenticated claim
-      auth_credentials_key: '_LOCAL_STORAGE_AUTH_CREDENTIALS', //Key to store the auth credentials to remember the successful login.      
+      app_key: 'CRM_OMNI_WIDGET',
+      auth_claim_key: '_SESSION_USER_AUTH_CLAIM_KEY', //Key to store the authenticated claim
+      auth_credentials_key: '_LOCAL_STORAGE_USER_AUTH_CREDENTIALS', //Key to store the auth credentials to remember the successful login.      
     },
 
   },
@@ -89,6 +90,10 @@ export const environment = {
       ],
     },
 
+    timer: {
+      application_interval: 5000, //In Milli-seconds
+    },
+
     default: {
       start_page: '/queue',
       auto_page_refersh_time_in_sec: 15
@@ -100,9 +105,26 @@ export const environment = {
     }
   },
 
+  // Uppy XHR configuration
+  uppy_configuration: {
+    contact_upload: {
+      xhr_endpoint: "http://ellaisys.crmomni.com/api/contact/upload",
+      file_size_bytes: 1000000,      
+    },
+    document_upload: {
+      xhr_endpoint: "http://ellaisys.crmomni.com/api/document",
+      file_size_bytes: 1000000,   
+    }
+  },
+
   // Facebook share
   facebook:{
     fb_appId:'1658574024410741' //Beta
+  },
+
+  //Stripe integration
+  stripe: {
+    publishable_key: 'pk_test_51ITl4lFoTpVJV8LygXIMZ2ox1phnpLm04OdEFbUBIxwFz8akusvtMuWewWJrTD50Ja7jKRebhlSwZBffzadiwfbn0079AOXjub'
   }
 };
 

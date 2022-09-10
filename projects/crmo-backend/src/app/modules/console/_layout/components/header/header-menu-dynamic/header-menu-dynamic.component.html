@@ -18,7 +18,7 @@
   <ng-container *ngIf="!item.submenu">
     <!-- begin::1 Level -->
     <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
-      <a class="menu-link" [routerLink]="['/secure/dashboard']" routerLinkActive="active">
+      <a class="menu-link" [routerLink]="item.page" routerLinkActive="active">
         <span class="menu-text" [translate]="item.translate">{{
           item.title
         }}</span>
@@ -170,7 +170,7 @@
 <ng-template #menu3LevelTemplate let-item="item">
   <!-- begin::3 Level -->
   <li class="menu-item" routerLinkActive="menu-item-active">
-    <a class="menu-link" [routerLink]="['/secure/dashboard']" routerLinkActive="active">
+    <a class="menu-link" [routerLink]="item.page" routerLinkActive="active">
       <i class="menu-bullet menu-bullet-dot"><span></span></i>
       <span class="menu-text" [translate]="item.translate">{{
         item.title

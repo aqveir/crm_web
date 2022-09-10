@@ -1,0 +1,55 @@
+<div class="flex-row p-5">
+    <div class="d-flex flex-fill flex-lg-row-reverse mb-2" *ngIf="objContact?.addresses?.length>0">
+        <button type="button" class="btn btn-icon icon-2x text-dark-50 font-weight-bold text-hover-primary" 
+            (click)="fnAddAction($event, modalContactAddress);" placement="top" [ngbTooltip]="'COMMON.LABEL.ADD_NEW'|translate">
+            <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+
+    <div class="row px-3">
+        <div class="col-12" [formGroup]="contactProfileForm">
+            <div class="row card-groups address-cards" [formArrayName]="'addresses'" *ngIf="contactAddressFormArray?.controls">
+                <div class="col-6 col-xl-4 p-2" *ngFor="let objAddress of contactAddressFormArray?.controls; let indexElem=index;">
+                    <!--begin::address card-->
+                    <div class="card card-custom card-rounded card-border">
+                        <div class="card-header px-2">
+                            <div class="card-title">Home</div>
+                            <div class="card-toolbar">
+                                <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-primary border-0 font-weight-bold btn-sm"
+                                    placement="top" [ngbTooltip]="'COMMON.LABEL.EDIT'|translate" (click)="fnEditAction(indexElem);">
+                                    <i class="flaticon-edit icon-md"></i>
+                                </button>
+                                <button type="button" class="btn btn-icon btn-icon-dark-50 btn-hover-icon-danger border-0 font-weight-bold btn-sm"
+                                    placement="top" [ngbTooltip]="'COMMON.LABEL.DELETE'|translate" (click)="fnDeleteAction(indexElem);">
+                                    <i class="flaticon-delete icon-md"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body text-dark-50 px-3 py-3">
+                            <span class="d-block">{{ objAddress?.value.address1 }},</span>
+                            <span class="d-block">{{ objAddress?.value.address2 }}</span>
+                            <span class="d-block">{{ objAddress?.value.locality }},</span>
+                            <span class="d-block">{{ objAddress?.value.city }} - {{ objAddress?.value.zipcode }}, Maharashtra,</span>
+                            <span class="d-block font-weight-bolder text-uppercase">{{ objContact?.addresses[indexElem]?.country?.display_value }}</span>
+                        </div>
+                    </div>
+                    <!--end::address card-->                
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<ng-template #modalContactAddress let-modal>
+    <div class="modal-header border-0">
+        <h5 class="modal-title" id="idModalContactAddress">{{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.MODAL.TITLE.ADD' | translate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss(true)">
+            <i aria-hidden="true" class="ki ki-close"></i>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <crmo-backend-widget-address-block></crmo-backend-widget-address-block>
+    </div>  
+</ng-template>

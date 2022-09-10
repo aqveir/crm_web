@@ -3,19 +3,14 @@ import { Observable, Observer } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
 //Framework files
-import { HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
+import { ContentType, HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
 import { BaseService } from '../base.service';
 
 //Interfaces
-import { IResponse, IResponseError } from '../../interfaces/common/response.interface';
-
-//Models
-import { 
-  RequestContactLogin, ResponseContactLogin, 
-  RequestContactValidate, ResponseContactValidate,
-  RequestContactRegister, RequestContactForgotPassword, 
-  RequestContactChangePassword 
-} from '../../models/contact/contact-auth.model';
+import { IResponseError } from '../../interfaces/common/response.interface';
+import { IRequestContactLogin, IResponseContactLogin, IRequestContactValidate, 
+        IResponseContactValidate, IRequestContactRegister, IRequestContactForgotPassword, 
+        IRequestContactChangePassword } from '../../interfaces/contact/contact-auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -36,25 +31,25 @@ export class ContactAuthService extends BaseService {
    * Authenticate the contact using the backend service.
    * @param _data RequestContactLogin
    */
-  public login(_data: RequestContactLogin): Observable<any> {
+  public login(_data: IRequestContactLogin): Observable<any> {
     //Set HTTP Params
     let params = new HttpParams()
       .set('username', _data.username)
       .set('password', _data.password)
-      .set('country_idd', _data.country_idd)
+      .set('phone_idd', _data.phone_idd)
       .set('device_id', _data.device_id);
 
     return Observable.create((observer: Observer<any>) => {
-      this._httpService.post('contact/login', params, true, false)
+      this._httpService.post('contact/login', params, false, null, ContentType.ENCODED_FORM_DATA)
         .then((response: any) => {
-          let claim: ResponseContactLogin = response.data;
+          let claim: IResponseContactLogin = response.data;
 
           //Store the claim into the session storage
-          this._sessionStorageService.setItem('_SESSION_AUTH_CLAIM_KEY', claim);
+          this._sessionStorageService.setItem('_SESSION_CONTACT_AUTH_CLAIM_KEY', claim);
 
           //Store the credentials into local storage
           if (_data.remember_me) {
-            this._localStorageService.setItem('_LOCAL_STORAGE_AUTH_CREDENTIALS', _data);
+            this._localStorageService.setItem('_LOCAL_STORAGE_CONTACT_AUTH_CREDENTIALS', _data);
           } //End if
 
           observer.next(claim);
@@ -77,8 +72,8 @@ export class ContactAuthService extends BaseService {
         .then((response: any) => {
 
           //Store the claim into the session storage
-          if (this._sessionStorageService.hasItem('_SESSION_AUTH_CLAIM_KEY')) {
-            this._sessionStorageService.removeItem('_SESSION_AUTH_CLAIM_KEY');
+          if (this._sessionStorageService.hasItem('_SESSION_CONTACT_AUTH_CLAIM_KEY')) {
+            this._sessionStorageService.removeItem('_SESSION_CONTACT_AUTH_CLAIM_KEY');
           } //End if          
 
           observer.next(response);
@@ -96,11 +91,11 @@ export class ContactAuthService extends BaseService {
    * Validate/check the contact inputs and confirm if that exists
    * @param _data RequestContactValidate
    */
-  public validate(_data: RequestContactValidate): Observable<any> {
+  public validate(_data: IRequestContactValidate): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
       this._httpService.get('contact/exists')
         .then((response: any) => {
-          let data: ResponseContactValidate = response.data;
+          let data: IResponseContactValidate = response.data;
           observer.next(data);
         })
         .catch((error: IResponseError) =>  { observer.error(error); })
@@ -115,7 +110,7 @@ export class ContactAuthService extends BaseService {
    * Register the contact using the backend service.
    * @param _data ContactLogin
    */
-  public register(_data: RequestContactRegister): Observable<any> {
+  public register(_data: IRequestContactRegister): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
       this._httpService.post('contact/register', _data)
         .then((response: any) => {
@@ -133,7 +128,7 @@ export class ContactAuthService extends BaseService {
    * Send the reset link to the contact
    * @param _data RequestContactForgotPassword
    */
-  public forgotpassword(_data: RequestContactForgotPassword): Observable<any> {
+  public forgotpassword(_data: IRequestContactForgotPassword): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
       this._httpService.post('contact/forgot', _data)
         .then((response: any) => {
@@ -151,7 +146,7 @@ export class ContactAuthService extends BaseService {
    * Allow the contact to chaneg the password.
    * @param _data RequestContactChangePassword
    */
-  public changepassword(_data: RequestContactChangePassword): Observable<any> {
+  public changepassword(_data: IRequestContactChangePassword): Observable<any> {
     return Observable.create((observer: Observer<any>) => {
       this._httpService.post('contact/changepass', _data)
         .then((response: any) => {

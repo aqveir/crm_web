@@ -1,4 +1,1306 @@
 {
+    "COMMON": {
+        "LABEL": {
+            "BLANK": "",
+
+            "BACK": "Back",
+            "CANCEL": "Cancel",
+            "CLOSE": "Close",
+            "SAVE": "Save",
+            "SAVE_N_CONTINUE": "Save & continue",
+            "SAVE_N_ADDNEW": "Save & add new",
+            "SAVE_N_EXIT": "Save & exit",
+
+            "ADD": "Add",
+            "ADD_NEW": "Add New",
+            "ADD_MORE": "Add More",
+            "EDIT": "Edit",
+            "DELETE": "Delete",
+
+            "LOAD": "Load",
+
+            "CALL": "Call",
+            "SMS": "SMS",
+            "EMAIL": "Email",
+
+            "PLEASE_WAIT": "Please wait ...",
+
+            "SEARCH": "Search",
+            "SEARCH_AND_ELLIPSIS": "Search ...",
+
+            "IMPORT": "Import",
+            "EXPORT": "Export",
+            "UPLOAD": "Upload",
+            "UPLOAD_DOCUMENT": "Upload Document",
+            "DOWNLOAD": "Download",
+            "DOWNLOAD_DOCUMENT": "Document Download",
+
+            "ACTIVE": "Active",
+            "IN_ACTIVE": "In Active",
+            "PRIMARY": "Primary",
+            "MAKE_PRIMARY": "Make Primary",
+            "VERIFIED": "Verified"
+        },
+        "NO_DATA": {
+            "TITLE": "No records found.",
+            "GET_STARTED": {
+                "TITLE": "Yet to start ?",
+                "MESSAGE": "You seem to have still not configured this feature </br>for your organization. Enjoy a seamless experience </br>of the system and explore it to its potential.",
+                "BUTTON": "Start Now !!"
+            }
+        },
+        "ADDRESS":{
+            "TITLE":"Address",
+            "ADDRESS": {
+                "LABEL": "Address",
+                "PLACEHOLDER": "Enter Address",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Address."
+            },
+            "AREA": {
+                "LABEL": "Area/Locality",
+                "PLACEHOLDER": "Enter Area name",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Area."
+            },
+            "CITY": {
+                "LABEL": "City",
+                "PLACEHOLDER": "Enter City",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid City."
+            },
+            "STATE": {
+                "LABEL": "State",
+                "PLACEHOLDER": "Select State",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid State."
+            },
+            "COUNTRY": {
+                "LABEL": "Country",
+                "PLACEHOLDER": "Select Country",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Country."
+            },
+            "ZIPCODE": {
+                "LABEL": "Zipcode",
+                "PLACEHOLDER": "Enter Zipcode",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Zipcode."
+            },
+            "LOCATION": {
+                "LABEL": "Select Location",
+                "PLACEHOLDER": "Select Location",
+                "FINE_TEXT": "",
+                "VALIDATION_ERROR": "Enter valid Location."
+            }
+        },
+        "VALIDATION_MSG": {
+            "PASSWORD": "Enter valid password.<br/>- include both uppercase &amp; lowercase characters<br/>- include minimum one number &amp; one symbol/special characters<br/>- should be 08 characters or more."
+        }
+    },
+
+    "ERROR": {
+        "CODE": {
+            "0": "There seems to be issues with internet connectivity. Please check your connection.",
+            "401": "The username and/or password is incorrect. Please check your credentials.",
+            "403": "You are not authorized to access this content.",
+            "404": "We are sorry, the page you've requested is not available.",
+            "422": "The data provided incorrect.",
+            "500": "We are sorry, we have encountered some error.If the issue persists, please contact the support team."
+        },
+        "GLOBAL": {
+            "CODE": {
+                "400": {
+                    "TITLE": "Bad Request",
+                    "SUBTITLE": "The requested URL does not exist or it may be restricted<br />as per company policy. Please enter a correct URL.",
+                    "ACTION_BTN_TITLE": "Goto Homepage !!"
+                }
+            }
+        }
+    },
+
+    "MENU": {
+        "DASHBOARD": {
+            "LABEL": "Dashboard"
+        },
+        "WORK_QUEUE": {
+            "LABEL": "Work Queue"
+        },
+        "ACCOUNT_LIST": {
+            "LABEL": "Accounts"
+        },
+        "CONTACT_LIST": {
+            "LABEL": "Contacts"
+        },
+        "LEAD_LIST": {
+            "LABEL": "Leads"
+        },
+        "OPPORTUNITY_LIST": {
+            "LABEL": "Opportunities"
+        },
+        "SUPPORT_LIST": {
+            "LABEL": "Support Requests"
+        },
+        "TASK_LIST": {
+            "LABEL": "Tasks"
+        },
+        "EVENT_LIST": {
+            "LABEL": "Events"
+        },
+        "SETTING": {
+            "LABEL": "Setting",
+            "ORGANIZATION": {
+                "LABEL": "Organization",
+                "DETAIL": {
+                    "LABEL": "Organization Detail"
+                },
+                "USER_MANAGEMENT": {
+                    "LABEL": "User Management",
+                    "USER": {
+                        "LABEL": "User"
+                    },
+                    "ROLE": {
+                        "LABEL": "Role"
+                    }
+                },
+                "BILLING_MANAGEMENT": {
+                    "LABEL": "Billing",
+                    "SUBSCRIPTIONS": {
+                        "LABEL": "Subscriptions"
+                    },
+                    "INVOICES": {
+                        "LABEL": "Invoices"
+                    },
+                    "CARDS": {
+                        "LABEL": "Cards"
+                    },
+                    "PLANS": {
+                        "LABEL": "Plans"
+                    }
+                },
+                "META_DATA": {
+                    "LABEL": "Master Data",
+                    "LOOKUP": {
+                        "LABEL": "Lists"
+                    },
+                    "PREFERENCES": {
+                        "LABEL": "Preferences"
+                    }
+                },
+                "ACCOUNT_MANAGEMENT": {
+                    "LABEL": "Account Management",
+                    "ACCOUNT": {
+                        "LABEL": "Account List"
+                    }
+                }
+            }
+        },
+        "AUTH_USER": {
+            "USER_STATUS": {
+                "USER_STATUS_OFFLINE": "Offline",
+                "USER_STATUS_ONLINE": "Online",
+                "USER_STATUS_BUSY": "Busy",
+                "USER_STATUS_AWAY": "Away"
+            },
+            "USER_PROFILE": {
+                "TITLE": "My Profile",
+                "SUBTITLE": ""
+            },
+            "CHANGE_PASSWORD": {
+                "TITLE": "Change Password",
+                "SUBTITLE": "Every 60 days, change your password."
+            },
+            "LOGOUT_USER": {
+                "TITLE": "Logout"
+            }
+        }
+    },
+
+    "PAGE": {
+        "DASHBOARD": {
+            "TITLE": "Dashboard"
+        },
+        "WORK_QUEUE": {
+            "TITLE": "Work Queue"
+        },
+        "AUTH": {
+            "SIGNIN": {
+                "TITLE": "aQveir, a smart CRM toolset",
+                "SUB_TITLE": "New Here ?",
+                "GENERAL_BUTTON_LABEL": "Create an Account",
+
+                "USERNAME": {
+                    "LABEL": "Username",
+                    "PLACEHOLDER": "Enter phone or email address",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid email or phone number."
+                },
+                "PASSWORD": {
+                    "LABEL": "Password",
+                    "PLACEHOLDER": "Enter password.",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
+                },
+                "SUBMIT_BUTTON": {
+                    "LABEL": "Login"
+                },
+                "FORGOT_PASSWORD": {
+                    "LABEL": "Forgot your Password ?"
+                }
+            },
+            "SIGNUP": {
+                
+            },
+            "FORGOT_PASSWORD": {
+                "TITLE": "Forgot Password ?",
+                "SUB_TITLE": "Enter your email to reset your password. We will send you the reset link to your registered email address.",
+                "EMAIL" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Enter email address",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid email address."
+                },
+                "SUBMIT_BTN": {
+                    "LABEL": "Send reset link"
+                }
+            },
+            "RESET_PASSWORD": {
+                "TITLE": "Reset Password",
+                "SUB_TITLE": "Enter a password that you will remember. Please make sure you keep is safe and secure.",
+                "TOKEN" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "This link is invalid and has missing valid token. Please check your email for the correct reset link."
+                },
+                "EMAIL" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Enter email address",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid email address."
+                },
+                "PASSWORD" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Enter a new password",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
+                },
+                "PASSWORD_CONFIRMATION" : {
+                    "LABEL": "",
+                    "PLACEHOLDER": "Re-type new password",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Both passwords should be similar."
+                }
+            }
+        },
+        "USER": {
+            "LIST": {
+                "TITLE": "Manage Users",
+                "FINE_TEXT": "List of all the Roles in an Organization.",
+                "COLUMNS": {
+                    "FULL_NAME": "Name",
+                    "CONTACT": "Phone",
+                    "STATUS": "Status",
+                    "LAST_LOGIN": "Last Login",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "DETAIL": {
+                "TITLE": {
+                    "ADD": "Add User",
+                    "EDIT": "Edit User"
+                },
+                "TAB_PROFILE": {
+                    "TITLE": "Profile",
+                    "AVATAR": {
+                        "LABEL": "Avatar",
+                        "PLACEHOLDER": "Upload avatar/image file",
+                        "FINE_TEXT": "The image file should be of jpg, png",
+                        "VALIDATION_ERROR": "Enter valid avatar image file"
+                    },
+                    "FIRST_NAME": {
+                        "LABEL": "First Name",
+                        "PLACEHOLDER": "Enter the given name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "LAST_NAME": {
+                        "LABEL": "Last Name",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "This number will be used to contact the user in case of any issues with the account. In case you have configured Cloud Telephony services, this number will be used to connect for calls and messages.",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "Email will not be publicly displayed and just used to communicate.",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                },
+                "TAB_ACCOUNT": {
+                    "TITLE": "Account",
+                    "USERNAME": {
+                        "LABEL": "Username",
+                        "PLACEHOLDER": "Enter the user name",
+                        "FINE_TEXT": "Email address is the default username.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "PASSWORD": {
+                        "LABEL": "Password",
+                        "PLACEHOLDER": "Enter the password",
+                        "FINE_TEXT": "Password to include uppercase & lowercase letters, numbers, and characters. Minimum 8 characters required.",
+                        "VALIDATION_ERROR": "Enter valid password as per given policy"
+                    },
+                    "LANGUAGE": {
+                        "LABEL": "Language",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "TIMEZONE": {
+                        "LABEL": "Timezone",
+                        "PLACEHOLDER": "Select the timezone",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "REMOTE_ONLY": {
+                        "LABEL": "Remote Access Only",
+                        "PLACEHOLDER": "Allow restricted application access for remote integration.",
+                        "FINE_TEXT": "The feature allows the user to interact with the application remotely. This feature should be enabled for accessing the data or saving data over REST API.</br></br><b>For safety reasons, the user will not have Console Access.</b>",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "DEACTIVATE_ACCOUNT": {
+                        "LABEL": "Deactivate the user account ?",
+                        "FINE_TEXT": "<b class='text-capitalize text-dark-50'>Important:</b> This action will <b class='text-capitalize'>disable</b> the user account and shall <b class='text-capitalize'>prohibit</b> the user from using the application."
+                    },
+                    "ACTIVATE_ACCOUNT": {
+                        "LABEL": "Activate the account ?",
+                        "FINE_TEXT": "<b class='text-capitalize text-dark-50'>Important:</b> This will enable the user account. <b class='text-capitalize text-dark-25'>beware</b>, the user will be allowed to use that application."
+                    }
+                }
+            }
+        },
+        "ORGANIZATION": {
+            "LIST": {
+                "TITLE": "Manage Oraganizations"
+            },
+            "DETAIL": {
+                "TITLE": {
+                    "ADD": "Add Organization",
+                    "EDIT": "Edit Organization"
+                },
+                "TAB_DETAIL": {
+                    "TITLE": "Detail",
+                    "SUBSECTION_CONTACT_PERSON": "Contact Person",
+                    "LOGO": {
+                        "LABEL": "Logo",
+                        "PLACEHOLDER": "Upload logo/image file",
+                        "FINE_TEXT": "The image file should be square (ratio 1:1) with jpg, png extensions.",
+                        "VALIDATION_ERROR": "Enter valid logo image file"
+                    },
+                    "NAME": {
+                        "LABEL": "Name",
+                        "PLACEHOLDER": "Enter organization name",
+                        "FINE_TEXT": "Your invoices will be addressed to this company.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "KEY": {
+                        "LABEL": "Key",
+                        "PLACEHOLDER": "",
+                        "FINE_TEXT": "This key will be required for Mail Parsing, Cloud Telephony and other external references.",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "SUBDOMAIN": {
+                        "LABEL": "Sub-Domain",
+                        "PLACEHOLDER": "Enter the subdomain name",
+                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "INDUSTRY": {
+                        "LABEL": "Industry",
+                        "PLACEHOLDER": "Select the industry that matches business.",
+                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "WEBSITE": {
+                        "LABEL": "Website",
+                        "PLACEHOLDER": "Enter the website url",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "SEARCH_TAG": {
+                        "LABEL": "Search Tags",
+                        "PLACEHOLDER": "Enter the tag name",
+                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PERSON_NAME": {
+                        "LABEL": "Person's Name",
+                        "PLACEHOLDER": "Enter the biller or contact person's name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "This email will be used to contact the biller for account based communication.",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                },
+                "TAB_CONFIGURATION": {
+                    "TITLE": "Configuration",
+                    "TABLE_NAMES": {
+                        "KEY_TITLE": "Key",
+                        "TYPE_TITLE": "Type",
+                        "VALUE_TITLE": "Value",
+                        "ACTION_TITLE": "Action"
+                    }
+                }
+            },
+            "AMEND_CONFIGURATIONS": {
+                "TITLE": "Amend Configuration",
+                "DISPLAY_VALUE": {
+                    "LABEL": "Name",
+                    "PLACEHOLDER": "Select the configuration",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": ""
+                }
+            },
+            "USER_LIST": {
+                "TITLE": "User List",
+                "COLUMNS": {
+                    "FULL_NAME": "Name",
+                    "CONTACT": "Phone",
+                    "STATUS": "Status",
+                    "LAST_LOGIN": "Last Login",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "ACCOUNT_LIST":{
+                "TITLE": "Account List",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "OWNER": "Owner",
+                    "TYPE": "Type",
+                    "LOCATION":"City",
+                    "LAST_LOGIN": "Last Login",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "ACCOUNT_DETAIL":{
+                "TITLE": {
+                    "Heading": "Accont Details",
+                    "ADD": "Add",
+                    "EDIT": "Edit"
+                },
+                "NAME": {
+                    "LABEL": "Name",
+                    "PLACEHOLDER": "Enter Account name",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid Account name."
+                },
+                "DESCRIPTION": {
+                    "LABEL": "Description",
+                    "PLACEHOLDER": "Enter Account Description",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter valid Account Description."
+                },
+                "TYPE":{
+                    "LABEL": "Type",
+                    "PLACEHOLDER": "Select Account Type",
+                    "FINE_TEXT":"",
+                    "VALIDATION_ERROR": "Account Type must be selected"
+                },
+                "OWNER":{
+                    "LABEL": "Owner",
+                    "PLACEHOLDER": "Select Owner",
+                    "FINE_TEXT":"",
+                    "VALIDATION_ERROR": "Account Owner must be assigned"
+                },                
+                "PHONE": {
+                    "LABEL": "Phone",
+                    "PLACEHOLDER": "Enter the phone number.",
+                    "FINE_TEXT": "Phone number of account owner",
+                    "VALIDATION_ERROR": "Enter valid phone number."
+                },
+                "EMAIL": {
+                    "LABEL": "Email Address",
+                    "PLACEHOLDER": "Enter the email address",
+                    "FINE_TEXT": "Account email used for communication",
+                    "VALIDATION_ERROR": "Enter valid email address."
+                },
+                "WEBSITE": {
+                    "LABEL": "Website",
+                    "PLACEHOLDER": "Enter Website",
+                    "FINE_TEXT": "Website of Account",
+                    "VALIDATION_ERROR": "Enter valid website."
+                },
+                "DEFAULT_ACCOUNT": {
+                    "LABEL": "Default Account",
+                    "PLACEHOLDER": "Is this the Default Account for Organization",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Value must be selected"
+                } 
+            }
+        },
+        "CONTACT": {
+            "CONTACT_LIST": {
+                "TITLE": "Contacts",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACTC_FULL_NAME": "Name",
+                    "CONTACT_TYPE": "Type",
+                    "CONTACT_OWNER": "Owner",
+                    "CONTACT_SOURCES": "Source",
+                    "CONTACT_STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
+                },
+                "MODAL": {
+                    "TITLE": "Import Contact",
+                    "NOTIFICATION": {
+                        "SUCCESS" : {
+                            "TITLE": "Upload Successful",
+                            "MESSAGE": "The uploaded file(s) are being processed. You will be notified about the details shortly."
+                        },
+                        "FAILURE" : {
+                            "TITLE": "Upload Failed"
+                        }
+                    }
+                }
+            },            
+            "CONTACT_DETAIL": {
+                "TITLE": {
+                    "ADD": "Add Contact",
+                    "EDIT": "Edit Contact"
+                },
+                "TAB_DETAILS": {
+                    "TITLE": "Personal",
+                    "AVATAR": {
+                        "LABEL": "Avatar",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },                    
+                    "FIRST_NAME": {
+                        "LABEL": "First Name",
+                        "PLACEHOLDER": "Enter the name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "MIDDLE_NAME": {
+                        "LABEL": "Middle Name",
+                        "PLACEHOLDER": "Enter the middle name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid middle name"
+                    },
+                    "LAST_NAME": {
+                        "LABEL": "Last Name",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid family name"
+                    },
+                    "GENDER": {
+                        "LABEL": "Gender",
+                        "PLACEHOLDER": "Select an appropriate gender",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "DATE_OF_BIRTH": {
+                        "LABEL": "Date Of Birth",
+                        "PLACEHOLDER": "Enter date of birth",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter a valid date of birth"
+                    },
+                    "CONTACT_EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter email address",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email address"
+                    },
+                    "CONTACT_PHONE": {
+                        "LABEL": "Contact Phone",
+                        "PLACEHOLDER": "Enter phone number",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid phone number"
+                    },
+                    "CONTACT_SOCIAL": {
+                        "LABEL": "Add Social Links",
+                        "PLACEHOLDER": "Enter social url/handle/link",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    }
+                },
+                "TAB_ADDRESS": {
+                    "TITLE": "Address",
+                    "MODAL": {
+                        "TITLE": {
+                            "ADD": "Add Contact",
+                            "EDIT": "Edit Contact"
+                        }
+                    },
+                    "ADDRESS1": {
+                        "LABEL": "Address Line 1",
+                        "PLACEHOLDER": "Enter an address line 1",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter a valid address"
+                    },
+                    "ADDRESS2": {
+                        "LABEL": "Address Line 2",
+                        "PLACEHOLDER": "Enter an address line 2",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter a valid address"
+                    },
+                    "LOCALITY": {
+                        "LABEL": "Locality",
+                        "PLACEHOLDER": "Enterthe locality or community area",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter a valid locality"
+                    },
+                    "CITY": {
+                        "LABEL": "City",
+                        "PLACEHOLDER": "Enter a city",
+                        "FINE_TEXT": "Please enter the city (i.e. Chicago, Mumbai, Singapore)",
+                        "VALIDATION_ERROR": "Enter a valid state"
+                    },
+                    "STATE": {
+                        "LABEL": "State",
+                        "PLACEHOLDER": "Enter a state/county",
+                        "FINE_TEXT": "Please enter the state (i.e. Illinois, Maharashtra, Singapore)",
+                        "VALIDATION_ERROR": "Enter a valid state"
+                    },
+                    "ZIPCODE": {
+                        "LABEL": "Zip Code",
+                        "PLACEHOLDER": "Enter a zipcode",
+                        "FINE_TEXT": "Please enter the post code i.e (Pin Code, Zip Code)",
+                        "VALIDATION_ERROR": "Enter a valid zip code"
+                    },
+                    "COUNTRY": {
+                        "LABEL": "Country",
+                        "PLACEHOLDER": "Select the country",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    }
+                },
+                "TAB_DOCUMENTS": {
+                    "TITLE": "Documents",
+                    "FIRST_ACTION_CARD": {
+                        "TITLE": "Upload Document",
+                        "DETAILS": "Organize yourself better by storing the right documents.<br/>You can upload your documents with us. We keep it safe and secure.",
+                        "ACTION_BTN_LABEL": "Upload document"
+                    }
+                },
+                "TAB_NOTES" : {
+                    "TITLE": "Notes",
+                    "FIRST_ACTION_CARD": {
+                        "TITLE": "Create Note",
+                        "DETAILS": "Worried about remembering and keeping scribes in some paper?<br/>You can write a note here and we will rememeber it for you in the right context, making you future ready.",
+                        "ACTION_BTN_LABEL": "Write a note"
+                    }
+                },
+                "TAB_SERVICE_REQUESTS": {
+                    "TITLE": "Leads/Requests",
+                    "FIRST_ACTION_CARD": {
+                        "TITLE": "Create Request",
+                        "DETAILS": "To create new leads, opportunities and support requests,<br/>click the plus sign and select the desired menu from the list.",
+                        "ACTION_BTN_LABEL": ""
+                    }
+                },
+                "TAB_ACCESS_CONTROLS": {
+                    "TITLE": "Access Control"
+                },
+                "TAB_SETTINGS": {
+                    "TITLE": "Setting & Preferences",
+                    "SECTIONS": {
+                        "TITLE_1": "Settings",
+                        "TITLE_2": "Preferences"
+                    },                 
+                    "GROUP": {
+                        "LABEL": "Group",
+                        "PLACEHOLDER": "Enter the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "TYPE": {
+                        "LABEL": "Contact Type",
+                        "PLACEHOLDER": "Select contact type",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "STATUS": {
+                        "LABEL": "Status",
+                        "PLACEHOLDER": "Enter the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "COMPANY": {
+                        "LABEL": "Select Company",
+                        "PLACEHOLDER": "Enter the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "ROLE": {
+                        "LABEL": "Enter Designation",
+                        "PLACEHOLDER": "Select the Role/Designation in the company",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "LANGUAGE": {
+                        "LABEL": "Language",
+                        "PLACEHOLDER": "Select the language preference",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    },
+                    "TIMEZONE": {
+                        "LABEL": "Time Zone",
+                        "PLACEHOLDER": "Select the time zone",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": ""
+                    }
+                },
+                "TAB_REVIEW": {
+                    "TITLE": "Review & Submit"
+                }
+            }
+        },
+        "LEAD": {
+            "LEAD_LIST": {
+                "TITLE": "Leads",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACT_FULL_NAME": "Contact Name",
+                    "TYPE": "Type",
+                    "OWNER": "Owner",
+                    "SOURCES": "Source",
+                    "STAGE": "Stage",
+                    "STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
+                }
+            }
+        },
+        "OPPORTUNITY": {
+            "OPPORTUNITY_LIST": {
+                "TITLE": "Opportunities",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACT_FULL_NAME": "Contact Name",
+                    "TYPE": "Type",
+                    "OWNER": "Owner",
+                    "SOURCES": "Source",
+                    "STAGE": "Stage",
+                    "STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
+                }
+            }
+        },
+        "SUPPORT": {
+            "SUPPORT_LIST": {
+                "TITLE": "Support Requests",
+                "SUB_TITLE": "Loaded 30 of total 5000",
+                "COLUMNS": {
+                    "CONTACT_FULL_NAME": "Contact Name",
+                    "TYPE": "Type",
+                    "OWNER": "Owner",
+                    "SOURCES": "Source",
+                    "STAGE": "Stage",
+                    "STATUS": "Status",
+                    "ACCOUNT_NAME": "Account",
+                    "LAST_MODIFIED": "Last modified",
+                    "ACTION_CONTROLS": ""
+                }
+            }
+        },
+        "TASK_LIST": {
+            "TITLE": "Tasks",
+            "SUB_TITLE": "Loaded 30 of total 5000",
+            "COLUMNS": {
+                "TASK_TYPE": "Type",
+                "TASK_OWNER": "Owner",
+                "TASK_ASSIGNEE": "Assignee",
+                "TASK_TITLE": "Title",
+                "TASK_STATUS": "Status",
+                "TASK_PRIORITY": "Priority",
+                "TASK_DUE_DATE": "Due On",
+                "COMPLETED_DATE": "Completed",
+                "ACTION_CONTROLS": ""
+            }
+        },
+        "EVENT_LIST": {
+            "TITLE": "Events",
+            "SUB_TITLE": "Loaded 30 of total 5000",
+            "COLUMNS": {
+                "EVENT_TYPE": "Type",
+                "EVENT_OWNER": "Owner",
+                "EVENT_TITLE": "Title",
+                "EVENT_LOCATION": "Location",
+                "EVENT_START_AT": "Start On",
+                "EVENT_END_AT": "Ends On",
+                "EVENT_PARTICIPANTS": "Participants",
+                "LAST_MODIFIED": "Last modified",
+                "ACTION_CONTROLS": ""
+            }
+        },
+        "ROLE": {
+            "LIST": {
+                "TITLE": "Manage Roles",
+                "FINE_TEXT": "List of all the Roles in an Organization.",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "STATUS": "Status",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "DETAIL": {
+                "TAB_PROFILE": {
+                    "TITLE": "User Profile",
+                    "AVATAR": {
+                        "LABEL": "Avatar",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "FIRST_NAME": {
+                        "LABEL": "First Name",
+                        "PLACEHOLDER": "Enter the given name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "LAST_NAME": {
+                        "LABEL": "Last Name",
+                        "PLACEHOLDER": "Enter the surname or family name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid name"
+                    },
+                    "SUBDOMAIN": {
+                        "LABEL": "Sub-Domain",
+                        "PLACEHOLDER": "Enter the subdomain name",
+                        "FINE_TEXT": "This URL that will be associated for your use.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "INDUSTRY": {
+                        "LABEL": "Industry",
+                        "PLACEHOLDER": "Select the industry that matches business.",
+                        "FINE_TEXT": "We provide preferences data as per industry best peactices, but you can amend it to suit your business.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "WEBSITE": {
+                        "LABEL": "Website",
+                        "PLACEHOLDER": "Enter the website url",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "SEARCH_TAG": {
+                        "LABEL": "Search Tags",
+                        "PLACEHOLDER": "Enter the tag name",
+                        "FINE_TEXT": "If you want your invoices addressed to a company. Leave blank to use your full name.",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PERSON_NAME": {
+                        "LABEL": "Person's Name",
+                        "PLACEHOLDER": "Enter the biller or contact person's name",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid email or phone number."
+                    },
+                    "PHONE": {
+                        "LABEL": "Phone",
+                        "PLACEHOLDER": "Enter the phone number.",
+                        "FINE_TEXT": "This number will be used to contact the biller in case of any issues with the account.",
+                        "VALIDATION_ERROR": "Enter valid phone number."
+                    },
+                    "EMAIL": {
+                        "LABEL": "Email Address",
+                        "PLACEHOLDER": "Enter the email address",
+                        "FINE_TEXT": "Email will not be publicly displayed and just used to communicate.",
+                        "VALIDATION_ERROR": "Enter valid email address."
+                    }
+                },
+                "TAB_ACCOUNT": {
+                    "TITLE": "Account",
+                    "USERNAME": {
+                        "LABEL": "Username",
+                        "PLACEHOLDER": "Enter the user name",
+                        "FINE_TEXT": "Email address is the default username.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "LANGUAGE": {
+                        "LABEL": "Language",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "TIMEZONE": {
+                        "LABEL": "Timezone",
+                        "PLACEHOLDER": "Select the timezone",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name"
+                    },
+                    "CUSTOMIZE": {
+                        "LABEL": "Customize",
+                        "PLACEHOLDER": "Select the language",
+                        "FINE_TEXT": "Default language is English. Select the language that best suits you.",
+                        "VALIDATION_ERROR": "Enter valid user name",
+                        "REMOTE_ONLY": {
+                            "LABEL": "Remote Only"
+                        }
+                    }
+                }
+            }
+        },
+        "PREFERENCE": {
+            "LIST": {
+                "TITLE": "Manage Preferences",
+                "FINE_TEXT": "List of all the Preferences in an Organization.",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "TYPE": "Data Type",
+                    "STATUS": "Status",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "DETAIL": {
+                "TITLE": {
+                    "ADD": "Add Preference",
+                    "EDIT": "Edit Preference"
+                },
+                "NAME": {
+                    "LABEL": "Name",
+                    "PLACEHOLDER": "Enter name for the preference",
+                    "FINE_TEXT": "This name should be a unique name, as this is used by the application.",
+                    "VALIDATION_ERROR": "Enter unique names only."
+                },
+                "DESCRIPTION": {
+                    "LABEL": "Description",
+                    "PLACEHOLDER": "Enter details for the preference",
+                    "FINE_TEXT": "",
+                    "VALIDATION_ERROR": "Enter a valid preference name"
+                },
+                "DATA_TYPE": {
+                    "LABEL": "Data Type",
+                    "PLACEHOLDER": "Select the data type",
+                    "FINE_TEXT": "For dropdown/multiselect type, do provide the possible values",
+                    "VALIDATION_ERROR": "Select a valid data type",
+                    "MINIMUM_VALUE": {
+                        "LABEL": "Mininum Value"
+                    },
+                    "MAXIMUM_VALUE": {
+                        "LABEL": "Maximum Value"
+                    },
+                    "LOOKUP_DATA": {
+                        "PLACEHOLDER": "",
+                        "ADD_BTN": {
+                            "LABEL": "Add Data Value"
+                        },
+                        "REMOVE_BTN": {
+                            "LABEL": "Remove Data Value"
+                        }
+                    },
+                    "EXTERNAL_DATA": {
+                        "PLACEHOLDER": "Enter external data link",
+                        "FINE_TEXT":"The external link should return a JSON data.</br>The json array should have below given structure."
+                    }
+                },                
+                "COLUMN_NAME": {
+                    "LABEL": "External Data Reference",
+                    "PLACEHOLDER": "Enter external data field for the preference",
+                    "FINE_TEXT": "This can be a column or field name in your external application, so that you can use the user preferences for better match results.",
+                    "VALIDATION_ERROR": ""
+                },
+                "KEYWORDS": {
+                    "LABEL": "Keywords",
+                    "PLACEHOLDER": "Enter the keywords",
+                    "FINE_TEXT": "These keywords will be used for searching into the auto input. No special characters are allowed, except comma, underscore and dash.",
+                    "VALIDATION_ERROR": "Enter proper validation key words with no spaces."
+                },
+                "CONFIGURATION": {
+                    "LABEL": "Configuration",
+                    "MULTI_SELECT": {
+                        "LABEL": "Allow Multiple Values"
+                    }
+                },
+                "ORDER": {
+                    "LABEL": "Order",
+                    "PLACEHOLDER": "Select the data type",
+                    "FINE_TEXT": "For dropdown/multiselect type, do provide the possible values",
+                    "VALIDATION_ERROR": ""
+                }
+            }
+        },
+        "SUBSCRIPTION" : {
+            "LIST": {
+                "TITLE": "Manage Subscriptions",
+                "FINE_TEXT": "List of all the Subscriptions in an Organization.",
+                "COLUMNS": {
+                    "NAME": "Name",
+                    "TYPE": "Data Type",
+                    "BILLING": "Billing",
+                    "STATUS": "Status",
+                    "CREATED_AT": "Created Date",
+                    "LAST_MODIFIED": "Last modified"
+                }
+            },
+            "DETAIL": {
+                "TITLE": "Subscriptions Details"
+            },
+            "ADD": {
+                "TITLE": "New/Renew Subscription",
+                "CARDS": {
+                    "TITLE": "Manage Cards",
+                    "ADD_CARD_ACTION_BUTTON": "Add Card",
+                    "DEFAULT_CARD": "Default",
+                    "COLUMNS": {
+                        "CARD_OWNER_NAME": "Name",
+                        "CARD_OWNER_PHONE": "Phone",
+                        "CARD_OWNER_EMAIL": "Email",
+                        "BILLING_ADDRESS": "Billing Address",
+                        "CARD_TYPE": "Type",
+                        "CARD_NUMBER": "Number",
+                        "CARD_EXPIRY_DT": "Expires",
+                        "CARD_CVC_CHECK": "CVC Check",
+                        
+                        "ERROR_DATA": {
+                            "CARD_OWNER_PHONE_NA" : "Not provided",
+                            "CARD_OWNER_EMAIL_NA" : "Not provided"
+                        }
+                    },
+                    "NO_DATA": {
+                        "TITLE": "No records found.",
+                        "GET_STARTED": {
+                            "TITLE": "Yet to add cards ?",
+                            "MESSAGE": "You seem to have still not configured this feature </br>for your organization. Enjoy a seamless experience </br>of easy subscriptions, renewals and explore it to </br>its potential.",
+                            "BUTTON": "Start Now !!"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "WIDGET": {
+        "MODAL": {
+            "NOTE": {
+                "TITLE": {
+                    "ADD": "Create Note",
+                    "EDIT": "Edit Note"
+                },
+                "FORM": {
+                    "TEXT": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter a note",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the note."
+                    }
+                }
+            },
+            "DOCUMENT": {
+                "TITLE": {
+                    "ADD": "Upload Document",
+                    "EDIT": "Edit Note"
+                },
+                "FORM": {
+                    "TITLE": {
+                        "LABEL": "Title",
+                        "PLACEHOLDER": "Enter document title",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid title for the document."
+                    }
+                }
+            },    
+            "TASK": {
+                "TITLE": {
+                    "ADD": "Create Task",
+                    "EDIT": "Edit Task"
+                },
+                "ADVANCED": {
+                    "LABEL":"Advanced"
+                },
+                "FORM": {
+                    "SUBJECT": {
+                        "LABEL": "Title",
+                        "PLACEHOLDER": "Enter a task title",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text as title."
+                    },
+                    "DESCRIPTION": {
+                        "LABEL": "Detail",
+                        "PLACEHOLDER": "Enter a task detail",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for task detail."
+                    },
+                    "START_DATE": {
+                        "LABEL": "Start Date",
+                        "PLACEHOLDER": "Enter a description",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "END_DATE": {
+                        "LABEL": "Target Date",
+                        "PLACEHOLDER": "Enter a description",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "STATUS": {
+                        "LABEL": "Status",
+                        "PLACEHOLDER": "Select an assignee",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "ASSIGNEE": {
+                        "LABEL": "Assignee",
+                        "PLACEHOLDER": "Select an assignee",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter select a task assignee."
+                    },
+                    "PRIORITY": {
+                        "LABEL": "Priority",
+                        "PLACEHOLDER": "Select a priority",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    },
+                    "SUBTYPE": {
+                        "LABEL": "Type",
+                        "PLACEHOLDER": "Select a priority",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid text for the description."
+                    }
+                }
+            },
+            "SMS_SEND": {
+                "TITLE": "Send Message",
+                "FORM": {
+                    "MESSAGE": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter the message to send",
+                        "FINE_TEXT": "Your invoices will be addressed to this company.",
+                        "VALIDATION_ERROR": "Enter valid message"
+                    }
+                }
+            },
+            "MAIL_SEND": {
+                "TITLE": "Send Mail",
+                "FORM": {
+                    "SUBJECT": {
+                        "LABEL": "Subject",
+                        "PLACEHOLDER": "Enter the subject to mail",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid subject"
+                    },
+                    "MESSAGE": {
+                        "LABEL": "Message",
+                        "PLACEHOLDER": "Enter the message to send",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid mail content"
+                    }
+                }
+            },
+            "CONFIRM_DELETE": {
+                "TITLE": "Confirm Delete",
+                "FORM": {
+                    "MESSAGE": {
+                        "LABEL": "Do you want to continue and delete? This action cannot be undone. Proceeding with this action could result into loss of data and/or changed behaviour of the application.",
+                        "PLACEHOLDER": "Enter {{deleteConfirmationText}} to confirm",
+                        "FINE_TEXT": "To confirm deletion, type <strong>{{deleteConfirmationText}}</strong> in the field.",
+                        "VALIDATION_ERROR": "Enter valid confirmation text (This field is case sensitive)."
+                    }
+    
+                }
+            },
+            "CONFIRM_CALL": {
+                "TITLE": "Continue Call?",
+                "BTN": {
+                    "CALL": {
+                        "LABEL": "Call"
+                    },
+                    "REJECT": {
+                        "LABEL": "Reject"
+                    }
+                },
+                "MESSAGE": {
+                    "LABEL": "Do you want to continue and connect the call? Proceeding with this action may result into additional telephony charges by your provider."
+                }
+            },
+            "ADD_PAYMENT_METHOD": {
+                "TITLE": "Add Card for Payment Method",
+                "BTN": {
+                    "ADD_CARD": {
+                        "LABEL": "Add Card"
+                    }
+                },
+                "FORM": {
+                    "CARD_OWNER_NAME": {
+                        "LABEL": "Cardholder Name",
+                        "PLACEHOLDER": "Enter the name of the card holder",
+                        "FINE_TEXT": "",
+                        "VALIDATION_ERROR": "Enter valid cardholder name, as given on the card."
+                    },
+                    "CARD": {
+                        "VERIFIED_LABEL": "Verified" 
+                    },
+                    "IS_DEFAULT": {
+                        "LABEL": "Make Default"
+                    }
+                }
+            }
+        }
+    },
+
+    "NOTIFICATION": {
+        "COMMON": {
+            "SUCCESS_TITLE": "Success",
+            "ERROR_TITLE": "Error"
+        },
+        "USER_AUTH": {
+            "LOGOUT": "",
+            "FORGOT_PASSWORD": {
+                "SUCCESS_MESSAGE": "The reset link is sent to your registered email address, In case you do not have access to your email, please contact your organiation administrator.",
+                "ERROR_MESSAGE": "We were unable to process your request. Please contact your organiation administrator."
+            },
+            "RESET_PASSWORD": {
+                "SUCCESS_MESSAGE": "Your password was changed successfully. Keep the password secure now.",
+                "ERROR_MESSAGE": "We were unable to process your request. Please contact your organiation administrator.",
+                "ERROR_TOKEN_EXPIRED": "The password link has expired. Please raise a new forgot password request.",
+                "ERROR_USER_INVALID": "The email provided does not exist. Please enter correct email address."
+            }
+        },
+        "ORGANIZATION_DETAILS": {
+            "SUCCESS_MESSAGE": "Organization information was successfully saved."
+        },
+        "CONTACT_DETAILS": {
+            "SUCCESS_MESSAGE": "Contact information was successfully saved."
+        },
+        "USER_DETAILS": {
+            "SUCCESS_MESSAGE": "User information was successfully saved."
+        },
+        "ACCOUNT_DETAILS":{
+            "SUCCESS_MESSAGE": "Account information saved successfully.",
+            "SAVE_ERROR":"Error occured while saving. Check log or Contact Administrator for support."
+        },
+        "DOCUMENT_MODAL": {
+            "UPLOAD_SUCCESS_MESSAGE": "The document is successfully uploaded.",
+            "UPLOAD_ERROR_MESSAGE": "An error occured while uploading the documents."
+        },
+        "NOTE_MODAL": {
+            "SUCCESS_MESSAGE": "The note is successfully saved.",
+            "ERROR_MESSAGE": "An error occured while saving the note."
+        }
+    },
+
     "NOTIFICATION_COMMON_SUCCESS_TITLE":"Success",
     
     "ERROR_CODE_0":"There seems to be issues with internet connectivity. Please check your connection.",
@@ -27,7 +1329,7 @@
     "COMMON_LABEL_VALUE":"Value",
     "COMMON_LABEL_STATUS":"Status",
 
-    "CUSTOMER_LOGIN_TITLE":"Sign In",
+    "CUSTOMER_LOGIN_TITLE":"Welcome to CRM OMNI",
     "CUSTOMER_LOGIN_SUBTITLE":"Hello, Welcome to your account.",
     "CUSTOMER_LOGIN_SOCIAL_FACEBOOK":"Sign In with Facebook",
     "CUSTOMER_LOGIN_SOCIAL_GOOGLE":"Sign In with Google+",

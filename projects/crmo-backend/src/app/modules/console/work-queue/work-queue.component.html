@@ -1,1 +1,137 @@
-<p>work-queue works!</p>
+<div class="d-block full-content-page-height">
+    <crmo-backend-widget-subheader 
+        [title]="'PAGE.WORK_QUEUE.TITLE'"
+        ></crmo-backend-widget-subheader>
+
+    <div class="row mb-10" *ngIf="objQueueData">
+        <div class="col-lg-6" *ngFor="let queue of objQueueData.task_events; let i = index;">
+            <ng-container [ngTemplateOutlet]="cardTaskTemplate" 
+            [ngTemplateOutletContext]="{ data: queue, index: i }"
+            *ngIf="queue.type.key=='entity_type_event_task'"></ng-container>
+
+            <ng-container [ngTemplateOutlet]="cardEventTemplate" 
+            [ngTemplateOutletContext]="{ data: queue, index: i }"
+            *ngIf="queue.type.key=='entity_type_event_calendar'"></ng-container>
+        </div>
+    </div>
+</div>
+
+<ng-template #cardRequestTemplate let-data="data">
+    <div class="card card-custom gutter-b">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between p-4 flex-lg-wrap flex-xl-nowrap">
+                <div class="d-flex flex-column mr-5">
+                    <a href="#" class="h4 text-dark text-hover-primary mb-5">
+                        Customer Support
+                    </a>
+                    <p class="text-dark-50">
+                        ...
+                    </p>
+                </div>
+                <div class="ml-6 ml-lg-0 ml-xxl-6 flex-shrink-0">
+                    <a href="#" target="_blank" class="btn font-weight-bolder text-uppercase btn-success py-4 px-6">
+                        Make A Call
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #cardTaskTemplate let-data="data" let-index="index">
+    <div class="card card-custom card-fit card-stretch gutter-b p-2">
+        <div class="card-header ribbon ribbon-top ribbon-ver p-2">
+            <div class="card-title">
+                <p class="card-label text-uppercase text-dark-50">Task</p>
+                <p class="card-label text-uppercase text-danger mr-2">
+                    <i class="fas fa-exclamation-circle text-danger mr-2"></i>2d Overdue
+                </p>
+            </div>
+
+            <div class="card-toolbar" *ngIf="data.priority">
+                <div class="ribbon-target bg-danger text-uppercase" *ngIf="(data.priority.key=='common_priority_high')">H</div>
+                <div class="ribbon-target bg-warning text-uppercase" *ngIf="(data.priority.key=='common_priority_medium')">M</div>
+                <div class="ribbon-target bg-gray-400 text-dark-65 text-uppercase" *ngIf="(data.priority.key=='common_priority_low')">L</div>
+            </div>
+        </div>
+
+        <div class="card-body p-2">
+            <div class="d-flex align-items-center justify-content-between flex-lg-wrap flex-xl-nowrap">
+                <div class="d-flex flex-column mr-5">
+                    <a href="#" class="h4 text-dark text-hover-primary mb-5">
+                        Missed Call
+                    </a>
+                    <p class="text-justify text-dark-50">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex justify-content-between p-2">
+            <div class="card-title">
+                <p class="card-label text-dark-50">Assign To: EllaiSys</p>
+            </div>
+            <div class="card-toolbar">
+                <a href="#" class="btn btn-sm btn-outline-secondary font-weight-bold text-uppercase mx-3 text-dark-65">
+                    <i class="la la-paper-plane"></i>Mark Complete
+                </a>
+
+                <a href="#" class="btn btn-sm btn-primary font-weight-bold text-uppercase" *ngIf="(index % 4) == 0">
+                    <i class="la la-sms"></i>SMS
+                </a>
+
+                <a href="#" class="btn btn-sm btn-primary font-weight-bold text-uppercase" *ngIf="(index % 4) == 1">
+                    <i class="la la-phone"></i>Call
+                </a>
+
+                <a href="#" class="btn btn-sm btn-primary font-weight-bold text-uppercase" *ngIf="(index % 4) == 2">
+                    <i class="la la-envelope"></i>Mail
+                </a>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #cardEventTemplate let-data="data" let-index="index">
+    <div class="card card-custom card-fit card-stretch gutter-b p-2">
+        <div class="card-header ribbon ribbon-top ribbon-ver p-2">
+            <div class="card-title">
+                <p class="card-label text-uppercase text-dark-50">Event</p>
+                <p class="card-label text-uppercase text-danger mr-2">
+                    <i class="fas fa-exclamation-circle text-danger mr-2"></i>2d Overdue
+                </p>
+            </div>
+
+            <div class="card-toolbar" *ngIf="data.priority">
+                <div class="ribbon-target bg-danger text-uppercase" *ngIf="(data.priority.key=='common_priority_high')">H</div>
+                <div class="ribbon-target bg-warning text-uppercase" *ngIf="(data.priority.key=='common_priority_medium')">M</div>
+                <div class="ribbon-target bg-gray-400 text-dark-65 text-uppercase" *ngIf="(data.priority.key=='common_priority_low')">L</div>
+            </div>
+        </div>
+
+        <div class="card-body p-2">
+            <div class="d-flex align-items-center justify-content-between flex-lg-wrap flex-xl-nowrap">
+                <div class="d-flex flex-column mr-5">
+                    <a href="#" class="h4 text-dark text-hover-primary mb-5">
+                        Meeting with Client
+                    </a>
+                    <p class="text-justify text-dark-50">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex justify-content-between p-2">
+            <div class="card-title">
+                <p class="card-label text-dark-50">Assign To: EllaiSys + Others</p>
+            </div>
+            <div class="card-toolbar">
+                <a href="#" class="btn btn-sm btn-outline-secondary font-weight-bold text-uppercase mx-3 text-dark-65">
+                    <i class="la la-paper-plane"></i>Mark Complete
+                </a>
+            </div>
+        </div>
+    </div>
+</ng-template>

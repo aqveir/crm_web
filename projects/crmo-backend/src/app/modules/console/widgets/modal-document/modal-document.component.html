@@ -1,0 +1,40 @@
+<div class="modal-dialog modal-lg m-0" role="document">
+    <div class="modal-content">
+        <form class="form" id="kt_form_document" novalidate="novalidate"
+            [formGroup]="documentForm" (ngSubmit)="fnSaveAction($event, uppyCtrlDocument)" autocomplete="off">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="exampleModalLabel">{{ 'WIDGET.MODAL.DOCUMENT.TITLE.ADD' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fnCloseModal(true)">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+
+            <div class="modal-body p-5">
+                <div class="form-group">
+                    <label>{{ 'WIDGET.MODAL.TASK.FORM.SUBJECT.LABEL' | translate }} <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="title"
+                        id="kt_forms_widget_1_input"
+                        placeholder="{{ 'WIDGET.MODAL.DOCUMENT.FORM.TITLE.PLACEHOLDER' | translate }}"
+                        autocomplete="off" tabindex="1" autofocus />
+
+                    <span class="form-text text-danger" *ngIf="documentForm.controls.title.dirty && documentForm.controls.title.invalid">
+                        {{ 'WIDGET.MODAL.DOCUMENT.FORM.TITLE.VALIDATION_ERROR' | translate }}
+                    </span>
+                </div>  
+
+                <ng-uppy #uppyCtrlDocument [config]="uppySettings"></ng-uppy>
+            </div>
+    
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-link font-weight-bold" data-dismiss="modal" tabindex="3" 
+                    (click)="fnCloseModal()">{{ 'COMMON.LABEL.CLOSE' | translate }}</button>
+    
+                <button type="submit" class="btn btn-primary font-weight-bold ml-2" [disabled]="boolLoading" tabindex="2">
+                    {{ 'COMMON.LABEL.UPLOAD' | translate }}
+                    <span class="spinner-grow spinner-grow-sm ml-2" role="status" aria-hidden="true" *ngIf="boolLoading"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
