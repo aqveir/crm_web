@@ -8,7 +8,7 @@ import { BaseComponent } from '../../../base.component';
 
 //Application CRMO Library
 import { IRequestUserLogin, IResponseUserLogin, UserAuthService } from 'crmo-lib';
-import { NotificationService } from 'ellaisys-lib';
+import { NotificationService } from 'common-lib';
 import { environment } from '@env-backend/environment';
 
 

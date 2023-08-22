@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
 //Framework files
-import { ContentType, HttpService } from 'ellaisys-lib';
+import { ContentType, HttpService } from 'common-lib';
 
 //Services
 import { BaseService } from '../base.service';

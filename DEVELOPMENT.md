@@ -70,7 +70,7 @@ The application uses Angular **workSpace development strategy**. We have below a
 1. crmo-backend: This is the **ng application** intended for use by the aQveir CRM Subscribers.
 2. crmo-lib: As the name suggests, this is the ng library for the aQveir CRM application. All Interfaces, Models and Services (Business) are managed by this library. 
 >This library need to be built prior to building the crmo-backend application.
-3. ellaisys-lib: This is the ng library that holds all the core services. e.g. 
+3. common-lib: This is the ng library that holds all the core services. e.g. 
 - Translate Service
 - HTTP Service,
 - Storage Service

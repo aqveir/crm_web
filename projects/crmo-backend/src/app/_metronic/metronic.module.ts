@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InlineSVGModule } from 'ng-inline-svg';
 
 //Application Module
-import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
+import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'common-lib';
 
 @NgModule({
   declarations: [

@@ -11,7 +11,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 
 //Application Module
-import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
+import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'common-lib';
 import { CoreModule } from '../../../_metronic/core';
 import { SubheaderModule } from '../../../_metronic/partials/layout/subheader/subheader.module';
 

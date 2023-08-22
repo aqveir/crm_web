@@ -7,7 +7,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
-import { EventBrokerService, NotificationService } from 'ellaisys-lib';
+import { EventBrokerService, NotificationService } from 'common-lib';
 import { OrganizationService, IOrganization, IResponse } from 'crmo-lib';
 
 

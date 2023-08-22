@@ -9,7 +9,7 @@ import KTWizard from '../../../../../assets/js/components/wizard';
 import { KTUtil } from '../../../../../assets/js/components/util';
 
 //Application Libraries
-import { EventBrokerService, NotificationService } from 'ellaisys-lib';
+import { EventBrokerService, NotificationService } from 'common-lib';
 import { ContactService, IContact } from 'crmo-lib';
 import { OnDestroy } from '@angular/core';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';

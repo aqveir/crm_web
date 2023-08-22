@@ -10,7 +10,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { environment } from '@env-backend/environment';
 import { BaseComponent } from '../../../base.component';
 import { IDocument, INote, NoteService } from 'crmo-lib';
-import { NotificationService, TranslateService } from 'ellaisys-lib';
+import { NotificationService, TranslateService } from 'common-lib';
 
 
 @Component({

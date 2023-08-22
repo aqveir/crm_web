@@ -3,7 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 //Application files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../base.component';
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService } from 'common-lib';
 import { IEventMinimal, EventService } from 'crmo-lib';
 
 

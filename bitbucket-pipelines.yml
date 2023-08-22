@@ -3,7 +3,7 @@ image: node:12.20
 
 definitions: 
   caches:
-    submodule: projects/ellaisys-lib
+    submodule: projects/common-lib
 
   steps:
     - step: &load-submodules
@@ -12,7 +12,7 @@ definitions:
           - git submodule update --init --recursive
           - echo "Loaded GIT Submodules"
         artifacts:
-          - projects/ellaisys-lib/**
+          - projects/common-lib/**
 
     - step: &install-angular
         name: Install Anugular & Project Dependencies

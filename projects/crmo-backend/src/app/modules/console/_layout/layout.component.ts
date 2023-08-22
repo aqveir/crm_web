@@ -12,7 +12,7 @@ import KTLayoutContent from '@asset-backend/js/layout/base/content';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 //Application common libraries
-import { EventBrokerService, NotificationService, TranslateService } from 'ellaisys-lib';
+import { EventBrokerService, NotificationService, TranslateService } from 'common-lib';
 import { INote } from 'crmo-lib';
 
 //Application Modal Components

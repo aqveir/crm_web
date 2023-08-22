@@ -10,7 +10,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
 
 //Application Libraries
-import { EventBrokerService, NotificationService } from 'ellaisys-lib';
+import { EventBrokerService, NotificationService } from 'common-lib';
 import { ILookup, ILookupValue, IContact, ICountry, IContactAddress } from 'crmo-lib';
 
 @Component({

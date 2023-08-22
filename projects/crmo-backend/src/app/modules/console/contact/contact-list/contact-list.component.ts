@@ -6,7 +6,7 @@ import { UppyAngularComponent, UppyConfig } from 'uppy-angular';
 
 //Project References
 import { environment } from '@env-backend/environment';
-import { NotificationService, TranslateService } from 'ellaisys-lib';
+import { NotificationService, TranslateService } from 'common-lib';
 import { ContactService, IContact } from 'crmo-lib';
 
 //Application files

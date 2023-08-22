@@ -10,7 +10,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
-import { EventBrokerService, NotificationService } from 'ellaisys-lib';
+import { EventBrokerService, NotificationService } from 'common-lib';
 import { IPaymentMethod, PaymentMethodService } from 'crmo-lib';
 import { ModalAddPaymentmethodComponent } from '../../../widgets/modal-add-paymentmethod/modal-add-paymentmethod.component';
 

@@ -19,7 +19,7 @@ import {
   EllaisysLibModule, NotificationModule, ValidatorModule, PipeModule, 
   TranslateModule, TranslateLoader, TranslateHttpLoader, HttpLoaderFactory,
   LoggerModule, LoggerLevel
-} from 'ellaisys-lib';
+} from 'common-lib';
 import { CrmoLibModule } from 'crmo-lib';
 
 import { UserModule } from './modules/user/user.module';

@@ -9,7 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 //Application Modules
-import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
+import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'common-lib';
 
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { ModalNoteComponent } from './modal-note/modal-note.component';

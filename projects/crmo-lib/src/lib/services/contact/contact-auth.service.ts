@@ -3,7 +3,7 @@ import { Observable, Observer } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 
 //Framework files
-import { ContentType, HttpService, LocalStorageService, SessionStorageService } from 'ellaisys-lib';
+import { ContentType, HttpService, LocalStorageService, SessionStorageService } from 'common-lib';
 import { BaseService } from '../base.service';
 
 //Interfaces

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 //Library Module
-import { TranslateService } from 'ellaisys-lib';
+import { TranslateService } from 'common-lib';
 import { ApplicationParams } from 'crmo-lib';
 
 //Application configurations

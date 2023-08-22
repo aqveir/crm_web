@@ -6,7 +6,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { BaseComponent } from '../../../../../base.component';
 
 //Application Libraries
-import { NotificationService } from 'ellaisys-lib';
+import { NotificationService } from 'common-lib';
 import { IUser } from 'crmo-lib';
 
 @Component({

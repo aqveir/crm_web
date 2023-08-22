@@ -4,7 +4,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { TaskService, ITaskMinimal } from 'crmo-lib';
 import { BaseComponent } from '../../base.component';
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService } from 'common-lib';
 
 
 @Component({

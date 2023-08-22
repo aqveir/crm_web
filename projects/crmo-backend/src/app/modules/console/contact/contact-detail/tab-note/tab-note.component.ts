@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 //Application libraries
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService } from 'common-lib';
 import { IContact, INote, NoteService} from 'crmo-lib';
 
 //Application Files

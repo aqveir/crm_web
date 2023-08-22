@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService } from 'common-lib';
 import { Globals } from '../../../app.global';
 
 @Component({

@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application libraries
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService } from 'common-lib';
 import { DocumentService, IContact, IDocument} from 'crmo-lib';
 
 //Application Files

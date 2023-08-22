@@ -184,38 +184,38 @@
         }
       }
     },
-    "ellaisys-lib": {
+    "common-lib": {
       "projectType": "library",
-      "root": "projects/ellaisys-lib",
-      "sourceRoot": "projects/ellaisys-lib/src",
+      "root": "projects/common-lib",
+      "sourceRoot": "projects/common-lib/src",
       "prefix": "eis-lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/ellaisys-lib/tsconfig.lib.json",
-            "project": "projects/ellaisys-lib/ng-package.json"
+            "tsConfig": "projects/common-lib/tsconfig.lib.json",
+            "project": "projects/common-lib/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ellaisys-lib/tsconfig.lib.prod.json"
+              "tsConfig": "projects/common-lib/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ellaisys-lib/src/test.ts",
-            "tsConfig": "projects/ellaisys-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/ellaisys-lib/karma.conf.js"
+            "main": "projects/common-lib/src/test.ts",
+            "tsConfig": "projects/common-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/common-lib/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ellaisys-lib/tsconfig.lib.json",
-              "projects/ellaisys-lib/tsconfig.spec.json"
+              "projects/common-lib/tsconfig.lib.json",
+              "projects/common-lib/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 //Propritery Library
 import { IResponseUserLogin, IPrivilege, IUserStatusResponse, ILookupValue,
     ApplicationParams, LookupService, ILookup,  UserStatusService, IRole, IUserMinimal, UserService, RoleService, CountryService, ICountry } from 'crmo-lib';
-import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'ellaisys-lib';
+import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'common-lib';
 
 //Project References
 import { environment } from '@env-backend/environment';

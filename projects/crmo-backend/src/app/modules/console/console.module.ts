@@ -7,7 +7,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg';
 
 //Application Libraries
-import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'ellaisys-lib';
+import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'common-lib';
 
 // Application Modules
 import { LayoutModule } from './_layout/layout.module';

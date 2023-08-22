@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 //Framework library
-import { NotificationService, LoggerService, LoaderService, TranslateService } from 'ellaisys-lib';
+import { NotificationService, LoggerService, LoaderService, TranslateService } from 'common-lib';
 
 //Application files
 import { Globals } from '../app.global';

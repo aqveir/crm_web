@@ -4,7 +4,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 //Application Module
-import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'ellaisys-lib';
+import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'common-lib';
 
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';

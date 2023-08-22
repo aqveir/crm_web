@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
 // Framework files
-import { HttpService } from 'ellaisys-lib';
+import { HttpService } from 'common-lib';
 import { BaseService } from '../base.service';
 import { IEvent, IEventMinimal, IEventRequest } from '../../interfaces/service-request/event.interface';
 

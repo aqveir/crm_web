@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
 // Framework files
-import { HttpService,ContentType } from 'ellaisys-lib';
+import { HttpService,ContentType } from 'common-lib';
 import { BaseService } from '../base.service';
 import { IAccountMinimal,IAccount, IAccountRequest } from '../../interfaces/account/account.interface';
 import { IBaseInterface }  from '../base.interface';

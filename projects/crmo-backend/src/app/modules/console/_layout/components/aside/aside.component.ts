@@ -8,7 +8,7 @@ import { Globals } from 'projects/crmo-backend/src/app/app.global';
 import { LayoutService, DynamicAsideMenuService } from '../../../../../_metronic/core';
 import { KTUtil } from '@asset-backend/js/components/util';
 import { Router } from '@angular/router';
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService } from 'common-lib';
 
 @Component({
   selector: 'app-aside',

@@ -11,7 +11,7 @@ import { ISendMailRequest, IServiceRequest, CommunicationService } from 'crmo-li
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { TranslateService } from 'ellaisys-lib';
+import { TranslateService } from 'common-lib';
 
 @Component({
   selector: 'crmo-backend-modal-send-mail',

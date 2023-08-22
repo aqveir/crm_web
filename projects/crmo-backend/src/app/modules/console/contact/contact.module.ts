@@ -11,7 +11,7 @@ import { UppyAngularModule } from 'uppy-angular';
 import { ContactRoutingModule } from './contact-routing.module';
 import { LayoutModule } from '../_layout/layout.module';
 import { WidgetsModule } from '../widgets/widgets.module';
-import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'ellaisys-lib';
+import { LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule, IntlTelInputModule } from 'common-lib';
 
 //Application Components
 import { ContactListComponent } from './contact-list/contact-list.component';

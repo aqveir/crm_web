@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angu
 
 //Application Libraries
 import { IOrganization, IConfiguration } from 'crmo-lib';
-import { EventBrokerService } from 'ellaisys-lib';
+import { EventBrokerService } from 'common-lib';
 import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
 
 

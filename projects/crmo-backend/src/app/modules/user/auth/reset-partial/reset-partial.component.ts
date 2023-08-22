@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application libraries
 import { IRequestUserResetPassword, UserAuthService } from 'crmo-lib';
-import { ConfirmPasswordValidator } from 'ellaisys-lib';
+import { ConfirmPasswordValidator } from 'common-lib';
 
 //Application global files
 import { Globals } from 'projects/crmo-backend/src/app/app.global';

@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 //Application Modules
-import { EllaisysLibModule } from 'ellaisys-lib';
+import { EllaisysLibModule } from 'common-lib';
 
 //Library Components
 import { CrmoLibComponent } from './crmo-lib.component';
