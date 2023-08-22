@@ -227,6 +227,5 @@
   },
   "cli": {
     "analytics": false
-  },
-  "defaultProject": "crmo-backend"
+  }
 }
