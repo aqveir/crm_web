@@ -3,183 +3,132 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "crmo-backend": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "projects/crmo-backend",
-      "sourceRoot": "projects/crmo-backend/src",
-      "prefix": "crmo-backend",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/crmo-backend",
-            "showCircularDependencies": false,
-            "allowedCommonJsDependencies": [
-              "object-path",
-              "clipboard.js",
-              "highlight.js",
-              "uppy-angular"
-            ],
-            "index": "projects/crmo-backend/src/index.html",
-            "main": "projects/crmo-backend/src/main.ts",
-            "polyfills": "projects/crmo-backend/src/polyfills.ts",
-            "tsConfig": "projects/crmo-backend/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "projects/crmo-backend/src/favicon.ico",
-              "projects/crmo-backend/src/assets"
-            ],
-            "styles": [
-              "node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "projects/crmo-backend/src/styles.scss"
-            ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/@fortawesome/fontawesome-free/js/all.min.js"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/crmo-backend/src/environments/environment.ts",
-                  "with": "projects/crmo-backend/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "8mb",
-                  "maximumError": "12mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "8kb",
-                  "maximumError": "12kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "crmo-backend:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "crmo-backend:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "crmo-backend:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/crmo-backend/src/test.ts",
-            "polyfills": "projects/crmo-backend/src/polyfills.ts",
-            "tsConfig": "projects/crmo-backend/tsconfig.spec.json",
-            "karmaConfig": "projects/crmo-backend/karma.conf.js",
-            "assets": [
-              "projects/crmo-backend/src/favicon.ico",
-              "projects/crmo-backend/src/assets"
-            ],
-            "styles": [
-              "./node_modules/bootstrap4/dist/css/bootstrap.min.css",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "projects/crmo-backend/src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/crmo-backend/tsconfig.app.json",
-              "projects/crmo-backend/tsconfig.spec.json",
-              "projects/crmo-backend/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/crmo-backend/e2e/protractor.conf.js",
-            "devServerTarget": "crmo-backend:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "crmo-backend:serve:production"
-            }
-          }
-        }
-      }
-    },
-    "crmo-lib": {
+    "crm-lib": {
       "projectType": "library",
-      "root": "projects/crmo-lib",
-      "sourceRoot": "projects/crmo-lib/src",
-      "prefix": "crmo-lib",
+      "root": "projects/crm-lib",
+      "sourceRoot": "projects/crm-lib/src",
+      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/crmo-lib/tsconfig.lib.json",
-            "project": "projects/crmo-lib/ng-package.json"
+            "project": "projects/crm-lib/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/crmo-lib/tsconfig.lib.prod.json"
+              "tsConfig": "projects/crm-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/crm-lib/tsconfig.lib.json"
             }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/crm-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "crm-backend-web": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/crm-backend-web",
+      "sourceRoot": "projects/crm-backend-web/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/crm-backend-web",
+            "index": "projects/crm-backend-web/src/index.html",
+            "main": "projects/crm-backend-web/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/crm-backend-web/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/crm-backend-web/src/favicon.ico",
+              "projects/crm-backend-web/src/assets"
+            ],
+            "styles": [
+              "projects/crm-backend-web/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "crm-backend-web:build:production"
+            },
+            "development": {
+              "browserTarget": "crm-backend-web:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "crm-backend-web:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/crmo-lib/src/test.ts",
-            "tsConfig": "projects/crmo-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/crmo-lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/crmo-lib/tsconfig.lib.json",
-              "projects/crmo-lib/tsconfig.spec.json"
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": "projects/crm-backend-web/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/crm-backend-web/src/favicon.ico",
+              "projects/crm-backend-web/src/assets"
+            ],
+            "styles": [
+              "projects/crm-backend-web/src/styles.scss"
+            ],
+            "scripts": []
           }
         }
       }
@@ -188,37 +137,30 @@
       "projectType": "library",
       "root": "projects/common-lib",
       "sourceRoot": "projects/common-lib/src",
-      "prefix": "eis-lib",
+      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/common-lib/tsconfig.lib.json",
             "project": "projects/common-lib/ng-package.json"
           },
           "configurations": {
             "production": {
               "tsConfig": "projects/common-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/common-lib/tsconfig.lib.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/common-lib/src/test.ts",
             "tsConfig": "projects/common-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/common-lib/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/common-lib/tsconfig.lib.json",
-              "projects/common-lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
             ]
           }
         }

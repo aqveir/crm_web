@@ -1,12 +1,24 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "crm-lib": [
+        "dist/crm-lib"
+      ],
+      "common-lib": [
+        "dist/common-lib"
+      ],
+      "@env-backend/*": ["projects/crm-backend-web/src/environments/*"],
+      "@asset-backend/*": ["projects/crm-backend-web/src/assets/*"],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -14,27 +26,16 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "strictNullChecks": false,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
     "lib": [
-      "es2018",
+      "ES2022",
       "dom"
-    ],
-    "paths": {
-      "crmo-lib": [
-        "dist/crmo-lib/crmo-lib",
-        "dist/crmo-lib"
-      ],
-      "common-lib": [
-        "dist/common-lib/common-lib",
-        "dist/common-lib"
-      ],
-      "@env-backend/*": ["projects/crmo-backend/src/environments/*"],
-      "@asset-backend/*": ["projects/crmo-backend/src/assets/*"],
-    }
+    ]
   },
   "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true

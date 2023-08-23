@@ -1,7 +1,7 @@
-// Public API Surface of crmo-lib
-export * from './lib/crmo-lib.service';
-export * from './lib/crmo-lib.component';
-export * from './lib/crmo-lib.module';
+// Public API Surface of crm-lib
+export * from './lib/crm-lib.service';
+export * from './lib/crm-lib.component';
+export * from './lib/crm-lib.module';
 
 // Exported Interfaces
 export * from './lib/interfaces/common/response.interface';

@@ -1,6 +1,6 @@
-# CRM Omni Web App
+# CRM Web App
 
-This is the Web Application that is generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4. This application connects with the CRM OMNI REST API that serves JSON data.
+This is the Web Application that is generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0. This application connects with the CRM REST API that serves JSON data.
 
 ## Development server
 
