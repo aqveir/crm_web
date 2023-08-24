@@ -23,18 +23,19 @@ export class ContactCommunicationService extends BaseService {
      * Get information for the existing Contact
      */
     public get(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            this._httpService.get('contact')
-            .then((response: any) => {
-                if (response.status=='success') {
-                    let data: IContact = response.data;
-                    observer.next(data);                    
-                } else {
-                    observer.error(response);
-                } //End if
-            })
-            .catch((error: any) =>  { observer.error(error); })
-            .finally();
+        return new Observable((observer: Observer<any>) => {
+            this._httpService.get('contact').subscribe({ 
+                next: (response: any) => {
+                    if (response.status=='success') {
+                        let data: IContact = response.data;
+                        observer.next(data);                    
+                    } else {
+                        observer.error(response);
+                    } //End if
+                }, 
+                error: (error: any) => { observer.error(error); }, 
+                complete: () => { observer.complete(); }
+            });
         });
     } //Function ends
 

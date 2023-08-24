@@ -7,8 +7,8 @@ export { IOrganizationMinimal } from '../organization/organization.interface';
 export interface IRequestUserLogin {
     username: string;  
     password: string
-    device_id?: string;
-    remember_me?: boolean;
+    device_id: string;
+    remember_me: boolean;
 }
 export interface IResponseUserLogin {
     token_type: string;  

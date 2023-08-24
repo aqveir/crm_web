@@ -12,4 +12,11 @@ import { Component } from '@angular/core';
 })
 export class CrmLibComponent {
 
-}
+  /**
+   * Default constructor
+   */
+  constructor() { }
+
+  ngOnInit(): void { }
+
+} // Class ends

@@ -26,19 +26,19 @@ export class OrganizationUserService extends BaseService {
   /**
    * Get All Users for an Organization
    * 
-   * @param  oHash  string
+   * @param  _oHash  string
    */
-  public getAll(oHash: string): Observable<any> {
+  public getAll(_oHash: string): Observable<any> {
 
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.get('organization/' + oHash + '/user')
-        .then((response: any) => {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.get('organization/' + _oHash + '/user').subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -47,16 +47,16 @@ export class OrganizationUserService extends BaseService {
    * Get a single user data for an organiztion
    * 
    */
-  public show(oHash: string, uHash: string): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.get('organization/' + oHash + '/user/' + uHash)
-        .then((response: any) => {
+  public show(_oHash: string, _uHash: string): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.get('organization/' + _oHash + '/user/' + _uHash).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
-          observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -65,16 +65,16 @@ export class OrganizationUserService extends BaseService {
    * Create new user for an organization
    * 
    */
-  public create(oHash: string, data: IUser): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.post('organization/' + oHash + '/user', data)
-        .then((response: any) => {
+  public create(_oHash: string, data: IUser): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('organization/' + _oHash + '/user', data).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
-          observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -83,16 +83,16 @@ export class OrganizationUserService extends BaseService {
    * Update the user data for an organiztion
    * 
    */
-  public update(oHash: string, uHash: string, data: IUser): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.put('organization/' + oHash + '/user/' + uHash, data)
-        .then((response: any) => {
+  public update(_oHash: string, _uHash: string, _data: IUser): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.put('organization/' + _oHash + '/user/' + _uHash, _data).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
-          observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -102,16 +102,16 @@ export class OrganizationUserService extends BaseService {
    * Delete the user record for an organiztion
    * 
    */
-  public delete(oHash: string, uHash: string): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.delete('organization/' + oHash + '/user/' + uHash)
-        .then((response: any) => {
+  public delete(_oHash: string, _uHash: string): Observable<any> {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.delete('organization/' + _oHash + '/user/' + _uHash).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
-          observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

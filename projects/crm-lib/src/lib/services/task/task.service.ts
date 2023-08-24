@@ -25,7 +25,7 @@ export class TaskService extends BaseService {
   /**
    * Get List of Tasks
    */
-  public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+  public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
@@ -45,7 +45,7 @@ export class TaskService extends BaseService {
   /**
    * Create Task for Service Request
    */
-  public create(_payload: ITaskRequest=null, _params: Object=null): Observable<any> {
+  public create(_payload: ITaskRequest=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('task', _payload, false, _params)
         .then((response: any) => {
@@ -62,7 +62,7 @@ export class TaskService extends BaseService {
   /**
    * Update Task for Service Request
    */
-  public update(id: number, _payload: ITaskRequest=null, _params: Object=null): Observable<any> {
+  public update(id: number, _payload: ITaskRequest=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.put('task/'+id, _payload, _params)
         .then((response: any) => {
@@ -79,7 +79,7 @@ export class TaskService extends BaseService {
   /**
    * Update Task (Mark Complete) for Service Request
    */
-  public markComplete(id: number, _payload: ITaskRequest=null, _params: Object=null): Observable<any> {
+  public markComplete(id: number, _payload: ITaskRequest=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.put('task/'+id+'/complete', _payload, _params)
         .then((response: any) => {

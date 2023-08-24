@@ -15,7 +15,10 @@ import { INote } from '../../interfaces/note/note.interface';
 })
 export class NoteService extends BaseService {
 
-  //Default Constructor
+
+  /**
+   * Default constructor
+   */
   constructor(
     private _httpService: HttpService
   ) { super(); }
@@ -24,18 +27,19 @@ export class NoteService extends BaseService {
   /**
    * Get Notes
    */
-  public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+  public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('note', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('note', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: INote[] = response.data;
           observer.next(data); 
-        })                          
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -45,51 +49,59 @@ export class NoteService extends BaseService {
    */
   public create(data: INote): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('note', data)
-        .then((response: any) => {
+      this._httpService.post('note', data).subscribe({ 
+        next: (response: any) => {
           let data: INote = response.data;
-
-          //Set observer state
-          observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+          observer.next(data); 
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
-   * Update Note
+   * Update Note by Identifier
+   * 
+   * @param _hash string
+   * @param _data INote
+   * 
+   * @returns Observable<any>
+   * 
    */
-  public update(id: number, data: INote): Observable<any> {
+  public update(_hash: string, _data: INote): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('note/' + id.toString(), data)
-        .then((response: any) => {
+      this._httpService.put('note/' + _hash, _data).subscribe({ 
+        next: (response: any) => {
           let data: INote = response.data;
-
-          //Set observer state
-          observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+          observer.next(data); 
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
-   * Delete Note
+   * Delete Note by Identifier
+   * 
+   * @param _hash string
+   * 
+   * @returns Observable<any>
+   * 
    */
-  public delete(id: number): Observable<any> {
+  public delete(_hash: string): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.delete('note/' + id.toString())
-        .then((response: any) => {
+      this._httpService.delete('note/'+_hash).subscribe({ 
+        next: (response: any) => {
           let data: INote = response.data;
-
-          //Set observer state
-          observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+          observer.next(data); 
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

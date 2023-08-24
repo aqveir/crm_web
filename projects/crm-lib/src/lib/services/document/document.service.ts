@@ -15,7 +15,10 @@ import { IDocument, IDocumentRequest } from '../../interfaces/document/document.
 })
 export class DocumentService extends BaseService {
 
-  //Default Constructor
+
+  /**
+   * Default constructor
+   */
   constructor(
     private _httpService: HttpService
   ) { super(); }
@@ -23,34 +26,45 @@ export class DocumentService extends BaseService {
 
   /**
    * Download Document
+   * 
+   * @param hash string
+   * 
+   * @returns Observable<Blob>
+   * 
    */
   public download(hash: string): Observable<Blob> {
     return new Observable((observer: Observer<Blob>) => {
-      this._httpService.get('document/'+hash, null, false, true)
-        .then((response: any) => {
-          //Set observer state
+      this._httpService.get('document/'+hash, false, null, true).subscribe({ 
+        next: (response: any) => {
           observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Update Document
+   * 
+   * @param hash string
+   * 
+   * @returns Observable<any>
+   * 
    */
   public update(hash: string, data: IDocumentRequest): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('document/'+hash, data)
-        .then((response: any) => {
+      this._httpService.put('document/'+hash, data).subscribe({ 
+        next: (response: any) => {
           let data: IDocument = response.data;
 
           //Set observer state
           observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -60,15 +74,16 @@ export class DocumentService extends BaseService {
    */
   public delete(hash: string): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.delete('document/'+hash)
-        .then((response: any) => {
+      this._httpService.delete('document/'+hash).subscribe({ 
+        next: (response: any) => {
           let data: IDocument = response.data;
 
           //Set observer state
           observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

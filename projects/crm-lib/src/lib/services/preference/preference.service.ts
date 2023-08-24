@@ -13,6 +13,7 @@ import { IPreference, IPreferenceMinimal, IPreferenceRequest } from '../../inter
 })
 export class PreferenceService extends BaseService {
 
+
   /**
    * Default constructor
    */
@@ -24,16 +25,16 @@ export class PreferenceService extends BaseService {
   /**
    * Get List of Organization Preferences
    */
-  public getAll(_params: Object=null): Observable<any> {
+  public getAll(_params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.get('preference', _params)
-        .then((response: any) => {
+      this._httpService.get('preference', false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IPreferenceMinimal[] = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -41,16 +42,16 @@ export class PreferenceService extends BaseService {
   /**
    * Get Organization Preference by Identifier
    */
-  public show(id: number, _params: Object=null): Observable<any> {
+  public show(_id: string, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.get('preference/'+id.toString())
-        .then((response: any) => {
+      this._httpService.get('preference/'+_id, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IPreference = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -58,16 +59,16 @@ export class PreferenceService extends BaseService {
   /**
    * Create Organization Preference Data
    */
-  public create(data: IPreferenceRequest, _params: Object=null): Observable<any> {
+  public create(_data: IPreferenceRequest, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('preference', data)
-        .then((response: any) => {
+      this._httpService.post('preference', _data, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -75,16 +76,16 @@ export class PreferenceService extends BaseService {
   /**
    * Update Organization Preference Data by Identifier
    */
-  public update(id: number, data: IPreferenceRequest, _params: Object=null): Observable<any> {
+  public update(_id: string, data: IPreferenceRequest, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('preference/'+id.toString(), data)
-        .then((response: any) => {
+      this._httpService.put('preference/'+_id, data).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -92,14 +93,16 @@ export class PreferenceService extends BaseService {
   /**
    * Delete Organization Preference Data by Identifier
    */
-  public delete(id: number, _params: Object=null): Observable<any> {
+  public delete(_id: string, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.delete('preference/'+id.toString())
-        .then((response: any) => {
-          observer.next(response);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+      this._httpService.delete('preference/'+_id).subscribe({ 
+        next: (response: any) => {
+          let data: any = response.data;
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

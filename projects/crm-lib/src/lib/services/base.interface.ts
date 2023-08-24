@@ -13,4 +13,4 @@ export interface IBaseInterface {
      */
     getByHash(_hash: string, _params:Object): Observable<any>;
 
-}
+} // Interface ends

@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:aqveir-build-libs-prod": "ng build --prod common-lib && ng build --prod crm-lib",
+    "build:aqveir-build-libs-prod": "ng build common-lib && ng build crm-lib",
     "build:aqveir-build-all-prod": "ng build --prod common-lib && ng build --prod crm-lib && ng build --prod --base-href=/web/ crm-backend-web",
     "build:aqveir-build-all-devenv": "ng build --prod common-lib && ng build --prod crm-lib && ng build --prod --environment dev --base-href=/web/ crm-backend-web",
     "build:aqveir-build-all-serve-backend": "ng build common-lib && ng build crm-lib && ng build crm-backend-web && ng serve crm-backend-web"
@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "ngx-bootstrap": "^11.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

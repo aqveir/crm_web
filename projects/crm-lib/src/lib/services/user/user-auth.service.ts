@@ -15,7 +15,10 @@ import { IRequestUserForgotPassword, IRequestUserLogin, IRequestUserResetPasswor
 })
 export class UserAuthService extends BaseService {
 
-  //Default Constructor
+  
+  /**
+   * Default constructor
+   */
   constructor(
     private _httpService: HttpService,
     private _localStorageService: LocalStorageService,
@@ -27,6 +30,9 @@ export class UserAuthService extends BaseService {
    * Authenticate the user using the backend service.
    * 
    * @param _data IRequestUserLogin
+   * 
+   * @returns Observable<any>
+   * 
    */
   public login(_data: IRequestUserLogin): Observable<any> {
     //Set HTTP Params
@@ -36,8 +42,8 @@ export class UserAuthService extends BaseService {
       .set('device_id', _data.device_id);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user/login', params, false, null, ContentType.ENCODED_FORM_DATA)
-        .then((response: any) => {
+      this._httpService.post('user/login', params, false, null, ContentType.ENCODED_FORM_DATA).subscribe({ 
+        next: (response: any) => {
           let claim: IResponseUserLogin = response.data;
 
           //Store the claim into the session storage
@@ -49,32 +55,34 @@ export class UserAuthService extends BaseService {
           } //End if
 
           observer.next(claim);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: IResponseError) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * User Logout/Sign Out
-   * 
    * Logout the user using the backend service.
+   * 
+   * @returns Observable<any>
    */
   public logout(): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('user/logout', null)
-        .then((response: any) => {
-
+      this._httpService.put('user/logout', null).subscribe({ 
+        next: (response: any) => {
           //Store the claim into the session storage
           if (this._sessionStorageService.hasItem('_SESSION_USER_AUTH_CLAIM_KEY')) {
             this._sessionStorageService.removeItem('_SESSION_USER_AUTH_CLAIM_KEY');
           } //End if          
 
           observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -83,15 +91,20 @@ export class UserAuthService extends BaseService {
    * User Forgot Password
    * 
    * @param _data IRequestUserForgotPassword
+   * 
+   * @returns Observable<any>
+   * 
    */
   public forgot(_data: IRequestUserForgotPassword): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user/forgot', _data)
-        .then((response: any) => {
-          observer.next(response.data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+      this._httpService.post('user/forgot', _data).subscribe({ 
+        next: (response: any) => {
+          let data: any = response.data;
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -100,15 +113,20 @@ export class UserAuthService extends BaseService {
    * User Reset Password
    * 
    * @param _data IRequestUserResetPassword
+   * 
+   * @returns Observable<any>
+   * 
    */
   public reset(_data: IRequestUserResetPassword): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user/reset', _data)
-        .then((response: any) => {
-          observer.next(response.data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+      this._httpService.post('user/reset', _data).subscribe({ 
+        next: (response: any) => {
+          let data: any = response.data;
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

@@ -8,7 +8,7 @@
         "dist/crm-lib"
       ],
       "common-lib": [
-        "dist/common-lib"
+        "dist/ngx-common-lib"
       ],
       "@env-backend/*": ["projects/crm-backend-web/src/environments/*"],
       "@asset-backend/*": ["projects/crm-backend-web/src/assets/*"],

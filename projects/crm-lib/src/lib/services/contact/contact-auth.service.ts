@@ -17,7 +17,10 @@ import { IRequestContactLogin, IResponseContactLogin, IRequestContactValidate,
 })
 export class ContactAuthService extends BaseService {
 
-  //Default Constructor
+
+  /**
+   * Default constructor
+   */
   constructor(
     private _httpService: HttpService,
     private _localStorageService: LocalStorageService,
@@ -27,9 +30,12 @@ export class ContactAuthService extends BaseService {
 
   /**
    * Contact Authentication/Sign In
-   * 
    * Authenticate the contact using the backend service.
+   * 
    * @param _data RequestContactLogin
+   * 
+   * @returns Observable<any>
+   * 
    */
   public login(_data: IRequestContactLogin): Observable<any> {
     //Set HTTP Params
@@ -39,9 +45,9 @@ export class ContactAuthService extends BaseService {
       .set('phone_idd', _data.phone_idd)
       .set('device_id', _data.device_id);
 
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.post('contact/login', params, false, null, ContentType.ENCODED_FORM_DATA)
-        .then((response: any) => {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('contact/login', params, false, null, ContentType.ENCODED_FORM_DATA).subscribe({ 
+        next: (response: any) => {
           let claim: IResponseContactLogin = response.data;
 
           //Store the claim into the session storage
@@ -53,23 +59,25 @@ export class ContactAuthService extends BaseService {
           } //End if
 
           observer.next(claim);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Contact Logout/Sign Out
-   * 
    * Logout the contact using the backend service.
-   * @param _data ContactLogin
+   * 
+   * @returns Observable<any>
+   * 
    */
   public logout(): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.put('contact/logout', null)
-        .then((response: any) => {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.put('contact/logout', null).subscribe({ 
+        next: (response: any) => {
 
           //Store the claim into the session storage
           if (this._sessionStorageService.hasItem('_SESSION_CONTACT_AUTH_CLAIM_KEY')) {
@@ -77,9 +85,10 @@ export class ContactAuthService extends BaseService {
           } //End if          
 
           observer.next(response);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -87,20 +96,24 @@ export class ContactAuthService extends BaseService {
 
   /**
    * Validate the contact inputs
-   * 
    * Validate/check the contact inputs and confirm if that exists
+   * 
    * @param _data RequestContactValidate
+   * 
+   * @returns Observable<any>
+   * 
    */
   public validate(_data: IRequestContactValidate): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.get('contact/exists')
-        .then((response: any) => {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.get('contact/exists').subscribe({ 
+        next: (response: any) => {
           let data: IResponseContactValidate = response.data;
           observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
-    });
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
+    });;
   } //Function ends
 
 
@@ -108,16 +121,21 @@ export class ContactAuthService extends BaseService {
    * Contact Registration
    * 
    * Register the contact using the backend service.
+   * 
    * @param _data ContactLogin
+   * 
+   * @returns Observable<any>
+   * 
    */
   public register(_data: IRequestContactRegister): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.post('contact/register', _data)
-        .then((response: any) => {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('contact/register', _data).subscribe({ 
+        next: (response: any) => {
           observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -126,16 +144,21 @@ export class ContactAuthService extends BaseService {
    * Forgot Password for the Contact
    * 
    * Send the reset link to the contact
+   * 
    * @param _data RequestContactForgotPassword
+   * 
+   * @returns Observable<any>
+   * 
    */
   public forgotpassword(_data: IRequestContactForgotPassword): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.post('contact/forgot', _data)
-        .then((response: any) => {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('contact/forgot', _data).subscribe({ 
+        next: (response: any) => {
           observer.next(response);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -145,15 +168,18 @@ export class ContactAuthService extends BaseService {
    * 
    * Allow the contact to chaneg the password.
    * @param _data RequestContactChangePassword
+   * 
+   * @returns Observable<any>
    */
   public changepassword(_data: IRequestContactChangePassword): Observable<any> {
-    return Observable.create((observer: Observer<any>) => {
-      this._httpService.post('contact/changepass', _data)
-        .then((response: any) => {
+    return new Observable((observer: Observer<any>) => {
+      this._httpService.post('contact/changepass', _data).subscribe({ 
+        next: (response: any) => {
           observer.next(response);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

@@ -22,7 +22,7 @@ export class CommunicationService extends BaseService {
   /**
    * Make a Call to Contact (having the Service Request)
    */
-  public makeCall(srhash: string, _payload: any=null, _params: Object=null): Observable<any> {
+  public makeCall(srhash: string, _payload: any=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('servicerequest/'+srhash+'/call', _payload, false, _params)
         .then((response: any) => {
@@ -39,7 +39,7 @@ export class CommunicationService extends BaseService {
   /**
    * Send SMS to Contact (having the Service Request)
    */
-  public sendSMS(srhash: string, _payload: ISendSmsRequest=null, _params: Object=null): Observable<any> {
+  public sendSMS(srhash: string, _payload: ISendSmsRequest=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('servicerequest/'+srhash+'/sms', _payload, false, _params)
         .then((response: any) => {
@@ -56,7 +56,7 @@ export class CommunicationService extends BaseService {
   /**
    * Send Mail/Email to Contact (having the Service Request)
    */
-  public sendMail(srhash: string, _payload: ISendMailRequest=null, _params: Object=null): Observable<any> {
+  public sendMail(srhash: string, _payload: ISendMailRequest=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('servicerequest/'+srhash+'/mail', _payload, false, _params)
         .then((response: any) => {

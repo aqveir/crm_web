@@ -14,27 +14,37 @@ import { IContact, IContactMinimal, IContactRequest } from '../../interfaces/con
 })
 export class ContactService extends BaseService {
 
-  //Default Constructor
+
+  /**
+   * Default constructor
+   */
   constructor(
-      private _httpService: HttpService,
+    private _httpService: HttpService,
   ) { super(); }
 
 
   /**
    * Get All Contacts
+   * 
+   * @param _payload Object
+   * @param _params Object
+   * 
+   * @returns Observable<any>
+   * 
    */
-  public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+  public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('contact/fetch', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('contact/fetch', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IContactMinimal[] = response.data;
-          observer.next(data); 
-        })                          
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -45,16 +55,19 @@ export class ContactService extends BaseService {
    * @param hash string
    * @param _params Object
    * 
+   * @returns Observable<any>
+   * 
    */
-  public show(hash: string, _params: Object=null): Observable<any> {
+  public show(hash: string, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-        this._httpService.get('contact/' + hash, _params)
-        .then((response: any) => {
+      this._httpService.get('contact/' + hash, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -65,16 +78,19 @@ export class ContactService extends BaseService {
    * @param data IContactRequest
    * @param _params Object
    * 
+   * @returns Observable<any>
+   * 
    */
-  public create(data: IContactRequest, _params: Object=null): Observable<any> {
+  public create(data: IContactRequest, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-        this._httpService.post('contact', data, false, _params, ContentType.NOTHING)
-        .then((response: any) => {
+      this._httpService.post('contact', data, false, _params, ContentType.NOTHING).subscribe({ 
+        next: (response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -86,23 +102,26 @@ export class ContactService extends BaseService {
    * @param data IContactRequest
    * @param _params Object
    * 
+   * @returns Observable<any>
+   * 
    */
-  public update(hash: string, data: IContactRequest, _params: Object=null): Observable<any> {
+  public update(hash: string, data: IContactRequest, _params: Object|null=null): Observable<any> {
 
     // Add PUT method into the params, incase the param is missing
     if (_params == null) {
       _params = {};
     } //End if
-    _params['_method'] = 'PUT';
+    _params = Object.assign(_params, { '_method': 'PUT' });
 
     return new Observable((observer: Observer<any>) => {
-        this._httpService.post('contact/' + hash, data, false, _params, ContentType.NOTHING)
-        .then((response: any) => {
+      this._httpService.post('contact/' + hash, data, false, _params, ContentType.NOTHING).subscribe({ 
+        next: (response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -112,16 +131,20 @@ export class ContactService extends BaseService {
    * 
    * @param hash string
    * @param data IContact
+   * 
+   * @returns Observable<any>
+   * 
    */
-  public delete(hash: string,  _params: Object=null): Observable<any> {
+  public delete(hash: string,  _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-        this._httpService.delete('contact/' + hash, _params)
-        .then((response: any) => {
+      this._httpService.delete('contact/' + hash, _params).subscribe({ 
+        next: (response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -131,16 +154,20 @@ export class ContactService extends BaseService {
    * 
    * @param data IContact
    * @param _params Object
+   * 
+   * @returns Observable<any>
+   * 
    */
-  public upload(data: IContact, _params: Object=null): Observable<any> {
+  public upload(data: IContact, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-        this._httpService.post('contact/upload', data, false, _params, ContentType.NOTHING)
-        .then((response: any) => {
+      this._httpService.post('contact/upload', data, false, _params, ContentType.NOTHING).subscribe({ 
+        next: (response: any) => {
           let data: IContact = response.data;
           observer.next(data); 
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

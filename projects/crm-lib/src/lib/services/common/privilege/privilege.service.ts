@@ -23,17 +23,23 @@ export class PrivilegeService extends BaseService {
 
   /**
    * Get List of Application Privileges
+   * 
+   * @param _params
+   * 
+   * @returns Observable<any>
+   * 
    */
-  public getAll(_params: Object=null): Observable<any> {
+  public getAll(_params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.get('privilege', _params)
-        .then((response: any) => {
+      this._httpService.get('privilege', false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IPrivilege[] = response.data;
 
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

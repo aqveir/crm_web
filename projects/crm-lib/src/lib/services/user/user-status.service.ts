@@ -23,7 +23,7 @@ export class UserStatusService extends BaseService {
   /**
    * Get current user status
    */
-  public get(_params: Object=null): Observable<any> {
+  public get(_params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.get('user/status', _params)
         .then((response: any) => {

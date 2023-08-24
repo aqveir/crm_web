@@ -24,7 +24,7 @@ export abstract class ServiceRequestService extends BaseService {
   /**
    * Get List of Service Request
    */
-  public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+  public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('servicerequest/fetch', _payload, false, _params)
         .then((response: any) => {
@@ -41,7 +41,7 @@ export abstract class ServiceRequestService extends BaseService {
   /**
    * Get Organization Preference by Identifier
    */
-  public show(id: number, _params: Object=null): Observable<any> {
+  public show(id: number, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.get('preference/'+id.toString())
         .then((response: any) => {
@@ -58,7 +58,7 @@ export abstract class ServiceRequestService extends BaseService {
   /**
    * Create Organization Preference Data
    */
-  public create(data: any, _params: Object=null): Observable<any> {
+  public create(data: any, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('preference', data)
         .then((response: any) => {
@@ -75,7 +75,7 @@ export abstract class ServiceRequestService extends BaseService {
   /**
    * Update Organization Preference Data by Identifier
    */
-  public update(id: number, data: any, _params: Object=null): Observable<any> {
+  public update(id: number, data: any, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.put('preference/'+id.toString(), data)
         .then((response: any) => {
@@ -92,7 +92,7 @@ export abstract class ServiceRequestService extends BaseService {
   /**
    * Delete Service Request Data by Identifier
    */
-  public delete(id: number, _params: Object=null): Observable<any> {
+  public delete(id: number, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.delete('preference/'+id.toString())
         .then((response: any) => {
@@ -110,7 +110,7 @@ export abstract class ServiceRequestService extends BaseService {
    * @param _params 
    * @param _categoryKey 
    */
-  protected setDefaultParamsWithPagination(_categoryKey: string, _params: Object=null): Object {
+  protected setDefaultParamsWithPagination(_categoryKey: string, _params: Object|null=null): Object {
     let objReturnValue: Object;
 
     try {

@@ -25,7 +25,7 @@ export class EventService extends BaseService {
   /**
    * Get List of Events
    */
-  public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+  public getAll(_payload: any=null, _params: any=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
@@ -45,7 +45,7 @@ export class EventService extends BaseService {
   /**
    * Create Event for Service Request
    */
-  public create(_payload: IEventRequest=null, _params: Object=null): Observable<any> {
+  public create(_payload: IEventRequest, _params: any=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.post('event', _payload, false, _params)
         .then((response: any) => {
@@ -62,7 +62,7 @@ export class EventService extends BaseService {
   /**
    * Update Event for Service Request
    */
-  public update(id: number, _payload: IEventRequest=null, _params: Object=null): Observable<any> {
+  public update(id: number, _payload: IEventRequest, _params: Object): Observable<any> {
     return new Observable((observer: Observer<any>) => {
       this._httpService.put('event/'+id, _payload, _params)
         .then((response: any) => {

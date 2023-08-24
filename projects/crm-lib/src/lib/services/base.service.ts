@@ -19,7 +19,7 @@ export class BaseService {
   // /**
   //  * Get List of Service Request
   //  */
-  // public getAll(_payload: any=null, _params: Object=null): Observable<any> {
+  // public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
   //   return new Observable((observer: Observer<any>) => {
   //     this.httpService.post('servicerequest/fetch', _payload, false, _params)
   //       .then((response: any) => {
@@ -38,7 +38,7 @@ export class BaseService {
    * 
    * @param _params
    */
-  protected setDefaultParamsForPagination(_params: Object=null): Object {
+  protected setDefaultParamsForPagination(_params: any=null): Object {
     let objReturnValue: Object;
 
     try {
