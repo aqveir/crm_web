@@ -24,71 +24,97 @@ export class TaskService extends BaseService {
   
   /**
    * Get List of Tasks
+   * 
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('task/fetch', _payload, false, _params)
-        .then((response: any) => {
-          let data: ITaskMinimal[] = response.data;
-
+      this._httpService.post('task/fetch', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
+          let data: ITaskMinimal = response.data;
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Create Task for Service Request
+   * 
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public create(_payload: ITaskRequest=null, _params: Object|null=null): Observable<any> {
+  public create(_payload: ITaskRequest|null=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('task', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('task', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: ITask = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Update Task for Service Request
+   * 
+   * @param _uuid
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public update(id: number, _payload: ITaskRequest=null, _params: Object|null=null): Observable<any> {
+  public update(_uuid: string, _payload: ITaskRequest|null=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('task/'+id, _payload, _params)
-        .then((response: any) => {
+      this._httpService.put('task/'+_uuid, _payload, _params).subscribe({ 
+        next: (response: any) => {
           let data: ITask = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Update Task (Mark Complete) for Service Request
+   * 
+   * @param _uuid
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public markComplete(id: number, _payload: ITaskRequest=null, _params: Object|null=null): Observable<any> {
+  public markComplete(_uuid: string, _payload: ITaskRequest|null=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('task/'+id+'/complete', _payload, _params)
-        .then((response: any) => {
+      this._httpService.put('task/'+_uuid+'/complete', _payload, _params).subscribe({ 
+        next: (response: any) => {
           let data: ITask = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

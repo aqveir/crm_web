@@ -11,6 +11,7 @@ import { IEvent, IEventMinimal, IEventRequest } from '../../interfaces/service-r
 })
 export class EventService extends BaseService {
 
+
   /**
    * Default constructor
    */
@@ -24,54 +25,73 @@ export class EventService extends BaseService {
   
   /**
    * Get List of Events
+   * 
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public getAll(_payload: any=null, _params: any=null): Observable<any> {
     //Add Pagination params, if missing
     _params = super.setDefaultParamsForPagination(_params);
 
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('event/fetch', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('event/fetch', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IEventMinimal[] = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Create Event for Service Request
+   * 
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public create(_payload: IEventRequest, _params: any=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('event', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('event', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IEvent = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Update Event for Service Request
+   * 
+   * @param _uuid
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public update(id: number, _payload: IEventRequest, _params: Object): Observable<any> {
+  public update(_uuid: string, _payload: IEventRequest, _params: Object): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('event/'+id, _payload, _params)
-        .then((response: any) => {
+      this._httpService.put('event/'+_uuid, _payload, _params).subscribe({ 
+        next: (response: any) => {
           let data: IEvent = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

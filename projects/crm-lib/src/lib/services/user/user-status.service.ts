@@ -14,7 +14,10 @@ import { IUserStatusResponse } from '../../interfaces/user/user-status.interface
 })
 export class UserStatusService extends BaseService {
 
-  //Default Constructor
+
+  /**
+   * Default constructor
+   */
   constructor(
     private _httpService: HttpService
   ) { super(); }
@@ -22,36 +25,45 @@ export class UserStatusService extends BaseService {
 
   /**
    * Get current user status
+   * 
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public get(_params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.get('user/status', _params)
-        .then((response: any) => {
+      this._httpService.get('user/status', false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IUserStatusResponse = response.data;
-
-          //Set observer state
           observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: IResponseError) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Set current user status
+   * 
+   * @param _statusKey
+   * 
+   * @returns Observable
+   * 
    */
-  public set(statusKey: string, data: any=null): Observable<any> {
+  public set(_statusKey: string, _data: any=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user/status/' + statusKey, data)
-        .then((response: any) => {
+      this._httpService.post('user/status/'+_statusKey, _data)
+      .subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
-          //Set observer state
           observer.next(data);
-        })
-        .catch((error: IResponseError) =>  { observer.error(error); })
-        .finally();
+        }, 
+        error: (error: IResponseError) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

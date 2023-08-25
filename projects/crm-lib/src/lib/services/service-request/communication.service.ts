@@ -3,6 +3,8 @@ import { Observable, Observer } from 'rxjs';
 
 // Framework files
 import { HttpService } from 'common-lib';
+
+// Interfaces
 import { BaseService } from '../base.service';
 import { ISendMailRequest, ISendSmsRequest } from '../../interfaces/service-request/communication.interface';
 
@@ -10,6 +12,7 @@ import { ISendMailRequest, ISendSmsRequest } from '../../interfaces/service-requ
   providedIn: 'root'
 })
 export class CommunicationService extends BaseService {
+
 
   /**
    * Default constructor
@@ -21,51 +24,72 @@ export class CommunicationService extends BaseService {
 
   /**
    * Make a Call to Contact (having the Service Request)
+   * 
+   * @param _uuid
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public makeCall(srhash: string, _payload: any=null, _params: Object|null=null): Observable<any> {
+  public makeCall(_uuid: string, _payload: any=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('servicerequest/'+srhash+'/call', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('servicerequest/'+_uuid+'/call', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Send SMS to Contact (having the Service Request)
+   * 
+   * @param _uuid
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public sendSMS(srhash: string, _payload: ISendSmsRequest=null, _params: Object|null=null): Observable<any> {
+  public sendSMS(_uuid: string, _payload: ISendSmsRequest, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('servicerequest/'+srhash+'/sms', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('servicerequest/'+_uuid+'/sms', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
 
   /**
    * Send Mail/Email to Contact (having the Service Request)
+   * 
+   * @param _uuid
+   * @param _payload
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public sendMail(srhash: string, _payload: ISendMailRequest=null, _params: Object|null=null): Observable<any> {
+  public sendMail(_uuid: string, _payload: ISendMailRequest, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('servicerequest/'+srhash+'/mail', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('servicerequest/'+_uuid+'/mail', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 

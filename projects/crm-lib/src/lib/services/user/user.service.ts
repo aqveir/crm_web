@@ -25,6 +25,11 @@ export class UserService extends BaseService {
 
   /**
    * Get users for an organization
+   * 
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public getAll(_params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
@@ -42,6 +47,12 @@ export class UserService extends BaseService {
 
   /**
    * Get user by identifier for an organization
+   * 
+   * @param _hash
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public show(_hash: string, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
@@ -59,6 +70,9 @@ export class UserService extends BaseService {
 
   /**
    * Get current user information
+   * 
+   * @returns Observable
+   * 
    */
   public profile(): Observable<any> {
     return new Observable((observer: Observer<any>) => {
@@ -76,10 +90,16 @@ export class UserService extends BaseService {
 
   /**
    * Create Organization User
+   * 
+   * @param _data
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
-  public create(data: IUserRequest, _params: Object|null=null): Observable<any> {
+  public create(_data: IUserRequest, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('user', data, false, _params).subscribe({ 
+      this._httpService.post('user', _data, false, _params).subscribe({ 
         next: (response: any) => {
           let data: any = response.data;
           observer.next(data);
@@ -93,6 +113,13 @@ export class UserService extends BaseService {
 
   /**
    * Update Organization User by Identifier
+   * 
+   * @param _hash
+   * @param _data
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public update(_hash: string, _data: IUserRequest, _params: Object|null=null): Observable<any> {
 
@@ -117,6 +144,12 @@ export class UserService extends BaseService {
 
   /**
    * Delete Organization User by Identifier
+   * 
+   * @param _hash
+   * @param _params
+   * 
+   * @returns Observable
+   * 
    */
   public delete(_hash: string, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
@@ -134,6 +167,10 @@ export class UserService extends BaseService {
 
   /**
    * Validate Organization User by Type
+   * 
+   * @param _params
+   * 
+   * @returns Observable
    */
   public exists(_params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {

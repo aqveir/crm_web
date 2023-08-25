@@ -24,7 +24,7 @@ export class LeadService extends ServiceRequestService {
   /**
    * Get List of Leads
    */
-  public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
+  public override getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
 
     //Check default params and set defaults
     _params = this.setDefaultParamsWithPagination('service_request_category_lead', _params);

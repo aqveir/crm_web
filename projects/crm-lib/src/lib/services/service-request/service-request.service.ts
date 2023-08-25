@@ -12,7 +12,7 @@ import { IServiceRequestMinimal, IServiceRequest } from '../../interfaces/servic
 })
 export abstract class ServiceRequestService extends BaseService {
 
-  public _httpService: HttpService;
+  public _httpService: HttpService|any;
 
   /**
    * Default constructor
@@ -24,16 +24,16 @@ export abstract class ServiceRequestService extends BaseService {
   /**
    * Get List of Service Request
    */
-  public getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
+  protected getAll(_payload: any=null, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('servicerequest/fetch', _payload, false, _params)
-        .then((response: any) => {
+      this._httpService.post('servicerequest/fetch', _payload, false, _params).subscribe({ 
+        next: (response: any) => {
           let data: IServiceRequestMinimal[] = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -43,14 +43,14 @@ export abstract class ServiceRequestService extends BaseService {
    */
   public show(id: number, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.get('preference/'+id.toString())
-        .then((response: any) => {
+      this._httpService.get('preference/'+id.toString()).subscribe({ 
+        next: (response: any) => {
           let data: IServiceRequest = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -58,16 +58,16 @@ export abstract class ServiceRequestService extends BaseService {
   /**
    * Create Organization Preference Data
    */
-  public create(data: any, _params: Object|null=null): Observable<any> {
+  public create(_data: any, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.post('preference', data)
-        .then((response: any) => {
+      this._httpService.post('preference', _data).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -77,14 +77,14 @@ export abstract class ServiceRequestService extends BaseService {
    */
   public update(id: number, data: any, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.put('preference/'+id.toString(), data)
-        .then((response: any) => {
+      this._httpService.put('preference/'+id.toString(), data).subscribe({ 
+        next: (response: any) => {
           let data: any = response.data;
-
           observer.next(data);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -94,12 +94,14 @@ export abstract class ServiceRequestService extends BaseService {
    */
   public delete(id: number, _params: Object|null=null): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this._httpService.delete('preference/'+id.toString())
-        .then((response: any) => {
-          observer.next(response);
-        })
-        .catch((error: any) =>  { observer.error(error); })
-        .finally()
+      this._httpService.delete('preference/'+id.toString()).subscribe({ 
+        next: (response: any) => {
+          let data: any = response.data;
+          observer.next(data);
+        }, 
+        error: (error: any) => { observer.error(error); }, 
+        complete: () => { observer.complete(); }
+      });
     });
   } //Function ends
 
@@ -122,7 +124,7 @@ export abstract class ServiceRequestService extends BaseService {
       } else { 
         //Set category key to fetch data
         if (!(super.hasProperty(_params, 'category_key'))) {
-          _params['category_key'] = _categoryKey;
+          _params = Object.assign(_params, { 'category_key': _categoryKey });
         } //End if
       } //End if
 
