@@ -2,9 +2,14 @@
 // Code
 //
 
-code {
-    background-color: $code-bg;
+code:not([class*="language-"]) {
+    font-weight: $code-font-weight;
+    color: var(--#{$prefix}code-color);
+    line-height: inherit;
+    font-size: inherit;
+    background-color: var(--#{$prefix}code-bg);
     padding: $code-padding;
-    font-weight: 400;
-    @include border-radius($border-radius);
+    margin: $code-margin;
+    box-shadow: var(--#{$prefix}code-box-shadow);
+    @include border-radius($code-border-radius);
 }

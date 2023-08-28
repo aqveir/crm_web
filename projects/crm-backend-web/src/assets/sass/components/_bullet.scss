@@ -4,29 +4,30 @@
 
 // Base
 .bullet {
-    // Base
     display: inline-block;
-    background-color: $gray-300;
-    width: get($bullet-config, hor-width);
-    height: get($bullet-config, hor-height);
-    @include border-radius(get($bullet-config, border-radius));
+    background-color: var(--#{$prefix}bullet-bg-color); 
+    @include border-radius($bullet-bar-border-radius);
+    width: $bullet-bar-width;
+    height: $bullet-bar-height;
+    flex-shrink: 0;
+}
 
-    // Dot bullet
-    &.bullet-dot {
-        width: get($bullet-config, dot-size);
-        height: get($bullet-config, dot-size);
-        border-radius: 100% !important;
-    }
+// Dot bullet
+.bullet-dot {
+    width: $bullet-dot-size;
+    height: $bullet-dot-size;
+    border-radius: 100% !important;
+}
 
-    // Vertical bullet
-    &.bullet-ver {
-        width: get($bullet-config, ver-width);
-        height: get($bullet-config, ver-height);
-    }
+// Vertical bullet
+.bullet-vertical {
+    width: $bullet-bar-height;
+    height: $bullet-bar-width;
+}
 
-    // Vertical resizable bullet(use with align-self-stretch)
-    &.bullet-bar {
-        width: get($bullet-config, bar-width);
-        height: auto;
-    }
+// Vertical line
+.bullet-line {
+    width: $bullet-line-width;
+    height: $bullet-line-height;
+    border-radius: 0;
 }

@@ -2,16 +2,22 @@
 // Browsers
 //
 
-@mixin for-ie11 {
-	// Microsoft IE11
-	@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+@mixin for-edge {
+    // Microsoft Edge
+	@supports (-ms-ime-align:auto) {
 		@content;
 	}
 }
 
-@mixin for-edge {
-    // Microsoft Edge
-	@supports (-ms-ime-align:auto) {
+@mixin for-safari {
+	.safari {
+		@content;
+	}
+}
+
+@mixin for-firefox {
+	// Firefox
+    @-moz-document url-prefix() {
 		@content;
 	}
 }

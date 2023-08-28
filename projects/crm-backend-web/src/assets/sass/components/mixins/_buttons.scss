@@ -1,205 +1,84 @@
 //
-// Custom button variation
+// Button Mixins
 //
 
-
+// Custom variant
 @mixin button-custom-variant(
-    $background, $border, $color, $icon, $box-shadow,
-    $hover-background, $hover-border, $hover-color, $hover-icon, $hover-box-shadow,
-    $active-background, $active-border, $active-color, $active-icon, $active-box-shadow) {
+    $color,
+    $icon-color,
+    $border-color,
+    $bg-color,
+    $color-active,
+    $icon-color-active,
+    $border-color-active,
+    $bg-color-active
+) {
 
-    // Initial state
-    @if ($color != null) {
+    @if ( $color != null ) {
         color: $color;
     }
 
-    @if ($icon != null) {
-        i {
-    		color: $icon;
-    	}
-
-    	.svg-icon {
-    		@include svg-icon-color($icon);
+    @if ( $icon-color != null ) {
+        i,
+        .svg-icon {
+    		color: $icon-color;
     	}
 
         &.dropdown-toggle:after {
-            color: $icon;
+            color: $icon-color;
         }
     }
 
-    @if ($background != null) {
-        background-color: $background;
+    @if ( $border-color != null ) {
+        border-color: $border-color;
     }
 
-    @if ($border != null) {
-        border-color: $border;
+    @if ( $bg-color != null ) {
+        background-color: $bg-color;
     }
 
-    // Hover & focus state
-    @if ($hover-color != null or $hover-border != null or $hover-icon != null or $hover-background != null) {
-        &:hover:not(.btn-text):not(:disabled):not(.disabled),
-        &:focus:not(.btn-text),
-        &.focus:not(.btn-text) {
-            @if ($hover-color != null) {
-                color: $hover-color;
-            }
+    .btn-check:checked + &,
+    .btn-check:active + &,
+    &:focus:not(.btn-active),
+    &:hover:not(.btn-active),
+    &:active:not(.btn-active),
+    &.active,
+    &.show,
+    .show > & {
+        @if ( $color-active != null ) {
+            color: $color-active;
+        }
 
-            @if ($hover-icon != null) {
-                i {
-            		color: $hover-icon;
-            	}
+        @if ( $icon-color-active != null ) {
+            i,
+            .svg-icon {
+        		color: $icon-color-active;
+        	}
 
-            	.svg-icon {
-            		@include svg-icon-color($hover-icon);
-            	}
-
-                &.dropdown-toggle:after {
-                    color: $hover-icon;
-                }
-            }
-
-            @if ($hover-background != null) {
-                background-color: $hover-background;
-            }
-
-            @if ($hover-border != null) {
-                border-color: $hover-border;
+            &.dropdown-toggle:after {
+                color: $icon-color-active;
             }
         }
-    }
 
-    // Disabled state
-    @if ($color != null or $icon != null or $border != null or $background != null) {
-        // Disabled comes first so active can properly restyle
-        &.disabled,
-        &:disabled {
-            @if ($color != null) {
-                color: $color;
-            }
-
-            @if ($icon != null) {
-                i {
-            		color: $icon;
-            	}
-
-            	.svg-icon {
-            		@include svg-icon-color($icon);
-            	}
-
-                &.dropdown-toggle:after {
-                    color: $icon;
-                }
-            }
-
-            @if ($background != null) {
-                background-color: $background;
-            }
-
-            @if ($border != null) {
-                border-color: $border;
-            }
+        @if ( $border-color-active != null ) {
+            border-color: $border-color-active;
         }
-    }
 
-    // Active state
-    @if ($active-color != null or $active-icon != null or $active-border != null or $active-background != null) {
-        &:not(:disabled):not(.disabled):active:not(.btn-text),
-        &:not(:disabled):not(.disabled).active,
-        .show > &.dropdown-toggle,
-        .show &.btn-dropdown {
-            @if ($active-color != null) {
-                color: $active-color;
-            }
-
-            @if ($active-icon != null) {
-                i {
-            		color: $active-icon;
-            	}
-
-            	.svg-icon {
-            		@include svg-icon-color($active-icon);
-            	}
-
-                &.dropdown-toggle:after {
-                    color: $active-icon;
-                }
-            }
-
-            @if ($active-background != null) {
-                background-color: $active-background;
-            }
-
-            @if ($active-border != null) {
-                border-color: $active-border;
-            }
-
-            // Focus state
-            &:focus {
-
-            }
-        }
-    }
-
-    // Box shadow
-    @if ($box-shadow != null) {
-        box-shadow: $box-shadow;
-    }
-
-    @if ($hover-box-shadow != null) {
-        &:hover:not(.btn-text):not(:disabled):not(.disabled),
-        &:focus:not(.btn-text),
-        &.focus:not(.btn-text) {
-            box-shadow: $hover-box-shadow;
-        }
-    }
-
-    @if ($active-box-shadow != null) {
-        &:not(:disabled):not(.disabled):active:not(.btn-text),
-        &:not(:disabled):not(.disabled).active,
-        .show > &.dropdown-toggle {
-            box-shadow: $active-box-shadow;
+        @if ( $bg-color-active != null ) {
+            background-color: $bg-color-active !important;
         }
     }
 }
 
-
-@mixin button-custom-transition($transition) {
-    // Initial state
-    transition: $transition;
-
-    i {
-        transition: $transition;
-    }
-
-    // Hover & focus state
-    &:hover:not(.btn-text),
-    &:focus:not(.btn-text),
-    &.focus {
-        transition: $transition;
-
-        i {
-            transition: $transition;
-        }
-    }
-
-    // Disabled state
-    &.disabled,
-    &:disabled {
-        transition: $transition;
-
-        i {
-            transition: $transition;
-        }
-    }
-
-    // Active state
-    &:not(:disabled):not(.disabled):active:not(.btn-text),
-    &:not(:disabled):not(.disabled).active,
-    .show > &.dropdown-toggle {
-        transition: $transition;
-
-        i {
-            transition: $transition;
-        }
+@mixin button-active-state() {    
+    .btn-check:checked + &,
+    .btn-check:active + &,
+    &:focus:not(.btn-active),
+    &:hover:not(.btn-active),
+    &:active:not(.btn-active),
+    &.active,
+    &.show,
+    .show > & {
+        @content;
     }
 }

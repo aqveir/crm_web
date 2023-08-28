@@ -2,234 +2,221 @@
 // Tagify
 //
 
+// Bootstrap .form-control sizing integration
+$tagify-tag-padding-y-sm: 0.3rem;
+$tagify-tag-padding-x-sm: 0.3rem;
+$tagify-input-padding-y-sm: #{$input-padding-y-sm - $tagify-tag-padding-y-sm}; 
 
+$tagify-tag-padding-y: 0.4rem;
+$tagify-tag-padding-x: 0.4rem;
+$tagify-input-padding-y: $input-padding-y - $tagify-tag-padding-y; 
+
+$tagify-tag-padding-y-lg: 0.5rem;
+$tagify-tag-padding-x-lg: 0.5rem;
+$tagify-input-padding-y-lg: $input-padding-y-lg - $tagify-tag-padding-y-lg; 
+
+// Base
 .tagify {
-    @include border-radius($border-radius);
-    border-color: $input-border-color;
-    padding: 0;
-    display: flex;
-    height: auto;
-
-    &:hover {
-        border-color: $input-border-color;
-    }
-
-    &.tagify--focus {
-        border: 1px solid $input-focus-border-color;
-    }
-
+    --tagify-dd-bg-color        : var(--#{$prefix}body-bg);
+    --tags-border-color         : #{$input-border-color};
+    --tags-hover-border-color   : #{$input-border-color};
+    --tags-focus-border-color   : #{$input-focus-border-color};
+    --tag-bg                    : var(--#{$prefix}gray-200);
+    --tag-hover                 : var(--#{$prefix}gray-200);
+    --tag-text-color            : var(--#{$prefix}gray-700);
+    --tag-text-color--edit      : var(--#{$prefix}gray-700);
+    --tag-pad                   : 0 0.5rem;
+    --tag-inset-shadow-size     : 1rem;
+    --tag-invalid-color         : var(--#{$prefix}danger);
+    --tag-invalid-bg            : var(--#{$prefix}danger-light);
+    --tag-remove-bg             : var(--#{$prefix}gray-200);
+    --tag-remove-btn-color      : transparent;
+    --tag-remove-btn-bg         : transparent;
+    --tag-remove-btn-bg--hover  : transparent;
+    --input-color               : var(--#{$prefix}gray-700);
+    --placeholder-color         : var(--#{$prefix}gray-400);
+    --placeholder-color-focus   : var(--#{$prefix}gray-500);
+    --loader-size               : .8rem;
+    --tagify-dd-item--hidden-duration : 0.3s;
+    
     .tagify__tag {
-        background-color: $gray-200;
-        display: inline-flex;
-        align-items: center;
-        padding: 0 0.5rem;
-        @include border-radius($border-radius);
-
+        background-color: var(--tag-bg);
+        margin: 0;
+        line-height: 1;
+        
         div {
-            order: 1;
-            padding-right: 0.25rem;
+            border-radius: inherit;
+        }
 
-            .tagify__tag-text {
-                color: $dark-50;
-                font-weight: 400;
-            }
-
-            &:before {
-                box-shadow: none !important;
-                animation: none;
-                transition: none;
-            }
+        .tagify__tag-text {
+            overflow: visible;    
         }
 
         .tagify__tag__removeBtn {
-            display: flex;
-            align-items: center;
-            order: 2;
-            transform: none;
-            position: static;
+            width: 0.6rem;
+            height: 0.6rem;
+            margin: 0  0.5rem 0 0;
             border-radius: 0;
-            margin-left: 0.25rem;
-            margin-right: 0;
-            line-height: 0;
+            content: " ";
+            @include svg-bg-icon(close, var(--#{$prefix}gray-500));
 
             &:after {
-                transition: $transition-link;
-                line-height: 0;
-                @include ki(get($ki-types, close));
-                font-size: 0.6rem;
-                color: $text-muted;
+                display: none;
             }
 
             &:hover {
-                background: transparent;
-                color: $primary;
-
-                & + div > span {
-                    opacity: .4;
-                }
-
-                &:after {
-                    transition: $transition-link;
-                    color: $primary;
-                }
+                @include svg-bg-icon(close, var(--#{$prefix}primary));
             }
         }
 
-
-
-        // State colors
-        @each $name, $color in $theme-colors {
-            &.tagify__tag--#{$name}:not(.tagify--notAllowed) {
-                 background-color: $color;
-
-                 div {
-                     .tagify__tag-text {
-                         color: $white;
-                         font-weight: 500;
-                     }
-                 }
-
-                 .tagify__tag__removeBtn {
-                     &:after {
-                         color: $white;
-                     }
-
-                     &:hover {
-                         background: transparent;
-                         color: $white;
-
-                         & + div > span {
-                             opacity: .3;
-                         }
-                     }
-                 }
-             }
-
-             &.tagify__tag-light--#{$name}:not(.tagify--notAllowed) {
-                  background-color: rgba($color, 0.12);
-
-                  div {
-                      .tagify__tag-text {
-                          color: $color;
-                          font-weight: 500;
-                      }
-                  }
-
-                  .tagify__tag__removeBtn {
-                      &:after {
-                          color: $color;
-                      }
-
-                      &:hover {
-                          background: transparent;
-                          color: $white;
-
-                          & + div > span {
-                              opacity: .3;
-                          }
-                      }
-                  }
-             }
-        }
-
-        // Not Allowed Mode
+        // Not allowed state
         &.tagify--notAllowed {
-            background-color: $danger;
-
             div {
-                &:before {
-                    box-shadow: none !important;
-                    animation: none;
-                    transition: none;
-                }
-
                 .tagify__tag-text {
-                    color: $danger-inverse;
-                    opacity: .75;
+                    color: var(--#{$prefix}danger);
+                    opacity: .5;
                 }
             }
 
             .tagify__tag__removeBtn {
-                &:after {
-                    opacity: .5;
-                    color: $danger-inverse;
-                }
-
+                opacity: .5;
+                @include svg-bg-icon(close, var(--#{$prefix}danger));
+                
                 &:hover {
                     background: transparent;
-                    color: $danger-inverse;
-
-                    & + div > span {
-                        opacity: .3;
-                    }
+                    opacity: .75;
                 }
             }
         }
     }
-}
 
-.tagify[readonly] .tagify__tag__removeBtn {
-    display: none;
-}
+    .tagify__input {
+        margin: 0;
 
-.tagify__input {
-    color: $input-plaintext-color;
-
-    &::before {
-        top: auto;
-        bottom: auto;
-        height: auto;
-        position: relative;
+        &:before {
+            font-size: inherit;
+            line-height: inherit;
+            font-weight: inherit;
+        }
     }
+
+    // Sizing
+    &.form-control {
+        display: flex;
+        align-items: center;    
+        gap: 0.25rem;
+    }
+
+    &.form-control-sm {
+        border-radius: $btn-border-radius-sm;
+        min-height: $input-height-sm;
+        padding-top: $tagify-input-padding-y-sm;
+        padding-bottom: $tagify-input-padding-y-sm;
+
+        .tagify__tag {
+            padding: $tagify-tag-padding-y-sm $tagify-tag-padding-x-sm;
+            border-radius: $btn-border-radius-sm;
+
+            .tagify__tag-text {
+                font-size: $input-btn-font-size-sm;
+            }
+        }
+    }
+
+    &:not(.form-control-sm):not(.form-control-lg) {
+        border-radius: $btn-border-radius;
+        min-height: $input-height;
+        padding-top: $tagify-input-padding-y;
+        padding-bottom: $tagify-input-padding-y;
+
+        .tagify__tag {
+            padding: $tagify-tag-padding-y $tagify-tag-padding-x;
+            border-radius: $btn-border-radius;
+
+            .tagify__tag-text {
+                font-size: $input-btn-font-size;
+            }
+        }
+    }
+
+    &.form-control-lg {
+        border-radius: $btn-border-radius-lg;
+        min-height: $input-height-lg;
+        padding-top: $tagify-input-padding-y-lg;
+        padding-bottom: $tagify-input-padding-y-lg;
+
+        .tagify__tag {
+            padding: $tagify-tag-padding-y-lg $tagify-tag-padding-x-lg;
+            border-radius: $btn-border-radius-lg;
+
+            .tagify__tag-text {
+                font-size: $input-btn-font-size-lg;
+            }
+        }
+    }   
 }
 
-.tagify__input ~ .tagify.form-control {
-    margin: 1rem;
-    padding: 0;
-    @include button-reset();
-}
-
-.tagify__input.form-control {
-    margin: 0;
-}
-
-.tagify__input--outside{
-    display: block;
-    max-width: 600px;
-    border: 1px solid $gray-200;
-    margin-top: 1.5em;
-    margin-bottom: 1em;
-}
-
+// Dropdown
 .tagify__dropdown {
-    box-shadow: $dropdown-box-shadow;
-    background: $white;
+    box-shadow: var(--#{$prefix}dropdown-box-shadow);
     border: 0 !important;
     outline: none !important;
     padding: 0.75rem 0;
     z-index: $zindex-dropdown;
+    background-color: var(--#{$prefix}body-bg);
     @include border-radius($border-radius);
 
+    // Wrapper
+    ._wrapper {
+        max-height: none;
+        @include border-radius($border-radius);
+    }
+
+    // In modal
     .modal-open & {
         z-index: $zindex-modal + 1;
     }
 
     .tagify__dropdown__wrapper {
+        background-color: var(--#{$prefix}body-bg);
         border: 0 !important;
         outline: none !important;
         box-shadow: none;
     }
 
     .tagify__dropdown__item {
-        color: $dark-75;
+        color: var(--#{$prefix}gray-700);
         border-radius: 0;
         padding: 0.75rem 1.5rem;
         margin: 0;
         box-shadow: none;
+        font-weight: $font-weight-semibold;
 
+        &:hover,
         &.tagify__dropdown__item--active {
-            background: $gray-100;
-            color: $primary;
+            background-color: var(--#{$prefix}component-hover-bg);
+            color: var(--#{$prefix}component-hover-color);
+        }
+    }
+
+    // Suggestions
+    &.tagify__inline__suggestions {    
+        padding: $input-padding-y $input-padding-x;
+
+        .tagify__dropdown__item {
+            display: inline-block;
+            font-size: $font-size-sm;
+            padding: 0.35rem 0.5rem;
+            margin: 0.25rem 0.5rem 0.25rem 0;  
+            background-color: var(--#{$prefix}gray-200);
+            color: var(--#{$prefix}gray-700);
+            @include border-radius($border-radius);
+
+            &:hover,
+            &.tagify__dropdown__item--active {
+                background-color: var(--#{$prefix}component-hover-bg);
+                color: var(--#{$prefix}component-hover-color);
+            }
         }
     }
 }

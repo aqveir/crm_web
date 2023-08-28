@@ -3,33 +3,64 @@
 //
 
 .separator {
+    display: block;
     height: 0;
+    border-bottom: 1px solid var(--#{$prefix}border-color);
 
-    // Dashed style
+    &.separator-dotted {
+        border-bottom-style: dotted;
+        border-bottom-color: var(--#{$prefix}border-dashed-color);
+    }
+
     &.separator-dashed {
-        border-bottom: 1px dashed $border-color;
+        border-bottom-style: dashed;
+        border-bottom-color: var(--#{$prefix}border-dashed-color);
     }
 
-    &.separator-solid {
-        border-bottom: 1px solid $border-color;
-    }
+    &.separator-content {
+        display: flex;
+        align-items: center;
+        border-bottom: 0;
+        text-align: center;
 
-    &.separator-border-2 {
-        border-bottom-width: 2px;
-    }
+        &::before,
+        &::after {
+            content: " ";
+            width: 50%;
+            border-bottom: 1px solid var(--#{$prefix}border-color);
+        }
 
-    &.separator-border-3 {
-        border-bottom-width: 3px;
-    }
+        &::before{
+            margin-right: 1.25rem;
+        }
 
-    &.separator-border-4 {
-        border-bottom-width: 4px;
-    }
+        &::after{
+            margin-left: 1.25rem;
+        }
 
-    // Theme colors
-    @each $name, $color in $theme-colors {
-        &.separator-#{$name} {
-            border-bottom-color: $color;
+        &.separator-dotted {
+            &::before,
+            &::after {
+                border-bottom-style: dotted;
+                border-bottom-color: var(--#{$prefix}border-dashed-color);
+            }
+        }
+
+        &.separator-dashed {
+            &::before,
+            &::after {
+                border-bottom-style: dashed;
+                border-bottom-color: var(--#{$prefix}border-dashed-color);
+            }
+        }
+
+        @each $color, $value in $theme-colors {
+            &.border-#{$color}{
+                &::before,
+                &::after {
+                    border-color: $value !important; 
+                }
+            }
         }
     }
 }

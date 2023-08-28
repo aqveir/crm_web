@@ -2,8 +2,9 @@
 // Functions
 //
 
-@import
-    "functions/get",
-    "functions/math",
-    "functions/valueif",
-    "functions/theme-colors";
+// Import Dependencies
+@import "functions/get";
+@import "functions/set";
+@import "functions/math";
+@import "functions/valueif";
+@import "functions/theme-colors";

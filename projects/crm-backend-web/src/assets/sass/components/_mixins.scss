@@ -2,20 +2,12 @@
 // Mixins
 //
 
-// Include mixins
-@import
-    "mixins/tooltip",
-    "mixins/buttons",
-    "mixins/burger-icon",
-    "mixins/checkbox",
-    "mixins/radio",
-    "mixins/switch",
-    "mixins/ki",
-    "mixins/symbol",
-    "mixins/menu-horizontal",
-    "mixins/menu-vertical",
-    "mixins/offcanvas",
-    "mixins/spinner",
-    "mixins/svg-icon",
-    "mixins/navi",
-    "mixins/label";
+// Import Dependencies
+@import "mixins/menu";
+@import "mixins/buttons";
+@import "mixins/ki";
+@import "mixins/symbol";
+@import "mixins/svg-icon";
+@import "mixins/svg-bg-icon";
+@import "mixins/scroll";
+@import "mixins/shape";

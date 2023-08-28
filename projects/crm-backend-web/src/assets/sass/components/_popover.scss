@@ -5,62 +5,54 @@
 
 // Base
 .popover {
+    --#{$prefix}popover-header-border-color: #{$popover-header-border-color};
+
     .popover-header {
         font-size: $popover-header-font-size;
         font-weight: $popover-header-font-weight;
-        border-bottom: 1px solid $popover-header-border-color;
+        border-bottom: 1px solid var(--#{$prefix}popover-header-border-color);
     }
 
-    /*rtl:raw:
-    left: 0 !important;
-    right: auto !important;
-    */
+    .popover-dismiss {
+        position: absolute;
+        top: $popover-dissmis-btn-top;
+        right: $popover-dissmis-btn-end;
+        height: $popover-dissmis-btn-size;
+        width: $popover-dissmis-btn-size;
+        @include svg-bg-icon(close, var(--#{$prefix}gray-500)); // todo: revise
+        mask-size: 50%;
+        -webkit-mask-size: 50%;
 
-    &.bs-popover-right {
-        margin-right: auto#{'/*rtl:ignore*/'};
-        margin-left: $popover-arrow-height#{'/*rtl:ignore*/'};
+        &:hover {
+            background-color: var(--#{$prefix}primary);
+        }
 
-        > .arrow {
-            right: auto#{'/*rtl:ignore*/'};
-            left: subtract(-$popover-arrow-height, $popover-border-width)#{'/*rtl:ignore*/'};
-
-            &::before {
-                right: auto#{'/*rtl:ignore*/'};
-                left: 0#{'/*rtl:ignore*/'};
-                border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0#{'/*rtl:ignore*/'};
-                border-right-color: $popover-arrow-outer-color#{'/*rtl:ignore*/'};
-            }
-
-            &::after {
-                right: auto#{'/*rtl:ignore*/'};
-                left: $popover-border-width#{'/*rtl:ignore*/'};
-                border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0#{'/*rtl:ignore*/'};
-                border-right-color: $popover-arrow-color#{'/*rtl:ignore*/'};
-            }
+        & + .popover-header {
+            padding-right: $popover-body-padding-x + $popover-dissmis-btn-size;
         }
     }
+}
 
-    &.bs-popover-left {
-        margin-left: auto#{'/*rtl:ignore*/'};
-        margin-right: $popover-arrow-height#{'/*rtl:ignore*/'};
+// Inverse
+.popover-inverse {
+    --#{$prefix}popover-bg: var(--#{$prefix}gray-900);
+    --#{$prefix}popover-border-color: var(--#{$prefix}gray-900);
+    --#{$prefix}popover-box-shadow: #{$popover-box-shadow-dark};
+    --#{$prefix}popover-header-color: var(--#{$prefix}gray-200);
+    --#{$prefix}popover-header-bg: var(--#{$prefix}gray-900);
+    --#{$prefix}popover-body-color: var(--#{$prefix}gray-400);
+    --#{$prefix}popover-arrow-border: transparent;
+    --#{$prefix}popover-header-border-color: var(--#{$prefix}gray-800);
+}
 
-        > .arrow {
-            left: auto#{'/*rtl:ignore*/'};
-            right: subtract(-$popover-arrow-height, $popover-border-width)#{'/*rtl:ignore*/'};
-
-            &::before {
-                left: auto#{'/*rtl:ignore*/'};
-                right: 0#{'/*rtl:ignore*/'};
-                border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height#{'/*rtl:ignore*/'};
-                border-left-color: $popover-arrow-outer-color#{'/*rtl:ignore*/'};
-            }
-
-            &::after {
-                left: auto#{'/*rtl:ignore*/'};
-                right: $popover-border-width#{'/*rtl:ignore*/'};
-                border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height#{'/*rtl:ignore*/'};
-                border-left-color: $popover-arrow-color#{'/*rtl:ignore*/'};
-            }
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .popover:not(.popover-inverse) {
+            --#{$prefix}popover-bg: #{$popover-bg-dark};
+            --#{$prefix}popover-border-color: #{$popover-border-color-dark};
+            --#{$prefix}popover-header-bg: #{$popover-bg-dark};
+            --#{$prefix}popover-box-shadow: #{$popover-box-shadow-dark};
+            --#{$prefix}popover-header-border-color: #{$popover-header-border-color-dark};
         }
     }
 }

@@ -1,64 +1,102 @@
 //
-// Dropzone
+// Dropzone plugin customization:  https://www.dropzonejs.com
 //
 
-
-// Base
+// Basic
 .dropzone {
     min-height: auto;
-}
-
-.dropzone.dropzone-default {
-    padding: 20px;
+    padding: 1.5rem 1.75rem;
 	text-align: center;
 	cursor: pointer;
-    border: 2px dashed $gray-200;
-    @include border-radius($border-radius);
+    border: 1px dashed var(--#{$prefix}primary);
+    background-color: var(--#{$prefix}primary-light);
+    border-radius: $border-radius !important;
 
-    .dropzone-msg-title {
-		color:  $dark-75;
-		margin: 0 0 5px 0;
-		padding: 0;
-		font-weight: 500;
-		font-size: 1.2rem;
-	}
-
-    .dropzone-msg-desc {
-        color:  $text-muted;
-        font-weight: 400;
-		font-size: 1rem;
-	}
-
-    .dz-preview {
-		.dz-image {
-			@include border-radius($border-radius);
-		}
+    .dz-message{
+        margin: 0;
+        display: flex;
+        text-align: left;
     }
 
-    .dz-remove {
-        color: $dark-50;
-        font-size: 1px;
-        font-weight: 500;
-        transition: $transition-link;
+    .dz-preview {
+        border-radius: $border-radius !important;
+        margin: 0.75rem;
 
-        &:hover {
-            transition: $transition-link;
-            color: $primary;
+		.dz-image {
+			border-radius: $border-radius !important;
+            z-index: 1;
+		}
+
+        &.dz-file-preview {
+            .dz-image {
+                background: var(--#{$prefix}gray-200);
+            }
         }
     }
 
-	// State colors
-	@each $name, $color in $theme-colors {
-		&.dropzone-#{$name} {
-			border-color: $color;
-		}
-	}
+    .dz-success-mark,
+    .dz-error-mark {
+        $size: 40px;
+
+        margin-left: -(divide($size, 2)) !important;
+        margin-top: -(divide($size, 2)) !important;
+        
+        svg {
+            height: $size !important;
+            width: $size !important;
+        }
+    }
+
+    .dz-remove {
+        $size: 1.65rem;
+        display:flex;
+		justify-content: center;
+		align-items: center;
+		height: $size;
+		width: $size;
+		font-size: 1rem;
+        text-indent: -9999px;
+        white-space: nowrap;  
+        position: absolute;
+        z-index: 2;
+        background-color: var(--#{$prefix}body-bg) !important;        
+        box-shadow: var(--#{$prefix}box-shadow);        
+		border-radius: 100%;
+        top: -(divide($size,2));
+        right: -(divide($size,2));
+
+        &:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            display: block;
+            content: "";
+            mask-size: 40%;
+            -webkit-mask-size: 40%;
+            @include svg-bg-icon(close, var(--#{$prefix}gray-600));
+        }       
+
+        &:hover {
+            &:after {
+                @include svg-bg-icon(close, var(--#{$prefix}primary));
+            } 
+        }
+    }
+
+    .dz-error-message {
+        color: var(--#{$prefix}danger-inverse);
+        background: var(--#{$prefix}danger);
+    }
 }
 
-// Multipe upload
-.dropzone.dropzone-multi {
+// Queue upload
+.dropzone.dropzone-queue {
     border: 0;
     padding: 0;
+    background-color: transparent;
+    text-align: left;
 
     .dz-message{
         display: none;
@@ -77,7 +115,7 @@
         margin-top: 0.75rem;
         @include border-radius($border-radius);
         padding: 0.5rem 1rem;
-        background-color: $gray-100;
+        background-color: var(--#{$prefix}gray-100);
 
         .dropzone-file {
             flex-grow: 1;
@@ -85,14 +123,12 @@
             .dropzone-filename {
                 font-size: 0.9rem;
                 font-weight: 500;
-                color: $gray-600;
+                color: var(--#{$prefix}gray-600);
                 text-overflow: ellipsis;
                 margin-right: 0.5rem;
 
-                b {
-                    font-size: 0.9rem;
-                    font-weight: 500;
-                    color: $text-muted;
+                &:hover {
+                    color: var(--#{$prefix}primary);
                 }
             }
 
@@ -100,7 +136,7 @@
                 margin-top: 0.25rem;
                 font-size: 0.9rem;
                 font-weight: 400;
-                color: $danger;
+                color: var(--#{$prefix}danger);
                 text-overflow: ellipsis;
             }
         }
@@ -130,16 +166,16 @@
                 cursor: pointer;
                 transition: $transition-link;
 
-                i {
+                > i {
                     transition: $transition-link;
                     font-size: 0.8rem;
-                    color: $gray-600;
+                    color: var(--#{$prefix}gray-600);
                 }
 
                 &:hover {
                     transition: $transition-link;
-                    i {
-                        color: $primary;
+                    > i {
+                        color: var(--#{$prefix}primary);
                     }
                 }
             }

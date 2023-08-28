@@ -1,15 +1,19 @@
 //
-//  Toggle
+// Toggle
 //
 
-.toggle-off {
-    .toggle-off-item {
-        display: none !important;
+.toggle {
+    &.collapsible:not(.collapsed), // Integration with Bootstrap Collapse
+    &.active {
+        .toggle-off {
+            display: none;
+        }
     }
-}
 
-.toggle-on {
-    .toggle-on-item {
-        display: none !important;
+    &.collapsible.collapsed, // Integration with Bootstrap Collapse
+    &:not(.collapsible):not(.active) {
+        .toggle-on {
+            display: none;
+        }
     }
 }

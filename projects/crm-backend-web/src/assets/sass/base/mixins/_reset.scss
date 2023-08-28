@@ -5,7 +5,7 @@
 @mixin button-reset() {
     appearance: none;
     box-shadow: none;
-    border-radius: none;
+    border-radius: 0;
     border: none;
     cursor: pointer;
     background-color: transparent;
@@ -17,6 +17,7 @@
 @mixin input-reset() {
 	border: 0;
 	background-color: transparent;
-	outline: none !important;
+    outline: none !important;
 	box-shadow: none;
+    border-radius: 0;
 }

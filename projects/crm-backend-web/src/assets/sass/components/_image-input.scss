@@ -11,21 +11,31 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 
+	// Empty state
+	&:not(.image-input-empty) {
+		background-image: none !important;
+	}
+
 	// Wrapper
 	.image-input-wrapper {
-		width: 85px;
-		height: 85px;
+		width: 120px;
+		height: 120px;
 		@include border-radius($border-radius);
 		background-repeat: no-repeat;
 		background-size: cover;
 	}
 
-	// Change Button
-	[data-action="change"] {
+	// Actions
+	[data-kt-image-input-action] {
 		cursor: pointer;
 		position: absolute;
-		right: -10px;
-		top: -10px;
+		transform: translate(-50%,-50%);
+	}
+
+	// Change Button
+	[data-kt-image-input-action="change"] {
+		left: 100%;
+		top: 0;
 
 		input {
 			width: 0 !important;
@@ -36,32 +46,32 @@
 	}
 
 	// Cancel & Remove Buttons
-	[data-action="cancel"],
-	[data-action="remove"] {
+	[data-kt-image-input-action="cancel"],
+	[data-kt-image-input-action="remove"] {
 		position: absolute;
-		right: -10px;
-		bottom: -5px;
+		left: 100%;
+		top: 100%;
 	}
 
-	[data-action="cancel"] {
+	[data-kt-image-input-action="cancel"] {
 		display: none;
 	}
 
 	// Input Changed State
 	&.image-input-changed {
-		[data-action="cancel"] {
+		[data-kt-image-input-action="cancel"] {
 			display: flex;
 		}
 
-		[data-action="remove"] {
+		[data-kt-image-input-action="remove"] {
 			display: none;
 		}
 	}
 
 	// Input Empty State
 	&.image-input-empty {
-		[data-action="remove"],
-		[data-action="cancel"] {
+		[data-kt-image-input-action="remove"],
+		[data-kt-image-input-action="cancel"] {
 			display: none;
 		}
 	}
@@ -69,74 +79,33 @@
 	// Circle style
 	&.image-input-circle {
 		border-radius: 50%;
-		
+
 		// Wrapper
 		.image-input-wrapper {
 			border-radius: 50%;
 		}
 
 		// Change Control
-		[data-action="change"] {
-			right: 5px;
-			top: 5px;
+		[data-kt-image-input-action="change"] {
+			left: 100%;
+			top: 0;
+			transform: translate(-100%, 0%);
 		}
 
 		// Cancel & Remove Buttons
-		[data-action="cancel"],
-		[data-action="remove"] {
-			right: 5px;
-			bottom: 5px;
+		[data-kt-image-input-action="cancel"],
+		[data-kt-image-input-action="remove"] {
+			left: 100%;
+			top: 100%;
+			transform: translate(-100%,-100%);
 		}
 	}
 
 	// Bordered style
 	&.image-input-outline {
 		.image-input-wrapper {
-			border: 3px solid $white;
-			box-shadow: $box-shadow;
-		}
-	}
-}
-
-@media (min-width: 576px) { 
-	.image-input {
-		// Wrapper
-		.image-input-wrapper {
-			width: 85px !important;
-			height: 85px !important;
-		}
-	}
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { 
-	.image-input {
-		// Wrapper
-		.image-input-wrapper {
-			width: 85px !important;
-			height: 85px !important;
-		}
-	}
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) { 
-	.image-input {
-		// Wrapper
-		.image-input-wrapper {
-			width: 100px !important;
-			height: 100px !important;
-		}
-	}
-}
-
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) { 
-	.image-input {
-		// Wrapper
-		.image-input-wrapper {
-			width: 120px !important;
-			height: 120px !important;
+			border: 3px solid var(--#{$prefix}body-bg);
+			box-shadow: var(--#{$prefix}box-shadow);
 		}
 	}
 }

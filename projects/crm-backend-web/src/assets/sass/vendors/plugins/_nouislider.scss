@@ -5,8 +5,8 @@
 
 // Base
 .noUi-target {
-    border: 1px solid $input-border-color;
-    background: $gray-100;
+    border: 0;
+    background: var(--#{$prefix}gray-100);
     box-shadow:none;
 
     &.noUi-horizontal {
@@ -15,8 +15,7 @@
         .noUi-handle {
             width: 24px;
             height: 24px;
-            //left: -17px;
-            top: -6px;
+            top: -4.5px;
             border-radius: 50%;
             outline: none;
 
@@ -37,7 +36,7 @@
         .noUi-handle {
             width: 24px;
             height: 24px;
-            top: -6px;
+            right: -4.5px;
             border-radius: 50%;
             outline: none;
 
@@ -52,61 +51,53 @@
     }
 
     .noUi-connect {
-        background: $primary;
+        background: var(--#{$prefix}component-active-bg);
     }
 
     .noUi-handle {
-        border: 1px solid $gray-200;
-        box-shadow: 0 3px 6px -3px rgba(#000, 0.7);
+        background-color: $white; //var(--#{$prefix}body-bg);
+        border: 1px solid var(--#{$prefix}gray-200);
+        box-shadow:var(--#{$prefix}box-shadow-sm)
     }
 
-    // Light option
-    &.nouislider-light{
-        height: 4px;
-
-        .noUi-handle{
-            width: 20px;
-            height: 20px;
-            top: -9px;
-        }
+    // Small size
+    &.noUi-sm {
+       @include nouislider-size(6px, 20px, 20px, 7px);
     }
 
-    // State colors
-    &.nouislider {
-        @each $name, $color in $theme-colors {
-            &.nouislider-connect-#{$name} {
-                .noUi-connect {
-                    background: $color;
-                }
-            }
+    // Large size
+    &.noUi-lg {
+        @include nouislider-size(18px, 30px, 30px, 6px);
+    }
+}
+    
+// Theme colors
+@each $name, $value in $theme-colors {
+    // NoUiSlider success color option
+    .noUi-target.noUi-target-#{$name} {
+        .noUi-connects {
+            background-color: var(--#{$prefix}#{$name}-light);
 
-            &.nouislider-handle-#{$name} {
-                .noUi-handle {
-                    border: 0;
-                    background: $color;
-                    box-shadow: 0 3px 6px -3px $color;
-                }
-            }
-
-            &.nouislider-bg-#{$name}{
-                background: $color;
-            }
-
-            &.nouislider-bg-light-#{$name}{
-                background: theme-light-color($name);
+            .noUi-connect {
+                background-color: var(--#{$prefix}#{$name});
             }
         }
-    }
 
-    // No Shadow
-    &.nouislider-shadowless{
         .noUi-handle {
-            box-shadow: none;
+            border: 1px solid var(--#{$prefix}#{$name});
+            box-shadow: 0 3px 6px -3px rgba(var(--#{$prefix}#{$name}), 0.7);
+            background-color: var(--#{$prefix}#{$name});
         }
     }
+}
 
-    // No Border
-    &.nouislider-borderless{
-        border: 0;
-    }
+// Tooltip
+.noUi-tooltip {
+    box-shadow: var(--#{$prefix}tooltip-box-shadow);
+    background: var(--#{$prefix}tooltip-bg);
+    color: var(--#{$prefix}tooltip-color);
+    font-size: $tooltip-font-size;
+    border: 0;
+    padding: 0.5rem 0.75rem;
+    @include border-radius($tooltip-border-radius);
 }

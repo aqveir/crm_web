@@ -2,64 +2,86 @@
 // Toastr
 //
 
-
-
-
 // Base
-.toast {
-    transition: $transition;
-    background-position: 15px center #{'/*rtl:calc(100% - 15px) center*/'} !important;
-	border: 0;
-    background-color: $gray-100;
-    color: $dark-75;
-    box-shadow: $box-shadow !important;
+.toastr {
+    // this is for RTL
+    background-position: calc(100% - 1.5rem) center !important;
+    /*rtl:ignore*/
+    background-position: 1.5rem center !important;
+    box-shadow: var(--#{$prefix}dropdown-box-shadow) !important;
+	border-radius: $dropdown-border-radius !important;
+	border: 0 !important;
+    background-color: var(--#{$prefix}gray-100);
+    color: var(--#{$prefix}gray-700);
+    padding: 1.25rem 1.25rem 1.25rem 4.5rem !important;
 
-    &:hover {
-        transition: $transition;
-        box-shadow: $box-shadow !important;
-        opacity: 1;
-    }
-
-	.toast-close-button {
+	.toastr-close-button {
    		outline: none !important;
-	    font-size: 0;
-
-        &:before {
-            @include ki(get($ki-types, close));
-        	font-size: 0.9rem;
-        }
+        font-size: 0;
+        width: 0.85rem;
+        height: 0.85rem;
 	}
 
 	// Title
-	.toast-title {
-		font-size: 1.1rem;
-		font-weight: 500;
-		margin-bottom: 0.25rem;
+	.toastr-title {
+		font-size: 1.15rem;
+		font-weight: $font-weight-semibold;
+        
+        & + .toastr-message {
+            margin-top: 0.25rem;
+        }
 	}
 
 	// Message
-	.toast-message {
-		font-size: 1rem;
+	.toastr-message {
+        font-size: 1rem;
+        font-weight: $font-weight-normal;
 	}
 
     // States
-    &.toast-success {
-        background-color: $success;
-        color: $success-inverse;
+    &.toastr-success {
+        background-color: var(--#{$prefix}success);
+        color: var(--#{$prefix}success-inverse);
+
+        .toastr-close-button {
+            @include svg-bg-icon(close, var(--#{$prefix}success-inverse));
+        }    
     }
 
-    &.toast-info {
-        background-color: $info;
-        color: $info-inverse;
+    &.toastr-info {
+        background-color: var(--#{$prefix}info);
+        color: var(--#{$prefix}info-inverse);
+
+        .toastr-close-button {
+            @include svg-bg-icon(close, var(--#{$prefix}info-inverse));
+        } 
     }
 
-    &.toast-warning {
-        background-color: $warning;
-        color: $warning-inverse;
+    &.toastr-warning {
+        background-color: var(--#{$prefix}warning);
+        color: var(--#{$prefix}warning-inverse);
+
+        .toastr-close-button {
+            @include svg-bg-icon(close, var(--#{$prefix}warning-inverse));
+        } 
     }
 
-    &.toast-error {
-        background-color: $danger;
-        color: $danger-inverse;
+    &.toastr-error {
+        background-color: var(--#{$prefix}danger);
+        color: var(--#{$prefix}danger-inverse);
+
+        .toastr-close-button {
+            @include svg-bg-icon(close, var(--#{$prefix}danger-inverse));
+        } 
     }
+}
+
+
+// Placements
+.toastr-top-center {
+    top: 12px;
+}
+
+.toastr-bottom-center {
+    bottom: 12px;
 }

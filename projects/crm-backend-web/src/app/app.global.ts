@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 //Propritery Library
 import { IResponseUserLogin, IPrivilege, IUserStatusResponse, ILookupValue,
-    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole, IUserMinimal, UserService, RoleService, CountryService, ICountry } from 'crmo-lib';
+    ApplicationParams, LookupService, ILookup,  UserStatusService, IRole, IUserMinimal, UserService, RoleService, CountryService, ICountry } from 'crm-lib';
 import { LocalStorageService, SessionStorageService, TranslateService, NotificationService } from 'common-lib';
 
 //Project References
@@ -26,10 +26,10 @@ export interface ILanguage {
 
 //Setting Information Model
 export class SettingInfo {
-    oHash: string=null;
-    uHash: string=null;
+    oHash: string|null|undefined=null;
+    uHash: string|null|undefined=null;
 
-    selected_oHash: string=null;
+    selected_oHash: string|null|undefined=null;
 } //Class ends
 
 @Injectable()
@@ -177,21 +177,21 @@ export class Globals {
     /**
      * Delaration of public variables
      */
-    public claimUser: IResponseUserLogin | null;
-    public params: ApplicationParams | null;
-    public objUserStatus: IUserStatusResponse = null;
+    public claimUser: IResponseUserLogin|null = null;
+    public params: ApplicationParams|null = null;
+    public objUserStatus: IUserStatusResponse|null = null;
 
 
     /**
      * Declaration of private variables
      */
     private boolDataLoaded: boolean = false;
-    private lookup: ILookup[] = null;
-    private objSettingInfo: SettingInfo = null;
-    private listPrivileges: IPrivilege[] = null;
-    private listRoles: IRole[] = null;
-    private listUsers: IUserMinimal[] = null;
-    private listCountry: ICountry[] = null;
+    private lookup: ILookup[]|null = null;
+    private objSettingInfo: SettingInfo|null  = null;
+    private listPrivileges: IPrivilege[]|null = null;
+    private listRoles: IRole[]|null  = null;
+    private listUsers: IUserMinimal[]|null  = null;
+    private listCountry: ICountry[]|null  = null;
 
     //Default Constructor
     constructor(
@@ -219,7 +219,11 @@ export class Globals {
     public setLanguage(_langCode: string, _boolShowNotify: boolean=false): void {
         this._translateService.use(_langCode).subscribe(() => {
             //Set lang params
-            let appParams: ApplicationParams = this.getAppParams();
+            let appParams: ApplicationParams|null = this.getAppParams();
+            if (appParams == null) {
+                console.log('Application params not found');
+                return null;
+            } //End if
             appParams.lang = _langCode;
 
             //Save lang params
@@ -244,7 +248,7 @@ export class Globals {
     /**
      * Getter and Setters for Authentication Claim Token
      */
-    public getClaim(): IResponseUserLogin {
+    public getClaim(): IResponseUserLogin|null {
         if(this.claimUser == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
             this.claimUser = strJsonData;
@@ -260,7 +264,7 @@ export class Globals {
     /**
      * Getter and Setters for Application Params
      */
-    public getAppParams(): ApplicationParams {
+    public getAppParams(): ApplicationParams|null {
         if(this.params == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_APP_PARAMS_KEY);
             this.params = (strJsonData)?strJsonData:(new ApplicationParams());
@@ -276,7 +280,7 @@ export class Globals {
     /**
      * Getter and Setters for Store Layout
      */
-    public getStoreData(): IResponseUserLogin {
+    public getStoreData(): IResponseUserLogin|null {
         if(this.claimUser == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._STORAGE_AUTH_CLAIM_KEY);
             this.claimUser = strJsonData;
@@ -311,25 +315,33 @@ export class Globals {
     /**
      * Getter and Setters for LookUp
      */
-    public getLookup(): ILookup[] {
+    public getLookup(): ILookup[]|null {
         if (this.lookup == null) {
             var strJsonData = this._localStorageService.getItem(Globals._STORAGE_LOOKUP_KEY);
             this.lookup = strJsonData;
         } //End if
         return this.lookup;
     } //Function ends
-    public getLookupByKey(_key: string): ILookup {
+    public getLookupByKey(_key: string): ILookup|null|undefined {
         if (this.lookup == null) {
             this.getLookup();
         } //End if
 
-        return this.lookup.find((x: ILookup) => { return x.key == _key; });
+        return this.lookup?.find((x: ILookup) => { return x.key == _key; });
     } //Function ends
     public getLookupByKeyValue(_key: string, _valueKey: string): number {
         let lookup = this.getLookupByKey(_key);
-        let lookupValue = (lookup.values).find((x: ILookupValue) => { return x.key == _valueKey; });
 
-        return lookupValue.id;
+        //validate for the null and undefined values
+        if (lookup != null && lookup !== undefined && lookup.values != null && lookup.values !== undefined) {
+            let lookupValue = (lookup.values).find((x: ILookupValue) => { return x.key == _valueKey; });
+            if (lookupValue != null && lookupValue !== undefined) {
+                return lookupValue.id;
+            } else {
+                return 0;
+            } //End if
+        } //End if
+        return 0;
     } //Function ends
     public setLookUp(_lookup: ILookup[]) {
         this.lookup = _lookup;
@@ -339,7 +351,7 @@ export class Globals {
     /**
      * Getter and Setters for User Status
      */
-    public getUserStatus(_boolIsForcedUpdate: boolean=false): IUserStatusResponse {
+    public getUserStatus(_boolIsForcedUpdate: boolean=false): IUserStatusResponse|null {
         if (this.objUserStatus==null || _boolIsForcedUpdate) {
             this._userStatusService.get()
                 .subscribe((response: IUserStatusResponse) => {
@@ -368,7 +380,7 @@ export class Globals {
     /**
      * Getter and Setters for Setting Information
      */
-    public getSettingInfo(): SettingInfo {
+    public getSettingInfo(): SettingInfo|null {
         if(this.objSettingInfo == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_SETTING_INFO_KEY);
             this.objSettingInfo = (strJsonData)?strJsonData:(new SettingInfo());
@@ -381,15 +393,18 @@ export class Globals {
     } //Function ends
     public updateSettingInfo(_settingKey: string, _settingValue: any): void {
         let objSettingInfo = this.getSettingInfo();
-        objSettingInfo[_settingKey] = _settingValue;
-        this.setSettingInfo(objSettingInfo);
+        //check if the key exists
+        if (objSettingInfo !=null && objSettingInfo.hasOwnProperty(_settingKey)) {
+            //objSettingInfo[_settingKey] = _settingValue;
+            this.setSettingInfo(objSettingInfo);            
+        } //End if
     } //Function ends
 
 
     /**
      * Getter and Setters for Meta Data - Country List
      */
-    public getCountries(): ICountry[] {
+    public getCountries(): ICountry[]|null {
         if(this.listCountry == null) {
             let strJsonData = this._localStorageService.getItem(Globals._STORAGE_COUNTRIES);
             this.listCountry = strJsonData;
@@ -405,7 +420,7 @@ export class Globals {
     /**
      * Getter and Setters for Organization Roles
      */
-    public getOrgRoles(): IRole[] {
+    public getOrgRoles(): IRole[]|null {
         if(this.listRoles == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_ORG_ROLES);
             this.listRoles = strJsonData;
@@ -421,14 +436,14 @@ export class Globals {
     /**
      * Getter and Setters for Organization Users
      */
-    public getOrgUsers(activeOnly: boolean=false): IUserMinimal[] {
+    public getOrgUsers(activeOnly: boolean=false): IUserMinimal[]|null|undefined {
         if(this.listUsers == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_ORG_USERS);
             this.listUsers = strJsonData;
         } //End if
 
         if (activeOnly) {
-            return this.listUsers.filter((x) => { return x.is_active == true; });
+            return this.listUsers?.filter((x) => { return x.is_active == true; });
         } else {
             return this.listUsers;
         } //End if 
@@ -442,7 +457,7 @@ export class Globals {
     /**
      * Getter and Setters for Application Privileges
      */
-    public getOrgPrivileges(): IPrivilege[] {
+    public getOrgPrivileges(): IPrivilege[]|null {
         if(this.listPrivileges == null) {
             let strJsonData = this._sessionStorageService.getItem(Globals._SESSION_ORG_PRIVILEGES);
             this.listPrivileges = strJsonData;
@@ -459,17 +474,17 @@ export class Globals {
         let objReturnValue: boolean = false;
         try {
             let boolSuccessCheck: boolean = true;
-            let claim: IResponseUserLogin = this.getClaim();
-            let privilegeList: IPrivilege[] = claim.privileges;
+            let claim: IResponseUserLogin|null = this.getClaim();
+            let privilegeList: IPrivilege[]|undefined = claim?.privileges;
 
             //Check for the 'not' OR '!' sign
             let signIndex: number = privilegeKey.search('!');
             if (signIndex==0) {
                 boolSuccessCheck = false;
-                privilegeKey = privilegeKey.substr(1, privilegeKey.length);
+                privilegeKey = privilegeKey.substring(1, privilegeKey.length);
             } //End if
 
-            let objPrivilege: IPrivilege = privilegeList.find((x) => {return (x.key == privilegeKey)?x:null;})
+            let objPrivilege: IPrivilege|undefined = privilegeList?.find((x) => {return (x.key == privilegeKey)?x:null;})
             
             objReturnValue = (objPrivilege && (objPrivilege !== undefined) && boolSuccessCheck)?true:false;
         } catch(error) {
@@ -487,11 +502,13 @@ export class Globals {
         if (!this.boolDataLoaded) {
 
             //Create Setting Model
-            let objSettingInfo: SettingInfo = this.getSettingInfo();
-            objSettingInfo['oHash'] = this.getClaim()?.organization?.hash;
-            objSettingInfo['uHash'] = this.getClaim().hash;
-            objSettingInfo['selected_oHash'] = objSettingInfo['oHash'];
-            this.setSettingInfo(objSettingInfo);
+            let objSettingInfo: SettingInfo|null = this.getSettingInfo();
+            if (objSettingInfo != null) {
+                objSettingInfo.oHash = this.getClaim()?.organization?.hash;
+                objSettingInfo.uHash = this.getClaim()?.hash;
+                objSettingInfo.selected_oHash = objSettingInfo.oHash;
+                this.setSettingInfo(objSettingInfo);
+            } //End if
 
             //Load lookup data
             this.fnLoadLookupnData();
@@ -522,11 +539,13 @@ export class Globals {
      */
     private fnLoadLookupnData(): void {
         try {
-            this._lookupService.getAll()
-                .subscribe((data: ILookup[]) => {
+            this._lookupService.getAll().subscribe({ 
+                next: (data: ILookup[]) => {
                     this.setLookUp(data);
-                },
-                (error) => { console.log(error); });
+                }, 
+                error: (error) => { console.log(error); }, 
+                complete: () => {} 
+            });
         } catch(error) {
             console.log(error);
         } //Try-catch ends
@@ -538,11 +557,13 @@ export class Globals {
      */
     private fnLoadOrgUsers(): void {
         try {
-            this._userService.getAll()
-                .subscribe((data: IUserMinimal[]) => {
+            this._userService.getAll().subscribe({ 
+                next: (data: IUserMinimal[]) => {
                     this.setOrgUsers(data);
-                },
-                (error) => { console.log(error); });
+                }, 
+                error: (error) => { console.log(error); }, 
+                complete: () => {} 
+            });
         } catch(error) {
             console.log(error);
         } //Try-catch ends
