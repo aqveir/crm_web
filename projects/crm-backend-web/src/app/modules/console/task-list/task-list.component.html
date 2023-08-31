@@ -1,14 +1,14 @@
 <div class="d-block full-content-page-height">
-    <crmo-backend-widget-subheader 
+    <crm-backend-widget-subheader 
         [title]="'PAGE.TASK_LIST.TITLE'" [filter]="true"
-        ></crmo-backend-widget-subheader>
+        ></crm-backend-widget-subheader>
 
     <app-layout-spinner [ngClass]="{'d-none': (!isLoading)}"></app-layout-spinner>
 
     <!--begin::Card-->
     <div class="card card-custom gutter-b card-screen-height">
         <div class="card-body">
-            <div class="table-responsive" *ngIf="listTask?.length>0">
+            <div class="table-responsive" *ngIf="listTask && listTask.length>0">
                 <table class="table table-hover table-head-custom table-vertical-center" id="kt_advance_table_widget_2">
                     <thead class="thead-dark">
                         <tr class="text-uppercase">

@@ -43,7 +43,7 @@
                     {{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.FINE_TEXT' | translate }}
                 </span>
 
-                <span class="form-text text-danger" *ngIf="userProfileForm.controls.first_name.dirty && userProfileForm.controls.first_name.invalid">
+                <span class="form-text text-danger" *ngIf="userProfileForm.controls && (userProfileForm.controls['first_name'].dirty && userProfileForm.controls['first_name'].invalid)">
                     {{ 'PAGE.USER.DETAIL.TAB_PROFILE.FIRST_NAME.VALIDATION_ERROR' | translate }}
                 </span>
             </div>
@@ -77,7 +77,7 @@
                     [phoneValidation]="true" [selectedCountryISO]="(objUser?.country)?(objUser?.country?.alpha2_code):'in'"></intl-tel-input>
                 <span class="form-text text-muted">{{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.FINE_TEXT' | translate }}</span>
 
-                <span class="form-text text-danger" *ngIf="userProfileForm.controls.phone_form_control.dirty && userProfileForm.controls.phone_form_control.invalid">
+                <span class="form-text text-danger" *ngIf="userProfileForm?.controls?.['phone_form_control']?.dirty && userProfileForm?.controls?.phone_form_control?.invalid">
                     {{ 'PAGE.USER.DETAIL.TAB_PROFILE.PHONE.VALIDATION_ERROR' | translate }}
                 </span>
             </div>
@@ -106,7 +106,7 @@
                     {{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.FINE_TEXT' | translate }}
                 </span>
 
-                <span class="form-text text-danger" *ngIf="userProfileForm.controls.email.dirty && userProfileForm.controls.email.invalid">
+                <span class="form-text text-danger" *ngIf="userProfileForm?.controls?.email?.dirty && userProfileForm?.controls?.email?.invalid">
                     {{ 'PAGE.USER.DETAIL.TAB_PROFILE.EMAIL.VALIDATION_ERROR' | translate }}
                 </span>
             </div>

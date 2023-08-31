@@ -3,15 +3,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { ContactService, IContact, ILookup, ILookupValue } from 'crmo-lib';
+import { ContactService, IContact, ILookup, ILookupValue } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-contact-detail',
+  selector: 'crm-backend-contact-detail',
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.scss']
 })

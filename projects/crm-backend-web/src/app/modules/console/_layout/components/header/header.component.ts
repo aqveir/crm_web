@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   headerMenuHTMLAttributes: any = {};
   routerLoaderTimout: any;
 
-  @ViewChild('ktHeaderMenu', { static: true }) ktHeaderMenu: ElementRef;
+  @ViewChild('ktHeaderMenu', { static: true }) ktHeaderMenu: ElementRef|undefined;
   loader$: Observable<number>;
 
   private loaderSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);

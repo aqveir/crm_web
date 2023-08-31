@@ -1,21 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
 import { EventBrokerService } from 'common-lib';
 
 @Component({
-  selector: 'crmo-backend-widget-subheader',
+  selector: 'crm-backend-widget-subheader',
   templateUrl: './widget-subheader.component.html',
   styleUrls: ['./widget-subheader.component.scss']
 })
 export class WidgetSubheaderComponent extends BaseComponent implements OnInit {
-  @Input('title') strTitle: string=null;
-  @Input('page-info') strPageInformation: string=null;
-  @Input('routerLinkAdd') strRouterLinkAddBtn: string|any[]=null;
+  @Input('title') strTitle: string='';
+  @Input('page-info') strPageInformation: string|null=null;
+  @Input('routerLinkAdd') strRouterLinkAddBtn: string|null|any[]=null;
   @Input('search') boolShowSearchControl: boolean=false;
   @Input('searchFull') boolShowFullSearchControl: boolean=false;
   @Input('filter') boolShowFilterButton: boolean=false;
@@ -54,7 +54,7 @@ export class WidgetSubheaderComponent extends BaseComponent implements OnInit {
   } //Function ends
 
 
-  public fnSearch(event): void {
+  public fnSearch(event: any): void {
     try {
       if (event && event.target) {
         let strSearch: string =  event.target?.value;
@@ -80,7 +80,7 @@ export class WidgetSubheaderComponent extends BaseComponent implements OnInit {
   /**
    * Filter Button Emitter
    */
-  public fnFilterClick(event): void {
+  public fnFilterClick(event: any): void {
     this._broker.emit<any>('show_page_filter', event);
   } //Function ends
 

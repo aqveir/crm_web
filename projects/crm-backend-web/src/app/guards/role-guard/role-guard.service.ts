@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } fro
 import { Observable } from 'rxjs';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 @Injectable({
   providedIn: 'root'

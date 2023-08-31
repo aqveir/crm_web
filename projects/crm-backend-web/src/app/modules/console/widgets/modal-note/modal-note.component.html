@@ -18,7 +18,7 @@
                         placeholder="{{ 'WIDGET.MODAL.NOTE.FORM.TEXT.PLACEHOLDER' | translate }}"
                         autocomplete="off" tabindex="1" autofocus></textarea>
 
-                    <span class="form-text text-danger" *ngIf="noteForm.controls.note.dirty && noteForm.controls.note.invalid">
+                    <span class="form-text text-danger" *ngIf="noteForm.controls['note'].dirty && noteForm.controls['note'].invalid">
                         {{ 'WIDGET.MODAL.NOTE.FORM.TEXT.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>                     

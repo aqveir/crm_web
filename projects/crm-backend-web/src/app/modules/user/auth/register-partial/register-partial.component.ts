@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'crmo-backend-register-partial',
+  selector: 'crm-backend-register-partial',
   templateUrl: './register-partial.component.html',
   styleUrls: ['./register-partial.component.scss']
 })

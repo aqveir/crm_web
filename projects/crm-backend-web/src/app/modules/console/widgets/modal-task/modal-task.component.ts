@@ -6,15 +6,15 @@ import moment from 'moment';
 import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { ILookup, ILookupValue, ITaskMinimal, ITaskRequest, IUserMinimal, TaskService } from 'crmo-lib';
+import { ILookup, ILookupValue, ITaskMinimal, ITaskRequest, IUserMinimal, TaskService } from 'crm-lib';
 
 
 @Component({
-  selector: 'crmo-backend-modal-task',
+  selector: 'crm-backend-modal-task',
   templateUrl: './modal-task.component.html',
   styleUrls: ['./modal-task.component.scss']
 })
@@ -23,19 +23,19 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public strEntityType: string = null;
+  public strEntityType: string|null = null;
   public intReferenceId: number = 0;
-  public srHash: string = null;
-  public objTask: ITaskMinimal = null;
+  public srHash: string|null = null;
+  public objTask: ITaskMinimal|null = null;
   public taskForm!: FormGroup;
   public startAtForm!: FormGroup;
   public endAtForm!: FormGroup;
   public boolIsNew: boolean = false;
 
-  public listActiveUsers: IUserMinimal[] = null;
-  public listLookUpTaskSubtypeValues: ILookupValue[] = null;
-  public listLookUpPriorityValues: ILookupValue[] = null;
-  public listLookUpStatusValues: ILookupValue[] = null;
+  public listActiveUsers: IUserMinimal[] = [];
+  public listLookUpTaskSubtypeValues: ILookupValue[] = [];
+  public listLookUpPriorityValues: ILookupValue[] = [];
+  public listLookUpStatusValues: ILookupValue[] = [];
 
   public ngbDatepickerConfig: any = {};
 
@@ -69,25 +69,25 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
    */
   private fnInitialize(): void {
     //Load lookup values (Task SubType)
-    let listLookUpTaskSubtype: ILookup = this._globals.getLookupByKey('service_request_comm_type');
-    if (listLookUpTaskSubtype) {
+    let listLookUpTaskSubtype: ILookup = this._globals.getLookupByKey('service_request_comm_type') as ILookup;
+    if (listLookUpTaskSubtype && (listLookUpTaskSubtype.values)) {
       this.listLookUpTaskSubtypeValues = (listLookUpTaskSubtype?.values).filter((x: ILookupValue) => {return ((x?.is_active)?(x.is_active==true):true) });
     } //End if
 
     //Load lookup values (Priority)
-    let listLookUpPriority: ILookup = this._globals.getLookupByKey('service_request_activity_type_task_priority');
-    if (listLookUpPriority) {
+    let listLookUpPriority: ILookup = this._globals.getLookupByKey('service_request_activity_type_task_priority') as ILookup;
+    if (listLookUpPriority && (listLookUpPriority.values)) {
       this.listLookUpPriorityValues = (listLookUpPriority?.values).filter((x: ILookupValue) => {return ((x?.is_active)?(x.is_active==true):true) });
     } //End if
 
     //Load lookup values (Status)
-    let listLookUpStatus: ILookup = this._globals.getLookupByKey('service_request_activity_type_task_status');
-    if (listLookUpStatus) {
+    let listLookUpStatus: ILookup = this._globals.getLookupByKey('service_request_activity_type_task_status') as ILookup;
+    if (listLookUpStatus  && (listLookUpStatus.values)) {
       this.listLookUpStatusValues = (listLookUpStatus?.values).filter((x: ILookupValue) => {return ((x?.is_active)?(x.is_active==true):true) });
     } //End if
 
     //Load OrganizationUsers (Assignee)
-    this.listActiveUsers = this._globals.getOrgUsers(true);
+    this.listActiveUsers = this._globals.getOrgUsers(true) as IUserMinimal[];
 
     this.fnInitializeForm();
 
@@ -228,7 +228,7 @@ export class ModalTaskComponent extends BaseComponent implements OnInit {
             throw error;
           });
       } else {
-        this._taskService.update(this.objTask?.id, objFormData)
+        this._taskService.update(this.objTask?.id.toString() as string, objFormData)
           .subscribe((response: ITaskMinimal) => {
             //Stop loader
             this.boolLoading = false;

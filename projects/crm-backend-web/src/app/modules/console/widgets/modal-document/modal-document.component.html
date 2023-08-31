@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-lg m-0" role="document">
     <div class="modal-content">
         <form class="form" id="kt_form_document" novalidate="novalidate"
-            [formGroup]="documentForm" (ngSubmit)="fnSaveAction($event, uppyCtrlDocument)" autocomplete="off">
+            [formGroup]="documentForm" (ngSubmit)="fnSaveAction($event, {})" autocomplete="off">
 
             <div class="modal-header border-0">
                 <h5 class="modal-title" id="exampleModalLabel">{{ 'WIDGET.MODAL.DOCUMENT.TITLE.ADD' | translate }}</h5>
@@ -18,12 +18,12 @@
                         placeholder="{{ 'WIDGET.MODAL.DOCUMENT.FORM.TITLE.PLACEHOLDER' | translate }}"
                         autocomplete="off" tabindex="1" autofocus />
 
-                    <span class="form-text text-danger" *ngIf="documentForm.controls.title.dirty && documentForm.controls.title.invalid">
+                    <span class="form-text text-danger" *ngIf="documentForm.controls['title'].dirty && documentForm.controls['title'].invalid">
                         {{ 'WIDGET.MODAL.DOCUMENT.FORM.TITLE.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>  
 
-                <ng-uppy #uppyCtrlDocument [config]="uppySettings"></ng-uppy>
+                <!-- <ng-uppy #uppyCtrlDocument [config]="uppySettings"></ng-uppy> -->
             </div>
     
             <div class="modal-footer border-0 pt-0">

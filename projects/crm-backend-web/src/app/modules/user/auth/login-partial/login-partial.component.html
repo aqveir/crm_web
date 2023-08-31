@@ -1,7 +1,7 @@
 <!--begin::Signin-->
 <div class="login-form login-signin">
     <!--begin::Form-->
-    <form class="form" novalidate="novalidate" id="kt_login_signin_form" 
+    <form class="form" id="kt_login_signin_form" novalidate="novalidate"
         [formGroup]="loginForm" (ngSubmit)="fnAuthenticateUserAction()" autocomplete="off">
         
         <!--begin::Title-->
@@ -11,7 +11,7 @@
             </h3>
             <span class="text-muted font-weight-bold font-size-h4">
                 {{ 'PAGE.AUTH.SIGNIN.SUB_TITLE' | translate }}
-                <a [routerLink]="['/user/registration']" id="kt_login_SIGNIN"
+                <a [routerLink]="['/user/register']" id="kt_login_SIGNIN"
                     class="text-primary font-weight-bolder">
                     {{ 'PAGE.AUTH.SIGNIN.GENERAL_BUTTON_LABEL' | translate }}
                 </a>
@@ -86,8 +86,7 @@
 </div>
 <!--end::Signin-->
 
-
-<!--start::NG Template for Error Msgs -->
+<!-- start::NG Template for Error Msgs -->
 <ng-template #formError let-control="control" let-message="message" let-validation="validation">
     <div *ngIf="(control.invalid && control.dirty)">
         <div class="fv-plugins-message-container text-danger">
@@ -95,5 +94,4 @@
         </div>
     </div>
 </ng-template>
-<!--end::NG Template for Error Msgs -->
-  
+<!-- end::NG Template for Error Msgs -->

@@ -1,7 +1,7 @@
 <div class="d-block full-content-page-height">
-    <crmo-backend-widget-subheader 
+    <crm-backend-widget-subheader 
         [title]="'PAGE.ROLE.LIST.TITLE'" [search]="objRawData?.length>0" (search)="fnFilterRecords($event)"
-        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'role', 'new']"></crmo-backend-widget-subheader>
+        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'role', 'new']"></crm-backend-widget-subheader>
 
     <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
 

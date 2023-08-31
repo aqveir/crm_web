@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 //Metronic Core
 import { FirstLetterPipe } from './pipes/first-letter.pipe';
@@ -7,7 +6,7 @@ import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [FirstLetterPipe, SafePipe],
-  imports: [CommonModule],
+  imports: [],
   exports: [FirstLetterPipe, SafePipe],
 })
 export class CoreModule {}

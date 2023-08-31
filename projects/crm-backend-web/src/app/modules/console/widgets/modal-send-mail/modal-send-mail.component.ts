@@ -3,18 +3,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Third Party components and libraries
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { ISendMailRequest, IServiceRequest, CommunicationService } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { ISendMailRequest, IServiceRequest, CommunicationService } from 'crm-lib';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
 import { TranslateService } from 'common-lib';
 
 @Component({
-  selector: 'crmo-backend-modal-send-mail',
+  selector: 'crm-backend-modal-send-mail',
   templateUrl: './modal-send-mail.component.html',
   styleUrls: ['./modal-send-mail.component.scss']
 })
@@ -23,9 +23,9 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
   
-  public objServiceRequest: IServiceRequest;
+  public objServiceRequest: IServiceRequest|null = null;
   public mailForm!: FormGroup;
-  public mailEditor = ClassicEditor;
+  //public mailEditor = ClassicEditor;
   public mailEditorConfig: any = { 
     toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
     //placeholder: this._translateService.getTranslation('WIDGET.MODAL.MAIL_SEND.FORM.MESSAGE.PLACEHOLDER')
@@ -79,7 +79,7 @@ export class ModalSendMailComponent extends BaseComponent implements OnInit {
       let objFormData: ISendMailRequest = this.mailForm.value;
       this.boolLoading = true;
 
-      this._commService.sendMail(this.objServiceRequest.hash, objFormData)
+      this._commService.sendMail(this.objServiceRequest?.hash as string, objFormData)
         .subscribe((response: any) => {
           //Stop loader
           this.boolLoading = false;

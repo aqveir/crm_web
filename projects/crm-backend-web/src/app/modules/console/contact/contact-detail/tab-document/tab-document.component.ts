@@ -5,15 +5,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application libraries
 import { EventBrokerService } from 'common-lib';
-import { DocumentService, IContact, IDocument} from 'crmo-lib';
+import { DocumentService, IContact, IDocument} from 'crm-lib';
 
 //Application Files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 
 @Component({
-  selector: 'crmo-backend-tab-document',
+  selector: 'crm-backend-tab-document',
   templateUrl: './tab-document.component.html',
   styleUrls: ['./tab-document.component.scss']
 })

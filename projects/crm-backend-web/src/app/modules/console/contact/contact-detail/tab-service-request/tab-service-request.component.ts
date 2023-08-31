@@ -2,15 +2,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 //Application libraries
 import { EventBrokerService } from 'common-lib';
-import { IContact, INote, IServiceRequestMinimal, NoteService} from 'crmo-lib';
+import { IContact, INote, IServiceRequestMinimal, NoteService} from 'crm-lib';
 
 //Application Files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'crmo-backend-tab-service-request',
+  selector: 'crm-backend-tab-service-request',
   templateUrl: './tab-service-request.component.html',
   styleUrls: ['./tab-service-request.component.scss']
 })

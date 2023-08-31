@@ -24,7 +24,7 @@
                 {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS1.FINE_TEXT' | translate }}
             </span>
 
-            <span class="form-text text-danger" *ngIf="addressForm.controls.address1.dirty && addressForm.controls.address1.invalid">
+            <span class="form-text text-danger" *ngIf="addressForm.controls['address1'].dirty && addressForm.controls['address1'].invalid">
                 {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS1.VALIDATION_ERROR' | translate }}
             </span>
         </div>
@@ -41,7 +41,7 @@
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS2.FINE_TEXT' | translate }}
                     </span>
 
-                    <span class="form-text text-danger" *ngIf="addressForm.controls.address2.dirty && addressForm.controls.address2.invalid">
+                    <span class="form-text text-danger" *ngIf="addressForm.controls['address2'].dirty && addressForm.controls['address2'].invalid">
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ADDRESS2.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>        
@@ -58,7 +58,7 @@
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.LOCALITY.FINE_TEXT' | translate }}
                     </span>
 
-                    <span class="form-text text-danger" *ngIf="addressForm.controls.locality.dirty && addressForm.controls.locality.invalid">
+                    <span class="form-text text-danger" *ngIf="addressForm.controls['locality'].dirty && addressForm.controls['locality'].invalid">
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.LOCALITY.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>
@@ -77,7 +77,7 @@
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.CITY.FINE_TEXT' | translate }}
                     </span>
 
-                    <span class="form-text text-danger" *ngIf="addressForm.controls.city.dirty && addressForm.controls.city.invalid">
+                    <span class="form-text text-danger" *ngIf="addressForm.controls['city'].dirty && addressForm.controls['city'].invalid">
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.CITY.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>
@@ -94,7 +94,7 @@
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ZIPCODE.FINE_TEXT' | translate }}
                     </span>
 
-                    <span class="form-text text-danger" *ngIf="addressForm.controls.zipcode.dirty && addressForm.controls.zipcode.invalid">
+                    <span class="form-text text-danger" *ngIf="addressForm.controls['zipcode'].dirty && addressForm.controls['zipcode'].invalid">
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.ZIPCODE.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>
@@ -129,7 +129,7 @@
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.COUNTRY.FINE_TEXT' | translate }}
                     </span>
 
-                    <span class="form-text text-danger" *ngIf="addressForm.controls.country_code.dirty && addressForm.controls.country_code.invalid">
+                    <span class="form-text text-danger" *ngIf="addressForm.controls['country_code'].dirty && addressForm.controls['country_code'].invalid">
                         {{ 'PAGE.CONTACT.CONTACT_DETAIL.TAB_ADDRESS.COUNTRY.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'crmo-backend-lead-detail',
+  selector: 'crm-backend-lead-detail',
   templateUrl: './lead-detail.component.html',
   styleUrls: ['./lead-detail.component.scss']
 })

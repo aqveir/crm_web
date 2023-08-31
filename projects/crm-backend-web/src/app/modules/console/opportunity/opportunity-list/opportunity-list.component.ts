@@ -4,14 +4,14 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { IServiceRequestMinimal, OpportunityService } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { IServiceRequestMinimal, OpportunityService } from 'crm-lib';
 import { BaseComponent } from '../../../base.component';
 import { EventBrokerService } from 'common-lib';
 
 
 @Component({
-  selector: 'crmo-backend-opportunity-list',
+  selector: 'crm-backend-opportunity-list',
   templateUrl: './opportunity-list.component.html',
   styleUrls: ['./opportunity-list.component.scss']
 })

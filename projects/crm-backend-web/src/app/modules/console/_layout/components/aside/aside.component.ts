@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, OnDestroy, Renderer2 } from '@ang
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 // Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 // Application Services
 import { LayoutService, DynamicAsideMenuService } from '../../../../../_metronic/core';
@@ -22,14 +22,14 @@ export class AsideComponent implements OnInit, OnDestroy {
 
   public currentPage: string = '';
 
-  activeTabId;
-  disableAsideSelfDisplay: boolean;
+  activeTabId: any;
+  disableAsideSelfDisplay: boolean=false;
   
-  ulCSSClasses: string;
+  ulCSSClasses: string='menu-nav';
   asideMenuHTMLAttributes: any = {};
-  asideMenuCSSClasses: string;
-  asideMenuDropdown;
-  brandClasses: string;
+  asideMenuCSSClasses: string='';
+  asideMenuDropdown: any;
+  brandClasses: string='';
   asideMenuScroll = 1;
   boolAsideSelfMinimizeToggle = false;
 

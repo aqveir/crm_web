@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { IResponseUserLogin } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { IResponseUserLogin } from 'crm-lib';
 
 @Injectable({
   providedIn: 'root'

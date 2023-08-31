@@ -27,7 +27,7 @@
                         tabindex="1" autofocus autocomplete="off" />
                 </div>
 
-                <span class="form-text text-danger" *ngIf="delConfirmForm.controls.delete_confirmation.dirty && delConfirmForm.controls.delete_confirmation.invalid">
+                <span class="form-text text-danger" *ngIf="delConfirmForm.controls['delete_confirmation'].dirty && delConfirmForm.controls['delete_confirmation'].invalid">
                     {{ 'WIDGET.MODAL.CONFIRM_DELETE.FORM.MESSAGE.VALIDATION_ERROR' | translate }}
                 </span>
             </div>

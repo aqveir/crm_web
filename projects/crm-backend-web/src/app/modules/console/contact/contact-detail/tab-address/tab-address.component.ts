@@ -6,15 +6,15 @@ import moment from 'moment';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { BaseComponent } from 'projects/crm-backend/src/app/modules/base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { ILookup, ILookupValue, IContact, ICountry, IContactAddress } from 'crmo-lib';
+import { ILookup, ILookupValue, IContact, ICountry, IContactAddress } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-tab-address',
+  selector: 'crm-backend-tab-address',
   templateUrl: './tab-address.component.html',
   styleUrls: ['./tab-address.component.scss'],
   providers: [ NgbActiveModal ]

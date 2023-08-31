@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { OrganizationService, IOrganizationMinimal } from 'crmo-lib';
+import { OrganizationService, IOrganizationMinimal } from 'crm-lib';
 
 
 @Component({
-  selector: 'crmo-backend-organization-list',
+  selector: 'crm-backend-organization-list',
   templateUrl: './organization-list.component.html',
   styleUrls: ['./organization-list.component.scss']
 })

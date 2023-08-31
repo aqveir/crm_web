@@ -2,8 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../../../../../../_metronic/core';
 
-import { KTUtil } from '@asset-backend/js/components/util';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+//import { KTUtil } from '@asset-backend/js/components/util';
+//import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-aside-static',
@@ -19,16 +19,16 @@ export class AsideStaticComponent implements OnInit {
     'kt_aside_tab_4',
     'kt_aside_tab_5',
     'kt_aside_tab_6'];
-  activeTabId;
+  activeTabId: any;
   disableAsideSelfDisplay: boolean=false;
   disableAsideSecondaryDisplay: boolean=false;
-  brandSkin: string;
-  ulCSSClasses: string;
-  location: Location;
+  brandSkin: string='light';
+  ulCSSClasses: string='menu-nav';
+  location: Location|null = null;
   asideMenuHTMLAttributes: any = {};
-  asideMenuCSSClasses: string;
-  asideMenuDropdown;
-  brandClasses: string;
+  asideMenuCSSClasses: string = '';
+  asideMenuDropdown: any;
+  brandClasses: string = '';
   asideMenuScroll = 1;
   boolAsideSelfMinimizeToggle = false;
 

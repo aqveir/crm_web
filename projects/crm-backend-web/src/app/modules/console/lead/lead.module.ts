@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Plugin Modules
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { InlineSVGModule } from 'ng-inline-svg';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 //Application Libraries
 import { IntlTelInputModule, LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'common-lib';
@@ -25,8 +25,6 @@ import { LeadDetailComponent } from './lead-detail/lead-detail.component';
     LeadDetailComponent
   ],
   imports: [
-    CommonModule,
-    FormsModule, 
     ReactiveFormsModule,
 
     //Imported Modules
@@ -34,7 +32,7 @@ import { LeadDetailComponent } from './lead-detail/lead-detail.component';
     NgbTooltipModule,
     InlineSVGModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,

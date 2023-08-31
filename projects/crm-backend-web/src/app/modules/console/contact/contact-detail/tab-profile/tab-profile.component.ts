@@ -6,15 +6,15 @@ import moment from 'moment';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { BaseComponent } from 'projects/crm-backend/src/app/modules/base.component';
 
 //Application Libraries
 import { NotificationService } from 'common-lib';
-import { ILookup, ILookupValue, IContact, IContactDetail } from 'crmo-lib';
+import { ILookup, ILookupValue, IContact, IContactDetail } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-tab-profile',
+  selector: 'crm-backend-tab-profile',
   templateUrl: './tab-profile.component.html',
   styleUrls: ['./tab-profile.component.scss']
 })

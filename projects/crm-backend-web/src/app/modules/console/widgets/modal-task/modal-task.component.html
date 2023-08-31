@@ -20,7 +20,7 @@
                             placeholder="{{ 'WIDGET.MODAL.TASK.FORM.SUBJECT.PLACEHOLDER' | translate }}"
                             autocomplete="off" tabindex="1" autofocus />
 
-                        <span class="form-text text-danger" *ngIf="taskForm.controls.subject.dirty && taskForm.controls.subject.invalid">
+                        <span class="form-text text-danger" *ngIf="taskForm.controls['subject'].dirty && taskForm.controls['subject'].invalid">
                             {{ 'WIDGET.MODAL.TASK.FORM.SUBJECT.VALIDATION_ERROR' | translate }}
                         </span>
                     </div>
@@ -35,7 +35,7 @@
                             [searchable]="true" autocomplete="off" tabindex="3">
                         </ng-select>
 
-                        <span class="form-text text-danger" *ngIf="taskForm.controls.assignee_hash.dirty && taskForm.controls.assignee_hash.invalid">
+                        <span class="form-text text-danger" *ngIf="taskForm.controls['assignee_hash'].dirty && taskForm.controls'[assignee_hash]'.invalid">
                             {{ 'WIDGET.MODAL.TASK.FORM.ASSIGNEE.VALIDATION_ERROR' | translate }}
                         </span>
                     </div>
@@ -51,7 +51,7 @@
                             placeholder="{{ 'WIDGET.MODAL.TASK.FORM.DESCRIPTION.PLACEHOLDER' | translate }}"
                             autocomplete="off" tabindex="2"></textarea>
 
-                        <span class="form-text text-danger" *ngIf="taskForm.controls.description.dirty && taskForm.controls.description.invalid">
+                        <span class="form-text text-danger" *ngIf="taskForm.controls['description'].dirty && taskForm.controls['description'].invalid">
                             {{ 'WIDGET.MODAL.TASK.FORM.DESCRIPTION.VALIDATION_ERROR' | translate }}
                         </span>
                     </div>
@@ -65,7 +65,7 @@
                                 <div class="input-group date">
                                     <input type="text" class="form-control" ngbDatepicker #endAt="ngbDatepicker"
                                         formControlName="date_picker" (dateSelect)="fnDateTimeControlUpdated($event)" 
-                                        [minDate]="startAtForm.controls.date_picker.value" 
+                                        [minDate]="startAtForm.controls['date_picker'].value" 
                                         placeholder="Select date" readonly />
                                     <div class="input-group-append" (click)="endAt.toggle()">
                                         <span class="input-group-text"><i class="flaticon-event-calendar-symbol"></i>
@@ -116,10 +116,12 @@
                                 <label>{{ 'WIDGET.MODAL.TASK.FORM.PRIORITY.LABEL' | translate }}</label>
                                 <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup name="radioPriority" formControlName="priority_key">
                                     <label ngbButtonLabel class="text-uppercase flex-even" 
-                                        [ngClass]="{'first': first, 'last': last, 
-                                            'btn-primary font-weight-bold': taskForm.controls.priority_key.value==priority?.key,
-                                            'btn-secondary': taskForm.controls.priority_key.value!=priority?.key}"
+                                        
                                         *ngFor="let priority of listLookUpPriorityValues;let first = first;let last = last;">
+
+                                        <!-- [ngClass]="{'first': first, 'last': last, 
+                                            'btn-primary font-weight-bold': taskForm.controls['priority_key'].value==priority?.key,
+                                            'btn-secondary': taskForm.controls['priority_key'].value!=priority?.key}" -->
                                         <input ngbButton type="radio" [value]="priority?.key"> {{ priority?.display_value }}
                                     </label>
                                 </div>

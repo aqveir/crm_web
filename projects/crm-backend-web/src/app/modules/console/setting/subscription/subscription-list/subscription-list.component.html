@@ -1,7 +1,7 @@
 <div class="d-block full-content-page-height">
-    <crmo-backend-widget-subheader 
+    <crm-backend-widget-subheader 
         [title]="'PAGE.SUBSCRIPTION.LIST.TITLE'" [search]="objRawData?.length>0" (search)="fnFilterRecords($event)"
-        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'subscription', 'new']"></crmo-backend-widget-subheader>
+        [routerLinkAdd]="['/secure/setting/organization/', oHash, 'subscription', 'new']"></crm-backend-widget-subheader>
 
     <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
     

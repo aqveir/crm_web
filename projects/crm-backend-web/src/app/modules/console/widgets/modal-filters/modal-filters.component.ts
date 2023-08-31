@@ -5,14 +5,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { INote, NoteService } from 'crmo-lib';
+import { INote, NoteService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-modal-filters',
+  selector: 'crm-backend-modal-filters',
   templateUrl: './modal-filters.component.html',
   styleUrls: ['./modal-filters.component.scss']
 })
@@ -21,9 +21,9 @@ export class ModalFiltersComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public strEntityType: string = null;
+  public strEntityType: string = '';
   public intReferenceId: number = 0;
-  public objNote: INote = null;
+  public objNote: INote|null = null;
   public noteForm!: FormGroup;
 
 

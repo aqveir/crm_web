@@ -6,7 +6,7 @@ import moment from 'moment';
 
 export abstract class BaseComponent {
 
-  private errors: ValidationErrors[];
+  private errors: ValidationErrors[]=[];
 
   //Default Constructor
   constructor(
@@ -165,8 +165,8 @@ export abstract class BaseComponent {
         return;
       } //End if
 
-      if(control.invalid) {
-        let controlErrors: ValidationErrors = control.errors;
+      if(control?.invalid) {
+        let controlErrors: ValidationErrors|null = control.errors;
         if (controlErrors !== null) {
           if(this.errors == null) { this.errors = []; }
 
@@ -174,20 +174,20 @@ export abstract class BaseComponent {
             this.errors.push({
               controlName: field,
               errorName: keyError,
-              errorValue: controlErrors[keyError]
+              errorValue: controlErrors?controlErrors[keyError]:null
             });
           });
         } //End if
       } //End if
     });
 
-    if(_formGroup.errors) {
+    if(_formGroup.errors != null) {
       if(this.errors == null) { this.errors = []; }
       Object.keys(_formGroup.errors).forEach(error_key => {
         this.errors.push({
           controlName: error_key,
           errorName: error_key,
-          errorValue: _formGroup.errors[error_key]
+          errorValue: _formGroup.errors?_formGroup.errors[error_key]:null
         });
       });
     } //End if
@@ -195,13 +195,13 @@ export abstract class BaseComponent {
 
     // This removes duplicates
     this.errors = this.errors.filter((error, index, self) => self.findIndex(t => {
-      return t.controlName === error.controlName;
+      return t['controlName'] === error['controlName'];
     }) === index);
 
     return this.errors;
   } //Function ends
   public fnResetFormValidationErrors(): void {
-    this.errors=null;
+    this.errors=[];
   } //Function ends
 
 } //Class ends

@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 //Application Modules
-import { IResponseUserLogin, UserAuthService, IUserStatusResponse } from 'crmo-lib';
+import { IResponseUserLogin, UserAuthService, IUserStatusResponse } from 'crm-lib';
 
 //Application Services
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { LayoutService } from '../../../../../core';
 
 
@@ -20,7 +20,7 @@ export class UserOffcanvasComponent implements OnInit {
   @Output('close') boolClose: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public extrasUserOffcanvasDirection: string = 'offcanvas-right';
-  public objUser: IResponseUserLogin;
+  public objUser: IResponseUserLogin|null = null;
 
   public keyUserStatus: string = 'user_status_offline';
   public langKeyUserStatus: string = 'MENU.AUTH_USER.USER_STATUS.USER_STATUS_OFFLINE';
@@ -114,7 +114,7 @@ export class UserOffcanvasComponent implements OnInit {
    */
   private fnGetUpdatedHeaderData(): void {
     //Get the updated user status
-    let userStatus: IUserStatusResponse = this._globals.getUserStatus();
+    let userStatus: IUserStatusResponse = this._globals.getUserStatus() as IUserStatusResponse;
     if (userStatus && userStatus.status) {
       this.keyUserStatus = userStatus.status.key;
     } //End if

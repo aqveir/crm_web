@@ -6,34 +6,34 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StripeCardElementOptions, StripeElementsOptions, SetupIntent, Stripe, loadStripe, SetupIntentResult, StripeElements, StripeCardElement } from '@stripe/stripe-js';
 
 //Application Libraries
-import { PaymentMethodService } from 'crmo-lib';
+import { PaymentMethodService } from 'crm-lib';
 import { environment } from '@env-backend/environment';
 
 //Application Files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
 
 @Component({
-  selector: 'crmo-backend-modal-add-paymentmethod',
+  selector: 'crm-backend-modal-add-paymentmethod',
   templateUrl: './modal-add-paymentmethod.component.html',
   styleUrls: ['./modal-add-paymentmethod.component.scss']
 })
 export class ModalAddPaymentmethodComponent extends BaseComponent implements OnInit {
-  @ViewChild('cardElement') cardElementRef: ElementRef;
+  @ViewChild('cardElement') cardElementRef: ElementRef|null = null;
   
   //Common attributes
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public oHash: string = null;
+  public oHash: string|null = null;
   public cardForm!: FormGroup;
-  public cardElements: StripeElements;
-  public cardElement: StripeCardElement;
+  public cardElements: StripeElements|undefined;
+  public cardElement: StripeCardElement|null = null;
   public cardErrors: any = null;
   public isCardVerified: boolean = false;
   
-  private stripeSetupIntent: SetupIntent = null;
-  private stripe: Stripe = null;
+  private stripeSetupIntent: SetupIntent|null = null;
+  private stripe: Stripe|null = null;
 
   public cardOptions: StripeCardElementOptions = {
     style: {
@@ -84,14 +84,14 @@ export class ModalAddPaymentmethodComponent extends BaseComponent implements OnI
   private fnInitialize(): void {
     //Get Stripe Instance
     loadStripe(environment.stripe.publishable_key)
-      .then((response: Stripe) => { 
+      .then((response: Stripe|null) => { 
         this.stripe = response;
-        this.cardElements = this.stripe.elements(this.elementsOptions);
-        this.cardElement = this.cardElements.create('card', this.cardOptions);
-        this.cardElement.mount(this.cardElementRef.nativeElement);
-        this.cardElement.on('change', ({ error }) => {
-          this.cardErrors = error && error.message;
-        });
+        // this.cardElements = this.stripe?.elements(this.elementsOptions);
+        // this.cardElement = this.cardElements.create('card', this.cardOptions);
+        // this.cardElement.mount(this.cardElementRef.nativeElement);
+        // this.cardElement.on('change', ({ error }) => {
+        //   this.cardErrors = error && error.message;
+        // });
       })
       .catch((error: any) => { throw error; });
 
@@ -146,18 +146,18 @@ export class ModalAddPaymentmethodComponent extends BaseComponent implements OnI
 
       //Validate the card with stripe
       this.boolLoading = true;
-      this.stripe.confirmCardSetup(this.stripeSetupIntent.client_secret, {
-          payment_method: {
-            card: this.cardElement,
-            billing_details: { name: objFormData.card_owner }
-          }
+      this.stripe?.confirmCardSetup(this.stripeSetupIntent?.client_secret as string, {
+          // payment_method: {
+          //   // card: this.cardElement,
+          //   // billing_details: { name: objFormData.card_owner }
+          // }
       })
       .then((response: SetupIntentResult) => {
         this.boolLoading = false;
 
         //Show error
         if (response.error) {
-          this._globals.showError(response.error?.message, false);
+          this._globals.showError(response.error?.message as string, false);
           this.isCardVerified = true;
         } else {
           this.isCardVerified = true;

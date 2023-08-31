@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { AccountService, IAccount, IAccountMinimal } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { AccountService, IAccount, IAccountMinimal } from 'crm-lib';
 import { BaseComponent } from '../../../../base.component';
 
 @Component({
-  selector: 'crmo-backend-account-list',
+  selector: 'crm-backend-account-list',
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.scss']
 })

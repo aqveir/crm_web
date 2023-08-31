@@ -16,19 +16,19 @@
                         placeholder="{{ 'WIDGET.MODAL.MAIL_SEND.FORM.SUBJECT.PLACEHOLDER' | translate }}"
                         autofocus autocomplete="off" tabindex="1" />
 
-                    <span class="form-text text-danger" *ngIf="mailForm.controls.email_subject.dirty && mailForm.controls.email_subject.invalid">
+                    <span class="form-text text-danger" *ngIf="mailForm.controls['email_subject'].dirty && mailForm.controls['email_subject'].invalid">
                         {{ 'WIDGET.MODAL.MAIL_SEND.FORM.SUBJECT.VALIDATION_ERROR' | translate }}
                     </span>    
                 </div>
 
 
                 <div class="form-group">
-                    <ckeditor [editor]="mailEditor" tagName="textarea" formControlName="email_body" 
-                        tabindex="2"></ckeditor>
+                    <!-- <ckeditor [editor]="mailEditor" tagName="textarea" formControlName="email_body" 
+                        tabindex="2"></ckeditor> -->
                         <!-- [config]="mailEditorConfig" placeholder="efgh" -->
                 </div>
 
-                <span class="form-text text-danger" *ngIf="mailForm.controls.email_body.dirty && mailForm.controls.email_body.invalid">
+                <span class="form-text text-danger" *ngIf="mailForm.controls['email_body'].dirty && mailForm.controls['email_body'].invalid">
                     {{ 'WIDGET.MODAL.MAIL_SEND.FORM.MESSAGE.VALIDATION_ERROR' | translate }}
                 </span>
             </div>

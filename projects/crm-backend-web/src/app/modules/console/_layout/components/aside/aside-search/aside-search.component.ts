@@ -8,14 +8,14 @@ import { LayoutService } from '../../../../../../_metronic/core';
   styleUrls: ['./aside-search.component.scss'],
 })
 export class AsideSearchComponent implements OnInit {
-  disableAsideSelfDisplay: boolean;
-  brandSkin: string;
-  ulCSSClasses: string;
-  location: Location;
+  disableAsideSelfDisplay: boolean = false;
+  brandSkin: string = '';
+  ulCSSClasses: string = '';
+  location: Location|null = null;
   asideMenuHTMLAttributes: any = {};
-  asideMenuCSSClasses: string;
-  asideMenuDropdown;
-  brandClasses: string;
+  asideMenuCSSClasses: string = '';
+  asideMenuDropdown: any;
+  brandClasses: string = '';
   asideMenuScroll = 1;
   boolAsideSelfMinimizeToggle = false;
 

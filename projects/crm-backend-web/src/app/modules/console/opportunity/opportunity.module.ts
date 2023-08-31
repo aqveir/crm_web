@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Plugin Modules
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { InlineSVGModule } from 'ng-inline-svg';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 //Application Libraries
 import { IntlTelInputModule, LoggerModule, NotificationModule, PipeModule, TranslateModule, ValidatorModule } from 'common-lib';
@@ -26,8 +26,6 @@ import { OpportunityDetailComponent } from './opportunity-detail/opportunity-det
     OpportunityDetailComponent
   ],
   imports: [
-    CommonModule,
-    FormsModule, 
     ReactiveFormsModule,
 
     //Imported Modules
@@ -35,7 +33,7 @@ import { OpportunityDetailComponent } from './opportunity-detail/opportunity-det
     NgbTooltipModule,
     InlineSVGModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,

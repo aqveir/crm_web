@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 // Application files
-import { Globals, SettingInfo } from 'projects/crmo-backend/src/app/app.global';
+import { Globals, SettingInfo } from 'projects/crm-backend-web/src/app/app.global';
 
 // Application Services
 import { LayoutService, DynamicAsideMenuService } from '../../../../../../_metronic/core';

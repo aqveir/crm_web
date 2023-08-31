@@ -4,14 +4,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { IServiceRequest, CommunicationService } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { IServiceRequest, CommunicationService } from 'crm-lib';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
 
 @Component({
-  selector: 'crmo-backend-modal-confirm-call',
+  selector: 'crm-backend-modal-confirm-call',
   templateUrl: './modal-confirm-call.component.html',
   styleUrls: ['./modal-confirm-call.component.scss']
 })
@@ -20,7 +20,7 @@ export class ModalConfirmCallComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public objServiceRequest: IServiceRequest;
+  public objServiceRequest: IServiceRequest|null = null;
 
 
   /**
@@ -59,22 +59,22 @@ export class ModalConfirmCallComponent extends BaseComponent implements OnInit {
     try {
       this.boolLoading = true;
 
-      this._commService.sendMail(this.objServiceRequest.hash)
-        .subscribe((response: any) => {
-          //Stop loader
-          this.boolLoading = false;
+      // this._commService.sendMail(this.objServiceRequest.hash)
+      //   .subscribe((response: any) => {
+      //     //Stop loader
+      //     this.boolLoading = false;
 
-          //Close the modal window
-          this._modalActive.close({confirm: true});
-        },(error) => {
-          //Stop loader
-          this.boolLoading = false;
+      //     //Close the modal window
+      //     this._modalActive.close({confirm: true});
+      //   },(error) => {
+      //     //Stop loader
+      //     this.boolLoading = false;
 
-          //Show Error
-          this.hasError = true;
+      //     //Show Error
+      //     this.hasError = true;
 
-          throw error;
-        });
+      //     throw error;
+      //   });
 
         return true;
     } catch (error) {

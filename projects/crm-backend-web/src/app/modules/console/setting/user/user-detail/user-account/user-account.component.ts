@@ -3,16 +3,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../../base.component';
 
 //Application Libraries
 import { NotificationService } from 'common-lib';
-import { IUser, UserService } from 'crmo-lib';
+import { IUser, UserService } from 'crm-lib';
 import { interval } from 'rxjs';
 
 @Component({
-  selector: 'crmo-backend-user-account',
+  selector: 'crm-backend-user-account',
   templateUrl: './user-account.component.html',
   styleUrls: ['./user-account.component.scss']
 })

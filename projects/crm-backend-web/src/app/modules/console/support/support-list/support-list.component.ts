@@ -4,14 +4,14 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { IServiceRequestMinimal, SupportService } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { IServiceRequestMinimal, SupportService } from 'crm-lib';
 import { BaseComponent } from '../../../base.component';
 import { EventBrokerService } from 'common-lib';
 
 
 @Component({
-  selector: 'crmo-backend-support-list',
+  selector: 'crm-backend-support-list',
   templateUrl: './support-list.component.html',
   styleUrls: ['./support-list.component.scss']
 })
@@ -19,7 +19,7 @@ export class SupportListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public isLoading: boolean = false;
 
-  public listSupport: IServiceRequestMinimal[] = null;
+  public listSupport: IServiceRequestMinimal[] = [];
   public pageRecordsLoaded: number = 0;
   public pageTotalSize: number = 100;  
 
@@ -29,7 +29,7 @@ export class SupportListComponent extends BaseComponent implements OnInit {
   private pageSize: number = Globals._LIST_PAGE_DEFAULT_RECORDS_DISPLAYED;
   private isScrollLoading: boolean = false;
   private elemPage: any;
-  private scrollId: string = 'abcd';
+  private scrollId: string|null = 'abcd';
   private payload: any = null;
   
 
@@ -127,7 +127,7 @@ export class SupportListComponent extends BaseComponent implements OnInit {
    * @param key 
    * @param servicerequest 
    */
-  public fnOpenModal(event, key: string, servicerequest: IServiceRequestMinimal): void {
+  public fnOpenModal(event: any, key: string, servicerequest: IServiceRequestMinimal): void {
     this._broker.emit(key, servicerequest);
     event.stopPropagation();
   } //Function ends

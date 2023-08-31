@@ -217,27 +217,29 @@ export class Globals {
         return objLanguages.filter((language: any) => (language.is_active==true)).sort((a: any, b: any) => { return a.order-b.order });
     } //Function ends
     public setLanguage(_langCode: string, _boolShowNotify: boolean=false): void {
-        this._translateService.use(_langCode).subscribe(() => {
-            //Set lang params
-            let appParams: ApplicationParams|null = this.getAppParams();
-            if (appParams == null) {
-                console.log('Application params not found');
-                return null;
-            } //End if
-            appParams.lang = _langCode;
+        // this._translateService.use(_langCode).subscribe({
+        //     next: () => {
+        //         //Set lang params
+        //         let appParams: ApplicationParams|null = this.getAppParams();
+        //         if (appParams == null) {
+        //             console.log('Application params not found');
+        //             return null;
+        //         } //End if
+        //         appParams.lang = _langCode;
 
-            //Save lang params
-            this.setAppParams(appParams);
+        //         //Save lang params
+        //         this.setAppParams(appParams);
 
-            //Show Notification
-            if (_boolShowNotify) {
-                this._notificationService.success(
-                    this._translateService.instant('NOTIFICATION_COMMON_SUCCESS_TITLE'), 
-                    'Language changed', 
-                    Globals.NotificationDefaultOptions
-                );
-            } //End if
-        });
+        //         //Show Notification
+        //         if (_boolShowNotify) {
+        //             this._notificationService.success(
+        //                 this._translateService.instant('NOTIFICATION_COMMON_SUCCESS_TITLE'), 
+        //                 'Language changed', 
+        //                 Globals.NotificationDefaultOptions
+        //             );
+        //         } //End if
+        //     } //Next
+        // });
     } //Function ends
     public validateLanguage(_langCode: string): boolean {
         let objLanguages: [] = Globals.APPLICATION_CONSTANT.LANGUAGES;
@@ -255,7 +257,7 @@ export class Globals {
         } //End if
         return this.claimUser;
     } //Function ends
-    public setClaim(_claim: IResponseUserLogin): void {
+    public setClaim(_claim: IResponseUserLogin|null): void {
         this._sessionStorageService.setItem(Globals._STORAGE_AUTH_CLAIM_KEY, _claim);
         this.claimUser = _claim;
     } //Function ends

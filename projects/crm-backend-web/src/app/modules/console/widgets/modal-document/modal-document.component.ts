@@ -3,18 +3,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Third Party components and libraries
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UppyAngularComponent, UppyConfig } from 'uppy-angular';
+import { Uppy } from '@uppy/core';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { environment } from '@env-backend/environment';
 import { BaseComponent } from '../../../base.component';
-import { IDocument, INote, NoteService } from 'crmo-lib';
+import { IDocument, INote, NoteService } from 'crm-lib';
 import { NotificationService, TranslateService } from 'common-lib';
 
 
 @Component({
-  selector: 'crmo-backend-modal-document',
+  selector: 'crm-backend-modal-document',
   templateUrl: './modal-document.component.html',
   styleUrls: ['./modal-document.component.scss']
 })
@@ -23,14 +23,14 @@ export class ModalDocumentComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public strEntityType: string = null;
+  public strEntityType: string|null = null;
   public intReferenceId: number = 0;
   public documentForm!: FormGroup;
-  public uppySettings: UppyConfig = {
+  public uppySettings: any = {
     uploadAPI: {
       endpoint: environment.uppy_configuration.document_upload.xhr_endpoint,
       headers: {
-        Authorization: 'bearer ' + this._globals.getClaim()['token']
+        Authorization: 'bearer ' //+ (this._globals.getClaim()?this._globals.getClaim()['token']:'')
       }
     },
     plugins: {
@@ -100,7 +100,7 @@ export class ModalDocumentComponent extends BaseComponent implements OnInit {
   /**
    * Save Data
    */
-  public fnSaveAction(event: any, _uppy: UppyAngularComponent): boolean {
+  public fnSaveAction(event: any, _uppy: any): boolean {
     try {
       //Check form validity
       this.documentForm.updateValueAndValidity();
@@ -113,31 +113,31 @@ export class ModalDocumentComponent extends BaseComponent implements OnInit {
       let objFormData: any = this.documentForm.value;
       this.boolLoading = true;
 
-      _uppy.uppyInstance.setMeta(objFormData);
-      _uppy.uppyInstance.upload()
-      .then((result: any) => {
-        let isRefresh: boolean = false;
-        let errorMsgs: string[] = null;
+      // _uppy.uppyInstance.setMeta(objFormData);
+      // _uppy.uppyInstance.upload()
+      // .then((result: any) => {
+      //   let isRefresh: boolean = false;
+      //   let errorMsgs: string[] = null;
 
-        //Stop loader
-        this.boolLoading = false;
+      //   //Stop loader
+      //   this.boolLoading = false;
 
-        //Check for upload status (success/failure)
-        if (result.failed?.length > 0) {
-          errorMsgs = [];
-          result.failed.forEach((file: any) => {
-            errorMsgs.push(file.error);
-          });
-        } else {
-          isRefresh=true;
-        } //End if
+      //   //Check for upload status (success/failure)
+      //   if (result.failed?.length > 0) {
+      //     errorMsgs = [];
+      //     result.failed.forEach((file: any) => {
+      //       errorMsgs.push(file.error);
+      //     });
+      //   } else {
+      //     isRefresh=true;
+      //   } //End if
 
-        //Uppy reset and close
-        _uppy.uppyInstance.reset();
-        _uppy.uppyInstance.close();
+      //   //Uppy reset and close
+      //   _uppy.uppyInstance.reset();
+      //   _uppy.uppyInstance.close();
 
-        this.fnCloseModal(false, isRefresh, errorMsgs);
-      });
+      //   this.fnCloseModal(false, isRefresh, errorMsgs);
+      // });
 
       return true;
     } catch (error) {

@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { IRole, IResponse, RoleService } from 'crmo-lib';
+import { IRole, IResponse, RoleService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-role-list',
+  selector: 'crm-backend-role-list',
   templateUrl: './role-list.component.html',
   styleUrls: ['./role-list.component.scss']
 })

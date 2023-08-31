@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { LayoutService } from '../../../../../../_metronic/core';
 
-function getCurrentURL(location) {
+function getCurrentURL(location: any) {
   return location.split(/[?#]/)[0];
 }
 

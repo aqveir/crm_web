@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 
 //Application Libraries
-import { IOrganization, IConfiguration } from 'crmo-lib';
+import { IOrganization, IConfiguration } from 'crm-lib';
 import { EventBrokerService } from 'common-lib';
-import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
+import { BaseComponent } from 'projects/crm-backend/src/app/modules/base.component';
 
 
 @Component({
-  selector: 'crmo-backend-organization-configuration-list',
+  selector: 'crm-backend-organization-configuration-list',
   templateUrl: './organization-configuration-list.component.html',
   styleUrls: ['./organization-configuration-list.component.scss']
 })

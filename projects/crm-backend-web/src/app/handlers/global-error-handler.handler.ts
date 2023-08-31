@@ -10,19 +10,19 @@ import { Globals } from '../app.global';
 import { environment } from '@env-backend/environment';
 
 export class ErrorModel {
-    code : string;
-    name : string;
-    message : string;
+    code : string = '';
+    name : string = '';
+    message : string = '';
     error : any;
     toLogin : boolean=false;
-    action: string=null;
+    action: string|null=null;
 }
 
 @Injectable({
     providedIn: 'root',
 })
 export class GlobalErrorHandler implements ErrorHandler {
-    private objError : ErrorModel|null;
+    private objError : ErrorModel|null = null;
 
 
     /**
@@ -134,7 +134,7 @@ export class GlobalErrorHandler implements ErrorHandler {
                     //Route in case of action
                     if (this._router) {
                         if ((!this.objError.toLogin) && (this.objError.action!=null)) {
-                            this._zone.run(() => this._router.navigate(['/error', this.objError.action]));
+                            this._zone.run(() => this._router.navigate(['/error', this.objError?.action]));
                         } else if (this.objError.toLogin) {
                             this._zone.run(() => this._router.navigate(['/']));
                         } else {

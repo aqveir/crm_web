@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'crmo-backend-tab-setting',
+  selector: 'crm-backend-tab-setting',
   templateUrl: './tab-setting.component.html',
   styleUrls: ['./tab-setting.component.scss']
 })

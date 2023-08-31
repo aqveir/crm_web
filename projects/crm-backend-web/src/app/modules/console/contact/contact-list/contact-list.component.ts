@@ -7,15 +7,15 @@ import { UppyAngularComponent, UppyConfig } from 'uppy-angular';
 //Project References
 import { environment } from '@env-backend/environment';
 import { NotificationService, TranslateService } from 'common-lib';
-import { ContactService, IContact } from 'crmo-lib';
+import { ContactService, IContact } from 'crm-lib';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
 
 
 @Component({
-  selector: 'crmo-backend-contact-list',
+  selector: 'crm-backend-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })

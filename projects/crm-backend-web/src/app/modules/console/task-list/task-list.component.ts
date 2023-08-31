@@ -1,14 +1,14 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { TaskService, ITaskMinimal } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { TaskService, ITaskMinimal } from 'crm-lib';
 import { BaseComponent } from '../../base.component';
 import { EventBrokerService } from 'common-lib';
 
 
 @Component({
-  selector: 'crmo-backend-task-list',
+  selector: 'crm-backend-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
@@ -16,7 +16,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public isLoading: boolean = false;
 
-  public listTask: ITaskMinimal[] = null;
+  public listTask: ITaskMinimal[]|null = null;
   public pageRecordsLoaded: number = 0;
   public pageTotalSize: number = 100;  
 
@@ -26,7 +26,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   private pageSize: number = Globals._LIST_PAGE_DEFAULT_RECORDS_DISPLAYED;
   private isScrollLoading: boolean = false;
   private elemPage: any;
-  private scrollId: string = 'abcd';
+  private scrollId: string|null = 'abcd';
   private payload: any = null;
   
 
@@ -93,7 +93,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
 
           //Fill list array
           dataArray.forEach((data: ITaskMinimal) => {
-            this.listTask.push(data);
+            this.listTask?.push(data);
           });
 
           //Set records loaded size
@@ -124,7 +124,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
    * @param key 
    * @param task 
    */
-  public fnOpenModal(event, key: string, task: ITaskMinimal): void {
+  public fnOpenModal(event: any, key: string, task: ITaskMinimal): void {
     this._broker.emit(key, task?.servicerequest);
     event.stopPropagation();
   } //Function ends
@@ -199,7 +199,7 @@ export class TaskListComponent extends BaseComponent implements OnInit {
   } //Function ends
 
   //TODO: Delete/Replan
-  public fnShowTaskModal(event, task: ITaskMinimal): void {
+  public fnShowTaskModal(event: any, task: ITaskMinimal): void {
     this._broker.emit('show_task_modal', [task?.servicerequest, task, (()=>{
       
     })]);

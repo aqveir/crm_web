@@ -2,11 +2,11 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 //Application Libraries
-import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
-import { IConfiguration } from 'crmo-lib';
+import { BaseComponent } from 'projects/crm-backend/src/app/modules/base.component';
+import { IConfiguration } from 'crm-lib';
 
 
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 //Language Interface
 class JsonData {
@@ -16,7 +16,7 @@ class JsonData {
 } //Interface ends
 
 @Component({
-  selector: 'crmo-backend-organization-configuration-data',
+  selector: 'crm-backend-organization-configuration-data',
   templateUrl: './organization-configuration-data.component.html',
   styleUrls: ['./organization-configuration-data.component.scss']
 })

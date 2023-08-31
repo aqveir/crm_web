@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { ISendSmsRequest, IServiceRequest, CommunicationService } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { ISendSmsRequest, IServiceRequest, CommunicationService } from 'crm-lib';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'crmo-backend-modal-send-sms',
+  selector: 'crm-backend-modal-send-sms',
   templateUrl: './modal-send-sms.component.html',
   styleUrls: ['./modal-send-sms.component.scss']
 })
@@ -19,7 +19,7 @@ export class ModalSendSmsComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
   
-  public objServiceRequest: IServiceRequest;
+  public objServiceRequest: IServiceRequest|null = null;
   public smsForm!: FormGroup;
 
   /**
@@ -68,6 +68,10 @@ export class ModalSendSmsComponent extends BaseComponent implements OnInit {
 
       let objFormData: ISendSmsRequest = this.smsForm.value;
       this.boolLoading = true;
+
+      if (!this.objServiceRequest) {
+        return false;
+      } //End if
 
       this._commService.sendSMS(this.objServiceRequest.hash, objFormData)
         .subscribe((response: any) => {

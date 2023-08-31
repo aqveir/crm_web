@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Application Modules
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -68,14 +68,13 @@ import { SubscriptionAddComponent } from './subscription/subscription-add/subscr
   ],
   imports: [
     CommonModule,
-    FormsModule, 
     ReactiveFormsModule,
 
     //Imported Modules
     NgbModule,
     NgSelectModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,

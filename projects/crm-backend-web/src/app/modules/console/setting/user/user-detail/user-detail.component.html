@@ -1,11 +1,11 @@
 <form class="form" id="kt_user_profile_form" novalidate="novalidate"
 	[formGroup]="userForm" (ngSubmit)="fnSaveAction($event)" autocomplete="off">
 
-	<crmo-backend-widget-subheader 
+	<crm-backend-widget-subheader 
 		[title]="boolIsNew?'PAGE.USER.DETAIL.TITLE.ADD':'PAGE.USER.DETAIL.TITLE.EDIT'"
 		[page-info]="userForm.controls['first_name'].value + ' ' + userForm.controls['last_name'].value"
 		[save-group]="true" [back]="true" [loading]="boolLoading"
-		(back)="fnResetForm(true)"></crmo-backend-widget-subheader>
+		(back)="fnResetForm(true)"></crm-backend-widget-subheader>
 
 	<!--begin::Card-->
 	<div class="card card-custom mb-5">
@@ -112,28 +112,28 @@
 			<div class="tab-content">
 				<!--begin::Tab-->
 				<div class="tab-pane show active px-7" id="kt_tab_user_profile" role="tabpanel">
-					<crmo-backend-user-profile [form]="userForm" [user]="objUser"
-						[refresh]="boolRefresh" [new]="boolIsNew"></crmo-backend-user-profile>
+					<crm-backend-user-profile [form]="userForm" [user]="objUser"
+						[refresh]="boolRefresh" [new]="boolIsNew"></crm-backend-user-profile>
 				</div>
 				<!--end::Tab-->
 
 				<!--begin::Tab-->
 				<div class="tab-pane px-7" id="kt_tab_user_account" role="tabpanel">
-					<crmo-backend-user-account [form]="userForm" [user]="objUser"
-						[refresh]="boolRefresh" [new]="boolIsNew"></crmo-backend-user-account>
+					<crm-backend-user-account [form]="userForm" [user]="objUser"
+						[refresh]="boolRefresh" [new]="boolIsNew"></crm-backend-user-account>
 				</div>
 				<!--end::Tab-->
 
 				<!--begin::Tab-->
 				<div class="tab-pane px-7" id="kt_tab_user_changepassword" role="tabpanel">
-					<crmo-backend-user-changepassword></crmo-backend-user-changepassword>
+					<crm-backend-user-changepassword></crm-backend-user-changepassword>
 				</div>
 				<!--end::Tab-->
 				
 				<!--begin::Tab-->
 				<div class="tab-pane px-7" id="kt_tab_user_setting" role="tabpanel">
-					<crmo-backend-user-setting [(user)]="objUser"
-						></crmo-backend-user-setting>
+					<crm-backend-user-setting [(user)]="objUser"
+						></crm-backend-user-setting>
 				</div>
 				<!--end::Tab-->
 			</div>

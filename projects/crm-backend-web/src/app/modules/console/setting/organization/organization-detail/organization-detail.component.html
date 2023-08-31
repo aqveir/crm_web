@@ -2,11 +2,11 @@
     [formGroup]="organizationForm" (ngSubmit)="fnSaveAction($event)" autocomplete="off">
     
     <div class="d-block full-content-page-height">
-        <crmo-backend-widget-subheader 
+        <crm-backend-widget-subheader 
             [title]="(boolIsNew)?'PAGE.ORGANIZATION.DETAIL.TITLE.ADD':'PAGE.ORGANIZATION.DETAIL.TITLE.EDIT'" 
             [page-info]="organizationForm.controls['name'].value"
             [save-group]="true" [back]="true" [loading]="boolSaving"
-            (back)="fnResetForm(true)"></crmo-backend-widget-subheader>
+            (back)="fnResetForm(true)"></crm-backend-widget-subheader>
 
         <!--begin::Card-->
         <div class="card card-custom mb-5" id="kt_page_sticky_card">
@@ -45,16 +45,16 @@
             <div class="card-body tab-contents mt-5" id="tabOrganization">
                 <!-- Organization Data -->
                 <div class="tab-pane fade show active" id="kt_tab_organization_detail" role="tabpanel" aria-labelledby="kt_tab_organization_detail">
-                    <crmo-backend-organization-data [form]="organizationForm" [organization]="objOrganization" 
-                        [refresh]="boolRefresh" [new]="boolIsNew"></crmo-backend-organization-data>              
+                    <crm-backend-organization-data [form]="organizationForm" [organization]="objOrganization" 
+                        [refresh]="boolRefresh" [new]="boolIsNew"></crm-backend-organization-data>              
                 </div>
 
                 <!-- Organization Configuration List -->
                 <div class="tab-pane fade" id="kt_tab_organization_configuration" role="tabpanel" aria-labelledby="kt_tab_organization_configuration">
-                    <crmo-backend-organization-configuration-list
+                    <crm-backend-organization-configuration-list
                         [organization]="objOrganization"
                         [configurations]="objOrganization?.configurations"
-                        (refresh)="fnRefreshOrganizationData(objOrganization.hash)"></crmo-backend-organization-configuration-list>
+                        (refresh)="fnRefreshOrganizationData(objOrganization.hash)"></crm-backend-organization-configuration-list>
                 </div>
 
                 <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>

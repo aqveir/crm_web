@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../base.component';
 
 @Component({
-  selector: 'crmo-backend-http-error',
+  selector: 'crm-backend-http-error',
   templateUrl: './http-error.component.html',
   styleUrls: ['./http-error.component.scss']
 })
@@ -15,7 +15,7 @@ export class HttpErrorComponent extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public code: string;
+  public code: string = '';
 
   /**
    * Default constructor
@@ -42,8 +42,8 @@ export class HttpErrorComponent extends BaseComponent implements OnInit {
    * Initialize
    */
    private fnInitialize(): void {
-    let code: string = this._route.snapshot.paramMap.get('code');
-    this.code = code;
+    let code: string|null = this._route.snapshot.paramMap.get('code');
+    this.code = code?code:'';
 
   } //Function ends
 

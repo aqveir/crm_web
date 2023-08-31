@@ -2,14 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 //Application libraries
 import { EventBrokerService } from 'common-lib';
-import { IContact, INote, NoteService} from 'crmo-lib';
+import { IContact, INote, NoteService} from 'crm-lib';
 
 //Application Files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 @Component({
-  selector: 'crmo-backend-tab-note',
+  selector: 'crm-backend-tab-note',
   templateUrl: './tab-note.component.html',
   styleUrls: ['./tab-note.component.scss']
 })

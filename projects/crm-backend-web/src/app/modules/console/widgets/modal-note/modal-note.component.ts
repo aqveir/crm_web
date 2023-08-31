@@ -5,14 +5,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { INote, NoteService } from 'crmo-lib';
+import { INote, NoteService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-modal-note',
+  selector: 'crm-backend-modal-note',
   templateUrl: './modal-note.component.html',
   styleUrls: ['./modal-note.component.scss']
 })
@@ -22,9 +22,9 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
   public hasError: boolean = false;
   public boolIsNew: boolean = false;
 
-  public strEntityType: string = null;
+  public strEntityType: string = '';
   public intReferenceId: number = 0;
-  public objNote: INote = null;
+  public objNote: INote|null = null;
   public noteForm!: FormGroup;
 
 
@@ -82,7 +82,7 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
       if (this.boolIsNew) {
         this.fnCreateNote(objFormData);
       } else {
-        let noteId: number = this.objNote?.id;
+        let noteId: number = this.objNote?.id as number;
         this.fnEditNote(noteId, objFormData);
       } //End if
 
@@ -132,7 +132,7 @@ export class ModalNoteComponent extends BaseComponent implements OnInit {
     //Show loading state
     this.boolLoading = true;
 
-    this._noteService.update(id, data)
+    this._noteService.update(id.toString(), data)
     .subscribe((response: any) => {
       //Stop loader
       this.boolLoading = false;

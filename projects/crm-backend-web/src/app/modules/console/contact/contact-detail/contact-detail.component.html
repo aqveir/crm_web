@@ -3,11 +3,11 @@
 
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid py-0 full-content-page-height">
-        <crmo-backend-widget-subheader
+        <crm-backend-widget-subheader
             [title]="'PAGE.CONTACT.CONTACT_DETAIL.TITLE.EDIT'" 
             [page-info]="contactForm.controls['first_name'].value"
             [save-group]="true" [back]="true" [loading]="boolSaving"
-            (back)="fnResetForm(true)"></crmo-backend-widget-subheader>
+            (back)="fnResetForm(true)"></crm-backend-widget-subheader>
 
         <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
@@ -392,36 +392,36 @@
                                 <div class="tab-content" style="min-height: 622px;">
                                     <!--begin::Tab Content (Profile)-->
                                     <div class="tab-pane active" id="kt_apps_contacts_view_tab_profile" role="tabpanel">
-                                        <crmo-backend-tab-profile
-                                            [form]="contactForm" [contact]="objContact"></crmo-backend-tab-profile>
+                                        <crm-backend-tab-profile
+                                            [form]="contactForm" [contact]="objContact"></crm-backend-tab-profile>
                                     </div>
                                     <!--end::Tab Content-->
 
                                     <!--begin::Tab Content (Addresses)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_addresses" role="tabpanel">
-                                        <crmo-backend-tab-address 
-                                            [form]="contactForm" [contact]="objContact"></crmo-backend-tab-address>
+                                        <crm-backend-tab-address 
+                                            [form]="contactForm" [contact]="objContact"></crm-backend-tab-address>
                                     </div>
                                     <!--end::Tab Content-->
 
                                     <!--begin::Tab Content (Documents)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_documents" role="tabpanel">
-                                        <crmo-backend-tab-document
-                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crmo-backend-tab-document>
+                                        <crm-backend-tab-document
+                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crm-backend-tab-document>
                                     </div>
                                     <!--end::Tab Content-->
 
                                     <!--begin::Tab Content (Notes)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_notes" role="tabpanel">
-                                        <crmo-backend-tab-note 
-                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crmo-backend-tab-note>
+                                        <crm-backend-tab-note 
+                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crm-backend-tab-note>
                                     </div>
                                     <!--end::Tab Content-->                                
 
                                     <!--begin::Tab Content (Service Request)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_service_requests" role="tabpanel">
-                                        <crmo-backend-tab-service-request
-                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crmo-backend-tab-service-request>
+                                        <crm-backend-tab-service-request
+                                            [contact]="objContact" (refresh)="fnReloadData($event);"></crm-backend-tab-service-request>
                                     </div>
                                     <!--end::Tab Content-->
 
@@ -739,7 +739,7 @@
 
                                     <!--begin::Tab Content (Settings)-->
                                     <div class="tab-pane" id="kt_apps_contacts_view_tab_settings" role="tabpanel">
-                                        <crmo-backend-tab-setting></crmo-backend-tab-setting>
+                                        <crm-backend-tab-setting></crm-backend-tab-setting>
                                     </div>
                                     <!--end::Tab Content-->
                                 </div>

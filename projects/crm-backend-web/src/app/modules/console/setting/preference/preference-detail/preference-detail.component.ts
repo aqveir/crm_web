@@ -3,15 +3,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { ILookup, ILookupValue, IPreference, IPreferenceDataValues, IPreferenceMinimal, IPreferenceRequest, PreferenceService } from 'crmo-lib';
+import { ILookup, ILookupValue, IPreference, IPreferenceDataValues, IPreferenceMinimal, IPreferenceRequest, PreferenceService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-preference-detail',
+  selector: 'crm-backend-preference-detail',
   templateUrl: './preference-detail.component.html',
   styleUrls: ['./preference-detail.component.scss']
 })

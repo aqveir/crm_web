@@ -3,16 +3,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { OrganizationService, IOrganization, IResponse } from 'crmo-lib';
+import { OrganizationService, IOrganization, IResponse } from 'crm-lib';
 
 
 @Component({
-  selector: 'crmo-backend-organization-detail',
+  selector: 'crm-backend-organization-detail',
   templateUrl: './organization-detail.component.html',
   styleUrls: ['./organization-detail.component.scss']
 })

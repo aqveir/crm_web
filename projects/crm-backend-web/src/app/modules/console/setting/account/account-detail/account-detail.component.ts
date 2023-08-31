@@ -3,10 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
-import { AccountService, IAccount, IAddress, ICountry, ILookup, ILookupValue, CountryService } from 'crmo-lib';
+import { AccountService, IAccount, IAddress, ICountry, ILookup, ILookupValue, CountryService } from 'crm-lib';
 //import { AddressComponent } from '../../../shared/address/address.component';
 import { ThrowStmt } from '@angular/compiler';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
@@ -14,7 +14,7 @@ import { IAccountRequest } from 'projects/crmo-lib/src/public-api';
 
 
 @Component({
-  selector: 'crmo-backend-account-detail',
+  selector: 'crm-backend-account-detail',
   templateUrl: './account-detail.component.html',
   styleUrls: ['./account-detail.component.scss']
 })

@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application libraries
-import { IRequestUserForgotPassword, UserAuthService } from 'crmo-lib';
+import { IRequestUserForgotPassword, UserAuthService } from 'crm-lib';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
 
 @Component({
-  selector: 'crmo-backend-forgot-partial',
+  selector: 'crm-backend-forgot-partial',
   templateUrl: './forgot-partial.component.html',
   styleUrls: ['./forgot-partial.component.scss']
 })

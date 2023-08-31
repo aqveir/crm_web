@@ -1,7 +1,7 @@
 <div class="d-block full-content-page-height">
-    <crmo-backend-widget-subheader 
+    <crm-backend-widget-subheader 
         [title]="'PAGE.ORGANIZATION.LIST.TITLE'" [search]="true" (search)="fnFilterRecords($event)"
-        [routerLinkAdd]="['/secure/setting/organization/', 'new']"></crmo-backend-widget-subheader>
+        [routerLinkAdd]="['/secure/setting/organization/', 'new']"></crm-backend-widget-subheader>
 
     <app-layout-spinner [ngClass]="{'d-none': (!boolLoading)}"></app-layout-spinner>
 

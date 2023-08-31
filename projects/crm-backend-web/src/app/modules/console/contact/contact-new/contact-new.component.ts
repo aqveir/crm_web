@@ -3,19 +3,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
 import KTWizard from '../../../../../assets/js/components/wizard';
 import { KTUtil } from '../../../../../assets/js/components/util';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { ContactService, IContact } from 'crmo-lib';
+import { ContactService, IContact } from 'crm-lib';
 import { OnDestroy } from '@angular/core';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'crmo-backend-contact-new',
+  selector: 'crm-backend-contact-new',
   templateUrl: './contact-new.component.html',
   styleUrls: ['./contact-new.component.scss']
 })

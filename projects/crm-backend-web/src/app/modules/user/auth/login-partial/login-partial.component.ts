@@ -3,17 +3,17 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../base.component';
 
 //Application CRMO Library
-import { IRequestUserLogin, IResponseUserLogin, UserAuthService } from 'crmo-lib';
+import { IRequestUserLogin, IResponseUserLogin, UserAuthService } from 'crm-lib';
 import { NotificationService } from 'common-lib';
 import { environment } from '@env-backend/environment';
 
 
 @Component({
-  selector: 'crmo-backend-login-partial',
+  selector: 'crm-backend-login-partial',
   templateUrl: './login-partial.component.html',
   styleUrls: ['./login-partial.component.scss']
 })

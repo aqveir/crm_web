@@ -1,14 +1,14 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../base.component';
 import { EventBrokerService } from 'common-lib';
-import { IEventMinimal, EventService } from 'crmo-lib';
+import { IEventMinimal, EventService } from 'crm-lib';
 
 
 @Component({
-  selector: 'crmo-backend-event-list',
+  selector: 'crm-backend-event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.scss']
 })
@@ -16,7 +16,7 @@ export class EventListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public isLoading: boolean = false;
 
-  public listEvent: IEventMinimal[] = null;
+  public listEvent: IEventMinimal[] = [];
   public pageRecordsLoaded: number = 0;
   public pageTotalSize: number = 100;  
 
@@ -26,7 +26,7 @@ export class EventListComponent extends BaseComponent implements OnInit {
   private pageSize: number = Globals._LIST_PAGE_DEFAULT_RECORDS_DISPLAYED;
   private isScrollLoading: boolean = false;
   private elemPage: any;
-  private scrollId: string = 'abcd';
+  private scrollId: string|null = 'abcd';
   private payload: any = null;
   
 
@@ -124,7 +124,7 @@ export class EventListComponent extends BaseComponent implements OnInit {
    * @param key 
    * @param task 
    */
-  public fnOpenModal(event, key: string, task: IEventMinimal): void {
+  public fnOpenModal(event: any, key: string, task: IEventMinimal): void {
     this._broker.emit(key, task?.servicerequest);
     event.stopPropagation();
   } //Function ends
@@ -199,7 +199,7 @@ export class EventListComponent extends BaseComponent implements OnInit {
   } //Function ends
 
   //TODO: Delete/Replan
-  public fnShowTaskModal(event, task: IEventMinimal): void {
+  public fnShowTaskModal(event: any, task: IEventMinimal): void {
     this._broker.emit('show_task_modal', [task?.servicerequest, task, (()=>{
       
     })]);

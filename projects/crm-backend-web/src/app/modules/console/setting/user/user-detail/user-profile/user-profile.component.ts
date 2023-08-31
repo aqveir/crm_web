@@ -2,21 +2,21 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../../base.component';
 
 //Application Libraries
 import { NotificationService } from 'common-lib';
-import { IUser } from 'crmo-lib';
+import { IUser } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-user-profile',
+  selector: 'crm-backend-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent  extends BaseComponent implements OnInit {
-  @Input('form') userProfileForm: FormGroup = null;
-  @Input('user') objUser: IUser = null;
+  @Input('form') userProfileForm: FormGroup = new FormGroup({});
+  @Input('user') objUser: IUser|null = null;
   @Input('new') boolIsNew: boolean = false;
   @Input('refresh') boolRefresh: boolean = false;
 
@@ -24,7 +24,7 @@ export class UserProfileComponent  extends BaseComponent implements OnInit {
   public boolLoading: boolean = false;
   public hasError: boolean = false;
 
-  public strUserAvatar: string=null;
+  public strUserAvatar: string='';
 
   /**
    * Default constructor
@@ -59,7 +59,7 @@ export class UserProfileComponent  extends BaseComponent implements OnInit {
    * 
    * @param event 
    */
-  public fnUpdateEmailAddress(event): void {
+  public fnUpdateEmailAddress(event: any): void {
     if (this.boolIsNew) {
       if (this.userProfileForm && (this.userProfileForm.controls['email'].valid)) {
         this.userProfileForm.patchValue({

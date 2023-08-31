@@ -2,16 +2,16 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { BaseComponent } from 'projects/crmo-backend/src/app/modules/base.component';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { BaseComponent } from 'projects/crm-backend/src/app/modules/base.component';
 
 //Application Libraries
 import { NotificationService } from 'common-lib';
-import { IOrganization, ILookup, ILookupValue } from 'crmo-lib';
+import { IOrganization, ILookup, ILookupValue } from 'crm-lib';
 
 
 @Component({
-  selector: 'crmo-backend-organization-data',
+  selector: 'crm-backend-organization-data',
   templateUrl: './organization-data.component.html',
   styleUrls: ['./organization-data.component.scss']
 })

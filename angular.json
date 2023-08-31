@@ -65,7 +65,12 @@
             "styles": [
               "projects/crm-backend-web/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "google-libphonenumber",
+              "moment",
+              "object-path"
+            ]
           },
           "configurations": {
             "production": {

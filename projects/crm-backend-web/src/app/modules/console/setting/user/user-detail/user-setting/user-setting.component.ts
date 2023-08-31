@@ -3,20 +3,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../../base.component';
 
 //Application Libraries
 import { NotificationService } from 'common-lib';
-import { IUser, IResponse, UserService, ILookup, ILookupValue } from 'crmo-lib';
+import { IUser, IResponse, UserService, ILookup, ILookupValue } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-user-setting',
+  selector: 'crm-backend-user-setting',
   templateUrl: './user-setting.component.html',
   styleUrls: ['./user-setting.component.scss']
 })
 export class UserSettingComponent  extends BaseComponent implements OnInit, OnChanges {
-  @Input('user') objUser: IUser = null;
+  @Input('user') objUser: IUser|null = null;
   @Output('user') user: EventEmitter<IUser> = new EventEmitter<IUser>();
   @Output('save') saveEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -49,7 +49,7 @@ export class UserSettingComponent  extends BaseComponent implements OnInit, OnCh
     this.fnInitialize();
   } //Function ends
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.objUser) {
+    if (changes && changes['objUser']) {
 
       //Load data on form
       this.fnLoadData();
@@ -80,10 +80,11 @@ export class UserSettingComponent  extends BaseComponent implements OnInit, OnCh
       } //End if
 
       //Set values
-      let objUser: IUser = this.objUser;
+      let objUser: IUser = this.objUser as IUser;
       let listControls: any = this.userSettingForm.controls;
       Object.keys(listControls).forEach((key: string) => {
-        objUser[key] = (listControls[key].dirty)?listControls[key].value:objUser[key];
+
+        //objUser[key] = (listControls[key].dirty)?listControls[key].value:objUser[key];
 
         //Update username for new user (without hash value)
         if (key=='email' && objUser['hash']==null) {

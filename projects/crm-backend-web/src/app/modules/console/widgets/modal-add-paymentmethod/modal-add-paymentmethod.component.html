@@ -19,7 +19,7 @@
                         placeholder="{{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.FORM.CARD_OWNER_NAME.PLACEHOLDER' | translate }}"
                         autocomplete="off" tabindex="1" autofocus />
 
-                    <span class="form-text text-danger" *ngIf="cardForm.controls.card_owner.dirty && cardForm.controls.card_owner.invalid">
+                    <span class="form-text text-danger" *ngIf="cardForm.controls['card_owner'].dirty && cardForm.controls['card_owner'].invalid">
                         {{ 'WIDGET.MODAL.ADD_PAYMENT_METHOD.FORM.CARD_OWNER_NAME.VALIDATION_ERROR' | translate }}
                     </span>
                 </div>

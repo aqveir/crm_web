@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { TaskService, ITaskMinimal } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { TaskService, ITaskMinimal } from 'crm-lib';
 import { BaseComponent } from '../../base.component';
 import { EventBrokerService } from 'common-lib';
 
 @Component({
-  selector: 'crmo-backend-work-queue',
+  selector: 'crm-backend-work-queue',
   templateUrl: './work-queue.component.html',
   styleUrls: ['./work-queue.component.scss']
 })
@@ -142,7 +142,7 @@ export class WorkQueueComponent extends BaseComponent implements OnInit {
    * @param key 
    * @param task 
    */
-  public fnOpenModal(event, key: string, task: ITaskMinimal): void {
+  public fnOpenModal(event: any, key: string, task: ITaskMinimal): void {
     this._broker.emit(key, task?.servicerequest);
     event.stopPropagation();
   } //Function ends

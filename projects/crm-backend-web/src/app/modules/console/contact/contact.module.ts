@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Plugin Modules
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UppyAngularModule } from 'uppy-angular';
+//import { UppyAngularModule } from 'uppy-angular';
 
 //Application Modules
 import { ContactRoutingModule } from './contact-routing.module';
@@ -53,15 +53,14 @@ import { TabServiceRequestComponent } from './contact-detail/tab-service-request
   ],
   imports: [
     CommonModule,
-    FormsModule, 
     ReactiveFormsModule,
 
     //Pluin Modules
     NgSelectModule,
     NgbModule,
-    UppyAngularModule,
+    //UppyAngularModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,

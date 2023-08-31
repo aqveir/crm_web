@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'crmo-backend-user-changepassword',
+  selector: 'crm-backend-user-changepassword',
   templateUrl: './user-changepassword.component.html',
   styleUrls: ['./user-changepassword.component.scss']
 })

@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "crmoBackend",
+      "crmBackend",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "crmo-backend",
+      "crm-backend",
       "kebab-case"
     ]
   }

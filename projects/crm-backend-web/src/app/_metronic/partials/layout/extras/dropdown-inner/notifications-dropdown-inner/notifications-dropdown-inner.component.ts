@@ -20,11 +20,11 @@ export class NotificationsDropdownInnerComponent implements OnInit {
     );
   }
 
-  setActiveTabId(tabId) {
+  setActiveTabId(tabId: any) {
     this.activeTabId = tabId;
   }
 
-  getActiveCSSClasses(tabId) {
+  getActiveCSSClasses(tabId: any) {
     if (tabId !== this.activeTabId) {
       return '';
     }

@@ -7,7 +7,7 @@ import { LayoutService } from '../../../../../core';
   styleUrls: ['./notifications-offcanvas.component.scss'],
 })
 export class NotificationsOffcanvasComponent implements OnInit {
-  extrasNotificationsOffcanvasDirectionCSSClass: string;
+  extrasNotificationsOffcanvasDirectionCSSClass: string = '';
 
   constructor(private layout: LayoutService) {}
   ngOnInit(): void {

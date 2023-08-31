@@ -5,14 +5,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
-import { ICountry, ILookup, ILookupValue, INote, NoteService } from 'crmo-lib';
+import { ICountry, ILookup, ILookupValue, INote, NoteService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-widget-address-block',
+  selector: 'crm-backend-widget-address-block',
   templateUrl: './widget-address-block.component.html',
   styleUrls: ['./widget-address-block.component.scss']
 })
@@ -22,13 +22,13 @@ export class WidgetAddressBlockComponent extends BaseComponent implements OnInit
   public hasError: boolean = false;
   public boolIsNew: boolean = false;
 
-  public strEntityType: string = null;
+  public strEntityType: string|null = null;
   public intReferenceId: number = 0;
-  public objNote: INote = null;
+  public objNote: INote|null = null;
   public addressForm!: FormGroup;
 
-  public listCountries: ICountry[];
-  public listLookupAddressType: ILookupValue[];
+  public listCountries: ICountry[]|null = null;
+  public listLookupAddressType: ILookupValue[]|null = null;
 
   /**
    * Default constructor
@@ -59,12 +59,12 @@ export class WidgetAddressBlockComponent extends BaseComponent implements OnInit
   private fnInitialize(): void {
     
     //Load country values
-    this.listCountries = this._globals.getCountries();
+    this.listCountries = this._globals.getCountries() as ICountry[];
 
     //Load lookup values (Contact Address Type)
-    let objAddressType: ILookup = this._globals.getLookupByKey('contact_address_type');
+    let objAddressType: ILookup = this._globals.getLookupByKey('contact_address_type') as ILookup;
     if (objAddressType) {
-      this.listLookupAddressType = (objAddressType?.values).filter((x: ILookupValue) => {return x.is_active==true});
+      this.listLookupAddressType = (objAddressType?.values)?.filter((x: ILookupValue) => {return x.is_active==true}) as ILookupValue[];
     } //End if
 
     //Initialize form
@@ -95,7 +95,7 @@ export class WidgetAddressBlockComponent extends BaseComponent implements OnInit
       if (this.boolIsNew) {
         this.fnCreateNote(objFormData);
       } else {
-        let noteId: number = this.objNote?.id;
+        let noteId: number = this.objNote?.id as number;
         this.fnEditNote(noteId, objFormData);
       } //End if
 
@@ -145,22 +145,22 @@ export class WidgetAddressBlockComponent extends BaseComponent implements OnInit
     //Show loading state
     this.boolLoading = true;
 
-    this._noteService.update(id, data)
-    .subscribe((response: any) => {
-      //Stop loader
-      this.boolLoading = false;
+    // this._noteService.update(id, data)
+    // .subscribe((response: any) => {
+    //   //Stop loader
+    //   this.boolLoading = false;
 
-      //Close the modal window
-      this._modalActive.close({refresh: true});
-    },(error) => {
-      //Stop loader
-      this.boolLoading = false;
+    //   //Close the modal window
+    //   this._modalActive.close({refresh: true});
+    // },(error) => {
+    //   //Stop loader
+    //   this.boolLoading = false;
 
-      //Show Error
-      this.hasError = true;
+    //   //Show Error
+    //   this.hasError = true;
 
-      throw error;
-    }); 
+    //   throw error;
+    // }); 
   } //Fuction ends
 
 

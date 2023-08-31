@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Application Modules
-import { IResponseUserLogin, UserAuthService, IUserStatusResponse } from 'crmo-lib';
+import { IResponseUserLogin, UserAuthService, IUserStatusResponse } from 'crm-lib';
 
 //Application Services
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { LayoutService } from '../../../../../core';
 import { strict } from 'assert';
 
@@ -16,7 +16,7 @@ import { strict } from 'assert';
 })
 export class UserDropdownInnerComponent implements OnInit, OnDestroy {
   public extrasUserDropdownStyle: 'light' | 'dark' = 'light';
-  public objUser: IResponseUserLogin;
+  public objUser?: IResponseUserLogin;
 
   public keyUserStatus: string = 'user_status_offline';
   public langKeyUserStatus: string = 'MENU.AUTH_USER.USER_STATUS.USER_STATUS_OFFLINE';
@@ -43,7 +43,7 @@ export class UserDropdownInnerComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.extrasUserDropdownStyle = this._layout.getProp('extras.user.dropdown.style');
-    this.objUser = this._globals.getClaim();
+    this.objUser = this._globals.getClaim() as IResponseUserLogin;
 
     this.hwdTimeInternalId = setInterval(() => {
       this.fnGetUpdatedHeaderData(); 
@@ -102,7 +102,7 @@ export class UserDropdownInnerComponent implements OnInit, OnDestroy {
    */
   private fnGetUpdatedHeaderData(): void {
     //Get the updated user status
-    let userStatus: IUserStatusResponse = this._globals.getUserStatus();
+    let userStatus: IUserStatusResponse = this._globals.getUserStatus() as IUserStatusResponse;
     this.keyUserStatus = userStatus.status.key;
 
     //Update user status css class & lang key

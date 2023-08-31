@@ -16,7 +16,7 @@ import { HttpErrorComponent } from './http-error/http-error.component';
     CommonModule,
     ErrorRoutingModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,

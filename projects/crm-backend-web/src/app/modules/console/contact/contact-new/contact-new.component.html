@@ -3,11 +3,11 @@
 
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid py-0 full-content-page-height">
-        <crmo-backend-widget-subheader
+        <crm-backend-widget-subheader
             [title]="'PAGE.CONTACT.CONTACT_DETAIL.TITLE.ADD'" 
             [page-info]="contactForm.controls['first_name']?.value"
             [save]="false" [back]="true" [loading]="boolSaving"
-            (back)="fnResetForm(true)"></crmo-backend-widget-subheader>
+            (back)="fnResetForm(true)"></crm-backend-widget-subheader>
 
         <!--begin::Entry-->
         <div class="d-block flex-column-fluid">
@@ -144,29 +144,29 @@
                             <div class="col-12">
                                 <!--begin::Form Wizard Step 1-->
                                 <div class="pb-5" data-wizard-type="step-content">
-                                    <crmo-backend-tab-profile-new-contact
-                                        [form]="contactForm"></crmo-backend-tab-profile-new-contact>                                    
+                                    <crm-backend-tab-profile-new-contact
+                                        [form]="contactForm"></crm-backend-tab-profile-new-contact>                                    
                                 </div>
                                 <!--end::Form Wizard Step 1-->
 
                                 <!--begin::Form Wizard Step 2-->
                                 <div class="pb-5" data-wizard-type="step-content">
-                                    <crmo-backend-tab-setting-new-contact
-                                        [form]="contactForm"></crmo-backend-tab-setting-new-contact>
+                                    <crm-backend-tab-setting-new-contact
+                                        [form]="contactForm"></crm-backend-tab-setting-new-contact>
                                 </div>
                                 <!--end::Form Wizard Step 2-->
 
                                 <!--begin::Form Wizard Step 3-->
                                 <div class="pb-5" data-wizard-type="step-content">
-                                    <crmo-backend-tab-address-new-contact
-                                        [form]="contactForm"></crmo-backend-tab-address-new-contact>
+                                    <crm-backend-tab-address-new-contact
+                                        [form]="contactForm"></crm-backend-tab-address-new-contact>
                                 </div>
                                 <!--end::Form Wizard Step 3-->
 
                                 <!--begin::Form Wizard Step 4-->
                                 <div class="pb-5" data-wizard-type="step-content">
-                                    <crmo-backend-tab-summary
-                                        [form]="contactForm"></crmo-backend-tab-summary>
+                                    <crm-backend-tab-summary
+                                        [form]="contactForm"></crm-backend-tab-summary>
                                 </div>
                                 <!--end::Form Wizard Step 4-->
 

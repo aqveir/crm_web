@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 //Application Modules
-import { IResponseUserLogin } from 'crmo-lib';
+import { IResponseUserLogin } from 'crm-lib';
 
 //Application Services
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { LayoutService } from '../../../../../_metronic/core';
 
 //import { AuthService } from '../../../../modules/auth/_services/auth.service';
@@ -36,7 +36,7 @@ import { KTUtil } from '@asset-backend/js/components/util';
 })
 export class TopbarComponent implements OnInit, AfterViewInit {
 
-  public objUser: IResponseUserLogin;
+  public objUser: IResponseUserLogin|null = null;
 
   // tobbar extras
   extraSearchDisplay: boolean = false;

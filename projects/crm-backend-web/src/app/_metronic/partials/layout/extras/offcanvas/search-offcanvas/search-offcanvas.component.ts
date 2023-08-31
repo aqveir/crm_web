@@ -7,7 +7,7 @@ import {LayoutService} from '../../../../../core';
   styleUrls: ['./search-offcanvas.component.scss']
 })
 export class SearchOffcanvasComponent implements OnInit {
-  extrasSearchOffcanvasDirectionCSSClass: string;
+  extrasSearchOffcanvasDirectionCSSClass: string='';
   constructor(private layout: LayoutService) { }
 
   ngOnInit(): void {

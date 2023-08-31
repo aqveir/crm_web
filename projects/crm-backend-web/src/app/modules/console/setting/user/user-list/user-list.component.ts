@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { NotificationService } from 'common-lib';
-import { IUser, IResponse, UserService } from 'crmo-lib';
+import { IUser, IResponse, UserService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-user-list',
+  selector: 'crm-backend-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
@@ -18,10 +18,10 @@ export class UserListComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
 
-  public oHash: string;
-  public listUsers: IUser[];
+  public oHash: string = '';
+  public listUsers: IUser[] = [];
 
-  private objRawData: IUser[];
+  private objRawData: IUser[] = [];
 
   /**
    * Default constructor

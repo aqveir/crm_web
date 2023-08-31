@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   getTitleText(): Promise<string> {
-    return element(by.css('crmo-backend-root .content span')).getText() as Promise<string>;
+    return element(by.css('crm-backend-root .content span')).getText() as Promise<string>;
   }
 }

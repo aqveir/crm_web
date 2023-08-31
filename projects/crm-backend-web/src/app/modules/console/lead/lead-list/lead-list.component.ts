@@ -4,14 +4,14 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
-import { LeadService, IServiceRequestMinimal, IServiceRequest } from 'crmo-lib';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
+import { LeadService, IServiceRequestMinimal, IServiceRequest } from 'crm-lib';
 import { BaseComponent } from '../../../base.component';
 import { EventBrokerService } from 'common-lib';
 
 
 @Component({
-  selector: 'crmo-backend-lead-list',
+  selector: 'crm-backend-lead-list',
   templateUrl: './lead-list.component.html',
   styleUrls: ['./lead-list.component.scss']
 })

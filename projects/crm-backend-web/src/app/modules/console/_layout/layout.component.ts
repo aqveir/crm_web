@@ -13,7 +13,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 //Application common libraries
 import { EventBrokerService, NotificationService, TranslateService } from 'common-lib';
-import { INote } from 'crmo-lib';
+import { INote } from 'crm-lib';
 
 //Application Modal Components
 import { ModalNoteComponent } from '../widgets/modal-note/modal-note.component';

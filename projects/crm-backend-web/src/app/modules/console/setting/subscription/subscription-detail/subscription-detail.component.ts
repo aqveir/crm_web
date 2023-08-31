@@ -3,15 +3,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { IRole, RoleService } from 'crmo-lib';
+import { IRole, RoleService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-subscription-detail',
+  selector: 'crm-backend-subscription-detail',
   templateUrl: './subscription-detail.component.html',
   styleUrls: ['./subscription-detail.component.scss']
 })

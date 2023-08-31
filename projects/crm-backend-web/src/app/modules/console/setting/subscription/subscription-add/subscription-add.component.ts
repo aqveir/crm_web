@@ -6,16 +6,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { IPaymentMethod, PaymentMethodService } from 'crmo-lib';
+import { IPaymentMethod, PaymentMethodService } from 'crm-lib';
 import { ModalAddPaymentmethodComponent } from '../../../widgets/modal-add-paymentmethod/modal-add-paymentmethod.component';
 
 @Component({
-  selector: 'crmo-backend-subscription-add',
+  selector: 'crm-backend-subscription-add',
   templateUrl: './subscription-add.component.html',
   styleUrls: ['./subscription-add.component.scss']
 })

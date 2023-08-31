@@ -3,7 +3,7 @@ import { EventBrokerService } from 'common-lib';
 import { Globals } from '../../../app.global';
 
 @Component({
-  selector: 'crmo-backend-dashboard',
+  selector: 'crm-backend-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

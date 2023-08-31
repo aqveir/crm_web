@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { IPreferenceMinimal, PreferenceService } from 'crmo-lib';
+import { IPreferenceMinimal, PreferenceService } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-preference-list',
+  selector: 'crm-backend-preference-list',
   templateUrl: './preference-list.component.html',
   styleUrls: ['./preference-list.component.scss']
 })

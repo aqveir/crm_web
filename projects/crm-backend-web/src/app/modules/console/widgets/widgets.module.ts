@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //Third Party Pluin Modules
-import { InlineSVGModule } from 'ng-inline-svg';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -22,9 +22,8 @@ import { ModalConfirmDeleteComponent } from './modal-confirm-delete/modal-confir
 import { ModalTaskComponent } from './modal-task/modal-task.component';
 import { ModalEventsComponent } from './modal-events/modal-events.component';
 import { ModalFiltersComponent } from './modal-filters/modal-filters.component';
-import { UppyAngularModule } from 'uppy-angular';
+import { UppyAngularDashboardModule } from '@uppy/angular';
 import { ModalAddPaymentmethodComponent } from './modal-add-paymentmethod/modal-add-paymentmethod.component';
-
 import { WidgetAddressBlockComponent } from './widget-address-block/widget-address-block.component';
 
 
@@ -47,7 +46,6 @@ import { WidgetAddressBlockComponent } from './widget-address-block/widget-addre
   ],
   imports: [
     CommonModule,
-    FormsModule, 
     ReactiveFormsModule,
 
     //Third Party Pluin Modules
@@ -55,9 +53,9 @@ import { WidgetAddressBlockComponent } from './widget-address-block/widget-addre
     NgSelectModule,
     NgbModule,
     CKEditorModule,
-    UppyAngularModule,
+    UppyAngularDashboardModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,
@@ -68,6 +66,9 @@ import { WidgetAddressBlockComponent } from './widget-address-block/widget-addre
     WidgetsRoutingModule,    
   ],
   exports: [
+    CommonModule,
+    ReactiveFormsModule,
+
     ModalNoteComponent, 
     ModalDocumentComponent,
     ModalSendMailComponent,

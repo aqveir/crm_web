@@ -1,17 +1,17 @@
-import { Component, OnInit, ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 //Application global files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { BaseComponent } from '../../../../base.component';
 
 //Application Libraries
 import { EventBrokerService, NotificationService } from 'common-lib';
-import { IUser, UserService, IUserRequest, IRoleRequest, IRole } from 'crmo-lib';
+import { IUser, UserService, IUserRequest, IRoleRequest, IRole } from 'crm-lib';
 
 @Component({
-  selector: 'crmo-backend-user-detail',
+  selector: 'crm-backend-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
@@ -19,8 +19,8 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
   //Common attributes
   public boolLoading: boolean = false;
 
-  public oHash: string;
-  public uuid: string;
+  public oHash: string='';
+  public uuid: string='';
   public objUser: any;
   public boolRefresh: boolean = false;
   public boolIsNew: boolean = false;
@@ -60,11 +60,11 @@ export class UserDetailComponent extends BaseComponent implements OnInit {
     this._broker.emit(Globals.EVENT_SHOW_SUBMENU, true);
 
     //Get params from the page route
-    let oHash: string = this._route.snapshot.paramMap.get('ohash');
-    let uuid: string = this._route.snapshot.paramMap.get('uhash');
+    let oHash: string|null = this._route.snapshot.paramMap.get('ohash');
+    let uuid: string|null = this._route.snapshot.paramMap.get('uhash');
 
-    this.oHash = oHash;
-    this.uuid = uuid;
+    this.oHash = oHash?.valueOf() as string;
+    this.uuid = uuid?.valueOf() as string;;
 
     //Initialize Form
     this.fnInitializeForm();

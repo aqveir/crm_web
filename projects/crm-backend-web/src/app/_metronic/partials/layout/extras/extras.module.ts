@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InlineSVGModule } from 'ng-inline-svg';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { InlineSVGModule } from 'ng-inline-svg-2';
+//import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 //Application Module
 import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'common-lib';
 
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+//import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+//import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { SearchDropdownInnerComponent } from './dropdown-inner/search-dropdown-inner/search-dropdown-inner.component';
 import { NotificationsDropdownInnerComponent } from './dropdown-inner/notifications-dropdown-inner/notifications-dropdown-inner.component';
 import { QuickActionsDropdownInnerComponent } from './dropdown-inner/quick-actions-dropdown-inner/quick-actions-dropdown-inner.component';
@@ -24,9 +24,9 @@ import { CoreModule } from '../../../core';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-};
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   suppressScrollX: true,
+// };
 
 @NgModule({
   declarations: [
@@ -46,13 +46,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ToolbarComponent,
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     InlineSVGModule, 
-    PerfectScrollbarModule, 
+    //PerfectScrollbarModule, 
     
     CoreModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,
@@ -60,9 +60,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LoggerModule,
   ],
   providers: [
-    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG, },
+    //{ provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG, },
   ],
   exports: [
+    CommonModule,
     SearchDropdownInnerComponent,
     NotificationsDropdownInnerComponent,
     QuickActionsDropdownInnerComponent,

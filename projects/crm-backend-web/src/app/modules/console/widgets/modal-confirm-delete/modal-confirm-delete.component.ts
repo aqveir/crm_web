@@ -5,13 +5,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 //Application files
-import { Globals } from 'projects/crmo-backend/src/app/app.global';
+import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 
 //Application Files
 import { BaseComponent } from '../../../base.component';
 
 @Component({
-  selector: 'crmo-backend-modal-confirm-delete',
+  selector: 'crm-backend-modal-confirm-delete',
   templateUrl: './modal-confirm-delete.component.html',
   styleUrls: ['./modal-confirm-delete.component.scss']
 })

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //Application Module
 import { TranslateModule, NotificationModule, LoggerModule, ValidatorModule, PipeModule } from 'common-lib';
@@ -23,18 +23,20 @@ import { ResetPartialComponent } from './auth/reset-partial/reset-partial.compon
   ],
   imports: [
     CommonModule,
-    FormsModule, 
     ReactiveFormsModule,
 
     //Routing Module
     UserRoutingModule,
 
-    //EllaiSys Library
+    //Common Library
     TranslateModule,
     NotificationModule,
     ValidatorModule,
     PipeModule,
     LoggerModule,
+  ],
+  exports: [
+    //ReactiveFormsModule
   ]
 })
 export class UserModule { }

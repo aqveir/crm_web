@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 //Application Files
-import { Globals, ILanguage } from 'projects/crmo-backend/src/app/app.global';
+import { Globals, ILanguage } from 'projects/crm-backend-web/src/app/app.global';
 
 @Component({
   selector: 'app-language-selector',
