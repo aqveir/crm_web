@@ -56,7 +56,7 @@
                                 <button type="button" class="btn btn-icon btn-clean" *ngIf="task.subtype?.key=='comm_type_other'"
                                     disabled><i class="la icon-xl"></i></button>
                             
-                                <span class="text-dark-75 font-weight-bolder ml-2">{{ task.subtype?.display_value }}</span>
+                                <span class="text-dark-75 font-weight-bolder ml-2">{{ task.subtype.display_value }}</span>
                             </td>
 
                             <td class="w-100">
@@ -64,18 +64,18 @@
                             </td>                            
 
                             <td class="d-none d-xl-table-cell">
-                                <span class="text-dark-50">{{ task.assignee?.participant?.full_name | shorten:20:'...' }}</span>
+                                <span class="text-dark-50">{{ task.assignee.participant.full_name | shorten:20:'...' }}</span>
                             </td>
 
                             <td (click)="fnShowTaskModal($event, task)">
                                 <span class="label font-weight-bold label-lg label-inline label-inlinetext-dark-50" 
-                                    [ngClass]="{'priority_high':'label-light-danger', 'priority_normal':'label-light-warning', 'priority_low':'label-light-info'}[task.priority?.key]">
-                                    {{ task.priority?.display_value }}
+                                    [ngClass]="{'priority_high':'label-light-danger', 'priority_normal':'label-light-warning', 'priority_low':'label-light-info'}[task.priority.key]">
+                                    {{ task.priority.display_value }}
                                 </span>
                             </td>
 
                             <td class="d-none d-xl-table-cell">
-                                <span class="text-dark-50">{{ task.owner?.full_name | shorten:20:'...' }}</span>
+                                <span class="text-dark-50">{{ task.owner.full_name | shorten:20:'...' }}</span>
                             </td>                           
 
                             <td class="d-none d-xl-table-cell table-cell-date">

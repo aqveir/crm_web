@@ -69,6 +69,8 @@ import { WidgetAddressBlockComponent } from './widget-address-block/widget-addre
     CommonModule,
     ReactiveFormsModule,
 
+    //Widget components
+    ModalTaskComponent,
     ModalNoteComponent, 
     ModalDocumentComponent,
     ModalSendMailComponent,

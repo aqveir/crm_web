@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 // Application files
 import { Globals } from 'projects/crm-backend-web/src/app/app.global';

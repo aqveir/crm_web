@@ -7,7 +7,6 @@ import { IResponseUserLogin, UserAuthService, IUserStatusResponse } from 'crm-li
 //Application Services
 import { Globals } from 'projects/crm-backend-web/src/app/app.global';
 import { LayoutService } from '../../../../../core';
-import { strict } from 'assert';
 
 @Component({
   selector: 'app-user-dropdown-inner',

@@ -9,16 +9,16 @@ import { BreadcrumbItemModel } from '../_models/breadcrumb-item.model';
   templateUrl: './subheader1.component.html',
 })
 export class Subheader1Component implements OnInit {
-  @Input() title: string;
+  @Input() title: string = '';
   subheaderCSSClasses = '';
   subheaderContainerCSSClasses = '';
   subheaderMobileToggle = false;
   subheaderDisplayDesc = false;
   subheaderDisplayDaterangepicker = false;
   title$: Observable<string>;
-  breadcrumbs$: Observable<BreadcrumbItemModel[]>;
+  breadcrumbs$: Observable<BreadcrumbItemModel[]> = new Observable<BreadcrumbItemModel[]>();
   breadcrumbs: BreadcrumbItemModel[] = [];
-  description$: Observable<string>;
+  description$: Observable<string> = new Observable<string>();
   
   constructor(
     private layout: LayoutService,

@@ -47,7 +47,7 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {     
     //Get Setting Model
-    this.objSettingInfo = this._global.getSettingInfo();
+    this.objSettingInfo = this._global.getSettingInfo() as SettingInfo;
   }
 
 
@@ -152,7 +152,7 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
         let strSearch = /oHash/gi;
 
         //Change the oHash to selected organization
-        strMenupath = strMenupath.replace(strSearch, this.objSettingInfo.selected_oHash);
+        strMenupath = strMenupath.replace(strSearch, this.objSettingInfo.selected_oHash as string);
         objReturnValue[0]=strMenupath;
       } //End if
     } catch(error) {

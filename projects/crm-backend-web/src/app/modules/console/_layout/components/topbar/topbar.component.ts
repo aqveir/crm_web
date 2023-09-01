@@ -16,7 +16,9 @@ import KTLayoutQuickCartPanel from '@asset-backend/js/layout/extended/quick-cart
 import KTLayoutQuickPanel from '@asset-backend/js/layout/extended/quick-panel';
 import KTLayoutQuickUser from '@asset-backend/js/layout/extended/quick-user';
 import KTLayoutHeaderTopbar from '@asset-backend/js/layout/base/header-topbar';
-import { KTUtil } from '@asset-backend/js/components/util';
+import { KTUtil } from '@asset-backend/js/components/util.js';
+
+type LayoutTypes = 'offcanvas' | 'dropdown';
 
 // import { Observable } from 'rxjs';
 // import { LayoutService } from '../../../../_metronic/core';
@@ -38,29 +40,28 @@ export class TopbarComponent implements OnInit, AfterViewInit {
 
   public objUser: IResponseUserLogin|null = null;
 
-  // tobbar extras
-  extraSearchDisplay: boolean = false;
-  extrasSearchLayout: 'offcanvas' | 'dropdown';
-  extrasNotificationsDisplay: boolean = false;
-  extrasNotificationsLayout: 'offcanvas' | 'dropdown';
-  extrasQuickActionsDisplay: boolean = false;
-  extrasQuickActionsLayout: 'offcanvas' | 'dropdown';
-  extrasCartDisplay: boolean = false;
-  extrasCartLayout: 'offcanvas' | 'dropdown';
-  extrasQuickPanelDisplay: boolean = false;
-  extrasLanguagesDisplay: boolean = false;
-  extrasUserDisplay: boolean = false;
-  extrasUserLayout: 'offcanvas' | 'dropdown';
-
   // layout
   public boolAsideSecondaryDisplay: boolean = false;
   public boolAsideSelfMinimizeToggle: boolean = false;
 
+  // tobbar extras
+  extraSearchDisplay: boolean = false;
+  extrasSearchLayout: LayoutTypes = 'offcanvas';  
+  extrasNotificationsDisplay: boolean = false;
+  extrasNotificationsLayout: LayoutTypes = 'offcanvas';  
+  extrasQuickActionsDisplay: boolean = false;
+  extrasQuickActionsLayout: LayoutTypes = 'offcanvas';  
+  extrasCartDisplay: boolean = false;
+  extrasCartLayout: LayoutTypes = 'offcanvas';  
+  extrasQuickPanelDisplay: boolean = false;
+  extrasLanguagesDisplay: boolean = false;
+  extrasUserDisplay: boolean = false;
+  extrasUserLayout: LayoutTypes = 'offcanvas';  
+
   constructor(
     private _globals: Globals,
     private layout: LayoutService, 
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     // Topbar extras

@@ -36,10 +36,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   // Public variables
   public selfLayout: string = 'default';
 
-  public cssAside: string = null;
-  public cssContent: string = null;
-  public cssContentContainer: string = null;
-  public cssFooter: string = null;
+  public cssAside: string|null = null;
+  public cssContent: string|null = null;
+  public cssContentContainer: string|null = null;
+  public cssFooter: string|null = null;
 
   public boolSubHeaderDisplay: boolean = false;
   public boolAsideSelfDisplay: boolean = true;
@@ -62,9 +62,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   extrasUserOffcanvasDisplay: boolean = false;
   extrasQuickPanelDisplay: boolean = false;
   
-  @ViewChild('ktAside', { static: true }) ktAside: ElementRef;
-  @ViewChild('ktHeaderMobile', { static: true }) ktHeaderMobile: ElementRef;
-  @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
+  @ViewChild('ktAside', { static: true }) ktAside: ElementRef|null=null;
+  @ViewChild('ktHeaderMobile', { static: true }) ktHeaderMobile: ElementRef|null=null;
+  @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef|null=null;
 
   /**
    * Default constructor
@@ -181,7 +181,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   } //Function ends
 
 
-  public fnCloseCanvas(event): void {
+  public fnCloseCanvas(event: any): void {
 
   } //Function ends
 

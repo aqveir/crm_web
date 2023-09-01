@@ -11,8 +11,8 @@ import { Globals, ILanguage } from 'projects/crm-backend-web/src/app/app.global'
 export class LanguageSelectorComponent implements OnInit {
 
   public boolShowLangSelection: boolean = false;
-  public arrActiveLanguages: ILanguage[];
-  public objDefaultLanguage: ILanguage;
+  public arrActiveLanguages: ILanguage[]|null = null;
+  public objDefaultLanguage: ILanguage|null = null;
 
 
   /**
@@ -57,7 +57,7 @@ export class LanguageSelectorComponent implements OnInit {
 
       //Get Default Language
       if (this.arrActiveLanguages && (this.arrActiveLanguages instanceof Array) && (this.arrActiveLanguages.length>0)) {
-        this.objDefaultLanguage = this.arrActiveLanguages.find((x: any) => {return x.code==langSelected; });
+        this.objDefaultLanguage = this.arrActiveLanguages.find((x: any) => {return x.code==langSelected; }) as ILanguage;
       } //End if      
     } //End if
     
@@ -74,7 +74,7 @@ export class LanguageSelectorComponent implements OnInit {
 
     //Display the selected language
     if (this.arrActiveLanguages && (this.arrActiveLanguages instanceof Array) && (this.arrActiveLanguages.length>0)) {
-      this.objDefaultLanguage = this.arrActiveLanguages.find((x: any) => {return x.code==_lang; });
+      this.objDefaultLanguage = this.arrActiveLanguages.find((x: any) => {return x.code==_lang; }) as ILanguage;
     } //End if
   } //Function ends
 

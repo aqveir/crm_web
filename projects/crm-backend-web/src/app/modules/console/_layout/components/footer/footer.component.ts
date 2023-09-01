@@ -8,7 +8,7 @@ import KTLayoutFooter from '../../../../../../assets/js/layout/base/footer';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit, AfterViewInit {
-  footerContainerCSSClasses: string = null;
+  footerContainerCSSClasses: string|null = null;
   public currentYear: string;
 
   constructor(private layout: LayoutService) {

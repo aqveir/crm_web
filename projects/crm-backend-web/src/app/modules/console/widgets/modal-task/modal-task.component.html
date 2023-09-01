@@ -35,7 +35,7 @@
                             [searchable]="true" autocomplete="off" tabindex="3">
                         </ng-select>
 
-                        <span class="form-text text-danger" *ngIf="taskForm.controls['assignee_hash'].dirty && taskForm.controls'[assignee_hash]'.invalid">
+                        <span class="form-text text-danger" *ngIf="taskForm.controls['assignee_hash'].dirty && taskForm.controls['assignee_hash'].invalid">
                             {{ 'WIDGET.MODAL.TASK.FORM.ASSIGNEE.VALIDATION_ERROR' | translate }}
                         </span>
                     </div>
