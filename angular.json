@@ -68,6 +68,9 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "lodash",
+              "namespace-emitter",
+              "is-shallow-equal",
+              "classnames",
               "google-libphonenumber",
               "moment",
               "object-path"
@@ -78,8 +81,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
