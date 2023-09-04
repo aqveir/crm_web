@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 
 //Application files
@@ -9,7 +9,7 @@ import { IResponseUserLogin } from 'crm-lib';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService {
 
 
   /**
@@ -24,9 +24,9 @@ export class AuthGuardService implements CanActivate {
   /**
    * Implement the method from CanActivate
    */
-  public canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+  canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-    let claim: IResponseUserLogin = this._globals.getClaim();
+    let claim: IResponseUserLogin = this._globals.getClaim() as IResponseUserLogin;
     if (!(claim && claim.token)) {
       this._router.navigate(['/']);
       return false;
