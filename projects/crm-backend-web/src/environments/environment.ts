@@ -19,7 +19,7 @@ export const environment = {
     api_server: {
       force_env: true, //Force this configuration
       
-      server: 'https://aqveir.com/',
+      server: 'https://ellaisys.aqveir.in/',
       apiUrl: 'api/',
       title: '',
       headers: {
@@ -59,7 +59,7 @@ export const environment = {
   },
 
   //CDN-Media Path
-  media_path: 'http://console.tatobite.Common.com',  
+  media_path: 'http://console.tatobite.com',  
 
   //Google Settings
   google: {
@@ -108,11 +108,11 @@ export const environment = {
   // Uppy XHR configuration
   uppy_configuration: {
     contact_upload: {
-      xhr_endpoint: "http://Common.crmomni.com/api/contact/upload",
+      xhr_endpoint: "http://aqveir.in/api/contact/upload",
       file_size_bytes: 1000000,      
     },
     document_upload: {
-      xhr_endpoint: "http://Common.crmomni.com/api/document",
+      xhr_endpoint: "http://aqveir.in/api/document",
       file_size_bytes: 1000000,   
     }
   },

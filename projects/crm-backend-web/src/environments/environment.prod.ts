@@ -19,7 +19,7 @@ export const environment = {
     api_server: {
       force_env: false, //Force this configuration
       
-      server: 'https://aqveir.com/',
+      server: 'https://aqveir.in/',
       apiUrl: 'api/',
       title: '',
       headers: {
@@ -59,7 +59,7 @@ export const environment = {
   },
 
   //CDN-Media Path
-  media_path: 'http://console.tatobite.Common.com',  
+  media_path: 'http://console.aqveir.in',  
 
   //Google Settings
   google: {
